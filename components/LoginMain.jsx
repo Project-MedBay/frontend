@@ -9,7 +9,7 @@ export default function LoginMain() {
                <h1 className="form-title">Welcome back!</h1>
 
                <div className="form-input">
-                  <p className="input-text">E-mail</p>
+                  <p className="input-text">E-mail:</p>
                   <input className="input-box" type="text" />
                </div>
 
@@ -22,7 +22,7 @@ export default function LoginMain() {
             </form>
 
             <div className="extras">
-               <h1 className="tagline">Rehabilitation Redefined</h1>
+               <h1 className="tagline">Rehabilitation<br />Redefined</h1>
                
                <div className="register-container">
                   <p className="register-q">You're new here?</p>

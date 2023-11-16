@@ -7,7 +7,8 @@
 
 .input-text {
    margin: 8px 0px;
-   font-size: 24px;
+   font-size: 18px;
+   font-weight: 400;
 }
 
 .input-box {

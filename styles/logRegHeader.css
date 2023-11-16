@@ -6,12 +6,16 @@
 }
 
 .logo-img {
-   width: 125px;
+   height: 7vh;
+   min-height: 70px;
    aspect-ratio: 1 / 1;
 }
 
 .logo-title {
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: 70px;
+   font-family: "Barlow", sans-serif;
+   font-size: max(3em, 5vh);
+   font-weight: 700;
+   letter-spacing: -0.07em;
    margin: 0;
+   margin-bottom: 0.15em;
 }

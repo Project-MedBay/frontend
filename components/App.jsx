@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <LogRegHeader />
-      <LoginMain />
+      <RegisterMain />
     </>
   )
 }
