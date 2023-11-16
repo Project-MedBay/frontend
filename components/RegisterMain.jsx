@@ -41,7 +41,8 @@ export default function RegisterMain(props) {
       })
   }
 
-   const sendFormData = () => {
+   function handleSubmit(event) {
+      event.preventDefault()
       axios({
          // Endpoint to send files
          url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/security/register",
@@ -50,11 +51,6 @@ export default function RegisterMain(props) {
       })
       .then(res => res.status == 200 && setSuccessPopup(true))
       .catch(error => console.log(error));
-   }
-
-   function handleSubmit(event) {
-      event.preventDefault()
-      sendFormData()
    }
 
    return (
