@@ -1,0 +1,65 @@
+export const registerFields = [
+   {
+      label:"Name",
+      placeholder:"John",
+      id:"grid-name",
+      width:"270px",
+      name:"firstName"
+   },
+   {
+      label:"Surname",
+      placeholder:"Doe",
+      id:"grid-surname",
+      width:"270px",
+      name:"lastName"
+   },
+   {
+      label:"E-mail",
+      placeholder:"john.doe@mail.com",
+      id:"grid-email",
+      width:"560px",
+      name:"email"
+   },
+   {
+      label:"Address",
+      placeholder:"Street Name 1",
+      id:"grid-address",
+      width:"560px",
+      name:"address"
+   },
+   {
+      label:"Date Of Birth",
+      placeholder:"YYYY-MM-DD",
+      id:"grid-dob",
+      width:"173px",
+      name:"dateOfBirth"
+   },
+   {
+      label:"Phone number",
+      placeholder:"0912345678",
+      id:"grid-phone",
+      width:"174px",
+      name:"phoneNumber"
+   },
+   {
+      label:"MBO",
+      placeholder:"123456789",
+      id:"grid-mbo",
+      width:"173px",
+      name:"MBO"
+   },
+   {
+      label:"Password",
+      placeholder:"********",
+      id:"grid-pass",
+      width:"270px",
+      name:"password"
+   },
+   {
+      label:"Confirm Password",
+      placeholder:"********",
+      id:"grid-passconf",
+      width:"270px",
+      name:"passwordConfirm"
+   }
+]

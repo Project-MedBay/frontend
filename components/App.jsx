@@ -5,10 +5,19 @@ import RegisterMain from './RegisterMain'
 import '../styles/App.css'
 
 export default function App() {
-  return (
-    <>
+
+  const [pageName, setPageName] = useState("login")
+  
+  const pages = {
+    login: <>
       <LogRegHeader />
-      <RegisterMain />
+      <LoginMain navigate={setPageName} />
+    </>,
+    register: <>
+      <LogRegHeader />
+      <RegisterMain navigate={setPageName} />
     </>
-  )
+  }
+  
+  return pages[pageName]
 }

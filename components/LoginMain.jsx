@@ -1,7 +1,8 @@
 import React from "react"
 import "../styles/login.css"
+import "../styles/inputField.css"
 
-export default function LoginMain() {
+export default function LoginMain(props) {
     return (
       <div className="login-main">
 
@@ -26,7 +27,9 @@ export default function LoginMain() {
                
                <div className="register-container">
                   <p className="register-q">You're new here?</p>
-                  <button className="register-button">Register now</button>
+                  <button className="register-button"
+                     onClick={() => props.navigate("register")}>Register now
+                  </button>
                </div>
             </div>
 

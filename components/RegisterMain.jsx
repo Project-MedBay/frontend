@@ -1,32 +1,75 @@
-import React from "react"
-import InputField from "./InputField"
+import React, { useState } from "react"
+import axios from "axios"
+import { registerFields } from "./FormsData"
 import "../styles/register.css"
+import "../styles/inputField.css"
 
-export default function RegisterMain() {
+export default function RegisterMain(props) {
 
-   var successPopup = true
+   const [formData, setFormData] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      dateOfBirth: "",
+      MBO: "",
+      password: "",
+      passwordConfirm: ""
+   })
+   const [successPopup, setSuccessPopup] = useState(false)
+
+   const formFields = registerFields.map(field => {
+      return (
+         <div className="form-input" id={field.id} key={field.id}>
+            <p className="input-text">{field.label}</p>
+            <input
+               className="input-box" type="text" style={{width: field.width}} onChange={handleChange}
+               placeholder={field.placeholder} name={field.name} value={formData[field.name]}
+            />
+         </div>
+      )
+   })
+
+   function handleChange(event) {
+      const {name, value} = event.target
+      setFormData(prevFormData => {
+          return {
+              ...prevFormData,
+              [name]: value
+          }
+      })
+  }
+
+   const sendFormData = () => {
+      axios({
+         // Endpoint to send files
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/security/register",
+         method: "POST",
+         data: formData
+      })
+      .then(res => res.status == 200 && setSuccessPopup(true))
+      .catch(error => console.log(error));
+   }
+
+   function handleSubmit(event) {
+      event.preventDefault()
+      sendFormData()
+   }
 
    return (
       <>
-         <div className="register-main">
+         <div className={`register-main ${successPopup && "covered-by-popup"}`}>
 
             <div className="greeting-container">
                <h1 className="greeting">Where Healing<br />Begins With Care.</h1>
             </div>
 
-            <form className="register-form">
+            <form className="register-form" onSubmit={handleSubmit}>
                <h1 className="form-title">Register</h1>
 
                <div className="grid-container">
-                  <InputField label="Name" id="grid-item-1" width={{width: "270px"}} />
-                  <InputField label="Surname" id="grid-item-2" width={{width: "270px"}} />
-                  <InputField label="E-mail" id="grid-item-3" width={{width: "540px"}} />
-                  <InputField label="OIB" id="grid-item-4" width={{width: "540px"}} />
-                  <InputField label="Date Of Birth" id="grid-item-5" width={{width: "173px"}} />
-                  <InputField label="" id="grid-item-6" width={{width: "173px"}} />
-                  <InputField label="" id="grid-item-7" width={{width: "174px"}} />
-                  <InputField label="Password" id="grid-item-8" width={{width: "270px"}} />
-                  <InputField label="Confirm Password" id="grid-item-9" width={{width: "270px"}} />
+                  {formFields}
                </div>
 
                <button className="form-button">Register</button>
@@ -41,7 +84,8 @@ export default function RegisterMain() {
             Please check your e-mail frequently in order to see whether
             your account is confirmed or there are changes to be made. 
             </p>
-            <button className="success-button">OK</button>
+            <button className="success-button"
+            onClick={() => props.navigate("login")}>OK</button>
          </div>}
 
       </>
