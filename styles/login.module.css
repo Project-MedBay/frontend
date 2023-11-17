@@ -10,8 +10,8 @@
    justify-content: center;
    align-items: center;
    gap: 8.5vw;
-   height: 93vh;
-   min-height: 500px;
+   height: calc(100vh - max(calc(85px * 0.6), calc(85vh * 59 / 725)));
+   min-height: 425px;
 }
 
 .login_form {
@@ -153,6 +153,7 @@
    .login_main {
       flex-direction: column;
       gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
+      min-height: 500px;
    }
    .tagline {
       display: none;
@@ -173,7 +174,7 @@
                         rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.5) 100%), 
                         url("../assets/logreg_bg_mobile.jpg");
       gap: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
-      min-height: 450px;
+      min-height: 90vw;
    }
 
    .login_form {
