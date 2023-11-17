@@ -35,15 +35,17 @@ export default function PatientDash(props) {
 
    return (
       <>
-         <h1>Welcome {userData.firstName}!</h1>
-         <h3>Here is your data:</h3>
-         <p>Id: {userData.id}</p>
-         <p>First name: {userData.firstName}</p>
-         <p>Last name: {userData.lastName}</p>
-         <p>Email: {userData.email}</p>
-         <p>Password (encrypted): {userData.password}</p>
-         <p>Activity status: {userData.active ? "true" : "false"}</p>
-         <p>Role: {userData.role}</p>
+         <div className="patient-main">
+            <h1>Welcome {userData.firstName}!</h1>
+            <h3>Here is your data:</h3>
+            <p>Id: {userData.id}</p>
+            <p>First name: {userData.firstName}</p>
+            <p>Last name: {userData.lastName}</p>
+            <p>Email: {userData.email}</p>
+            <p>Password (encrypted): {userData.password}</p>
+            <p>Activity status: {userData.active ? "true" : "false"}</p>
+            <p>Role: {userData.role}</p>
+         </div>
       </>
    )
 }

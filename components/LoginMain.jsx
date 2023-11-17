@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import axios from "axios"
 import "../styles/login.css"
-import "../styles/inputField.css"
 
 export default function LoginMain(props) {
 
    const [formData, setFormData] = useState({
       email: "",
       password: ""
+   })
+   const [inputFailed, setInputFailed] = useState({
+      value: false,
+      text: "Invalid email or password. Please try again."
    })
 
    function handleChange(event) {
@@ -29,7 +32,7 @@ export default function LoginMain(props) {
          data: formData
       })
       .then(res => res.status == 200 && handleLogIn(res.data.accessToken))
-      .catch(error => console.log(error));
+      .catch(error => handleError(error));
    }
 
    function handleLogIn(token) {
@@ -37,25 +40,37 @@ export default function LoginMain(props) {
       props.navigate("patientDash")
    }
 
+   function handleError(error) {
+      console.log(error)
+      error.response.status == 403 ?
+      setInputFailed({value: true, text: "Invalid email or password. Please try again."})
+      : setInputFailed({value: true, text: `${error.message}. Please try again.`})
+   }
+
    return (
       <div className="login-main">
 
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleSubmit} autoComplete="off">
                <h1 className="form-title">Welcome back!</h1>
+               <p className={`login-failed ${inputFailed.value && "failed-text"}`}>
+                  {inputFailed.text}
+               </p>
 
                <div className="form-input">
                   <p className="input-text">E-mail:</p>
                   <input
-                     className="input-box" type="text" onChange={handleChange}
-                     placeholder="john.doe@mail.com" name="email" value={formData["email"]}
+                     className={`input-box ${inputFailed.value && "failed-input"}`}
+                     type="text"onChange={handleChange} placeholder="john.doe@mail.com"
+                     name="email" value={formData["email"]}
                   />
                </div>
 
                <div className="form-input">
                   <p className="input-text">Password:</p>
                   <input
-                     className="input-box" type="text" onChange={handleChange}
-                     placeholder="********" name="password" value={formData["password"]}
+                     className={`input-box ${inputFailed.value && "failed-input"}`}
+                     type="text"onChange={handleChange} placeholder="********"
+                     name="password" value={formData["password"]}
                   />
                </div>
 

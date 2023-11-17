@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
 import "../styles/register.css"
-import "../styles/inputField.css"
 
 export default function RegisterMain(props) {
 
@@ -10,23 +9,39 @@ export default function RegisterMain(props) {
       firstName: "",
       lastName: "",
       email: "",
-      phoneNumber: "",
       address: "",
       dateOfBirth: "",
+      phoneNumber: "",
       MBO: "",
       password: "",
       passwordConfirm: ""
    })
+   const [inputFailed, setInputFailed] = useState({
+      firstName: {failed: false, text: "Name is required."},
+      lastName: {failed: false, text: "Surname is required."},
+      email: {failed: false, text: "Email must be in format 'something@something.domain'."},
+      address: {failed: false, text: "Address is required."},
+      dateOfBirth: {failed: false, text: "Must be YYYY-MM-DD."},
+      phoneNumber: {failed: false, text: "Must be 9+ digits."},
+      MBO: {failed: false, text: "Must be 9 digits."},
+      password: {failed: false, text: "Password must be 8+ characters."},
+      passwordConfirm: {failed: false, text: "Passwords do not match."}
+   })
    const [successPopup, setSuccessPopup] = useState(false)
 
    const formFields = registerFields.map(field => {
+      const {id, label, name, width, placeholder} = field
       return (
          <div className="form-input" id={field.id} key={field.id}>
             <p className="input-text">{field.label}</p>
             <input
-               className="input-box" type="text" style={{width: field.width}} onChange={handleChange}
+               className={`input-box ${inputFailed[name].failed && "failed-input"}`}
+               type="text" style={{width: field.width}} onChange={handleChange}
                placeholder={field.placeholder} name={field.name} value={formData[field.name]}
             />
+            <p className={`register-failed ${inputFailed[name].failed && "failed-text"}`}>
+               {inputFailed[name].text}
+            </p>
          </div>
       )
    })
@@ -39,10 +54,123 @@ export default function RegisterMain(props) {
               [name]: value
           }
       })
+
+      if (name == "password" || name == "passwordConfirm") {
+         // ovo dvoje je odvojeno jer su jedine meduovisne, ostala pravila provjeravamo doli
+         checkPasswordsMatch(value, name)
+      }
+
+      if (value == "") {
+         // ako je prazno automatski ne valja
+         setInputFailed(prevState => {
+            return {
+               ...prevState,
+               [name]: {failed: true, text: "Field is required."}
+         }})
+      } else if (name == "firstName" || name == "lastName" || name == "address") {
+         // ovi samo ne smiju bit prazni
+         setInputFailed(prevState => {
+            return {
+               ...prevState,
+               [name]: {failed: false, text: "Field is required."}
+         }})
+      } else if (name != "passwordConfirm") {
+         let updateInputFailedTo = {}
+         switch(name) {
+            // ovdi idu frontend provjere za ostale, npr date format
+            case "email":
+               updateInputFailedTo = checkEmailRules(value)
+               break
+            case "dateOfBirth":
+               updateInputFailedTo = checkDoBRules(value)
+               break
+            case "phoneNumber":
+               updateInputFailedTo = checkPhoneNumberRules(value)
+               break
+            case "MBO":
+               updateInputFailedTo = checkMBORules(value)
+               break
+            case "password":
+               updateInputFailedTo = checkPasswordRules(value)
+               break
+         }
+         setInputFailed(prevState => {
+            return {
+               ...prevState,
+               [name]: updateInputFailedTo
+         }})
+      }
+
+      checkInputFailedAny()
+   }
+
+   function checkInputFailedAny() {
+      let inputEmpty = false
+      for (let name in formData) {
+         if (formData[name] == "") inputEmpty = true
+         if (inputEmpty || inputFailed[name].failed) {
+            return true
+         }
+      }
+      return false
+   }
+
+   function checkEmailRules(value) {
+      let failed = !/.+@.+[/.].+/.test(value)
+      let text = "Email must be in format 'something@something.domain'."
+      return {failed: failed, text: text}
+   }
+
+   function checkPhoneNumberRules(value) {
+      let failed = !/^\d+$/.test(value)
+      let text = "Must be digits only."
+      if (!failed && value.length < 9) {
+         failed = true
+         text = "Must be 9+ digits."
+      }
+      return {failed: failed, text: text}
+   }
+
+   function checkMBORules(value) {
+      let failed = !/^\d+$/.test(value)
+      let text = "Must be digits only."
+      if (!failed && value.length != 9) {
+         failed = true
+         text = "Must be 9 digits."
+      }
+      return {failed: failed, text: text}
+   }
+
+   function checkDoBRules(value) {
+      let failed = !/^\d{4}-\d{2}-\d{2}$/.test(value)
+      let text = "Must be YYYY-MM-DD."
+      if (!failed && isNaN(new Date(value))) failed = true
+      return {failed: failed, text: text}
+   }
+
+   function checkPasswordRules(value) {
+      let failed = false
+      let text = "Password must be 8+ characters."
+      if (value.length < 8) failed = true
+      // ovdje idu else if za ostala pravila
+      return {failed: failed, text: text}
+   }
+
+   function checkPasswordsMatch(value, name) {
+      let failed = false
+      let checkAgainst = name == "password" ? "passwordConfirm" : "password"
+      value != formData[checkAgainst] ? failed = true : failed = false
+      console.log(failed)
+      setInputFailed(prevState => {
+         return {
+            ...prevState,
+            passwordConfirm: {failed: failed, text: "Passwords do not match."}
+      }})
   }
 
    function handleSubmit(event) {
       event.preventDefault()
+      if (checkInputFailedAny()) return;
       axios({
          // Endpoint to send files
          url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/security/register",
@@ -50,7 +178,7 @@ export default function RegisterMain(props) {
          data: formData
       })
       .then(res => res.status == 200 && setSuccessPopup(true))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
    }
 
    return (
@@ -61,7 +189,7 @@ export default function RegisterMain(props) {
                <h1 className="greeting">Where Healing<br />Begins With Care.</h1>
             </div>
 
-            <form className="register-form" onSubmit={handleSubmit}>
+            <form className="register-form" onSubmit={handleSubmit} autoComplete="off">
                <h1 className="form-title">Register</h1>
 
                <div className="grid-container">
