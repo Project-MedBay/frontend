@@ -1,7 +1,7 @@
 .login_main {
-   background-image: linear-gradient(15deg, rgba(255,255,255,1) 0%,
-                     rgba(255,255,255,1) 45%, rgba(255,255,255,0.5) 65%,
-                     rgba(255,255,255,0) 100%), url("../assets/docs.jpg");
+   background-image: linear-gradient(30deg, rgba(255,255,255,1) 0%,
+                     rgba(255,255,255,1) 35%, rgba(255,255,255,0.5) 65%,
+                     rgba(255,255,255,0) 100%), url("../assets/login_bg4.jpg");
    background-size: cover;
    background-position: top center;
    background-attachment: fixed;
@@ -112,8 +112,8 @@
    font-weight: 600;
    letter-spacing: -0.05em;
    margin: 0;
-   color: #200063;
-   text-shadow: 0px 4px 4px #FFFFFF;
+   color: rgb(34, 0, 106);
+   text-shadow: 2px 5px 5px #FFFFFF;
 }
 
 .register_container {
@@ -135,7 +135,7 @@
    font-weight: 500;
    padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(25px * 0.6), calc(25vh * 59 / 725));
    border-radius: 12px;
-   background: #200063;
+   background: rgb(34, 0, 106);
    box-shadow: 0px 4px 50px 8px #00000026;
    color: white;
 }
@@ -145,13 +145,14 @@
 }
 
 @media only screen and ((max-aspect-ratio: 8 / 7) or (max-width: 950px)) {
-   .register_button {
+   /* za testiranje
+      .form_button {
       background-color: red;
-   }
+   } */
 
    .login_main {
       flex-direction: column;
-      gap: min(max(30px, 5vh), 80px);
+      gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
    }
    .tagline {
       display: none;
@@ -161,58 +162,59 @@
    }
 }
 
-@media only screen and (max-aspect-ratio: 4 / 5) {
-   .register_button {
+@media only screen and ((max-aspect-ratio: 4 / 5) or (max-width: 550px)) {
+   /* za testiranje
+      .form_button {
       background-color: blue;
+   } */
+
+   .login_main {
+      background-image: linear-gradient(0deg, rgba(255,255,255,0.5) 0%,
+                        rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.5) 100%), 
+                        url("../assets/logreg_bg_mobile.jpg");
+      gap: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
+      min-height: 450px;
    }
 
    .login_form {
-      padding: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725)) max(calc(75px * 0.6), calc(75vh * 59 / 725));
-      gap: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
+      padding: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725)) max(calc(75px * 0.3), calc(75vw * 1.25 * 59 / 725));
+      gap: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
    }
 
    .form_title {
-      font-size: max(calc(72px * 0.6), calc(72vw * 1.25 * 59 / 725));
+      font-size: max(calc(72px * 0.3), calc(72vw * 1.25 * 59 / 725));
    }
 
    .login_failed {
-      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
-      margin-top: min(calc(-25px * 0.6), calc(-25vw * 1.25 * 59 / 725));
-      margin-bottom: min(calc(-45px * 0.6), calc(-45vw * 1.25 * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
+      margin-top: min(calc(-25px * 0.3), calc(-25vw * 1.25 * 59 / 725));
+      margin-bottom: min(calc(-45px * 0.3), calc(-45vw * 1.25 * 59 / 725));
    }
 
    .input_text {
-      margin: max(calc(8px * 0.6), calc(8vw * 1.25 * 59 / 725)) 0;
-      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+      margin: max(calc(8px * 0.3), calc(8vw * 1.25 * 59 / 725)) 0;
+      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
    }
 
    .input_box {
-      width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
-      font-size: max(calc(22px * 0.6), calc(22vw * 1.25 * 59 / 725));
-      padding: max(calc(10px * 0.6), calc(10vw * 1.25 * 59 / 725));
-      padding-left: max(calc(14px * 0.6), calc(14vw * 1.25 * 59 / 725));
+      width: max(calc(560px * 0.3), calc(560vw * 1.25 * 59 / 725));
+      font-size: max(calc(22px * 0.3), calc(22vw * 1.25 * 59 / 725));
+      padding: max(calc(10px * 0.3), calc(10vw * 1.25 * 59 / 725));
+      padding-left: max(calc(14px * 0.3), calc(14vw * 1.25 * 59 / 725));
    }
 
    .form_button {
-      padding: max(calc(20px * 0.6), calc(20vw * 1.25 * 59 / 725)) max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
-      font-size: max(calc(40px * 0.6), calc(40vw * 1.25 * 59 / 725));
-   }
-
-   .extras {
-      gap: max(calc(80px * 0.6), calc(80vw * 1.25 * 59 / 725));
-   }
-
-   .tagline {
-      font-size: max(calc(78px * 0.6), calc(78vw * 1.25 * 59 / 725));
+      padding: max(calc(20px * 0.3), calc(20vw * 1.25 * 59 / 725)) max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
+      font-size: max(calc(40px * 0.3), calc(40vw * 1.25 * 59 / 725));
    }
 
    .register_q {
-      margin: max(calc(8px * 0.6), calc(8vw * 1.25 * 59 / 725));
-      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+      margin: max(calc(8px * 0.3), calc(8vw * 1.25 * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
    }
 
    .register_button {
-      font-size: max(calc(24px * 0.6), calc(24vw * 1.25 * 59 / 725));
-      padding: max(calc(15px * 0.6), calc(15vw * 1.25 * 59 / 725)) max(calc(25px * 0.6), calc(25vw * 1.25 * 59 / 725));
+      font-size: max(calc(24px * 0.3), calc(24vw * 1.25 * 59 / 725));
+      padding: max(calc(15px * 0.3), calc(15vw * 1.25 * 59 / 725)) max(calc(25px * 0.3), calc(25vw * 1.25 * 59 / 725));
    }
 }

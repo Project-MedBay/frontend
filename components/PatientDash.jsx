@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import "../styles/patientDash.css"
+import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
 
@@ -35,7 +35,7 @@ export default function PatientDash(props) {
 
    return (
       <>
-         <div className="patient-main">
+         <div className={s.patient_main}>
             <h1>Welcome {userData.firstName}!</h1>
             <h3>Here is your data:</h3>
             <p>Id: {userData.id}</p>

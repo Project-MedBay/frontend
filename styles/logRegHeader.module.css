@@ -6,25 +6,24 @@
    align-items: center;
 }
 
-.header-logo {
+.header_logo {
    display: flex;
    justify-content: center;
    align-items: flex-end;
 }
 
-.header-logo:hover {
+.header_logo:hover {
    cursor: pointer;
 }
 
-.logo-img {
-   height: 7vh;
-   min-height: 70px;
+.logo_img {
+   height: max(calc(85px * 0.6), calc(85vh * 59 / 725));
    aspect-ratio: 1 / 1;
 }
 
-.logo-title {
+.logo_title {
    font-family: "Barlow", sans-serif;
-   font-size: max(3em, 5vh);
+   font-size: max(calc(60px * 0.6), calc(60vh * 59 / 725));
    font-weight: 700;
    letter-spacing: -0.07em;
    margin: 0;
