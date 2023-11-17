@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
 import "../styles/register.css"
+import "../styles/logRegScaling.css"
 
 export default function RegisterMain(props) {
 
@@ -37,8 +38,8 @@ export default function RegisterMain(props) {
             <p className="input-text">{field.label}</p>
             <input
                className={`input-box ${inputFailed[name].failed && "failed-input"}`}
-               type="text" style={{width: field.width}} onChange={handleChange}
-               placeholder={field.placeholder} name={field.name} value={formData[field.name]}
+               type="text" onChange={handleChange} placeholder={field.placeholder}
+               name={field.name} value={formData[field.name]} id={field.id}
             />
             <p className={`register-failed ${inputFailed[name].failed && "failed-text"}`}>
                {inputFailed[name].text}

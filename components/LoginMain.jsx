@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import "../styles/login.css"
+import "../styles/logRegScaling.css"
 
 export default function LoginMain(props) {
 

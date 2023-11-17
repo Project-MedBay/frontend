@@ -11,7 +11,7 @@
    align-items: center;
    gap: 8.5vw;
    height: 93vh;
-   min-height: 550px;
+   min-height: 500px;
 }
 
 .login-form {
@@ -21,7 +21,7 @@
    min-width: 550px;
    min-height: 450px; */
    background-color: white;
-   padding: max(calc(50px * 0.7), calc(50vh * 49 / 600));
+   padding: max(calc(50px * 0.6), calc(50vh * 59 / 725));
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -29,23 +29,23 @@
    box-shadow: 0px 4px 50px 20px #00000033;
    border-radius: 14px;
    font-family: "Barlow", sans-serif;
-   gap: max(calc(50px * 0.7), calc(50vh * 49 / 600));
+   gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
 }
 
 .form-title {
    color: #636363;
-   font-size: max(calc(72px * 0.7), calc(72vh * 49 / 600));
+   font-size: max(calc(72px * 0.6), calc(72vh * 59 / 725));
    font-weight: 600;
-   margin: 0 max(calc(80px * 0.7), calc(80vh * 49 / 600));
+   margin: 0 max(calc(80px * 0.6), calc(80vh * 59 / 725));
    text-wrap: nowrap;
 }
 
 .login-failed {
    color: #FF0000;
-   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    font-weight: 500;
-   margin-top: min(calc(-25px * 0.7), calc(-25vh * 49 / 600));
-   margin-bottom: min(calc(-45px * 0.7), calc(-45vh * 49 / 600));
+   margin-top: min(calc(-25px * 0.6), calc(-25vh * 59 / 725));
+   margin-bottom: min(calc(-45px * 0.6), calc(-45vh * 59 / 725));
    visibility: hidden;
 }
 
@@ -60,16 +60,16 @@
 }
 
 .input-text {
-   margin: max(calc(8px * 0.7), calc(8vh * 49 / 600)) 0;
-   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
+   margin: max(calc(8px * 0.6), calc(8vh * 59 / 725)) 0;
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    font-weight: 500;
 }
 
 .input-box {
-   width: max(calc(540px * 0.7), calc(540vh * 49 / 600));
-   font-size: max(calc(22px * 0.7), calc(22vh * 49 / 600));
-   padding: max(calc(10px * 0.7), calc(10vh * 49 / 600));
-   padding-left: max(calc(14px * 0.7), calc(14vh * 49 / 600));
+   width: max(calc(540px * 0.6), calc(540vh * 59 / 725));
+   font-size: max(calc(22px * 0.6), calc(22vh * 59 / 725));
+   padding: max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   padding-left: max(calc(14px * 0.6), calc(14vh * 59 / 725));
    background: #F4F3F3;
    border: 1px solid #F4F3F3;
    border-radius: 10px;
@@ -86,10 +86,10 @@
 .form-button {
    background: #70D8AC;
    box-shadow: 0px 4px 50px 8px #00000026;
-   padding: max(calc(20px * 0.7), calc(20vh * 49 / 600)) max(calc(50px * 0.7), calc(50vh * 49 / 600));
+   padding: max(calc(20px * 0.6), calc(20vh * 59 / 725)) max(calc(50px * 0.6), calc(50vh * 59 / 725));
    font-family: "Barlow", sans-serif;
    font-weight: 700;
-   font-size: max(calc(40px * 0.7), calc(40vh * 49 / 600));
+   font-size: max(calc(40px * 0.6), calc(40vh * 59 / 725));
    color: white;
    border: 1px solid #70D8AC;
    border-radius: 14px;
@@ -104,11 +104,11 @@
    display: flex;
    flex-direction: column;
    justify-content: center;
-   gap: max(calc(80px * 0.7), calc(80vh * 49 / 600));
+   gap: max(calc(80px * 0.6), calc(80vh * 59 / 725));
 }
 
 .tagline {
-   font-size: max(calc(78px * 0.7), calc(78vh * 49 / 600));
+   font-size: max(calc(78px * 0.6), calc(78vh * 59 / 725));
    font-weight: 600;
    letter-spacing: -0.05em;
    margin: 0;
@@ -124,16 +124,16 @@
 }
 
 .register-q {
-   margin: max(calc(8px * 0.7), calc(8vh * 49 / 600));
-   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
+   margin: max(calc(8px * 0.6), calc(8vh * 59 / 725));
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    font-weight: 500;
 }
 
 .register-button {
    font-family: "Barlow", sans-serif;
-   font-size: max(calc(24px * 0.7), calc(24vh * 49 / 600));
+   font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
    font-weight: 500;
-   padding: max(calc(15px * 0.7), calc(15vh * 49 / 600)) max(calc(25px * 0.7), calc(25vh * 49 / 600));
+   padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(25px * 0.6), calc(25vh * 59 / 725));
    border-radius: 12px;
    background: #200063;
    box-shadow: 0px 4px 50px 8px #00000026;
@@ -144,81 +144,3 @@
    cursor: pointer;
 }
 
-@media only screen and ((max-aspect-ratio: 8 / 7) or (max-width: 950px)) {
-   .login-main {
-      flex-direction: column;
-      gap: min(max(30px, 5vh), 80px);
-   }
-   .tagline {
-      display: none;
-   }
-   .register-q {
-      text-align: center;
-   }
-   .register-button {
-      background-color: red;
-   }
-}
-
-@media only screen and (max-aspect-ratio: 4 / 5) {
-   .register-button {
-      background-color: blue;
-   }
-   
-   .login-form {
-      /* width: 725px, height: 600px */
-      /* width: 59vw * 1.25;
-      height: 49vw * 1.25;
-      min-width: 550px;
-      min-height: 450px; */
-      padding: max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
-      gap: max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
-   }
-
-   .form-title {
-      font-size: max(calc(72px * 0.7), calc(72vw * 1.25 * 49 / 600));
-      margin: 0 max(calc(80px * 0.7), calc(80vw * 1.25 * 49 / 600));
-   }
-
-   .login-failed {
-      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
-      margin-top: min(calc(-25px * 0.7), calc(-25vw * 1.25 * 49 / 600));
-      margin-bottom: min(calc(-45px * 0.7), calc(-45vw * 1.25 * 49 / 600));
-   }
-
-   .input-text {
-      margin: max(calc(8px * 0.7), calc(8vw * 1.25 * 49 / 600)) 0;
-      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
-   }
-
-   .input-box {
-      width: max(calc(540px * 0.7), calc(540vw * 1.25 * 49 / 600));
-      font-size: max(calc(22px * 0.7), calc(22vw * 1.25 * 49 / 600));
-      padding: max(calc(10px * 0.7), calc(10vw * 1.25 * 49 / 600));
-      padding-left: max(calc(14px * 0.7), calc(14vw * 1.25 * 49 / 600));
-   }
-
-   .form-button {
-      padding: max(calc(20px * 0.7), calc(20vw * 1.25 * 49 / 600)) max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
-      font-size: max(calc(40px * 0.7), calc(40vw * 1.25 * 49 / 600));
-   }
-
-   .extras {
-      gap: max(calc(80px * 0.7), calc(80vw * 1.25 * 49 / 600));
-   }
-
-   .tagline {
-      font-size: max(calc(78px * 0.7), calc(78vw * 1.25 * 49 / 600));
-   }
-
-   .register-q {
-      margin: max(calc(8px * 0.7), calc(8vw * 1.25 * 49 / 600));
-      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
-   }
-
-   .register-button {
-      font-size: max(calc(24px * 0.7), calc(24vw * 1.25 * 49 / 600));
-      padding: max(calc(15px * 0.7), calc(15vw * 1.25 * 49 / 600)) max(calc(25px * 0.7), calc(25vw * 1.25 * 49 / 600));
-   }
-
-}
