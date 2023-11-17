@@ -17,6 +17,7 @@ export default function RegisterMain(props) {
       passwordConfirm: ""
    })
    const [inputFailed, setInputFailed] = useState({
+      unexpectedError: {failed: false, text: "Error"},
       firstName: {failed: false, text: "Name is required."},
       lastName: {failed: false, text: "Surname is required."},
       email: {failed: false, text: "Email must be in format 'something@something.domain'."},
@@ -100,19 +101,6 @@ export default function RegisterMain(props) {
                [name]: updateInputFailedTo
          }})
       }
-
-      checkInputFailedAny()
-   }
-
-   function checkInputFailedAny() {
-      let inputEmpty = false
-      for (let name in formData) {
-         if (formData[name] == "") inputEmpty = true
-         if (inputEmpty || inputFailed[name].failed) {
-            return true
-         }
-      }
-      return false
    }
 
    function checkEmailRules(value) {
@@ -120,7 +108,7 @@ export default function RegisterMain(props) {
       let text = "Email must be in format 'something@something.domain'."
       return {failed: failed, text: text}
    }
-
+   
    function checkPhoneNumberRules(value) {
       let failed = !/^\d+$/.test(value)
       let text = "Must be digits only."
@@ -130,7 +118,7 @@ export default function RegisterMain(props) {
       }
       return {failed: failed, text: text}
    }
-
+   
    function checkMBORules(value) {
       let failed = !/^\d+$/.test(value)
       let text = "Must be digits only."
@@ -140,14 +128,14 @@ export default function RegisterMain(props) {
       }
       return {failed: failed, text: text}
    }
-
+   
    function checkDoBRules(value) {
       let failed = !/^\d{4}-\d{2}-\d{2}$/.test(value)
       let text = "Must be YYYY-MM-DD."
       if (!failed && isNaN(new Date(value))) failed = true
       return {failed: failed, text: text}
    }
-
+   
    function checkPasswordRules(value) {
       let failed = false
       let text = "Password must be 8+ characters."
@@ -155,21 +143,41 @@ export default function RegisterMain(props) {
       // ovdje idu else if za ostala pravila
       return {failed: failed, text: text}
    }
-
+   
    function checkPasswordsMatch(value, name) {
       let failed = false
       let checkAgainst = name == "password" ? "passwordConfirm" : "password"
       value != formData[checkAgainst] ? failed = true : failed = false
-      console.log(failed)
       setInputFailed(prevState => {
          return {
             ...prevState,
             passwordConfirm: {failed: failed, text: "Passwords do not match."}
-      }})
-  }
+         }})
+      }
+   
+   function checkInputFailedAny() {
+      let failedAny = false
+      for (let name in formData) {
+         if (inputFailed[name].failed) failedAny = true
+         else if (formData[name] == "") {
+            setInputFailed(prevState => {
+               return {
+                  ...prevState,
+                  [name]: {failed: true, text: "Field is required."}
+            }})
+            failedAny = true
+         }
+      }
+      return failedAny
+   }
 
    function handleSubmit(event) {
       event.preventDefault()
+      setInputFailed(prevState => {
+         return {
+            ...prevState,
+            unexpectedError: {failed: false, text: "Error"}
+      }})
       if (checkInputFailedAny()) return;
       axios({
          // Endpoint to send files
@@ -178,8 +186,18 @@ export default function RegisterMain(props) {
          data: formData
       })
       .then(res => res.status == 200 && setSuccessPopup(true))
-      .catch(error => console.log(error))
+      .catch(error => handleError(error))
    }
+
+   function handleError(error) {
+      console.log(error)
+      setInputFailed(prevState => {
+         return {
+            ...prevState,
+            unexpectedError: {failed: true, text: `${error.message}. Please try again.`}
+      }})
+   }
+
 
    return (
       <>
@@ -191,6 +209,9 @@ export default function RegisterMain(props) {
 
             <form className="register-form" onSubmit={handleSubmit} autoComplete="off">
                <h1 className="form-title">Register</h1>
+               <p className={`register-error ${inputFailed["unexpectedError"].failed && "failed-text"}`}>
+                  {inputFailed["unexpectedError"].text}
+               </p>
 
                <div className="grid-container">
                   {formFields}

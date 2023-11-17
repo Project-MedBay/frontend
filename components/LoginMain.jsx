@@ -48,7 +48,7 @@ export default function LoginMain(props) {
    }
 
    return (
-      <div className="login-main">
+         <div className="login-main">
 
             <form className="login-form" onSubmit={handleSubmit} autoComplete="off">
                <h1 className="form-title">Welcome back!</h1>
@@ -88,6 +88,6 @@ export default function LoginMain(props) {
                </div>
             </div>
 
-      </div>
+         </div>
     )
 }

@@ -3,17 +3,25 @@
                      rgba(255,255,255,1) 45%, rgba(255,255,255,0.5) 65%,
                      rgba(255,255,255,0) 100%), url("../assets/docs.jpg");
    background-size: cover;
+   background-position: top center;
+   background-attachment: fixed;
+   position: relative;
    display: flex;
-   padding: 200px;
    justify-content: center;
    align-items: center;
-   gap: 225px;
+   gap: 8.5vw;
    height: 93vh;
+   min-height: 550px;
 }
 
 .login-form {
+   /* width: 725px, height: 600px */
+   /* width: 59vh;
+   height: 49vh;
+   min-width: 550px;
+   min-height: 450px; */
    background-color: white;
-   padding: 50px;
+   padding: max(calc(50px * 0.7), calc(50vh * 49 / 600));
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -21,24 +29,23 @@
    box-shadow: 0px 4px 50px 20px #00000033;
    border-radius: 14px;
    font-family: "Barlow", sans-serif;
-   gap: 50px;
+   gap: max(calc(50px * 0.7), calc(50vh * 49 / 600));
 }
 
 .form-title {
    color: #636363;
-   font-size: 72px;
+   font-size: max(calc(72px * 0.7), calc(72vh * 49 / 600));
    font-weight: 600;
-   margin: 50px 80px;
-   margin-bottom: 15px;
+   margin: 0 max(calc(80px * 0.7), calc(80vh * 49 / 600));
    text-wrap: nowrap;
 }
 
 .login-failed {
    color: #FF0000;
-   font-size: 18px;
+   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
    font-weight: 500;
-   margin-top: -25px;
-   margin-bottom: -45px;
+   margin-top: min(calc(-25px * 0.7), calc(-25vh * 49 / 600));
+   margin-bottom: min(calc(-45px * 0.7), calc(-45vh * 49 / 600));
    visibility: hidden;
 }
 
@@ -53,16 +60,16 @@
 }
 
 .input-text {
-   margin: 8px 0px;
-   font-size: 18px;
+   margin: max(calc(8px * 0.7), calc(8vh * 49 / 600)) 0;
+   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
    font-weight: 500;
 }
 
 .input-box {
-   width: 540px;
-   font-size: 22px;
-   padding: 10px;
-   padding-left: 14px;
+   width: max(calc(540px * 0.7), calc(540vh * 49 / 600));
+   font-size: max(calc(22px * 0.7), calc(22vh * 49 / 600));
+   padding: max(calc(10px * 0.7), calc(10vh * 49 / 600));
+   padding-left: max(calc(14px * 0.7), calc(14vh * 49 / 600));
    background: #F4F3F3;
    border: 1px solid #F4F3F3;
    border-radius: 10px;
@@ -79,10 +86,10 @@
 .form-button {
    background: #70D8AC;
    box-shadow: 0px 4px 50px 8px #00000026;
-   padding: 20px 50px;
+   padding: max(calc(20px * 0.7), calc(20vh * 49 / 600)) max(calc(50px * 0.7), calc(50vh * 49 / 600));
    font-family: "Barlow", sans-serif;
    font-weight: 700;
-   font-size: 40px;
+   font-size: max(calc(40px * 0.7), calc(40vh * 49 / 600));
    color: white;
    border: 1px solid #70D8AC;
    border-radius: 14px;
@@ -93,16 +100,15 @@
 }
 
 .extras {
-   padding: 150px 0px;
    font-family: "Barlow", sans-serif;
    display: flex;
    flex-direction: column;
    justify-content: center;
-   gap: 100px;
+   gap: max(calc(80px * 0.7), calc(80vh * 49 / 600));
 }
 
 .tagline {
-   font-size: 78px;
+   font-size: max(calc(78px * 0.7), calc(78vh * 49 / 600));
    font-weight: 600;
    letter-spacing: -0.05em;
    margin: 0;
@@ -118,16 +124,16 @@
 }
 
 .register-q {
-   margin: 8px;
-   font-size: 18px;
+   margin: max(calc(8px * 0.7), calc(8vh * 49 / 600));
+   font-size: max(calc(18px * 0.7), calc(18vh * 49 / 600));
    font-weight: 500;
 }
 
 .register-button {
    font-family: "Barlow", sans-serif;
-   font-size: 24px;
+   font-size: max(calc(24px * 0.7), calc(24vh * 49 / 600));
    font-weight: 500;
-   padding: 15px 25px;
+   padding: max(calc(15px * 0.7), calc(15vh * 49 / 600)) max(calc(25px * 0.7), calc(25vh * 49 / 600));
    border-radius: 12px;
    background: #200063;
    box-shadow: 0px 4px 50px 8px #00000026;
@@ -136,4 +142,83 @@
 
 .register-button:hover {
    cursor: pointer;
+}
+
+@media only screen and ((max-aspect-ratio: 8 / 7) or (max-width: 950px)) {
+   .login-main {
+      flex-direction: column;
+      gap: min(max(30px, 5vh), 80px);
+   }
+   .tagline {
+      display: none;
+   }
+   .register-q {
+      text-align: center;
+   }
+   .register-button {
+      background-color: red;
+   }
+}
+
+@media only screen and (max-aspect-ratio: 4 / 5) {
+   .register-button {
+      background-color: blue;
+   }
+   
+   .login-form {
+      /* width: 725px, height: 600px */
+      /* width: 59vw * 1.25;
+      height: 49vw * 1.25;
+      min-width: 550px;
+      min-height: 450px; */
+      padding: max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
+      gap: max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
+   }
+
+   .form-title {
+      font-size: max(calc(72px * 0.7), calc(72vw * 1.25 * 49 / 600));
+      margin: 0 max(calc(80px * 0.7), calc(80vw * 1.25 * 49 / 600));
+   }
+
+   .login-failed {
+      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
+      margin-top: min(calc(-25px * 0.7), calc(-25vw * 1.25 * 49 / 600));
+      margin-bottom: min(calc(-45px * 0.7), calc(-45vw * 1.25 * 49 / 600));
+   }
+
+   .input-text {
+      margin: max(calc(8px * 0.7), calc(8vw * 1.25 * 49 / 600)) 0;
+      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
+   }
+
+   .input-box {
+      width: max(calc(540px * 0.7), calc(540vw * 1.25 * 49 / 600));
+      font-size: max(calc(22px * 0.7), calc(22vw * 1.25 * 49 / 600));
+      padding: max(calc(10px * 0.7), calc(10vw * 1.25 * 49 / 600));
+      padding-left: max(calc(14px * 0.7), calc(14vw * 1.25 * 49 / 600));
+   }
+
+   .form-button {
+      padding: max(calc(20px * 0.7), calc(20vw * 1.25 * 49 / 600)) max(calc(50px * 0.7), calc(50vw * 1.25 * 49 / 600));
+      font-size: max(calc(40px * 0.7), calc(40vw * 1.25 * 49 / 600));
+   }
+
+   .extras {
+      gap: max(calc(80px * 0.7), calc(80vw * 1.25 * 49 / 600));
+   }
+
+   .tagline {
+      font-size: max(calc(78px * 0.7), calc(78vw * 1.25 * 49 / 600));
+   }
+
+   .register-q {
+      margin: max(calc(8px * 0.7), calc(8vw * 1.25 * 49 / 600));
+      font-size: max(calc(18px * 0.7), calc(18vw * 1.25 * 49 / 600));
+   }
+
+   .register-button {
+      font-size: max(calc(24px * 0.7), calc(24vw * 1.25 * 49 / 600));
+      padding: max(calc(15px * 0.7), calc(15vw * 1.25 * 49 / 600)) max(calc(25px * 0.7), calc(25vw * 1.25 * 49 / 600));
+   }
+
 }
