@@ -12,11 +12,11 @@ export default function App() {
   
   const pages = {
     login: <>
-      <LogRegHeader />
+      <LogRegHeader navigate={setPageName} />
       <LoginMain navigate={setPageName} setUserToken={setUserToken} />
     </>,
     register: <>
-      <LogRegHeader />
+      <LogRegHeader navigate={setPageName} />
       <RegisterMain navigate={setPageName} />
     </>,
     patientDash: <>

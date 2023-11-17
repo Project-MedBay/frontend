@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
-import "../styles/register.css"
-import "../styles/logRegScaling.css"
+import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
 
@@ -34,14 +33,14 @@ export default function RegisterMain(props) {
    const formFields = registerFields.map(field => {
       const {id, label, name, width, placeholder} = field
       return (
-         <div className="form-input" id={field.id} key={field.id}>
-            <p className="input-text">{field.label}</p>
+         <div className={s.form_input} id={s[field.id]} key={field.id}>
+            <p className={s.input_text}>{field.label}</p>
             <input
-               className={`input-box ${inputFailed[name].failed && "failed-input"}`}
+               className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}
                type="text" onChange={handleChange} placeholder={field.placeholder}
-               name={field.name} value={formData[field.name]} id={field.id}
+               name={field.name} value={formData[field.name]} id={s[field.id]}
             />
-            <p className={`register-failed ${inputFailed[name].failed && "failed-text"}`}>
+            <p className={`${s.register_failed} ${inputFailed[name].failed && s.failed_text}`}>
                {inputFailed[name].text}
             </p>
          </div>
@@ -202,35 +201,35 @@ export default function RegisterMain(props) {
 
    return (
       <>
-         <div className={`register-main ${successPopup && "covered-by-popup"}`}>
+         <div className={`${s.register_main} ${successPopup && s.covered_by_popup}`}>
 
-            <div className="greeting-container">
-               <h1 className="greeting">Where Healing<br />Begins With Care.</h1>
+            <div className={s.greeting_container}>
+               <h1 className={s.greeting}>Where Healing<br />Begins With Care.</h1>
             </div>
 
-            <form className="register-form" onSubmit={handleSubmit} autoComplete="off">
-               <h1 className="form-title">Register</h1>
-               <p className={`register-error ${inputFailed["unexpectedError"].failed && "failed-text"}`}>
+            <form className={s.register_form} onSubmit={handleSubmit} autoComplete="off">
+               <h1 className={s.form_title}>Register</h1>
+               <p className={`${s.register_error} ${inputFailed["unexpectedError"].failed && s.failed_text}`}>
                   {inputFailed["unexpectedError"].text}
                </p>
 
-               <div className="grid-container">
+               <div className={s.grid_container}>
                   {formFields}
                </div>
 
-               <button className="form-button">Register</button>
+               <button className={s.form_button}>Register</button>
             </form>
          </div>
 
-         {successPopup && <div className="register-success">
-            <h1 className="success-title">Success!</h1>
-            <p className="success-text">
+         {successPopup && <div className={s.register_success}>
+            <h1 className={s.success_title}>Success!</h1>
+            <p className={s.success_text}>
             You have filled all the information and your account
             is now being processed by our administrator.<br />
             Please check your e-mail frequently in order to see whether
             your account is confirmed or there are changes to be made. 
             </p>
-            <button className="success-button"
+            <button className={s.success_button}
             onClick={() => props.navigate("login")}>OK</button>
          </div>}
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import "../styles/login.css"
-import "../styles/logRegScaling.css"
+import s from "../styles/login.module.css"
 
 export default function LoginMain(props) {
 
@@ -49,41 +48,41 @@ export default function LoginMain(props) {
    }
 
    return (
-         <div className="login-main">
+         <div className={s.login_main}>
 
-            <form className="login-form" onSubmit={handleSubmit} autoComplete="off">
-               <h1 className="form-title">Welcome back!</h1>
-               <p className={`login-failed ${inputFailed.value && "failed-text"}`}>
+            <form className={s.login_form} onSubmit={handleSubmit} autoComplete="off">
+               <h1 className={s.form_title}>Welcome back!</h1>
+               <p className={`${s.login_failed} ${inputFailed.value && s.failed_text}`}>
                   {inputFailed.text}
                </p>
 
-               <div className="form-input">
-                  <p className="input-text">E-mail:</p>
+               <div className={s.form_input}>
+                  <p className={s.input_text}>E-mail:</p>
                   <input
-                     className={`input-box ${inputFailed.value && "failed-input"}`}
+                     className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
                      type="text"onChange={handleChange} placeholder="john.doe@mail.com"
                      name="email" value={formData["email"]}
                   />
                </div>
 
-               <div className="form-input">
-                  <p className="input-text">Password:</p>
+               <div className={s.form_input}>
+                  <p className={s.input_text}>Password:</p>
                   <input
-                     className={`input-box ${inputFailed.value && "failed-input"}`}
+                     className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
                      type="text"onChange={handleChange} placeholder="********"
                      name="password" value={formData["password"]}
                   />
                </div>
 
-               <button className="form-button">Login</button>
+               <button className={s.form_button}>Login</button>
             </form>
 
-            <div className="extras">
-               <h1 className="tagline">Rehabilitation<br />Redefined</h1>
+            <div className={s.extras}>
+               <h1 className={s.tagline}>Rehabilitation<br />Redefined</h1>
                
-               <div className="register-container">
-                  <p className="register-q">You're new here?</p>
-                  <button className="register-button"
+               <div className={s.register_container}>
+                  <p className={s.register_q}>You're new here?</p>
+                  <button className={s.register_button}
                      onClick={() => props.navigate("register")}>Register now
                   </button>
                </div>

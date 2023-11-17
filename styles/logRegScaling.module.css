@@ -1,62 +1,41 @@
-@media only screen and ((max-aspect-ratio: 8 / 7) or (max-width: 950px)) {
-   .login-main {
-      flex-direction: column;
-      gap: min(max(30px, 5vh), 80px);
-   }
-   .tagline {
-      display: none;
-   }
-   .register-q {
-      text-align: center;
-   }
-   .register-button {
-      background-color: red;
-   }
-}
 
-@media only screen and ((max-aspect-ratio: 6 / 5) or (max-width: 1050px)) {
-   .register-main {
-      flex-direction: column;
-   }
-   .greeting-container {
-      display: none;
-   }
-}
+
+
 
 @media only screen and (max-aspect-ratio: 4 / 5) {
-   .register-button {
+   .register_button {
       background-color: blue;
    }
    
-   .login-form, .register-form {
+   .login_form, .register_form {
       padding: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
       gap: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
    }
 
-   .form-title {
+   .form_title {
       font-size: max(calc(72px * 0.6), calc(72vw * 1.25 * 59 / 725));
       margin: 0 max(calc(80px * 0.6), calc(80vw * 1.25 * 59 / 725));
    }
 
-   .login-failed {
+   .login_failed {
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
       margin-top: min(calc(-25px * 0.6), calc(-25vw * 1.25 * 59 / 725));
       margin-bottom: min(calc(-45px * 0.6), calc(-45vw * 1.25 * 59 / 725));
    }
 
-   .input-text {
+   .input_text {
       margin: max(calc(8px * 0.6), calc(8vw * 1.25 * 59 / 725)) 0;
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
    }
 
-   .input-box {
+   .input_box {
       width: max(calc(540px * 0.6), calc(540vw * 1.25 * 59 / 725));
       font-size: max(calc(22px * 0.6), calc(22vw * 1.25 * 59 / 725));
       padding: max(calc(10px * 0.6), calc(10vw * 1.25 * 59 / 725));
       padding-left: max(calc(14px * 0.6), calc(14vw * 1.25 * 59 / 725));
    }
 
-   .form-button {
+   .form_button {
       padding: max(calc(20px * 0.6), calc(20vw * 1.25 * 59 / 725)) max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
       font-size: max(calc(40px * 0.6), calc(40vw * 1.25 * 59 / 725));
    }
@@ -69,75 +48,75 @@
       font-size: max(calc(78px * 0.6), calc(78vw * 1.25 * 59 / 725));
    }
 
-   .register-q {
+   .register_q {
       margin: max(calc(8px * 0.6), calc(8vw * 1.25 * 59 / 725));
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
    }
 
-   .register-button {
+   .register_button {
       font-size: max(calc(24px * 0.6), calc(24vw * 1.25 * 59 / 725));
       padding: max(calc(15px * 0.6), calc(15vw * 1.25 * 59 / 725)) max(calc(25px * 0.6), calc(25vw * 1.25 * 59 / 725));
    }
 
 
-   .register-error {
+   .register_error {
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
       margin-top: min(calc(-26px * 0.6), calc(-26vw * 1.25 * 59 / 725));
       margin-bottom: min(calc(-36px * 0.6), calc(-36vw * 1.25 * 59 / 725));
    }
    
-   .register-failed {
+   .register_failed {
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
       margin-top: max(calc(2px * 0.6), calc(2vw * 1.25 * 59 / 725));
       margin-bottom: min(calc(-22px * 0.6), calc(-22vw * 1.25 * 59 / 725));
    }
 
-   #grid-name {
+   #grid_name {
       width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
    }
-   #grid-surname {
+   #grid_surname {
       width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
    }
-   #grid-email {
+   #grid_email {
       width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
    }
-   #grid-address {
+   #grid_address {
       width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
    }
-   #grid-dob {
+   #grid_dob {
       width: max(calc(173px * 0.6), calc(173vw * 1.25 * 59 / 725));
    }
-   #grid-phone {
+   #grid_phone {
       width: max(calc(174px * 0.6), calc(174vw * 1.25 * 59 / 725));
    }
-   #grid-mbo {
+   #grid_mbo {
       width: max(calc(173px * 0.6), calc(173vw * 1.25 * 59 / 725));
    }
-   #grid-pass {
+   #grid_pass {
       width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
    }
-   #grid-passconf {
+   #grid_passconf {
       width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
    }
 
-   .register-success {
+   .register_success {
       gap: max(calc(30px * 0.6), calc(30vw * 1.25 * 59 / 725));
       padding: max(calc(30px * 0.6), calc(30vw * 1.25 * 59 / 725)) max(calc(40px * 0.6), calc(40vw * 1.25 * 59 / 725));
       max-width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
       min-width: max(calc(500px * 0.6), calc(500vw * 1.25 * 59 / 725));
    }
    
-   .success-title {
+   .success_title {
       font-size: max(calc(54px * 0.6), calc(54vw * 1.25 * 59 / 725));
       margin-top: max(calc(20px * 0.6), calc(20vw * 1.25 * 59 / 725));
    }
    
-   .success-text {
+   .success_text {
       font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
       margin-bottom: max(calc(10px * 0.6), calc(10vw * 1.25 * 59 / 725));
    }
    
-   .success-button {
+   .success_button {
       font-size: max(calc(36px * 0.6), calc(36vw * 1.25 * 59 / 725));
       padding: max(calc(15px * 0.6), calc(15vw * 1.25 * 59 / 725)) max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
    } 

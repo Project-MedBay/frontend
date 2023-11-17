@@ -2,55 +2,55 @@ export const registerFields = [
    {
       label:"Name",
       placeholder:"John",
-      id:"grid-name",
+      id:"grid_name",
       name:"firstName"
    },
    {
       label:"Surname",
       placeholder:"Doe",
-      id:"grid-surname",
+      id:"grid_surname",
       name:"lastName"
    },
    {
       label:"E-mail",
       placeholder:"john.doe@mail.com",
-      id:"grid-email",
+      id:"grid_email",
       name:"email"
    },
    {
       label:"Address",
       placeholder:"Street Name 1",
-      id:"grid-address",
+      id:"grid_address",
       name:"address"
    },
    {
       label:"Date Of Birth",
       placeholder:"YYYY-MM-DD",
-      id:"grid-dob",
+      id:"grid_dob",
       name:"dateOfBirth"
    },
    {
       label:"Phone number",
       placeholder:"0912345678",
-      id:"grid-phone",
+      id:"grid_phone",
       name:"phoneNumber"
    },
    {
       label:"MBO",
       placeholder:"123456789",
-      id:"grid-mbo",
+      id:"grid_mbo",
       name:"MBO"
    },
    {
       label:"Password",
       placeholder:"********",
-      id:"grid-pass",
+      id:"grid_pass",
       name:"password"
    },
    {
       label:"Confirm Password",
       placeholder:"********",
-      id:"grid-passconf",
+      id:"grid_passconf",
       name:"passwordConfirm"
    }
 ]

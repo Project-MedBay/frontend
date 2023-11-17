@@ -1,0 +1,322 @@
+.register_main {
+   background-image: linear-gradient(0deg, rgba(255,255,255,1) 0%,
+                        rgba(255,255,255,1) 10%, rgba(255,255,255,0) 100%),
+                        url("../assets/docs.jpg");
+   background-size: cover;
+   background-position: top center;
+   background-attachment: fixed;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 8.5vw;
+   height: 93vh;
+   min-height: 650px;
+}
+
+.covered_by_popup {
+   opacity: 50%;
+}
+
+.register_form {
+   background-color: white;
+   padding: max(calc(50px * 0.6), calc(50vh * 59 / 725)) max(calc(75px * 0.6), calc(75vh * 59 / 725));
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0px 4px 50px 20px #00000033;
+   border-radius: 14px;
+   font-family: "Barlow", sans-serif;
+   gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
+}
+
+.register_error {
+   color: #FF0000;
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   font-weight: 500;
+   margin-top: min(calc(-26px * 0.6), calc(-26vh * 59 / 725));
+   margin-bottom: min(calc(-36px * 0.6), calc(-36vh * 59 / 725));
+   visibility: hidden;
+}
+
+.register_failed {
+   color: #FF0000;
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   font-weight: 500;
+   margin-top: max(calc(2px * 0.6), calc(2vh * 59 / 725));
+   margin-bottom: min(calc(-22px * 0.6), calc(-22vh * 59 / 725));
+   visibility: hidden;
+}
+
+.failed_text {
+   visibility: visible;
+}
+
+.form_title {
+   color: #636363;
+   font-size: max(calc(72px * 0.6), calc(72vh * 59 / 725));
+   font-weight: 600;
+   margin: 0;
+   text-wrap: nowrap;
+}
+
+
+.grid_container {
+   display: grid;
+   grid-template-columns: auto auto auto auto auto auto;
+   column-gap: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+   row-gap: max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   margin: 0;
+}
+
+#grid_name {
+   grid-column: 1 / 4;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+#grid_surname {
+   grid-column: 4 / 7;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+#grid_email {
+   grid-column: 1 / 7;
+   width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
+}
+#grid_address {
+   grid-column: 1 / 7;
+   width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
+}
+#grid_dob {
+   grid-column: 1 / 3;
+   width: max(calc(173px * 0.6), calc(173vh * 59 / 725));
+}
+#grid_phone {
+   grid-column: 3 / 5;
+   width: max(calc(174px * 0.6), calc(174vh * 59 / 725));
+}
+#grid_mbo {
+   grid-column: 5 / 7;
+   width: max(calc(173px * 0.6), calc(173vh * 59 / 725));
+}
+#grid_pass {
+   grid-column: 1 / 4;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+#grid_passconf {
+   grid-column: 4 / 7;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+
+.form_input {
+   display: flex;
+   flex-direction: column;
+   width: max-content;
+}
+
+.input_text {
+   margin: max(calc(8px * 0.6), calc(8vh * 59 / 725)) 0;
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   font-weight: 500;
+}
+
+.input_box {
+   width: max(calc(540px * 0.6), calc(540vh * 59 / 725));
+   font-size: max(calc(22px * 0.6), calc(22vh * 59 / 725));
+   padding: max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   padding-left: max(calc(14px * 0.6), calc(14vh * 59 / 725));
+   background: #F4F3F3;
+   border: 1px solid #F4F3F3;
+   border-radius: 10px;
+}
+
+.form_button {
+   background: #70D8AC;
+   box-shadow: 0px 4px 50px 8px #00000026;
+   padding: max(calc(20px * 0.6), calc(20vh * 59 / 725)) max(calc(50px * 0.6), calc(50vh * 59 / 725));
+   font-family: "Barlow", sans-serif;
+   font-weight: 700;
+   font-size: max(calc(40px * 0.6), calc(40vh * 59 / 725));
+   color: white;
+   border: 1px solid #70D8AC;
+   border-radius: 14px;
+}
+
+.form_button:hover {
+   cursor: pointer;
+}
+
+.greeting_container {
+   font-family: "Barlow", sans-serif;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.greeting {
+   font-size: max(calc(78px * 0.6), calc(78vh * 59 / 725));
+   font-weight: 600;
+   letter-spacing: -0.05em;
+   margin: 0;
+   color: #200063;
+   text-shadow: 0px 4px 4px #FFFFFF;
+}
+
+.register_success {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   left: 50vw;
+   top: 50vh;
+   transform: translate(-50%, -50%);
+   align-items: center;
+   justify-content: center;
+   gap: max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   padding: max(calc(30px * 0.6), calc(30vh * 59 / 725)) max(calc(40px * 0.6), calc(40vh * 59 / 725));
+   max-width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
+   min-width: max(calc(500px * 0.6), calc(500vh * 59 / 725));
+   font-family: "Barlow", sans-serif;
+   font-weight: 700;
+   background: #FFFFFF;
+   box-shadow: 0px 4px 25px 12px #00000026;
+   border-radius: 8px;
+}
+
+.success_title {
+   font-size: max(calc(54px * 0.6), calc(54vh * 59 / 725));
+   color: #636363;
+   margin: 0;
+   margin-top: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+}
+
+.success_text {
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   line-height: 100%;
+   color: #636363;
+   margin: 0;
+   margin-bottom: max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   text-align: center;
+}
+
+.success_button {
+   font-family: "Barlow", sans-serif;
+   font-size: max(calc(36px * 0.6), calc(36vh * 59 / 725));
+   font-weight: 700;
+   color: white;
+   padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(50px * 0.6), calc(50vh * 59 / 725));
+   background: #70D8AC;
+   border: 1px solid #70D8AC;
+   border-radius: 14px;
+   box-shadow: 0px 4px 50px 8px #00000026;
+}
+
+.success_button:hover {
+   cursor: pointer;
+}
+
+@media only screen and ((max-aspect-ratio: 6 / 5) or (max-width: 1050px)) {
+   .form_button {
+      background-color: red;
+   }
+
+   .register_main {
+      flex-direction: column;
+   }
+   .greeting_container {
+      display: none;
+   }
+}
+
+
+@media only screen and (max-aspect-ratio: 4 / 5) {
+   .form_button {
+      background-color: blue;
+   }
+
+   .register_form {
+      padding: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725)) max(calc(75px * 0.6), calc(75vh * 59 / 725));
+      gap: max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
+   }
+
+   .form_title {
+      font-size: max(calc(72px * 0.6), calc(72vw * 1.25 * 59 / 725));
+   }
+
+   .input_text {
+      margin: max(calc(8px * 0.6), calc(8vw * 1.25 * 59 / 725)) 0;
+      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+   }
+
+   .input_box {
+      width: max(calc(540px * 0.6), calc(540vw * 1.25 * 59 / 725));
+      font-size: max(calc(22px * 0.6), calc(22vw * 1.25 * 59 / 725));
+      padding: max(calc(10px * 0.6), calc(10vw * 1.25 * 59 / 725));
+      padding-left: max(calc(14px * 0.6), calc(14vw * 1.25 * 59 / 725));
+   }
+
+   .form_button {
+      padding: max(calc(20px * 0.6), calc(20vw * 1.25 * 59 / 725)) max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
+      font-size: max(calc(40px * 0.6), calc(40vw * 1.25 * 59 / 725));
+   }
+
+   .register_error {
+      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+      margin-top: min(calc(-26px * 0.6), calc(-26vw * 1.25 * 59 / 725));
+      margin-bottom: min(calc(-36px * 0.6), calc(-36vw * 1.25 * 59 / 725));
+   }
+   
+   .register_failed {
+      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+      margin-top: max(calc(2px * 0.6), calc(2vw * 1.25 * 59 / 725));
+      margin-bottom: min(calc(-22px * 0.6), calc(-22vw * 1.25 * 59 / 725));
+   }
+
+   #grid_name {
+      width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
+   }
+   #grid_surname {
+      width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
+   }
+   #grid_email {
+      width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
+   }
+   #grid_address {
+      width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
+   }
+   #grid_dob {
+      width: max(calc(173px * 0.6), calc(173vw * 1.25 * 59 / 725));
+   }
+   #grid_phone {
+      width: max(calc(174px * 0.6), calc(174vw * 1.25 * 59 / 725));
+   }
+   #grid_mbo {
+      width: max(calc(173px * 0.6), calc(173vw * 1.25 * 59 / 725));
+   }
+   #grid_pass {
+      width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
+   }
+   #grid_passconf {
+      width: max(calc(270px * 0.6), calc(270vw * 1.25 * 59 / 725));
+   }
+
+   .register_success {
+      gap: max(calc(30px * 0.6), calc(30vw * 1.25 * 59 / 725));
+      padding: max(calc(30px * 0.6), calc(30vw * 1.25 * 59 / 725)) max(calc(40px * 0.6), calc(40vw * 1.25 * 59 / 725));
+      max-width: max(calc(560px * 0.6), calc(560vw * 1.25 * 59 / 725));
+      min-width: max(calc(500px * 0.6), calc(500vw * 1.25 * 59 / 725));
+   }
+   
+   .success_title {
+      font-size: max(calc(54px * 0.6), calc(54vw * 1.25 * 59 / 725));
+      margin-top: max(calc(20px * 0.6), calc(20vw * 1.25 * 59 / 725));
+   }
+   
+   .success_text {
+      font-size: max(calc(18px * 0.6), calc(18vw * 1.25 * 59 / 725));
+      margin-bottom: max(calc(10px * 0.6), calc(10vw * 1.25 * 59 / 725));
+   }
+   
+   .success_button {
+      font-size: max(calc(36px * 0.6), calc(36vw * 1.25 * 59 / 725));
+      padding: max(calc(15px * 0.6), calc(15vw * 1.25 * 59 / 725)) max(calc(50px * 0.6), calc(50vw * 1.25 * 59 / 725));
+   }
+}
