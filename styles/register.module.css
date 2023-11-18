@@ -238,7 +238,7 @@
 }
 
 
-@media only screen and ((max-aspect-ratio: 4 / 5) or (max-width: 550px)) {
+@media only screen and ((max-aspect-ratio: 7 / 10) or (max-width: 550px)) {
    /* za testiranje
       .form_button {
       background-color: blue;
@@ -248,99 +248,99 @@
       background-image: linear-gradient(0deg, rgba(255,255,255,0.5) 0%,
                         rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.5) 100%), 
                         url("../assets/logreg_bg_mobile.jpg");
-      min-height: 110vw;
+      min-height: 120vw;
    }
 
    .register_form {
-      padding: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725)) max(calc(75px * 0.3), calc(75vw * 1.25 * 59 / 725));
-      gap: max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
+      padding: max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725)) max(calc(75px * 0.3), calc(75vw * (10 / 7) * 59 / 725));
+      gap: max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
    }
 
    .form_title {
-      font-size: max(calc(72px * 0.3), calc(72vw * 1.25 * 59 / 725));
+      font-size: max(calc(72px * 0.3), calc(72vw * (10 / 7) * 59 / 725));
    }
 
    .grid_container {
-      column-gap: max(calc(20px * 0.3), calc(20vw * 1.25 / 725));
-      row-gap: max(calc(30px * 0.3), calc(30vw * 1.25 * 59 / 725));
+      column-gap: max(calc(20px * 0.3), calc(20vw * (10 / 7) / 725));
+      row-gap: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
    }
 
    .input_text {
-      margin: max(calc(8px * 0.3), calc(8vw * 1.25 * 59 / 725)) 0;
-      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
+      margin: max(calc(8px * 0.3), calc(8vw * (10 / 7) * 59 / 725)) 0;
+      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
    }
 
    .input_box {
-      width: max(calc(540px * 0.3), calc(540vw * 1.25 * 59 / 725));
-      font-size: max(calc(22px * 0.3), calc(22vw * 1.25 * 59 / 725));
-      padding: max(calc(10px * 0.3), calc(10vw * 1.25 * 59 / 725));
-      padding-left: max(calc(14px * 0.3), calc(14vw * 1.25 * 59 / 725));
+      width: max(calc(540px * 0.3), calc(540vw * (10 / 7) * 59 / 725));
+      font-size: max(calc(22px * 0.3), calc(22vw * (10 / 7) * 59 / 725));
+      padding: max(calc(10px * 0.3), calc(10vw * (10 / 7) * 59 / 725));
+      padding-left: max(calc(14px * 0.3), calc(14vw * (10 / 7) * 59 / 725));
    }
 
    .form_button {
-      padding: max(calc(20px * 0.3), calc(20vw * 1.25 * 59 / 725)) max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
-      font-size: max(calc(40px * 0.3), calc(40vw * 1.25 * 59 / 725));
+      padding: max(calc(20px * 0.3), calc(20vw * (10 / 7) * 59 / 725)) max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
+      font-size: max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
    }
 
    .register_error {
-      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
-      margin-top: min(calc(-26px * 0.3), calc(-26vw * 1.25 * 59 / 725));
-      margin-bottom: min(calc(-36px * 0.3), calc(-36vw * 1.25 * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
+      margin-top: min(calc(-26px * 0.3), calc(-26vw * (10 / 7) * 59 / 725));
+      margin-bottom: min(calc(-36px * 0.3), calc(-36vw * (10 / 7) * 59 / 725));
    }
    
    .register_failed {
-      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
-      margin-top: max(calc(2px * 0.3), calc(2vw * 1.25 * 59 / 725));
-      margin-bottom: min(calc(-22px * 0.3), calc(-22vw * 1.25 * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
+      margin-top: max(calc(2px * 0.3), calc(2vw * (10 / 7) * 59 / 725));
+      margin-bottom: min(calc(-22px * 0.3), calc(-22vw * (10 / 7) * 59 / 725));
    }
 
    #grid_name {
-      width: max(calc(270px * 0.3), calc(270vw * 1.25 * 59 / 725));
+      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
    }
    #grid_surname {
-      width: max(calc(270px * 0.3), calc(270vw * 1.25 * 59 / 725));
+      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
    }
    #grid_email {
-      width: max(calc(560px * 0.3), calc(560vw * 1.25 * 59 / 725));
+      width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));
    }
    #grid_address {
-      width: max(calc(560px * 0.3), calc(560vw * 1.25 * 59 / 725));
+      width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));
    }
    #grid_dob {
-      width: max(calc(173px * 0.3), calc(173vw * 1.25 * 59 / 725));
+      width: max(calc(173px * 0.3), calc(173vw * (10 / 7) * 59 / 725));
    }
    #grid_phone {
-      width: max(calc(174px * 0.3), calc(174vw * 1.25 * 59 / 725));
+      width: max(calc(174px * 0.3), calc(174vw * (10 / 7) * 59 / 725));
    }
    #grid_mbo {
-      width: max(calc(173px * 0.3), calc(173vw * 1.25 * 59 / 725));
+      width: max(calc(173px * 0.3), calc(173vw * (10 / 7) * 59 / 725));
    }
    #grid_pass {
-      width: max(calc(270px * 0.3), calc(270vw * 1.25 * 59 / 725));
+      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
    }
    #grid_passconf {
-      width: max(calc(270px * 0.3), calc(270vw * 1.25 * 59 / 725));
+      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
    }
 
    .register_success {
-      gap: max(calc(30px * 0.3), calc(30vw * 1.25 * 59 / 725));
-      padding: max(calc(30px * 0.3), calc(30vw * 1.25 * 59 / 725)) max(calc(40px * 0.3), calc(40vw * 1.25 * 59 / 725));
-      max-width: max(calc(560px * 0.3), calc(560vw * 1.25 * 59 / 725));
-      min-width: max(calc(500px * 0.3), calc(500vw * 1.25 * 59 / 725));
+      gap: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
+      padding: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725)) max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
+      max-width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));
+      min-width: max(calc(500px * 0.3), calc(500vw * (10 / 7) * 59 / 725));
    }
    
    .success_title {
-      font-size: max(calc(54px * 0.3), calc(54vw * 1.25 * 59 / 725));
-      margin-top: max(calc(20px * 0.3), calc(20vw * 1.25 * 59 / 725));
+      font-size: max(calc(54px * 0.3), calc(54vw * (10 / 7) * 59 / 725));
+      margin-top: max(calc(20px * 0.3), calc(20vw * (10 / 7) * 59 / 725));
    }
    
    .success_text {
-      font-size: max(calc(18px * 0.3), calc(18vw * 1.25 * 59 / 725));
-      margin-bottom: max(calc(10px * 0.3), calc(10vw * 1.25 * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
+      margin-bottom: max(calc(10px * 0.3), calc(10vw * (10 / 7) * 59 / 725));
    }
    
    .success_button {
-      font-size: max(calc(36px * 0.3), calc(36vw * 1.25 * 59 / 725));
-      padding: max(calc(15px * 0.3), calc(15vw * 1.25 * 59 / 725)) max(calc(50px * 0.3), calc(50vw * 1.25 * 59 / 725));
+      font-size: max(calc(36px * 0.3), calc(36vw * (10 / 7) * 59 / 725));
+      padding: max(calc(15px * 0.3), calc(15vw * (10 / 7) * 59 / 725)) max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
    }
 }
