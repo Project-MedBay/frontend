@@ -5,9 +5,9 @@ import RegisterMain from './RegisterMain'
 import PatientDash from './PatientDash'
 import '../styles/App.css'
 
-export default function App() {
+export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("login")
+  const [pageName, setPageName] = useState("login")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("")
   
   const pages = {

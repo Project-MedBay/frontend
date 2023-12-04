@@ -4,7 +4,7 @@ import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
 
-   const [userData, setUserData] = useState({
+   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
       id: "",
       firstName: "",
       lastName: "",
@@ -15,11 +15,10 @@ export default function PatientDash(props) {
    })
 
    axios({
-      // Endpoint to send files
       url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
       method: "GET",
       headers: {
-         Authorization: `Bearer ${props.userToken}`
+         Authorization: `Bearer ${props.userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
       }
    })
    .then(res => setUserData({

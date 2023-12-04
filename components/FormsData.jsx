@@ -1,4 +1,4 @@
-export const registerFields = [
+export const registerFields = [          // sluzi za lakse generiranje i management input polja u formama
    {
       label:"Name",
       placeholder:"John",
