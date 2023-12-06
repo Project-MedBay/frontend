@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
+import eyeHidden from "../assets/eye_hidden.png"
+import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/login.module.css"
 
 export default function LoginMain(props) {
@@ -12,6 +14,7 @@ export default function LoginMain(props) {
       value: false,
       text: "Invalid email or password. Please try again."
    })
+   const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
 
    function handleChange(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       const {name, value} = event.target
@@ -46,6 +49,11 @@ export default function LoginMain(props) {
       : setInputFailed({value: true, text: `${error.message}. Please try again.`})
    }
 
+   function togglePassword() {
+      setPasswordShown(prevState => !prevState)
+   }
+
+
    return (
          <div className={s.login_main}>
 
@@ -66,11 +74,17 @@ export default function LoginMain(props) {
 
                <div className={s.form_input}>
                   <p className={s.input_text}>Password:</p>
-                  <input
-                     className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
-                     type="text" onChange={handleChange} placeholder="********"
-                     name="password" value={formData["password"]}
-                  />
+                  <div className={s.password_container}>
+                     <input
+                        className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
+                        type={passwordShown ? "text" : "password"} onChange={handleChange}
+                        placeholder="********" name="password" value={formData["password"]}
+                     />
+                     <img 
+                        src={passwordShown ? eyeShown : eyeHidden}                  /* uvjetni izbor slike oka za toggle lozinke */
+                        className={s.password_eye} onClick={togglePassword}
+                     />
+                  </div>
                </div>
 
                <button className={s.form_button}>Login</button>

@@ -83,6 +83,27 @@
    border-color: #FF0000;
 }
 
+input[type=password] {
+   letter-spacing: 0.1em;
+}
+
+input[type=password]::placeholder, input[type=text]::placeholder {
+   letter-spacing: normal;
+}
+
+.password_container {
+   position: relative;
+   display: flex;
+}
+
+.password_eye {
+   position: absolute;
+   right: 2%;
+   top: 32%;
+   width: max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   cursor: pointer;
+}
+
 .form_button {
    background: #70D8AC;
    box-shadow: 0px 4px 50px 8px #00000026;
@@ -202,6 +223,10 @@
       font-size: max(calc(22px * 0.3), calc(22vw * (10 / 7) * 59 / 725));
       padding: max(calc(10px * 0.3), calc(10vw * (10 / 7) * 59 / 725));
       padding-left: max(calc(14px * 0.3), calc(14vw * (10 / 7) * 59 / 725));
+   }
+
+   .password_eye {
+      width: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
    }
 
    .form_button {

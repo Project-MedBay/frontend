@@ -63,6 +63,7 @@
 
 
 .grid_container {
+   position: relative;
    display: grid;
    grid-template-columns: auto auto auto auto auto auto;
    column-gap: max(calc(20px * 0.6), calc(20vh * 59 / 725));
@@ -92,7 +93,7 @@
 }
 #grid_phone {
    grid-column: 3 / 5;
-   width: max(calc(174px * 0.6), calc(174vh * 59 / 725));
+   width: max(calc(173px * 0.6), calc(174vh * 59 / 725));
 }
 #grid_mbo {
    grid-column: 5 / 7;
@@ -100,11 +101,12 @@
 }
 #grid_pass {
    grid-column: 1 / 4;
-   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+   width: max(calc(260px * 0.6), calc(260vh * 59 / 725));
 }
 #grid_passconf {
    grid-column: 4 / 7;
-   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+   width: max(calc(260px * 0.6), calc(260vh * 59 / 725));
+   margin-left: auto;
 }
 
 .form_input {
@@ -135,6 +137,27 @@
 
 .failed_input {
    border-color: #FF0000;
+}
+
+input[type=password] {
+   letter-spacing: 0.1em;
+}
+
+input[type=password]::placeholder, input[type=text]::placeholder {
+   letter-spacing: normal;
+}
+
+.password_container {
+   position: relative;
+   display: flex;
+}
+
+.password_eye {
+   position: absolute;
+   right: 47.5%;
+   bottom: 3.5%;
+   width: max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   cursor: pointer;
 }
 
 .form_button {
@@ -277,6 +300,10 @@
       padding-left: max(calc(14px * 0.3), calc(14vw * (10 / 7) * 59 / 725));
    }
 
+   .password_eye {
+      width: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
+   }
+
    .form_button {
       padding: max(calc(20px * 0.3), calc(20vw * (10 / 7) * 59 / 725)) max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
       font-size: max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
@@ -310,16 +337,16 @@
       width: max(calc(173px * 0.3), calc(173vw * (10 / 7) * 59 / 725));
    }
    #grid_phone {
-      width: max(calc(174px * 0.3), calc(174vw * (10 / 7) * 59 / 725));
+      width: max(calc(173px * 0.3), calc(174vw * (10 / 7) * 59 / 725));
    }
    #grid_mbo {
       width: max(calc(173px * 0.3), calc(173vw * (10 / 7) * 59 / 725));
    }
    #grid_pass {
-      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
+      width: max(calc(260px * 0.3), calc(260vw * (10 / 7) * 59 / 725));
    }
    #grid_passconf {
-      width: max(calc(270px * 0.3), calc(270vw * (10 / 7) * 59 / 725));
+      width: max(calc(260px * 0.3), calc(260vw * (10 / 7) * 59 / 725));
    }
 
    .register_success {

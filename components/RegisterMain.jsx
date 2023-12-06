@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
+import eyeHidden from "../assets/eye_hidden.png"
+import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
@@ -29,16 +31,21 @@ export default function RegisterMain(props) {
       passwordConfirm: {failed: false, text: "Passwords do not match."}
    })
    const [successPopup, setSuccessPopup] = useState(false)        // state za uvjetni render popupa o uspjesnoj registraciji
+   const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
 
    const formFields = registerFields.map(field => {               // mapiranje podataka iz formsdata na jsx (html) elemente za ispis
-      const {id, label, name, width, placeholder} = field
+      const {id, label, name, placeholder} = field
+      let type = "text"
+      if (name == "password" || name == "passwordConfirm") {      // uvjetni tip za polja lozinki
+         type = passwordShown ? "text" : "password"               
+      }
       return (
-         <div className={s.form_input} id={s[field.id]} key={field.id}>       {/* osim klase, id sluzi za namjestanje grida, jedinstven key je potreban pri mapiranju */}
-            <p className={s.input_text}>{field.label}</p>
+         <div className={s.form_input} id={s[id]} key={id}>       {/* osim klase, id sluzi za namjestanje grida, jedinstven key je potreban pri mapiranju */}
+            <p className={s.input_text}>{label}</p>
             <input
                className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}       /* uvjetni render klase za gresku (zacrveni input box) */
-               type="text" onChange={handleChange} placeholder={field.placeholder}
-               name={field.name} value={formData[field.name]} id={s[field.id]}                  /* tekst polja odgovara sadrzaju statea formData */
+               type={type} onChange={handleChange} placeholder={placeholder}
+               name={name} value={formData[name]} id={s[id]}                  /* tekst polja odgovara sadrzaju statea formData */
             />
             <p className={`${s.register_failed} ${inputFailed[name].failed && s.failed_text}`}>    {/* uvjetni render teksta za gresku ispod pojedinog inputa */}
                {inputFailed[name].text}
@@ -199,6 +206,10 @@ export default function RegisterMain(props) {
       }})
    }
 
+   function togglePassword() {
+      setPasswordShown(prevState => !prevState)
+   }
+
 
    return (
       <>
@@ -216,6 +227,10 @@ export default function RegisterMain(props) {
 
                <div className={s.grid_container}>              {/* input polja koja su gore mapirana u html elemente */}
                   {formFields}
+                  <img 
+                     src={passwordShown ? eyeShown : eyeHidden}            /* uvjetni izbor slike oka za toggle lozinke */
+                     className={s.password_eye} onClick={togglePassword}
+                  />
                </div>
 
                <button className={s.form_button}>Register</button>
