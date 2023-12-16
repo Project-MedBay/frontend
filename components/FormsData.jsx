@@ -30,7 +30,7 @@ export const registerFields = [          // sluzi za lakse generiranje i managem
       name:"dateOfBirth"
    },
    {
-      label:"Phone number",
+      label:"Phone Number",
       placeholder:"0912345678",
       id:"grid_phone",
       name:"phoneNumber"
