@@ -1,3 +1,242 @@
-.patient_main {
+::-webkit-scrollbar {
+   width: 6px;
+}
+  
+::-webkit-scrollbar-thumb {
+   background: #BFBFBF;
+   border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+   background: #636363; 
+}
+
+.patient_dash_main {
+   background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%,
+               rgba(134, 113, 255, 0.4) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
+   background-size: cover;
+   background-position: top center;
+   background-attachment: fixed;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: top;
+   padding: 90px;
+   gap: 8.5vw;
+   height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
+   min-height: 650px;
+}
+
+.container_title {
+   color: #22006a;
+   font-family: Barlow;
+   font-size: 40px;
+   font-weight: 700;
+   margin: 0;
+   margin-bottom: 30px;
+}
+
+.date_wrapper {
+   display: inline-flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: -10px;
+   width: 420px;
+}
+
+.container_date, .date_arrow {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   margin: 0;
+   margin-bottom: 10px;
+}
+
+.date_reset {
+   width: 30px;
+   height: 30px;
+   margin-bottom: -8px;
+   margin-left: 15px;
+}
+
+.date_arrow:hover, .date_reset:hover {
+   cursor: pointer;
+}
+
+.date_arrow, .date_reset {
+   -webkit-user-select: none; /* Safari */
+   -ms-user-select: none; /* IE 10 and IE 11 */
+   user-select: none; /* Standard syntax */
+}
+
+.scroll_container {
+   padding: 30px 10px;
+   border-radius: 12px;
+   background: #FFF;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.schedule_card {
+   display: flex;
+   flex-direction: column;
+   overflow: auto;
+   align-items: center;
+   width: max-content;
+   gap: 25px;
+   height: 750px;
+}
+
+.no_sessions {
+   width: 400px;
+   text-align: center;
+   color: #656565;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   margin: 320px 20px;
+}
+
+.session_card {
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+   margin: 0px 20px;
+   padding: 10px 20px;
+   padding-right: 30px;
+   border-radius: 10px;
+   gap: 5px;
+   background: #FFF;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+   margin-bottom: 5px;
+}
+
+.session_date {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 300;
+   margin: 0;
+}
+
+.session_time {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.session_location {
+   color: #000;
+   font-family: Barlow;
+   font-size: 14px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.session_more {
+   text-align: right;
+   color: #22006a;
+   font-family: Barlow;
+   font-size: 14px;
+   font-weight: 500;
+   text-decoration: underline;
+   margin: 0;
+   margin-top: -10px;
+   margin-bottom: 10px;
+}
+
+.session_more:hover {
+   cursor: pointer;
+}
+
+.selected_session {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    padding: 30px 50px;
+   border-radius: 12px;
+   background: #FFF;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+   width: 700px;
+   min-height: 810px;
+}
+
+.session_info {
+   display: flex;
+   gap: 20px;
+   align-items: center;
+}
+
+.info_labels > p {
+   color: #656565;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+}
+
+.info_values {
+   max-width: 480px;
+}
+
+.info_values > p {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+}
+
+.session_image {
+   height: 380px;
+   margin: 10px;
+}
+
+.session_buttons {
+   width: 515px;
+}
+
+.session_button {
+   width: 225px;
+   height: 50px;
+   color: #FFF;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   border: 0;
+   margin: 15px;
+   margin-bottom: 5px;
+   border-radius: 10px;
+   background: #70D8AC;
+}
+
+.session_button:hover {
+   cursor: pointer;
+}
+
+.button_disabled {
+   background-color: #B4D6C7;
+}
+
+.button_disabled:hover {
+   cursor: not-allowed;
+}
+
+.notes_text, .reschedule_text {
+   display: inline-block;
+   width: 225px;
+   margin: 0px 15px;
+   color: #4A4747;
+   font-family: Barlow;
+   font-size: 12px;
+   font-weight: 400;
+   visibility: hidden;
+}
+
+.reschedule_text {
+   text-align: right;
+}
+
+.disabled_text {
+   visibility: visible;
 }

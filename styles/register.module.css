@@ -188,7 +188,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    font-weight: 600;
    letter-spacing: -0.05em;
    margin: 0;
-   color: rgb(34, 0, 106);
+   color: #22006a;
    text-shadow: 2px 5px 5px #FFFFFF;
 }
 
