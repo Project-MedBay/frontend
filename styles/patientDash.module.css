@@ -27,6 +27,12 @@
    min-height: 650px;
 }
 
+.covered_by_popup {
+   opacity: 50%;
+   filter: blur(4px);
+   -webkit-filter: blur(4px);
+}
+
 .container_title {
    color: #22006a;
    font-family: Barlow;
@@ -239,4 +245,80 @@
 
 .disabled_text {
    visibility: visible;
+}
+
+.session_reschedule {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   left: 50vw;
+   top: 50vh;
+   transform: translate(-50%, -50%);
+   align-items: center;
+   justify-content: center;
+   gap: max(calc(15px * 0.6), calc(15vh * 59 / 725));
+   font-family: "Barlow", sans-serif;
+   font-weight: 700;
+   background: #FFFFFF;
+   box-shadow: 5px 8px 8px 6px rgba(0, 0, 0, 0.15);
+   border-radius: 12px;
+}
+
+.reschedule_header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   padding: max(calc(20px * 0.6), calc(20vh * 59 / 725)) max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   border-bottom: #656565 solid 1px;
+   margin-bottom: 10px;
+}
+
+.reschedule_title {
+   color: #000;
+   font-family: Barlow;
+   font-size: 32px;
+   font-weight: 700;
+   margin: 0;
+}
+
+.reschedule_exit {
+   margin-top: 3px;
+}
+
+.reschedule_exit:hover {
+   cursor: pointer;
+}
+
+.reschedule_info {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 400;
+   margin: 0px 30px;
+}
+
+.reschedule_info > span {
+   font-size: 32px;
+}
+
+.reschedule_legend {
+   color: #656565;
+   font-family: Barlow;
+   font-size: 16px;
+   font-weight: 400;
+   text-align: center;
+   margin: 10px 30px;
+   line-height: 125%;
+}
+
+.legend_purple {
+   color: #22006a;
+   font-weight: 700;
+}
+
+.legend_green {
+   border: #70D8AC solid 2px;
+   border-radius: 5px;
+   padding: 0px 2px;
 }

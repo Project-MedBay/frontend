@@ -46,14 +46,14 @@ export const mySchedule = {
    "25th December - 31st December": [
       {
          id: 0,
-         datetime: new Date ("2023-12-26 11:30"),
+         datetime: new Date ("2023-12-26 17:30"),
          location: "Electrotherapy room",
          sessionNumber: "10/11",
          therapist: "Ante Pavlović"
       },
       {
          id: 1,
-         datetime: new Date ("2023-12-29 11:30"),
+         datetime: new Date ("2023-12-28 11:30"),
          location: "Electrotherapy room",
          sessionNumber: "11/11",
          therapist: "Ante Pavlović"

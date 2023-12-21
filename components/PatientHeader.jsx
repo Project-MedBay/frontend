@@ -5,7 +5,7 @@ import s from "../styles/patientHeader.module.css"
 export default function PatientHeader(props) {
     return (
         <div className={s.header}>
-            <div className={s.header_logo}>
+            <div className={s.header_logo} onClick={() => props.navigate("patientDash")}>
                <img src={logo} className={s.logo_img} />
                <h1 className={s.logo_title}>MedBay</h1>
             </div>

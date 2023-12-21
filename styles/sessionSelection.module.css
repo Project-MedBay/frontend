@@ -1,0 +1,75 @@
+.selection_main {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+.date_wrapper {
+   display: inline-flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: -10px;
+   width: 420px;
+}
+
+.container_date, .date_arrow {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   margin: 0;
+   margin-bottom: 10px;
+}
+
+.date_arrow:hover {
+   cursor: pointer;
+}
+
+.date_arrow {
+   -webkit-user-select: none; /* Safari */
+   -ms-user-select: none; /* IE 10 and IE 11 */
+   user-select: none; /* Standard syntax */
+}
+
+.scroll_container {
+   padding: 10px;
+}
+
+.dates_container {
+   display: flex;
+   flex-direction: column;
+   overflow: auto;
+   align-items: center;
+   width: max-content;
+   gap: 15px;
+   height: 500px;
+   padding: 0 15px;
+}
+
+.weekdate {
+   color: #000;
+   font-family: Barlow;
+   font-size: 24px;
+   font-weight: 500;
+   margin: 0;
+   padding: 5px
+}
+
+.weekdate:hover {
+   cursor: pointer;
+}
+
+.weekdate_disabled {
+   color: #656565;
+   font-weight: 300;
+}
+
+.weekdate_in_sessions {
+   border: #70D8AC solid 2px;
+   border-radius: 5px;
+}
+
+.weekdate_selected {
+   color: #22006a;
+   font-weight: 700;
+}
