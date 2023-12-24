@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import SessionSelection from "./SessionSelection"
+import SessionSelection2 from "./SessionSelection2"
 import { mySchedule } from "./TestingData"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
@@ -27,24 +28,35 @@ export default function PatientDash(props) {
    const [notesDisabled, setNotesDisabled] = useState(false)
    const [notesPopup, setNotesPopup] = useState(false)
 
+   const [rescheduleText, setRescheduleText] = useState("Appointment is in less than 48 hours.")
    const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
-   const [reschedulePopup, setReschedulePopup] = useState(true)
+   const [reschedulePopup, setReschedulePopup] = useState(false)
    const [rescheduledSession, setRescheduledSession] = useState(mySchedule[formatWeek(new Date())][0])
+
+   useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
+      if (selectedSession.datetime.getTime() <= new Date().getTime() + 48*60*60*1000) {
+         setRescheduleDisabled(true)
+      } else {setRescheduleDisabled(false)}
+      if (selectedSession.datetime.getTime() <= new Date().getTime()) {
+         setRescheduleText("Appointment has passed.")
+      } else {setRescheduleText("Appointment is in less than 48 hours.")}
+      setRescheduledSession(selectedSession)
+   }, [selectedSession])
 
    if (mySchedule[formatWeek(selectedWeek)] != null) {   
       var scheduleElements = mySchedule[formatWeek(selectedWeek)].map(session => {               // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
-         const { id, datetime, location, sessionNumber, therapist } = session
+         const { id, datetime, location } = session
+         let cardClass = s.session_card
+         if (datetime.getTime() < new Date().getTime()) {
+            cardClass += ` ${s.session_passed}`
+         }
          return (
-            <div className={s.session_card} key={id}>
+            <div className={cardClass} key={id}>
                <h3 className={s.session_date}>{formatDate(datetime)}</h3>
                <h3 className={s.session_time}>{formatTime(datetime)}</h3>
                <p className={s.session_location}>{location}</p>
                <p className={s.session_more} onClick={() => {
-                  setSelectedSession(mySchedule[formatWeek(selectedWeek)][id])
-                  setRescheduledSession(mySchedule[formatWeek(selectedWeek)][id])
-                  if (mySchedule[formatWeek(selectedWeek)][id].datetime.getTime() <= new Date().getTime() + 48*60*60*1000) {
-                     setRescheduleDisabled(true)
-                  } else {setRescheduleDisabled(false)}}}>View more
+                  setSelectedSession(mySchedule[formatWeek(selectedWeek)][id])}}>View more
                </p>
             </div>
          )
@@ -96,12 +108,13 @@ export default function PatientDash(props) {
    function formatTime(datetime) {
       let formattedTime = datetime.getHours() + ":" + (datetime.getMinutes() ? datetime.getMinutes() : "00") + " - "
       let tempDate = new Date(datetime.getTime())
-      tempDate.setMinutes(datetime.getMinutes() + 30)
+      tempDate.setMinutes(datetime.getMinutes() + 60)
       formattedTime += tempDate.getHours() + ":" + (tempDate.getMinutes() ? tempDate.getMinutes() : "00")
       return formattedTime
    }
 
    function goBackWeek() {
+      // ako je selected week (format week) == week earliest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(prevDate.getDate() - 7)
@@ -110,11 +123,17 @@ export default function PatientDash(props) {
    }
 
    function goForwardWeek() {
+      // ako je selected week (format week) == week latest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(prevDate.getDate() + 7)
          return newDate
       })
+   }
+
+   function rescheduleSession() {
+      // send new session data to db to reschedule session and update schedule
+      setReschedulePopup(false)
    }
 
    // axios({
@@ -179,7 +198,7 @@ export default function PatientDash(props) {
 
                   <div className={s.session_buttons}>
                      <button className={`${s.session_button} ${notesDisabled && s.button_disabled}`}
-                        onClick={() => notesDisabled ? "" : setReschedulePopup(true)}>View notes
+                        onClick={() => notesDisabled ? "" : setNotesPopup(true)}>View notes
                      </button>
                      <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
                         onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>Reschedule
@@ -188,13 +207,13 @@ export default function PatientDash(props) {
                      <p className={`${s.notes_text} ${notesDisabled && s.disabled_text}`}>
                         No notes so far.<br />­</p>                           {/* iza br sam ubacio ALT + 0173 za poravnanje */}
                      <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
-                        Cannot reschedule.<br />Appointment is in less than 48 hours.</p>
+                        Cannot reschedule.<br />{rescheduleText}</p>
                   </div>
                </div>
             </div>
          </div>
 
-         {reschedulePopup && <div className={s.session_reschedule}>             {/* uvjetni render popupa za uspjesnu registraciju */}
+         {reschedulePopup && <div className={s.session_reschedule}>             {/* uvjetni render popupa za reschedule */}
             <div className={s.reschedule_header}>
                <h3 className={s.reschedule_title}>RESCHEDULE SESSION:</h3>
                <img src={x_icon} className={s.reschedule_exit} onClick={() => {
@@ -204,25 +223,30 @@ export default function PatientDash(props) {
             </div>
 
             <p className={s.reschedule_info}>CURRENT SESSION:&#160;
-               <span>{formatDate(selectedSession.datetime)}</span>
+               <span>{formatDate(selectedSession.datetime)} {formatTime(selectedSession.datetime)}</span>
             </p>
             <p className={s.reschedule_info}>NEW SESSION:&#160;
-               <span>{formatDate(rescheduledSession.datetime)}</span>
+               <span>{formatDate(rescheduledSession.datetime)} {formatTime(rescheduledSession.datetime)}</span>
             </p>
 
-            <p className={s.reschedule_legend}>Grayed out dates are inelligible or full.
-               The selected date is colored in <span className={s.legend_purple}>purple and bolded</span>.<br />
+            <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
+               The selected date/time is colored in <span className={s.legend_purple}>purple and bolded</span>.<br />
                Dates when you have other sessions scheduled are emphasized 
                with a <span className={s.legend_green}>green box.</span></p>
 
-            <SessionSelection 
+            <SessionSelection2 
                formatDate = {formatDate}
+               formatWeek = {formatWeek}
                selectedWeek = {selectedWeek}
-               selectedSession = {rescheduledSession}
-               setSelectedSession = {setRescheduledSession}
+               selectedSessions = {[rescheduledSession]}
+               setSelectedSessions = {setRescheduledSession}
                currentSession = {selectedSession}
                mySchedule = {mySchedule}
+               reschedule = {true}
             />
+
+            <button className={s.reschedule_button} onClick={() => rescheduleSession()}>Reschedule
+            </button>
          </div>}
       </>
    )

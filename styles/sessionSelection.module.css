@@ -2,6 +2,7 @@
    display: flex;
    justify-content: space-evenly;
    align-items: center;
+   gap: 50px;
 }
 
 .date_wrapper {
@@ -35,7 +36,7 @@
    padding: 10px;
 }
 
-.dates_container {
+.dates_container, .times_container {
    display: flex;
    flex-direction: column;
    overflow: auto;
@@ -46,22 +47,31 @@
    padding: 0 15px;
 }
 
-.weekdate {
+.weekdate, .datetime {
    color: #000;
    font-family: Barlow;
    font-size: 24px;
    font-weight: 500;
+   text-align: center;
    margin: 0;
    padding: 5px
 }
 
-.weekdate:hover {
+.vertical_center {
+   margin: auto 0;
+}
+
+.weekdate:hover, .datetime:hover {
    cursor: pointer;
 }
 
-.weekdate_disabled {
+.weekdate_disabled, .datetime_disabled {
    color: #656565;
    font-weight: 300;
+}
+
+.weekdate_disabled:hover, .datetime_disabled:hover {
+   cursor: not-allowed;
 }
 
 .weekdate_in_sessions {
@@ -69,7 +79,20 @@
    border-radius: 5px;
 }
 
-.weekdate_selected {
-   color: #22006a;
-   font-weight: 700;
+.weekdate_selected, .datetime_selected {
+   background-color: #22006a;
+   color: #fff;
+   font-weight: 600;
+   border: #22006a solid 2px;
+   border-radius: 5px;
+}
+
+.session_deselect {
+   height: 15px;
+   margin-top: 3px;
+   margin-left: 8px;
+}
+
+.session_deselect:hover {
+   cursor: pointer;
 }

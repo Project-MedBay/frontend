@@ -63,24 +63,35 @@ export default function SessionSelection(props) {
 
    return (
       <div className={s.selection_main}>
-         <div className={s.selection_date}>
-            <div className={s.scroll_container}>
-               <div className={s.dates_container}>
-                  {weekElements}
-               </div>
+         <div className={s.scroll_container}>
+            <div className={s.dates_container}>
+               {weekElements}
             </div>
          </div>
 
-         <div className={s.selection_time} onClick={() => console.log(weekElements)}>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
-            <p>08:00</p>
+         <div className={s.scroll_container}>
+            <div className={s.times_container}>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>08:00</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>08:30</p>
+               <p className={s.datetime}>09:00</p>
+               <p className={s.datetime}>09:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>10:00</p>
+               <p className={s.datetime}>10:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>11:00</p>
+               <p className={`${s.datetime} ${s.datetime_selected}`}>11:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>12:00</p>
+               <p className={s.datetime}>12:30</p>
+               <p className={s.datetime}>13:00</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>13:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>14:00</p>
+               <p className={s.datetime}>14:30</p>
+               <p className={s.datetime}>15:00</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>15:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>16:00</p>
+               <p className={s.datetime}>16:30</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>17:00</p>
+               <p className={`${s.datetime} ${s.datetime_disabled}`}>17:30</p>
+            </div>
          </div>
       </div>
     )
