@@ -102,11 +102,13 @@ export default function SessionSelection(props) {
    }
 
    useEffect(() => {
-      let newBlockedSessions = {}
-      for (let session of selectedSessions) {
-         updateBlockedSessions(session, newBlockedSessions)
+      if (!reschedule) {
+         let newBlockedSessions = {}
+         for (let session of selectedSessions) {
+            updateBlockedSessions(session, newBlockedSessions)
+         }
+         setBlockedSessions(newBlockedSessions)
       }
-      setBlockedSessions(newBlockedSessions)
    }, [selectedSessions])
 
    function updateBlockedSessions(date, newBlockedSessions) {
