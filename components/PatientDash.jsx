@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import SessionSelection from "./SessionSelection"
 import SessionSelection2 from "./SessionSelection2"
-import { mySchedule } from "./TestingData"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   
-   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+   const {formatWeek, formatDate, mySchedule} = props
    
    const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
       id: "",
@@ -63,46 +60,6 @@ export default function PatientDash(props) {
       })
    } else {
       var scheduleElements = <p className={s.no_sessions}>No sessions this week.</p>
-   }
-
-   function formatWeek(datetime) {
-      let tempDate = new Date(datetime)
-      let date = tempDate.getDate()
-      let weekday = tempDate.getDay()
-      date -= weekday == 0 ? 6 : (weekday - 1)
-      let formattedWeek = date.toString() + addExtension(date) + " " + 
-                          month[tempDate.getMonth()] + " - "
-      tempDate.setDate(date + 6)
-      date = tempDate.getDate()
-      formattedWeek += date.toString() + addExtension(date) + " " +
-                        month[tempDate.getMonth()]
-      return formattedWeek
-   }
-
-   function formatDate(datetime) {
-      let formattedDate = ""
-      formattedDate += weekday[datetime.getDay()] + ", "
-      formattedDate += (datetime.getDate()).toString()
-      formattedDate += addExtension(datetime.getDate()) + " "
-      formattedDate += month[datetime.getMonth()]
-      return formattedDate
-   }
-
-   function addExtension(date) {
-      switch (date) {
-         case 1:
-         case 21:
-         case 31:
-            return "st"
-         case 2:
-         case 22:
-            return "nd"
-         case 3:
-         case 23:
-            return "rd"
-         default:
-            return "th"
-      }
    }
 
    function formatTime(datetime) {
@@ -230,19 +187,18 @@ export default function PatientDash(props) {
             </p>
 
             <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
-               The selected date/time is colored in <span className={s.legend_purple}>purple and bolded</span>.<br />
+               The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
                Dates when you have other sessions scheduled are emphasized 
                with a <span className={s.legend_green}>green box.</span></p>
 
             <SessionSelection2 
                formatDate = {formatDate}
                formatWeek = {formatWeek}
-               selectedWeek = {selectedWeek}
-               selectedSessions = {[rescheduledSession]}
+               selectedSessions = {[rescheduledSession.datetime]}
                setSelectedSessions = {setRescheduledSession}
                currentSession = {selectedSession}
                mySchedule = {mySchedule}
-               reschedule = {true}
+               numberOfSessions = {1}
             />
 
             <button className={s.reschedule_button} onClick={() => rescheduleSession()}>Reschedule

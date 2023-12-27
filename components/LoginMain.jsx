@@ -18,12 +18,10 @@ export default function LoginMain(props) {
 
    function handleChange(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       const {name, value} = event.target
-      setFormData(prevFormData => {
-          return {
-              ...prevFormData,
-              [name]: value
-          }
-      })
+      setFormData(prevFormData => ({
+         ...prevFormData,
+         [name]: value
+      }))
   }
 
    function handleSubmit(event) {               // submit - axios poziv na odgovarajuci url za obradu na backendu

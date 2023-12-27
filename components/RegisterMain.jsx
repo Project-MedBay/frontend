@@ -56,12 +56,10 @@ export default function RegisterMain(props) {
 
    function handleChange(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       const {name, value} = event.target
-      setFormData(prevFormData => {
-          return {
-              ...prevFormData,
-              [name]: value
-          }
-      })
+      setFormData(prevFormData => ({
+         ...prevFormData,
+         [name]: value
+      }))
 
       // pri updateanju polja provodi se kontinuirana provjera gresaka u formatu unosa i slicno (provodi se preko pomocnih funkcija):
       if (name == "password" || name == "passwordConfirm") {
@@ -71,19 +69,17 @@ export default function RegisterMain(props) {
 
       if (value == "") {
          // ako je prazno automatski ne valja
-         setInputFailed(prevState => {
-            return {
-               ...prevState,
-               [name]: {failed: true, text: "Field is required."}
-         }})
+         setInputFailed(prevState => ({
+            ...prevState,
+            [name]: {failed: true, text: "Field is required."}
+         }))
       }
       else if (name == "firstName" || name == "lastName" || name == "address") {
          // ovi samo ne smiju bit prazni, nemaju pravila za provjeru formata
-         setInputFailed(prevState => {
-            return {
-               ...prevState,
-               [name]: {failed: false, text: "Field is required."}      /* tekst mora neki biti da se odrzi poravnanje, bitno je da je false */
-         }})
+         setInputFailed(prevState => ({
+            ...prevState,
+            [name]: {failed: false, text: "Field is required."}      /* tekst mora neki biti da se odrzi poravnanje, bitno je da je false */
+         }))
       }
       else if (name != "passwordConfirm") {
          let updateInputFailedTo = {}
@@ -105,11 +101,10 @@ export default function RegisterMain(props) {
                updateInputFailedTo = checkPasswordRules(value)
                break
          }
-         setInputFailed(prevState => {
-            return {
-               ...prevState,
-               [name]: updateInputFailedTo
-         }})
+         setInputFailed(prevState => ({
+            ...prevState,
+            [name]: updateInputFailedTo
+         }))
       }
    }
 
@@ -157,20 +152,18 @@ export default function RegisterMain(props) {
       let failed = false
       let checkAgainst = name == "password" ? "passwordConfirm" : "password"        // ako je pozivatelj password usporedi s passwordConfirm i obratno
       value != formData[checkAgainst] ? failed = true : failed = false
-      setInputFailed(prevState => {
-         return {
-            ...prevState,
-            passwordConfirm: {failed: failed, text: "Passwords do not match."}
-         }})
-      }
+      setInputFailed(prevState => ({
+         ...prevState,
+         passwordConfirm: {failed: failed, text: "Passwords do not match."}
+      }))
+   }
       
    function handleSubmit(event) {               // submit - axios poziv na odgovarajuci url za obradu na backendu
       event.preventDefault()
-      setInputFailed(prevState => {
-         return {
-            ...prevState,
-            unexpectedError: {failed: false, text: "Error"}
-      }})
+      setInputFailed(prevState => ({
+         ...prevState,
+         unexpectedError: {failed: false, text: "Error"}
+      }))
       if (checkInputFailedAny()) return;        // blokiraj slanje ako postoji greska
       axios({
          url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/security/register",
@@ -186,11 +179,10 @@ export default function RegisterMain(props) {
       for (let name in formData) {
          if (inputFailed[name].failed) failedAny = true        // ako je failed postavljeno u true gornjom provjerom
          else if (formData[name] == "") {                      // ako je polje ostalo prazno, a netaknuto (dakle nije provjereno u handleChange)
-            setInputFailed(prevState => {
-               return {
-                  ...prevState,
-                  [name]: {failed: true, text: "Field is required."}
-            }})
+            setInputFailed(prevState => ({
+               ...prevState,
+               [name]: {failed: true, text: "Field is required."}
+            }))
             failedAny = true
          }
       }
@@ -199,11 +191,10 @@ export default function RegisterMain(props) {
    
    function handleError(error) {                // ispisuje error u konzoli i na vrhu forme
       console.log(error)
-      setInputFailed(prevState => {
-         return {
-            ...prevState,
-            unexpectedError: {failed: true, text: `${error.message}. Please try again.`}
-      }})
+      setInputFailed(prevState => ({
+         ...prevState,
+         unexpectedError: {failed: true, text: `${error.message}. Please try again.`}
+      }))
    }
 
    function togglePassword() {

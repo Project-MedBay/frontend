@@ -1,0 +1,135 @@
+.patient_therapy_main {
+   background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(134, 113, 255, 0.25) 30%,
+               rgba(134, 113, 255, 0.5) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
+   background-size: cover;
+   background-position: top center;
+   background-attachment: fixed;
+   position: relative;
+   padding: 50px 200px;
+   gap: 8.5vw;
+   height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
+   min-height: 650px;
+   overflow: hidden;
+}
+
+.create_title {
+   color: #FFF;
+   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   font-family: Barlow;
+   font-size: 64px;
+   font-weight: 700;
+   margin: 0;
+}
+
+.white_shape, .create_container {
+   position: absolute;
+   left: -190px;
+   top: calc((100vh - 650px) / 2);
+   width: 1300px;
+   height: 650px;
+   background-color: #fff;
+   transform: skewX(-30deg);
+}
+
+.create_container {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+   left: 0;
+   border: red solid 2px;
+   transform: skewX(0deg);
+   background-color: transparent;
+   padding-left: 200px;
+   padding-top: 30px;
+}
+
+.create_header {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   font-weight: 700;
+}
+
+.header_step {
+   font-size: 32px;
+   color: #22006a;
+   margin: 0;
+}
+
+.header_counter {
+   display: flex;
+   height: fit-content;
+   padding: 10px 50px;
+   background-color: #C7FFE7;
+   transform: skewX(-30deg);
+   margin-right: 40px;
+   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.counter_text {
+   transform: skewX(30deg);
+   margin: 0;
+   height: fit-content;
+   font-size: 42px;
+   color: #22006a;
+   text-align: right;
+}
+
+.create_info {
+   font-size: 20px;
+   font-weight: 500;
+   line-height: 150%;
+   margin-top: -30px;
+}
+
+.create_info > span {
+   font-weight: 700;
+   line-height: 200%;
+}
+
+.create_progress {
+   margin-left: 200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: max-content;
+   gap: 5px;
+}
+
+.progress_bg {
+   display: flex;
+   width: 360px;
+   height: 8px;
+   padding: 0 2px;
+   background-color: rgba(134, 113, 255, 0.25);
+   border-radius: 5px;
+}
+
+.progress_line {
+   width: 125px;
+   height: 8px;
+   background-color: #7F56D9;
+   border-radius: 5px;
+   margin: 0px -2px;
+   /* border: #000 solid 2px; */
+}
+
+.progress_label {
+   width: fit-content;
+   font-size: 18px;
+   font-weight: 500;
+}
+
+.green_shape {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   right: -190px;
+   top: calc((100vh - 650px) / 2);
+   width: 850px;
+   height: 650px;
+   background-color: #C7FFE7;
+   transform: skewX(-30deg);
+}
