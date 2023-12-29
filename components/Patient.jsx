@@ -6,7 +6,7 @@ import PatientNewTherapy from './PatientNewTherapy'
 
 export default function Patient(props) {           // glavna komponenta, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
-   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const [subPageName, setSubPageName] = useState("newTherapy")           // sluzi za navigaciju
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]

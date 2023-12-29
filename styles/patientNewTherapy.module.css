@@ -43,17 +43,165 @@
    padding-top: 30px;
 }
 
+.header_step {
+   font-size: 36px;
+   color: #22006a;
+   margin: 0;
+}
+
+.therapy_header {
+   display: flex;
+   align-items: flex-start;
+   gap: 20px;
+}
+
+.header_prompt {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0;
+   margin-top: 18px;
+}
+
+.header_input {
+   width: 150px;
+   font-size: 20px;
+   padding: 10px;
+   padding-left: 14px;
+   /* background: #F4F3F3; */
+   border: 2px solid hsl(0, 0%, 90%);
+   border-radius: 10px;
+}
+
+.header_input:focus {
+   outline: none;
+}
+
+.invalid_text {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 12px -8px;
+   color: #FF0000;
+   visibility: hidden;
+}
+
+.invalid_input {
+   border-color: #FF0000;
+   visibility: visible;
+}
+
+.therapy_select {
+   display: flex;
+   padding: 30px 85px;
+   height: 550px;
+}
+
+.therapy_form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   margin: auto -10px;
+   width: 525px;
+}
+
+.form_title {
+   color: #636363;
+   font-size: 40px;
+   margin: 0;
+   font-weight: 600;
+}
+
+.form_title > span {
+   color: #22006a;
+   font-size: 48px;
+   font-weight: 700;
+}
+
+.form_search {
+   width: 100%;
+   font-size: 20px;
+   padding: 10px;
+   padding-left: 14px;
+   /* background: #F4F3F3; */
+   border: 2px solid hsl(0, 0%, 90%);
+   border-radius: 10px;
+}
+
+.form_search:focus {
+   outline: none;
+}
+
+.scroll_container {
+   padding: 10px;
+}
+
+.therapies_container {
+   display: flex;
+   flex-direction: column;
+   overflow: auto;
+   align-items: flex-start;
+   gap: 15px;
+   height: 175px;
+   padding: 0;
+   /* border: 2px solid red; */
+}
+
+.therapy_wrapper {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   cursor: pointer;
+}
+
+.therapy_checkbox {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 22px;
+   height: 22px;
+   padding: 2px;
+   border: 2px solid #636363;
+   border-radius: 5px;
+}
+/* 
+.therapy_checkbox:hover {
+   background-color: #B4D6C7;
+} */
+
+.checkbox_filled {
+   width: 100%;
+   height: 100%;
+   background-color: #22006a;
+   border-radius: 3px;
+   visibility: hidden;
+}
+
+.checkbox_selected {
+   visibility: visible;
+}
+
+.therapy_info {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+   cursor: pointer;
+}
+
+.therapy_name, .therapy_code {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.therapy_code {
+   color: #636363;
+   font-size: 16px;
+}
+
 .sessions_header {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
    font-weight: 700;
-}
-
-.header_step {
-   font-size: 36px;
-   color: #22006a;
-   margin: 0;
 }
 
 .header_counter {
@@ -176,6 +324,7 @@
    background-repeat: no-repeat;
    background-position: 50px 0px;
    background-attachment: fixed;
+   pointer-events: none;
    /* border: red solid 2px; */
 }
 

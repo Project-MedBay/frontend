@@ -22,7 +22,7 @@ export default function LoginMain(props) {
          ...prevFormData,
          [name]: value
       }))
-  }
+   }
 
    function handleSubmit(event) {               // submit - axios poziv na odgovarajuci url za obradu na backendu
       event.preventDefault()

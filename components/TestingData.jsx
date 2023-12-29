@@ -62,3 +62,48 @@ export const availableSessions = {
    "Wednesday, 10th January": [10, 14, 16, 17, 19],
    dateMax: new Date("2024-01-12 00:00")
 }
+
+export const therapies = {
+   "head": [],
+   "shoulder": [
+      {
+         name: "Shoulder impingement",
+         code: "#4JG5E"
+      },
+      {
+         name: "Shoulder tendon injury",
+         code: "#56JG3"
+      },
+      {
+         name: "Post shoulder operation recovery",
+         code: "#43GE4"
+      },
+      {
+         name: "Impingement 2 electric bogaloo",
+         code: "#4JF9F"
+      },
+      {
+         name: "Please scroll",
+         code: "#Please"
+      }
+   ],
+   "arm": [
+      {
+         name: "Elbow impingement",
+         code: "#4JG5F"
+      },
+      {
+         name: "Elbow tendon injury",
+         code: "#56JG6"
+      },
+      {
+         name: "Post elbow operation recovery",
+         code: "#43HE4"
+      },
+   ],
+   "hand": [],
+   "upper torso": [],
+   "lower torso": [],
+   "leg": [],
+   "foot": []
+}
