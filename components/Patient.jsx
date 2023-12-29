@@ -6,7 +6,7 @@ import PatientNewTherapy from './PatientNewTherapy'
 
 export default function Patient(props) {           // glavna komponenta, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
-   const [subPageName, setSubPageName] = useState("newTherapy")           // sluzi za navigaciju
+   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -59,6 +59,20 @@ export default function Patient(props) {           // glavna komponenta, u njoj 
       }
    }
 
+   function formatFullDatetime(datetime) {
+      let formattedDatetime = ""
+      datetime.getDate() < 10 ? formattedDatetime += "0" : ""
+      formattedDatetime += datetime.getDate() + "."
+      datetime.getMonth() + 1 < 10 ? formattedDatetime += "0" : ""
+      formattedDatetime += (datetime.getMonth() + 1) + "."
+      formattedDatetime += datetime.getFullYear() + ". "
+      datetime.getHours() < 10 ? formattedDatetime += "0" : ""
+      formattedDatetime += datetime.getHours() + ":"
+      datetime.getMinutes() < 10 ? formattedDatetime += "0" : ""
+      formattedDatetime += datetime.getMinutes()
+      return formattedDatetime
+   }
+
    const subpages = {
       dash: <>
          <PatientHeader navigate={navigate} />
@@ -66,6 +80,7 @@ export default function Patient(props) {           // glavna komponenta, u njoj 
             userToken={userToken}
             formatWeek={formatWeek}
             formatDate={formatDate}
+            formatFullDatetime={formatFullDatetime}
             mySchedule={mySchedule}
          />
       </>,
@@ -76,6 +91,7 @@ export default function Patient(props) {           // glavna komponenta, u njoj 
             formatWeek={formatWeek}
             formatDate={formatDate}
             mySchedule={mySchedule}
+            navigate={navigate}
          />
       </>,
       profile: <>

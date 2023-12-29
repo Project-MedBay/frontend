@@ -4,33 +4,6 @@
    gap: 50px;
 }
 
-.date_wrapper {
-   display: inline-flex;
-   justify-content: space-between;
-   align-items: center;
-   margin-top: -10px;
-   width: 420px;
-}
-
-.container_date, .date_arrow {
-   color: #000;
-   font-family: Barlow;
-   font-size: 24px;
-   font-weight: 500;
-   margin: 0;
-   margin-bottom: 10px;
-}
-
-.date_arrow:hover {
-   cursor: pointer;
-}
-
-.date_arrow {
-   -webkit-user-select: none; /* Safari */
-   -ms-user-select: none; /* IE 10 and IE 11 */
-   user-select: none; /* Standard syntax */
-}
-
 .scroll_container {
    padding: 10px;
 }
@@ -46,6 +19,10 @@
    padding: 0 15px;
 }
 
+.container_small {
+   height: 400px;
+}
+
 .weekdate, .datetime {
    color: #000;
    font-family: Barlow;
@@ -54,6 +31,10 @@
    text-align: center;
    margin: 0;
    padding: 5px
+}
+
+.container_small > h3 {
+   font-size: 24px;
 }
 
 .vertical_center {

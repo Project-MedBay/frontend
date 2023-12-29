@@ -8,7 +8,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {formatWeek, formatDate, mySchedule} = props
+   const {formatWeek, formatDate, formatFullDatetime, mySchedule} = props
    
    const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
       id: "",
@@ -20,7 +20,11 @@ export default function PatientDash(props) {
       role: "",
    })
    const [selectedWeek, setSelectedWeek] = useState(new Date())
-   const [selectedSession, setSelectedSession] = useState(mySchedule[formatWeek(new Date())][0])
+   let nextSessionWeek
+   for (nextSessionWeek in mySchedule) {
+      break
+   }
+   const [selectedSession, setSelectedSession] = useState(mySchedule[nextSessionWeek][0])
    
    const [notesDisabled, setNotesDisabled] = useState(false)
    const [notesPopup, setNotesPopup] = useState(false)
@@ -28,7 +32,7 @@ export default function PatientDash(props) {
    const [rescheduleText, setRescheduleText] = useState("Appointment is in less than 48 hours.")
    const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
    const [reschedulePopup, setReschedulePopup] = useState(false)
-   const [rescheduledSession, setRescheduledSession] = useState(mySchedule[formatWeek(new Date())][0])
+   const [rescheduledSession, setRescheduledSession] = useState()
 
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (selectedSession.datetime.getTime() <= new Date().getTime() + 48*60*60*1000) {
@@ -38,6 +42,10 @@ export default function PatientDash(props) {
          setRescheduleText("Appointment has passed.")
       } else {setRescheduleText("Appointment is in less than 48 hours.")}
       setRescheduledSession(selectedSession)
+
+      if (selectedSession.notes == "") {
+         setNotesDisabled(true)
+      } else {setNotesDisabled(false)}
    }, [selectedSession])
 
    if (mySchedule[formatWeek(selectedWeek)] != null) {   
@@ -132,7 +140,9 @@ export default function PatientDash(props) {
             </div>
 
             <div className={s.container_right}>
-               <h2 className={s.container_title}>Next session:</h2>
+               <h2 className={s.container_title}>
+                  {selectedSession == mySchedule[nextSessionWeek][0] ? "Next session:" : "Selected session:"}
+               </h2>
                <p className={s.container_date}>{formatDate(selectedSession.datetime)}</p>
                
                <div className={s.selected_session}>
@@ -170,10 +180,32 @@ export default function PatientDash(props) {
             </div>
          </div>
 
-         {reschedulePopup && <div className={s.session_reschedule}>             {/* uvjetni render popupa za reschedule */}
-            <div className={s.reschedule_header}>
-               <h3 className={s.reschedule_title}>RESCHEDULE SESSION:</h3>
-               <img src={x_icon} className={s.reschedule_exit} onClick={() => {
+         {notesPopup && <div className={s.session_popup}>
+            <div className={s.popup_header}>
+               <h3 className={s.popup_title}>SESSION NOTES:</h3>
+               <img src={x_icon} className={s.popup_exit} onClick={() => setNotesPopup(false)}
+               />
+            </div>
+
+            <div className={s.notes_info}>
+               <p><span>Session {selectedSession.sessionNumber}</span></p>
+               <p>{formatDate(selectedSession.datetime)}</p>
+            </div>
+
+            <div className={s.notes_note}>
+               <p className={s.note_details}>
+                  {selectedSession.therapist}, {formatFullDatetime(selectedSession.notes.datetime)}
+               </p>
+               <div className={s.note_box}>
+                  <p className={s.note_contents}>{selectedSession.notes.contents}</p>
+               </div>
+            </div>
+         </div>}
+
+         {reschedulePopup && <div className={s.session_popup}>             {/* uvjetni render popupa za reschedule */}
+            <div className={s.popup_header}>
+               <h3 className={s.popup_title}>RESCHEDULE SESSION:</h3>
+               <img src={x_icon} className={s.popup_exit} onClick={() => {
                      setReschedulePopup(false)
                      setRescheduledSession(selectedSession)}}
                />

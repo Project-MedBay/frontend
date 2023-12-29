@@ -212,7 +212,7 @@
    color: #FFF;
    font-family: Barlow;
    font-size: 24px;
-   font-weight: 500;
+   font-weight: 600;
    border: 0;
    margin: 15px;
    margin-bottom: 5px;
@@ -251,7 +251,7 @@
    visibility: visible;
 }
 
-.session_reschedule {
+.session_popup {
    position: absolute;
    display: flex;
    flex-direction: column;
@@ -269,7 +269,7 @@
    width: max-content;
 }
 
-.reschedule_header {
+.popup_header {
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -279,7 +279,7 @@
    margin-bottom: 10px;
 }
 
-.reschedule_title {
+.popup_title {
    color: #000;
    font-family: Barlow;
    font-size: 32px;
@@ -287,12 +287,53 @@
    margin: 0;
 }
 
-.reschedule_exit {
+.popup_exit {
    margin-top: 3px;
+   cursor: pointer;
 }
 
-.reschedule_exit:hover {
-   cursor: pointer;
+.notes_info {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   padding: 0 30px;
+}
+
+.notes_info > p {
+   font-size: 28px;
+   font-weight: 400;
+   margin: 0;
+}
+
+.notes_info span {
+   font-weight: 600;
+}
+
+.notes_note {
+   margin: 30px;
+   margin-top: 15px;
+}
+
+.note_details {
+   font-size: 20px;
+   font-weight: 600;
+   margin: 5px;
+   color: #22006a;
+}
+
+.note_box {
+   display: flex;
+   background-color: hsl(0, 0%, 90%);
+   border-radius: 5px;
+   width: 700px;
+   min-height: 250px;
+   padding: 15px;
+}
+
+.note_contents {
+   margin: 0;
+   font-weight: 600;
+   font-size: 20px;
 }
 
 .reschedule_info {

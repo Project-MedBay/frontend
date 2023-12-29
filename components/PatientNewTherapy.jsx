@@ -4,13 +4,18 @@ import SessionSelection2 from "./SessionSelection2"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {formatWeek, formatDate, mySchedule} = props
+   const {formatWeek, formatDate, mySchedule, navigate} = props
 
-   const [progress, setProgress] = useState(1)
+   const [progress, setProgress] = useState(2)
    const [selectedSessions, setSelectedSessions] = useState([])
    
    const numberOfSessions = 5       // bit ce presumably neki selected therapy state i iz njegovog propertyja izvlacimo ovo
    
+   var nextDisabled = () => {switch (progress) {         // ovdi uvjete za nastavit dalje u svakom koraku
+      case 2:
+         return selectedSessions.length < numberOfSessions
+   }}
+
    return (
       <div className={s.patient_therapy_main}>
          <h1 className={s.create_title}>CREATE A NEW THERAPY</h1>
@@ -18,14 +23,16 @@ export default function PatientNewTherapy(props) {
          <div className={s.green_shape}></div>
          
          <div className={s.create_container}>
-            <div className={s.create_header}>
+            
+            {progress == 2 && <>
+            <div className={s.sessions_header}>
                <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
                <div className={s.header_counter}>
                   <h2 className={s.counter_text}>SELECTED: {selectedSessions.length}/{numberOfSessions}</h2>
                </div>
             </div>
 
-            <p className={s.create_info}>
+            <p className={s.sessions_info}>
                <span>Restrictions:</span><br />
                1.&#160; Selected sessions must be at least 36h apart.<br />      {/* extra space za poravnanje */}
                2. The total duration of the therapy must not exceed 30 days.
@@ -39,10 +46,18 @@ export default function PatientNewTherapy(props) {
                currentSession = ""
                mySchedule = {mySchedule}
                numberOfSessions = {numberOfSessions}
-            />
+               />
+            </>}
 
             <div className={s.create_buttons}>
-
+               <button className={s.button_back} onClick={() => {
+                  progress == 1 ? navigate("dash") : setProgress(prevProgress => prevProgress - 1)}
+                  }>{progress == 1 ? "Cancel" : "Back"}
+               </button>
+               <button className={`${s.button_next} ${nextDisabled() ? s.button_disabled : ""}`} onClick={() => {
+                  nextDisabled() ? "" : (progress == 3 ? navigate("dash") : setProgress(prevProgress => prevProgress + 1))}
+                  }>{progress == 3 ? "Finish" : "Next"}
+               </button>
             </div>
 
             <div className={s.create_progress}>
@@ -56,7 +71,7 @@ export default function PatientNewTherapy(props) {
          </div>
 
          <div className={s.tagline_container}>
-
+            <h1 className={s.tagline}>RECOVERY<br /><span>BEGINS HERE.</span></h1>
          </div>
       </div>
    )

@@ -137,13 +137,13 @@ export default function SessionSelection(props) {
    return (
       <div className={s.selection_main}>
          <div className={s.scroll_container}>
-            <div className={s.dates_container}> {/* ako triba razlicit style ubacit reschedule ? i onda razl imena za container, a u css koristit samo container class i container class > h3*/}
+            <div className={`${s.dates_container} ${!reschedule && s.container_small}`}>     {/* s ovim mozemo minjat visinu containera i velicinu fonta npr za new therapy */}
                {weekElements}
             </div>
          </div>
 
          <div className={s.scroll_container}>
-            <div className={s.times_container}>
+            <div className={`${s.times_container} ${!reschedule && s.container_small}`}>
                {timeElements}
             </div>
          </div>

@@ -1,55 +1,52 @@
 export const mySchedule = {
-   "25th December - 31st December": [
-      {
-         id: 0,
-         datetime: new Date ("2023-12-25 11:00"),
-         location: "Electrotherapy room",
-         sessionNumber: "4/11",
-         therapist: "Ante Pavlović"
-      },
-      {
-         id: 1,
-         datetime: new Date ("2023-12-26 11:00"),
-         location: "Electrotherapy room",
-         sessionNumber: "5/11",
-         therapist: "Ante Pavlović"
-      },
-      {
-         id: 2,
-         datetime: new Date ("2023-12-27 11:00"),
-         location: "Electrotherapy room",
-         sessionNumber: "6/11",
-         therapist: "Ante Pavlović"
-      },
-      {
-         id: 3,
-         datetime: new Date ("2023-12-28 11:00"),
-         location: "Electrotherapy room",
-         sessionNumber: "7/11",
-         therapist: "Ante Pavlović"
-      },
-      {
-         id: 4,
-         datetime: new Date ("2023-12-29 11:00"),
-         location: "Electrotherapy room",
-         sessionNumber: "8/11",
-         therapist: "Ante Pavlović"
-      }
-   ],
    "1st January - 7th January": [
       {
          id: 0,
-         datetime: new Date ("2024-01-02 17:00"),
+         datetime: new Date ("2024-01-01 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "10/11",
-         therapist: "Ante Pavlović"
+         sessionNumber: "4/11",
+         therapist: "Ante Pavlović",
+         notes: {
+            datetime: new Date("2024-01-01 17:53"),
+            contents: "Pacijent je odradio normalno i dobro... ovaj put"
+         }
       },
       {
          id: 1,
-         datetime: new Date ("2024-01-05 11:00"),
+         datetime: new Date ("2024-01-03 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "11/11",
-         therapist: "Ante Pavlović"
+         sessionNumber: "5/11",
+         therapist: "Ante Pavlović",
+         notes: {
+            datetime: new Date("2024-01-03 17:53"),
+            contents: "Pacijent je odradio normalno i dobro."
+         }
+      },
+      {
+         id: 2,
+         datetime: new Date ("2024-01-05 17:00"),
+         location: "Electrotherapy room",
+         sessionNumber: "6/11",
+         therapist: "Ante Pavlović",
+         notes: ""
+      },
+   ],
+   "8th January - 14th January": [
+      {
+         id: 0,
+         datetime: new Date ("2024-01-09 17:00"),
+         location: "Electrotherapy room",
+         sessionNumber: "7/11",
+         therapist: "Ante Pavlović",
+         notes: ""
+      },
+      {
+         id: 1,
+         datetime: new Date ("2024-01-11 11:00"),
+         location: "Electrotherapy room",
+         sessionNumber: "8/11",
+         therapist: "Ante Pavlović",
+         notes: ""
       }
    ]
 }
