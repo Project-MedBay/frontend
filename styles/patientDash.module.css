@@ -33,6 +33,14 @@
    -webkit-filter: blur(4px);
 }
 
+.popup_separate {
+   position: absolute;
+   left: 0;
+   top: max(calc(60px * 0.6), calc(60vh * 59 / 725));
+   width: 100%;
+   height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
+}
+
 .container_title {
    color: #22006a;
    font-family: Barlow;

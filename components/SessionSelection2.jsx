@@ -93,7 +93,7 @@ export default function SessionSelection(props) {
                setSelectedSessions(prevArray => ([
                   ...prevArray.filter(session => formatDate(session) != formatDate(viewingSession)),
                   newDate
-               ]))
+               ].sort((date1, date2) => date1 - date2)))
             }
          }
       }

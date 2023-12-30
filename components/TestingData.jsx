@@ -68,37 +68,45 @@ export const therapies = {
    "shoulder": [
       {
          name: "Shoulder impingement",
-         code: "#4JG5E"
+         code: "#4JG5E",
+         numberOfSessions: 3
       },
       {
          name: "Shoulder tendon injury",
-         code: "#56JG3"
+         code: "#56JG3",
+         numberOfSessions: 5
       },
       {
-         name: "Post shoulder operation recovery",
-         code: "#43GE4"
+         name: "Post operation shoulder recovery",
+         code: "#43GE4",
+         numberOfSessions: 4
       },
       {
          name: "Impingement 2 electric bogaloo",
-         code: "#4JF9F"
+         code: "#4JF9F",
+         numberOfSessions: 5
       },
       {
          name: "Please scroll",
-         code: "#Please"
+         code: "#Please",
+         numberOfSessions: 2
       }
    ],
    "arm": [
       {
          name: "Elbow impingement",
-         code: "#4JG5F"
+         code: "#4JG5F",
+         numberOfSessions: 4
       },
       {
          name: "Elbow tendon injury",
-         code: "#56JG6"
+         code: "#56JG6",
+         numberOfSessions: 3
       },
       {
-         name: "Post elbow operation recovery",
-         code: "#43HE4"
+         name: "Post operation elbow recovery",
+         code: "#43HE4",
+         numberOfSessions: 5
       },
    ],
    "hand": [],

@@ -8,7 +8,7 @@ export default function BodypartSelection(props) {
 
    function handleClick(bodypart) {
       if (selectedBodypart == bodypart) {
-         setSelectedBodypart("none")
+         setSelectedBodypart("any")
       } else {setSelectedBodypart(bodypart)}
    }
 

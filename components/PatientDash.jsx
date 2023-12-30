@@ -10,15 +10,6 @@ import s from "../styles/patientDash.module.css"
 export default function PatientDash(props) {
    const {formatWeek, formatDate, formatFullDatetime, mySchedule} = props
    
-   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
-      id: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      active: "",
-      role: "",
-   })
    const [selectedWeek, setSelectedWeek] = useState(new Date())
    let nextSessionWeek
    for (nextSessionWeek in mySchedule) {
@@ -101,27 +92,15 @@ export default function PatientDash(props) {
       setReschedulePopup(false)
    }
 
-   // axios({
-   //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
-   //    method: "GET",
-   //    headers: {
-   //       Authorization: `Bearer ${props.userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
-   //    }
-   // })
-   // .then(res => setUserData({
-   //    id: res.data.id,
-   //    firstName: res.data.firstName,
-   //    lastName: res.data.lastName,
-   //    email: res.data.email,
-   //    password: res.data.password,
-   //    active: res.data.active,
-   //    role: res.data.role
-   // }))
-   // .catch(error => console.log(error));
+   function popupExit() {
+      console.log("exited")
+      if (notesPopup) setNotesPopup(false)
+      else {setReschedulePopup(false); setRescheduledSession(selectedSession)}
+   }
 
    return (
       <>
-         <div className={`${s.patient_dash_main} ${reschedulePopup && s.covered_by_popup}`}>
+         <div className={`${s.patient_dash_main} ${(reschedulePopup || notesPopup) && s.covered_by_popup}`}>
             <div className={s.container_left}>
                <h2 className={s.container_title}>My schedule:</h2>
 
@@ -180,10 +159,12 @@ export default function PatientDash(props) {
             </div>
          </div>
 
+         {(notesPopup || reschedulePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
+
          {notesPopup && <div className={s.session_popup}>
             <div className={s.popup_header}>
                <h3 className={s.popup_title}>SESSION NOTES:</h3>
-               <img src={x_icon} className={s.popup_exit} onClick={() => setNotesPopup(false)}
+               <img src={x_icon} className={s.popup_exit} onClick={popupExit}
                />
             </div>
 
@@ -205,10 +186,7 @@ export default function PatientDash(props) {
          {reschedulePopup && <div className={s.session_popup}>             {/* uvjetni render popupa za reschedule */}
             <div className={s.popup_header}>
                <h3 className={s.popup_title}>RESCHEDULE SESSION:</h3>
-               <img src={x_icon} className={s.popup_exit} onClick={() => {
-                     setReschedulePopup(false)
-                     setRescheduledSession(selectedSession)}}
-               />
+               <img src={x_icon} className={s.popup_exit} onClick={popupExit}/>
             </div>
 
             <p className={s.reschedule_info}>CURRENT SESSION:&#160;

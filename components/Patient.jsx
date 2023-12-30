@@ -4,9 +4,36 @@ import PatientHeader from './PatientHeader'
 import PatientDash from './PatientDash'
 import PatientNewTherapy from './PatientNewTherapy'
 
-export default function Patient(props) {           // glavna komponenta, u njoj se renderaju sve ostale
+export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
-   const [subPageName, setSubPageName] = useState("newTherapy")           // sluzi za navigaciju
+   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
+      id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      active: "",
+      role: "",
+   })
+   
+   // axios({
+   //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
+   //    method: "GET",
+   //    headers: {
+   //       Authorization: `Bearer ${props.userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+   //    }
+   // })
+   // .then(res => setUserData({
+   //    id: res.data.id,
+   //    firstName: res.data.firstName,
+   //    lastName: res.data.lastName,
+   //    email: res.data.email,
+   //    password: res.data.password,
+   //    active: res.data.active,
+   //    role: res.data.role
+   // }))
+   // .catch(error => console.log(error));
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
