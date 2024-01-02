@@ -37,7 +37,7 @@ export default function LoginMain(props) {
 
    function handleLogIn(token) {          // preko propsa updateamo stanje u stateovima na visoj razini (App)
       props.setUserToken(token)
-      props.navigate("patientDash")
+      props.navigate("patient")
    }
 
    function handleError(error) {          // ispisuje error u konzoli, ako je error code 403 (bad request - forbidden) znaci da baza nije dopustila unos

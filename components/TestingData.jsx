@@ -2,7 +2,8 @@ export const mySchedule = {
    "1st January - 7th January": [
       {
          id: 0,
-         datetime: new Date ("2024-01-01 17:00"),
+         therapy: "Shoulder impingement",
+         datetime: new Date ("2024-01-01 09:00"),
          location: "Electrotherapy room",
          sessionNumber: "4/11",
          therapist: "Ante Pavlović",
@@ -13,6 +14,7 @@ export const mySchedule = {
       },
       {
          id: 1,
+         therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-03 17:00"),
          location: "Electrotherapy room",
          sessionNumber: "5/11",
@@ -24,6 +26,7 @@ export const mySchedule = {
       },
       {
          id: 2,
+         therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-05 17:00"),
          location: "Electrotherapy room",
          sessionNumber: "6/11",
@@ -34,6 +37,7 @@ export const mySchedule = {
    "8th January - 14th January": [
       {
          id: 0,
+         therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-09 17:00"),
          location: "Electrotherapy room",
          sessionNumber: "7/11",
@@ -42,6 +46,7 @@ export const mySchedule = {
       },
       {
          id: 1,
+         therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-11 11:00"),
          location: "Electrotherapy room",
          sessionNumber: "8/11",
@@ -60,7 +65,7 @@ export const availableSessions = {
    "Friday, 5th January": [9, 11, 13, 14, 16, 17, 19],
    "Monday, 8th January": [8, 12, 13, 15, 18],
    "Wednesday, 10th January": [10, 14, 16, 17, 19],
-   dateMax: new Date("2024-01-12 00:00")
+   dateMax: new Date("2024-01-15 00:00")
 }
 
 export const therapies = {
@@ -115,3 +120,34 @@ export const therapies = {
    "leg": [],
    "foot": []
 }
+
+export const myTherapies = [
+   {
+      name: "Shoulder impingement",
+      code: "#4JG5E",
+      dateStarted: new Date("2023-10-27"),
+      dateFinished: new Date("2023-11-21"),
+      numberOfSessions: 8
+   },
+   {
+      name: "Shoulder impingement",
+      code: "#4JG5E",
+      dateStarted: new Date("2023-10-27"),
+      dateFinished: new Date("2023-11-21"),
+      numberOfSessions: 8
+   },
+   {
+      name: "Shoulder impingement",
+      code: "#4JG5E",
+      dateStarted: new Date("2023-10-27"),
+      dateFinished: new Date("2023-11-21"),
+      numberOfSessions: 8
+   },
+   {
+      name: "Shoulder impingement",
+      code: "#4JG5E",
+      dateStarted: new Date("2023-10-27"),
+      dateFinished: new Date("2023-11-21"),
+      numberOfSessions: 8
+   }
+]

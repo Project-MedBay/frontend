@@ -6,3 +6,16 @@ body {
   margin: 0;
   font-family: "Barlow", sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #BFBFBF;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #636363; 
+}

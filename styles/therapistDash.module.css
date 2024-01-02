@@ -1,6 +1,6 @@
-.patient_dash_main {
+.therapist_dash_main {
    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%,
-               rgba(134, 113, 255, 0.4) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
+             rgba(112, 216, 172, 0.3) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
    background-size: cover;
    background-position: top center;
    background-attachment: fixed;
@@ -150,9 +150,6 @@
    margin: 0;
    margin-top: -10px;
    margin-bottom: 10px;
-}
-
-.session_more:hover {
    cursor: pointer;
 }
 
@@ -165,12 +162,12 @@
    background: #FFF;
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
    width: 700px;
-   min-height: 810px;
+   /* min-height: 500px; */
 }
 
 .session_info {
    display: flex;
-   gap: 15px;
+   gap: 20px;
    align-items: center;
 }
 
@@ -192,12 +189,22 @@
    font-weight: 500;
 }
 
+p.patient_link {
+   color: #22006a;
+   text-decoration: underline;
+   font-weight: 600;
+   cursor: pointer;
+}
+
 .session_image {
-   height: 340px;
+   height: 380px;
    margin: 10px;
 }
 
 .session_buttons {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    width: 515px;
 }
 
@@ -213,33 +220,108 @@
    margin-bottom: 5px;
    border-radius: 10px;
    background: #70D8AC;
-}
-
-.session_button:hover {
    cursor: pointer;
 }
 
-.button_disabled {
-   background-color: #B4D6C7;
-}
-
-.button_disabled:hover {
-   cursor: not-allowed;
-}
-
-.notes_text, .reschedule_text {
+.reschedule_text, .add_note_text {
    display: inline-block;
    width: 225px;
    margin: 0px 15px;
+   margin-bottom: 0;
    color: #4A4747;
    font-family: Barlow;
    font-size: 12px;
    font-weight: 400;
+   text-align: center;
    visibility: hidden;
 }
 
-.reschedule_text {
-   text-align: right;
+.session_notes {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 0px;
+   border-radius: 12px;
+   background: #FFF;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+   width: 700px;
+   margin-top: 30px;
+   padding: 10px 20px;
+}
+
+.notes_header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   padding: 5px 0;
+}
+
+.note_title {
+   font-size: 24px;
+   font-weight: 600;
+   margin: 5px;
+   color: #22006a;
+}
+
+.add_note_text {
+   width: max-content;
+   font-size: 16px;
+   margin: 0;
+   margin-top: 5px;
+}
+
+.note_edit, .note_cancel {
+   color: #FFF;
+   font-family: Barlow;
+   font-size: 22px;
+   font-weight: 600;
+   width: 130px;
+   padding: 5px;
+   border: 0;
+   border-radius: 10px;
+   background: #70D8AC;
+   cursor: pointer;
+}
+
+.note_cancel {
+   width: 130px;
+   background: #22006a;
+   margin-right: -250px;
+}
+
+.note_box {
+   display: flex;
+   background-color: hsl(0, 0%, 90%);
+   border-radius: 5px;
+   width: 100%;
+   height: 240px;
+   padding: 15px;
+   margin: 10px 0;
+}
+
+textarea.note_box {
+   font-family: "Barlow", sans-serif;
+   font-weight: 600;
+   font-size: 20px;
+   resize: none;
+   border: 2px solid #22006a;
+   background-color: hsl(0, 0%, 95%);
+}
+
+.note_box:focus {
+   outline: none;
+}
+
+.note_contents {
+   margin: 0;
+   font-weight: 600;
+   font-size: 20px;
+}
+
+.button_disabled {
+   background-color: #B4D6C7;
+   cursor: not-allowed;
 }
 
 .disabled_text {
@@ -287,50 +369,6 @@
    cursor: pointer;
 }
 
-.notes_info {
-   display: flex;
-   justify-content: space-between;
-   width: 100%;
-   padding: 0 30px;
-}
-
-.notes_info > p {
-   font-size: 28px;
-   font-weight: 400;
-   margin: 0;
-}
-
-.notes_info span {
-   font-weight: 600;
-}
-
-.notes_note {
-   margin: 30px;
-   margin-top: 15px;
-}
-
-.note_details {
-   font-size: 20px;
-   font-weight: 600;
-   margin: 5px;
-   color: #22006a;
-}
-
-.note_box {
-   display: flex;
-   background-color: hsl(0, 0%, 90%);
-   border-radius: 5px;
-   width: 700px;
-   min-height: 250px;
-   padding: 15px;
-}
-
-.note_contents {
-   margin: 0;
-   font-weight: 600;
-   font-size: 20px;
-}
-
 .reschedule_info {
    color: #000;
    font-family: Barlow;
@@ -359,12 +397,6 @@
    font-weight: 600;
    border: #22006a solid 2px;
    border-radius: 5px;
-}
-
-.legend_green {
-   border: #70D8AC solid 2px;
-   border-radius: 5px;
-   padding: 0px 2px;
 }
 
 .reschedule_button {

@@ -116,7 +116,7 @@ export default function SessionSelection(props) {
       let blockedTimes
       for (let i = -1; i < 2; i = i + 2) {
          blockedTimes = []
-         blockedDate.setHours(date.getHours() + 36 * i)     // i=-1: blokiraj 36h unazad, i=1: blokiraj 36h unaprid
+         blockedDate.setHours(date.getHours() + 24 * i)     // i=-1: blokiraj 36h unazad, i=1: blokiraj 36h unaprid
          while (blockedDate.getDate() != date.getDate()) {
             if (blockedDate.getDay() != 0 && blockedDate.getDay() != 6 && 
                blockedDate.getHours() >= 8 && blockedDate.getHours() <= 19) {

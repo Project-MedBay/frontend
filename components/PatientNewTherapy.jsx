@@ -6,7 +6,7 @@ import SessionSelection2 from "./SessionSelection2"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {formatWeek, formatDate, mySchedule, navigate} = props         // global const
+   const {userToken, formatWeek, formatDate, mySchedule, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
 
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
@@ -28,6 +28,7 @@ export default function PatientNewTherapy(props) {
 
    const [expandSessions, setExpandSessions] = useState(false)           // page 3 const
    const [verificationData, setVerificationData] = useState({referral: "", hlkid: ""})
+   const [finishAgreement, setFinishAgreement] = useState(false)
 
    var nextDisabled = () => {switch (progress) {         // ovdi uvjete za nastavit dalje u svakom koraku
       case 1:
@@ -35,7 +36,7 @@ export default function PatientNewTherapy(props) {
       case 2:
          return selectedSessions.length != numberOfSessions
       case 3:
-         return (verificationData.referral == "" || verificationData.hlkid == "")
+         return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
    
    const therapyElements = therapiesList
@@ -196,6 +197,15 @@ export default function PatientNewTherapy(props) {
                            }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid} />
                         </div>
                      </form>
+                  </div>
+               </div>
+               <div className={s.final_finish}>
+                  <p className={s.finish_note}>Once your therapy is approved by admin, we will notify you by email.</p>
+                  <div className={s.checkbox_container} onClick={() => setFinishAgreement(prevState => !prevState)}>
+                     <div className={s.therapy_checkbox}>
+                        <div className={`${s.checkbox_filled} ${finishAgreement && s.checkbox_selected}`}></div>
+                     </div>
+                     <p className={s.finish_label}>I understand</p>
                   </div>
                </div>
             </>}

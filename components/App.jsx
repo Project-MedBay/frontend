@@ -3,11 +3,12 @@ import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
 import Patient from './Patient'
+import Therapist from './Therapist'
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("patient")           // sluzi za navigaciju
+  const [pageName, setPageName] = useState("therapist")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("")
 
   const pages = {
@@ -22,7 +23,11 @@ export default function App() {           // glavna komponenta, u njoj se render
     patient: <Patient 
       setPageName={setPageName}
       userToken={userToken}
-    /> 
+    />,
+    therapist: <Therapist
+      setPageName={setPageName}
+      userToken={userToken}
+    />
   }
 
   return pages[pageName]

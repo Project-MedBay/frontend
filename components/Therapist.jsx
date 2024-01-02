@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import { mySchedule } from "./TestingData"
-import PatientHeader from './PatientHeader'
-import PatientDash from './PatientDash'
-import PatientNewTherapy from './PatientNewTherapy'
-import PatientProfile from './PatientProfile'
+import TherapistHeader from './TherapistHeader'
+import TherapistDash from './TherapistDash'
 
-export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
+export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
-   const [subPageName, setSubPageName] = useState("profile")           // sluzi za navigaciju
+   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
    const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
       id: "",
       firstName: "",
@@ -109,8 +107,8 @@ export default function Patient(props) {           // glavna komponenta uloge, u
 
    const subpages = {
       dash: <>
-         <PatientHeader navigate={navigate} />
-         <PatientDash
+         <TherapistHeader navigate={navigate} />
+         <TherapistDash
             userToken={userToken}
             formatWeek={formatWeek}
             formatDate={formatDate}
@@ -118,26 +116,10 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             mySchedule={mySchedule}
          />
       </>,
-      newTherapy: <>
-         <PatientHeader navigate={navigate} />
-         <PatientNewTherapy
-            userToken={userToken}
-            formatWeek={formatWeek}
-            formatDate={formatDate}
-            mySchedule={mySchedule}
-            navigate={navigate}
-         />
-      </>,
-      profile: <>
-         <PatientHeader navigate={navigate} />
-         <PatientProfile
-            userToken={userToken}
-            userData={userData}
-            formatWeek={formatWeek}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-         />
-      </>,
+      patients: <>
+         <TherapistHeader navigate={navigate} />
+         <h1>PATIENTS</h1>
+      </>
    }
   
   return subpages[subPageName]

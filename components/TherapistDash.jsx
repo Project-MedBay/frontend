@@ -5,9 +5,9 @@ import SessionSelection2 from "./SessionSelection2"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
-import s from "../styles/patientDash.module.css"
+import s from "../styles/therapistDash.module.css"
 
-export default function PatientDash(props) {
+export default function TherapistDash(props) {
    const {userToken, formatWeek, formatDate, formatFullDatetime, mySchedule} = props
    
    const [selectedWeek, setSelectedWeek] = useState(new Date())                                       // const za dash
@@ -16,9 +16,9 @@ export default function PatientDash(props) {
       break
    }
    const [selectedSession, setSelectedSession] = useState(mySchedule[nextSessionWeek][0])
-   
-   const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
-   const [notesPopup, setNotesPopup] = useState(false)
+   const [notesDisabled, setNotesDisabled] = useState(false)
+   const [editingNotes, setEditingNotes] = useState(false)
+   const [notesInput, setNotesInput] = useState("")
 
    const [rescheduleText, setRescheduleText] = useState("Appointment is in less than 48 hours.")      // const za reschedule
    const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
@@ -34,9 +34,12 @@ export default function PatientDash(props) {
       } else {setRescheduleText("Appointment is in less than 48 hours.")}
       setRescheduledSession(selectedSession)
 
-      if (selectedSession.notes == "") {
+      if (selectedSession.datetime > new Date()) {
          setNotesDisabled(true)
       } else {setNotesDisabled(false)}
+      if (selectedSession.notes != "") {
+         setNotesInput(selectedSession.notes.contents)
+      } else {setNotesInput("")}
    }, [selectedSession])
 
    var scheduleElements
@@ -44,7 +47,7 @@ export default function PatientDash(props) {
       scheduleElements = mySchedule[formatWeek(selectedWeek)].map(session => {               // kartice sesija u rasporedu
          const { id, datetime, location } = session
          let cardClass = s.session_card
-         if (datetime.getTime() < new Date().getTime()) {
+         if (datetime < new Date()) {
             cardClass += ` ${s.session_passed}`
          }
          return (
@@ -79,10 +82,26 @@ export default function PatientDash(props) {
          return newDate
       })
    }
+
+   function handleNotesEdit(action) {
+      if (action == "cancel") {
+         setNotesInput(selectedSession.notes.contents)
+      } else if (editingNotes) {
+         setSelectedSession(prevSession => ({
+            ...prevSession,
+            notes:{
+               datetime: new Date(),
+               contents: notesInput
+            }
+         }))
+         // axios koji ce poslat informaciju o novom noteu
+      }
+      setEditingNotes(prevState => !prevState)
+   }
    
    function popupExit() {
-      if (notesPopup) setNotesPopup(false)
-      else {setReschedulePopup(false); setRescheduledSession(selectedSession)}
+      setReschedulePopup(false)
+      setRescheduledSession(selectedSession)
    }
 
    function rescheduleSession() {
@@ -92,7 +111,7 @@ export default function PatientDash(props) {
 
    return (
       <>
-         <div className={`${s.patient_dash_main} ${(reschedulePopup || notesPopup) && s.covered_by_popup}`}>
+         <div className={`${s.therapist_dash_main} ${reschedulePopup && s.covered_by_popup}`}>
             <div className={s.container_left}>
                <h2 className={s.container_title}>My schedule:</h2>
 
@@ -123,60 +142,57 @@ export default function PatientDash(props) {
                         <p>Time:</p>
                         <p>Location:</p>
                         <p>Session number:</p>
-                        <p>Therapist:</p>
+                        <p>Patient:</p>
                      </div>
                      <div className={s.info_values}>
                         <p>{selectedSession.therapy}</p>
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
                         <p>{selectedSession.location}</p>
                         <p>{selectedSession.sessionNumber}</p>
-                        <p>{selectedSession.therapist}</p>
+                        <p className={s.patient_link}>{selectedSession.therapist}</p>
                      </div>
                   </div>
 
-                  <img src={map} className={s.session_image} />
-
                   <div className={s.session_buttons}>
-                     <button className={`${s.session_button} ${notesDisabled && s.button_disabled}`}
-                        onClick={() => notesDisabled ? "" : setNotesPopup(true)}>View notes
-                     </button>
                      <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
-                        onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>Reschedule
+                        onClick={() => rescheduleDisabled ? {} : setReschedulePopup(true)}>Reschedule
                      </button>
-                     
-                     <p className={`${s.notes_text} ${notesDisabled && s.disabled_text}`}>
-                        No notes so far.<br />­</p>                           {/* iza br sam ubacio ALT + 0173 za poravnanje */}
                      <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
                         Cannot reschedule.<br />{rescheduleText}</p>
                   </div>
+               </div>
+
+               <div className={s.session_notes}>
+                  <div className={s.notes_header}>
+                     <p className={s.note_title}>Your note:</p>
+                     
+                     {editingNotes ?
+                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button> :
+                     <p className={`${s.add_note_text} ${notesDisabled && s.disabled_text}`}>
+                        Cannot add note before session has started.
+                     </p>}
+                     
+                     <button className={`${s.note_edit} ${notesDisabled && s.button_disabled}`}
+                        onClick={() => notesDisabled ? {} : handleNotesEdit("edit")}>
+                        {editingNotes ? "Save note" :
+                        selectedSession.notes == "" ? "Add note" : "Edit note"}
+                     </button>
+                  
+                  </div>
+                  {editingNotes ?
+                  <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                     className={s.note_box} type="text" onChange={event => setNotesInput(event.target.value)}
+                     placeholder="No notes yet." name="note" value={notesInput}
+                  /> :
+                  <div className={s.note_box}>
+                     <p className={s.note_contents}>{selectedSession.notes.contents}</p>
+                  </div>}
                </div>
             </div>
          </div>
 
 
-         {(notesPopup || reschedulePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
-
-         {notesPopup && <div className={s.session_popup}>                   {/* uvjetni render popupa za notes */}
-            <div className={s.popup_header}>
-               <h3 className={s.popup_title}>SESSION NOTES:</h3>
-               <img src={x_icon} className={s.popup_exit} onClick={popupExit}
-               />
-            </div>
-
-            <div className={s.notes_info}>
-               <p><span>Session {selectedSession.sessionNumber}</span></p>
-               <p>{formatDate(selectedSession.datetime)}</p>
-            </div>
-
-            <div className={s.notes_note}>
-               <p className={s.note_details}>
-                  {selectedSession.therapist}, {formatFullDatetime(selectedSession.notes.datetime)}
-               </p>
-               <div className={s.note_box}>
-                  <p className={s.note_contents}>{selectedSession.notes.contents}</p>
-               </div>
-            </div>
-         </div>}
+         {reschedulePopup && <div className={s.popup_separate} onClick={popupExit}></div>}
 
          {reschedulePopup && <div className={s.session_popup}>             {/* uvjetni render popupa za reschedule */}
             <div className={s.popup_header}>
@@ -192,9 +208,7 @@ export default function PatientDash(props) {
             </p>
 
             <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
-               The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
-               Dates when you have other sessions scheduled are emphasized 
-               with a <span className={s.legend_green}>green box.</span></p>
+               The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span></p>
 
             <SessionSelection2 
                formatDate = {formatDate}
@@ -202,7 +216,7 @@ export default function PatientDash(props) {
                selectedSessions = {[rescheduledSession.datetime]}
                setSelectedSessions = {setRescheduledSession}
                currentSession = {selectedSession}
-               mySchedule = {mySchedule}
+               mySchedule = {{}}
                numberOfSessions = {1}
             />
 
