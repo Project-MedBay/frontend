@@ -113,8 +113,12 @@
 }
 
 .session_passed {
-   background: lightgrey;
+   background: linear-gradient(to right, #f0f0f0, #d6d6d6);
+   color: #6c757d;
+   font-style: italic;
+   opacity: 0.5;
 }
+
 
 .session_date {
    color: #000;

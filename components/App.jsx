@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
 import Patient from './Patient'
 import Therapist from './Therapist'
+import Admin from './Admin'
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("therapist")           // sluzi za navigaciju
+  const [pageName, setPageName] = useState("admin")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("")
 
   const pages = {
@@ -25,6 +26,10 @@ export default function App() {           // glavna komponenta, u njoj se render
       userToken={userToken}
     />,
     therapist: <Therapist
+      setPageName={setPageName}
+      userToken={userToken}
+    />,
+    admin: <Admin
       setPageName={setPageName}
       userToken={userToken}
     />

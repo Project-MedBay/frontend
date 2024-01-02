@@ -54,7 +54,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       tempDate.setDate(tempDate.getDate() - offset)
       let date = tempDate.getDate()
       let formattedWeek = date.toString() + addExtension(date) + " " + 
-                          month[tempDate.getMonth()] + " - "
+                        month[tempDate.getMonth()] + " - "
       tempDate.setDate(date + 6)
       date = tempDate.getDate()
       formattedWeek += date.toString() + addExtension(date) + " " +
@@ -139,6 +139,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          />
       </>,
    }
-  
-  return subpages[subPageName]
+
+   return subpages[subPageName]
 }
