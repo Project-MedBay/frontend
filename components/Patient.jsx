@@ -52,7 +52,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       let weekday = tempDate.getDay()
       date -= weekday == 0 ? 6 : (weekday - 1)
       let formattedWeek = date.toString() + addExtension(date) + " " + 
-                          month[tempDate.getMonth()] + " - "
+                        month[tempDate.getMonth()] + " - "
       tempDate.setDate(date + 6)
       date = tempDate.getDate()
       formattedWeek += date.toString() + addExtension(date) + " " +
@@ -126,6 +126,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <h1>MY PROFILE</h1>
       </>,
    }
-  
-  return subpages[subPageName]
+
+   return subpages[subPageName]
 }

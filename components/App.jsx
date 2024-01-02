@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
