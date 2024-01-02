@@ -1,0 +1,73 @@
+.header {
+    display: flex;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
+    justify-content: space-between; /* Changed to space-between for better alignment */
+    align-items: center;
+    padding: 0, max(calc(5px * 0.6), calc(5vh * 59 / 725));
+}
+
+.header_logo {
+    cursor: pointer;
+    /* Centering the logo */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_img {
+    height: max(calc(50px * 0.6), calc(50vh * 59 / 725));
+    aspect-ratio: 1 / 1;
+}
+
+.logo_title {
+    font-family: "Barlow", sans-serif;
+    font-size: max(calc(35px * 0.6), calc(35vh * 59 / 725));
+    font-weight: 700;
+    letter-spacing: -0.07em;
+    margin: 0;
+    margin-bottom: 0.15em;
+}
+
+.header_nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Align items to the start */
+    align-items: center;
+    gap: max(calc(20px * 0.6), calc(80vh * 59 / 725)); /* Adjusted gap */
+}
+
+.header_nav:first-child {
+    padding-left: max(calc(10px * 0.6), calc(30vh * 59 / 725)); /* More padding on the left of the first nav */
+}
+
+.header_nav:last-child {
+    padding-right: max(calc(10px * 0.6), calc(30vh * 59 / 725)); /* More padding on the right of the last nav */
+}
+
+.nav_item, .nav_logout {
+    font-family: "Barlow", sans-serif;
+    font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
+    font-weight: 400;
+    color: rgb(34, 0, 106);
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.nav_logout {
+    color: #FF0000;
+}
+
+.nav_item:hover, .nav_logout:hover {
+    color: #FF5733; /* Change color on hover */
+    cursor: pointer;
+}
+
+.nav_item:active, .nav_logout:active {
+    color: #C70039; /* Change color on click */
+}
+
+/* Active tab indication - assuming you pass an 'active' prop to your component */
+.nav_item.active {
+    color: #4CAF50; /* Active tab color */
+    font-weight: 600;
+}
