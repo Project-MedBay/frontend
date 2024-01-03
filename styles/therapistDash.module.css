@@ -399,7 +399,7 @@ textarea.note_box {
    border-radius: 5px;
 }
 
-.reschedule_button {
+.reschedule_button, .confirm_yes, .confirm_no {
    width: 250px;
    height: 60px;
    color: #FFF;
@@ -410,9 +410,27 @@ textarea.note_box {
    margin: 20px;
    margin-bottom: 40px;
    border-radius: 10px;
-   background: #70D8AC;
+   background-color: #70D8AC;
+   cursor: pointer;
 }
 
-.reschedule_button:hover {
-   cursor: pointer;
+.reschedule_confirm {
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+}
+
+.confirm_text {
+   font-size: 36px;
+   font-weight: 700;
+   margin: 0 10px;
+}
+
+.confirm_yes, .confirm_no {
+   width: 100px;
+   margin: 20px 10px;
+}
+
+.confirm_no {
+   background-color: #22006a;
 }

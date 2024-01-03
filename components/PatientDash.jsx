@@ -24,6 +24,7 @@ export default function PatientDash(props) {
    const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
    const [reschedulePopup, setReschedulePopup] = useState(false)
    const [rescheduledSession, setRescheduledSession] = useState()
+   const [rescheduleConfirmBox, setRescheduleConfirmBox] = useState(false)
 
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (selectedSession.datetime.getTime() <= new Date().getTime() + 48*60*60*1000) {
@@ -88,6 +89,7 @@ export default function PatientDash(props) {
    function rescheduleSession() {
       // send new session data to db to reschedule session and update schedule
       setReschedulePopup(false)
+      setRescheduleConfirmBox(false)
    }
 
    return (
@@ -159,8 +161,7 @@ export default function PatientDash(props) {
          {notesPopup && <div className={s.session_popup}>                   {/* uvjetni render popupa za notes */}
             <div className={s.popup_header}>
                <h3 className={s.popup_title}>SESSION NOTES:</h3>
-               <img src={x_icon} className={s.popup_exit} onClick={popupExit}
-               />
+               <img src={x_icon} className={s.popup_exit} onClick={popupExit} />
             </div>
 
             <div className={s.notes_info}>
@@ -206,8 +207,14 @@ export default function PatientDash(props) {
                numberOfSessions = {1}
             />
 
-            <button className={s.reschedule_button} onClick={rescheduleSession}>Reschedule
-            </button>
+            {!rescheduleConfirmBox ?
+               <button className={s.reschedule_button} onClick={() => setRescheduleConfirmBox(true)}>Reschedule</button> :
+               <div className={s.reschedule_confirm}>
+                  <p className={s.confirm_text}>Are you sure?</p>
+                  <button className={s.confirm_yes} onClick={rescheduleSession}>Yes</button>
+                  <button className={s.confirm_no} onClick={() => setRescheduleConfirmBox(false)}>No</button>
+               </div>
+            }
          </div>}
       </>
    )

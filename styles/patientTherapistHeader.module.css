@@ -10,9 +10,6 @@
    display: flex;
    justify-content: center;
    align-items: center;
-}
-
-.header_logo:hover {
    cursor: pointer;
 }
 
@@ -42,12 +39,9 @@
    font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
    font-weight: 400;
    color: rgb(34, 0, 106);
+   cursor: pointer;
 }
 
 .nav_logout {
    color: #FF0000
-}
-
-.nav_item:hover, .nav_logout:hover {
-   cursor: pointer;
 }

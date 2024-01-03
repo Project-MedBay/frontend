@@ -16,6 +16,8 @@
 
 .covered_by_popup {
    opacity: 50%;
+   filter: blur(4px);
+   -webkit-filter: blur(4px);
 }
 
 .register_form {
@@ -170,9 +172,6 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    color: white;
    border: 1px solid #70D8AC;
    border-radius: 14px;
-}
-
-.form_button:hover {
    cursor: pointer;
 }
 
@@ -190,58 +189,6 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    margin: 0;
    color: #22006a;
    text-shadow: 2px 5px 5px #FFFFFF;
-}
-
-.register_success {
-   position: absolute;
-   display: flex;
-   flex-direction: column;
-   left: 50vw;
-   top: 50vh;
-   transform: translate(-50%, -50%);
-   align-items: center;
-   justify-content: center;
-   gap: max(calc(30px * 0.6), calc(30vh * 59 / 725));
-   padding: max(calc(30px * 0.6), calc(30vh * 59 / 725)) max(calc(40px * 0.6), calc(40vh * 59 / 725));
-   max-width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
-   min-width: max(calc(500px * 0.6), calc(500vh * 59 / 725));
-   font-family: "Barlow", sans-serif;
-   font-weight: 700;
-   background: #FFFFFF;
-   box-shadow: 0px 4px 25px 12px #00000026;
-   border-radius: 8px;
-}
-
-.success_title {
-   font-size: max(calc(54px * 0.6), calc(54vh * 59 / 725));
-   color: #636363;
-   margin: 0;
-   margin-top: max(calc(20px * 0.6), calc(20vh * 59 / 725));
-}
-
-.success_text {
-   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
-   line-height: 100%;
-   color: #636363;
-   margin: 0;
-   margin-bottom: max(calc(10px * 0.6), calc(10vh * 59 / 725));
-   text-align: center;
-}
-
-.success_button {
-   font-family: "Barlow", sans-serif;
-   font-size: max(calc(36px * 0.6), calc(36vh * 59 / 725));
-   font-weight: 700;
-   color: white;
-   padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(50px * 0.6), calc(50vh * 59 / 725));
-   background: #70D8AC;
-   border: 1px solid #70D8AC;
-   border-radius: 14px;
-   box-shadow: 0px 4px 50px 8px #00000026;
-}
-
-.success_button:hover {
-   cursor: pointer;
 }
 
 @media only screen and ((max-aspect-ratio: 6 / 5) or (max-width: 1050px)) {
@@ -347,27 +294,5 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    }
    #grid_passconf {
       width: max(calc(260px * 0.3), calc(260vw * (10 / 7) * 59 / 725));
-   }
-
-   .register_success {
-      gap: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
-      padding: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725)) max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
-      max-width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));
-      min-width: max(calc(500px * 0.3), calc(500vw * (10 / 7) * 59 / 725));
-   }
-   
-   .success_title {
-      font-size: max(calc(54px * 0.3), calc(54vw * (10 / 7) * 59 / 725));
-      margin-top: max(calc(20px * 0.3), calc(20vw * (10 / 7) * 59 / 725));
-   }
-   
-   .success_text {
-      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
-      margin-bottom: max(calc(10px * 0.3), calc(10vw * (10 / 7) * 59 / 725));
-   }
-   
-   .success_button {
-      font-size: max(calc(36px * 0.3), calc(36vw * (10 / 7) * 59 / 725));
-      padding: max(calc(15px * 0.3), calc(15vw * (10 / 7) * 59 / 725)) max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
    }
 }

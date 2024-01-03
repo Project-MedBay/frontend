@@ -10,9 +10,6 @@
    display: flex;
    justify-content: center;
    align-items: flex-end;
-}
-
-.header_logo:hover {
    cursor: pointer;
 }
 

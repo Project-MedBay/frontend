@@ -63,7 +63,7 @@ export const availableSessions = {
    "Wednesday, 3rd January": [9, 11, 13, 14, 16, 17, 19],
    "Thursday, 4th January": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
    "Friday, 5th January": [9, 11, 13, 14, 16, 17, 19],
-   "Monday, 8th January": [8, 12, 13, 15, 18],
+   "Tuesday, 9th January": [8, 12, 13, 15, 18],
    "Wednesday, 10th January": [10, 14, 16, 17, 19],
    dateMax: new Date("2024-01-15 00:00")
 }
@@ -123,31 +123,151 @@ export const therapies = {
 
 export const myTherapies = [
    {
+      id: 0,
       name: "Shoulder impingement",
       code: "#4JG5E",
       dateStarted: new Date("2023-10-27"),
       dateFinished: new Date("2023-11-21"),
-      numberOfSessions: 8
+      numberOfSessions: 8,
+      therapist: "Ante Pavlović",
+      location: "Electrotherapy room",
+      sessions: [
+         {
+            id: 1,
+            datetime: new Date("2024-01-01 09:00"),
+            notes: "Pacijent je odradio normalno i dobro... ovaj put"
+         },
+         {
+            id: 2,
+            datetime: new Date("2024-01-02 11:00"),
+            notes: "Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro."
+         },
+         {
+            id: 3,
+            datetime: new Date("2024-01-04 15:00"),
+            notes: " Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro.Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro."
+         },
+         {
+            id: 4,
+            datetime: new Date("2024-01-05 13:00"),
+            notes: ""
+         },
+         {
+            id: 5,
+            datetime: new Date("2024-01-08 13:00"),
+            notes: ""
+         },
+         {
+            id: 6,
+            datetime: new Date("2024-01-09 08:00"),
+            notes: ""
+         },
+         {
+            id: 7,
+            datetime: new Date("2024-01-10 16:00"),
+            notes: ""
+         },
+         {
+            id: 8,
+            datetime: new Date("2024-01-12 19:00"),
+            notes: ""
+         }
+      ]
    },
    {
-      name: "Shoulder impingement",
+      id: 1,
+      name: "Post operation shoulder recovery",
       code: "#4JG5E",
       dateStarted: new Date("2023-10-27"),
       dateFinished: new Date("2023-11-21"),
-      numberOfSessions: 8
+      numberOfSessions: 8,
+      therapist: "Ante Pavlović",
+      location: "Electrotherapy room",
+      sessions: [
+         {
+            id: 1,
+            datetime: new Date("2024-01-01 09:00"),
+            notes: "Pacijent je odradio normalno i dobro... ovaj put"
+         },
+         {
+            id: 2,
+            datetime: new Date("2024-01-02 11:00"),
+            notes: "Pacijent je odradio normalno i dobro."
+         },
+         {
+            id: 3,
+            datetime: new Date("2024-01-04 15:00"),
+            notes: ""
+         },
+         {
+            id: 4,
+            datetime: new Date("2024-01-05 13:00"),
+            notes: ""
+         }
+      ]
    },
    {
+      id: 2,
       name: "Shoulder impingement",
       code: "#4JG5E",
       dateStarted: new Date("2023-10-27"),
       dateFinished: new Date("2023-11-21"),
-      numberOfSessions: 8
+      numberOfSessions: 8,
+      therapist: "Ante Pavlović",
+      location: "Electrotherapy room",
+      sessions: [
+         {
+            id: 1,
+            datetime: new Date("2024-01-01 09:00"),
+            notes: "Pacijent je odradio normalno i dobro... ovaj put"
+         },
+         {
+            id: 2,
+            datetime: new Date("2024-01-02 11:00"),
+            notes: "Pacijent je odradio normalno i dobro."
+         },
+         {
+            id: 3,
+            datetime: new Date("2024-01-04 15:00"),
+            notes: ""
+         },
+         {
+            id: 4,
+            datetime: new Date("2024-01-05 13:00"),
+            notes: ""
+         }
+      ]
    },
    {
+      id: 3,
       name: "Shoulder impingement",
       code: "#4JG5E",
       dateStarted: new Date("2023-10-27"),
       dateFinished: new Date("2023-11-21"),
-      numberOfSessions: 8
-   }
+      numberOfSessions: 8,
+      therapist: "Ante Pavlović",
+      location: "Electrotherapy room",
+      sessions: [
+         {
+            id: 1,
+            datetime: new Date("2024-01-01 09:00"),
+            notes: "Pacijent je odradio normalno i dobro... ovaj put"
+         },
+         {
+            id: 2,
+            datetime: new Date("2024-01-02 11:00"),
+            notes: "Pacijent je odradio normalno i dobro."
+         },
+         {
+            id: 3,
+            datetime: new Date("2024-01-04 15:00"),
+            notes: ""
+         },
+         {
+            id: 4,
+            datetime: new Date("2024-01-05 13:00"),
+            notes: ""
+         }
+      ]
+   },
 ]

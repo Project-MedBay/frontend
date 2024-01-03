@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
+import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
+   const {navigate} = props
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       firstName: "",
@@ -219,7 +221,7 @@ export default function RegisterMain(props) {
                <div className={s.grid_container}>              {/* input polja koja su gore mapirana u html elemente */}
                   {formFields}
                   <img 
-                     src={passwordShown ? eyeShown : eyeHidden}            /* uvjetni izbor slike oka za toggle lozinke */
+                     src={passwordShown ? eyeShown : eyeHidden}            // uvjetni izbor slike oka za toggle lozinke
                      className={s.password_eye} onClick={togglePassword}
                   />
                </div>
@@ -228,17 +230,12 @@ export default function RegisterMain(props) {
             </form>
          </div>
 
-         {successPopup && <div className={s.register_success}>             {/* uvjetni render popupa za uspjesnu registraciju */}
-            <h1 className={s.success_title}>Success!</h1>
-            <p className={s.success_text}>
-            You have filled all the information and your account
-            is now being processed by our administrator.<br />
-            Please check your e-mail frequently in order to see whether
-            your account is confirmed or there are changes to be made. 
-            </p>
-            <button className={s.success_button}
-            onClick={() => props.navigate("login")}>OK</button>            {/* uporaba prop funkcije za navigaciju */}
-         </div>}
+         {successPopup && <SuccessPopup              // uvjetni render popupa za uspjesnu registraciju
+            text1="You have filled in all the information and your account is now being processed by our administrator."
+            text2="Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made."
+            buttonText="OK"
+            clickFunction={() => navigate("login")}
+         />}
 
       </>
     )

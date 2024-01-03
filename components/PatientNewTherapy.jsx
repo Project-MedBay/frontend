@@ -3,11 +3,13 @@ import axios, { formToJSON } from "axios"
 import { therapies } from "./TestingData"
 import BodypartSelection from "./BodypartSelection"
 import SessionSelection2 from "./SessionSelection2"
+import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
    const {userToken, formatWeek, formatDate, mySchedule, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
+   const [successPopup, setSuccessPopup] = useState(false)
 
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
    const [searchInput, setSearchInput] = useState("")
@@ -45,7 +47,7 @@ export default function PatientNewTherapy(props) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
       <div className={s.therapy_wrapper} key={therapy.code}
-           onClick={() => {setSelectedTherapy(therapy); setCodeInput("")}}>
+           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.code)}}>
          <div className={s.therapy_checkbox}>
             <div className={`${s.checkbox_filled} ${selectedTherapy?.code == therapy.code && s.checkbox_selected}`}></div>
          </div>
@@ -57,8 +59,8 @@ export default function PatientNewTherapy(props) {
    ))
 
    function handleCodeInput(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
-      setCodeInput(event.target.value)
-      setSelectedTherapy(therapiesList[codeList.indexOf(event.target.value)])
+      setCodeInput(event.target.value.toUpperCase())
+      setSelectedTherapy(therapiesList[codeList.indexOf(event.target.value.toUpperCase())])
    }
 
    function formatString(string) {
@@ -86,9 +88,9 @@ export default function PatientNewTherapy(props) {
       // ovdi axios za poslat podatke o novonastaloj terapiji u bazu
    }
 
-   return (
-      <div className={s.patient_therapy_main}>
-         <h1 className={s.create_title}>CREATE A NEW THERAPY</h1>
+   return (<>
+      <div className={`${s.patient_therapy_main} ${successPopup && s.covered_by_popup}`}>
+         <h1 className={s.create_title}>REQUEST A NEW THERAPY</h1>
          <div className={s.white_shape}></div>
          <div className={s.green_shape}></div>
          
@@ -129,7 +131,7 @@ export default function PatientNewTherapy(props) {
 
             <p className={s.sessions_info}>
                <span>Restrictions:</span><br />
-               1.&#160; Selected sessions must be at least 36h apart.<br />      {/* extra space za poravnanje */}
+               1.&#160; Selected sessions must be at least 24h apart.<br />      {/* extra space za poravnanje */}
                2. The total duration of the therapy must not exceed 30 days.
             </p>
 
@@ -217,7 +219,7 @@ export default function PatientNewTherapy(props) {
                   }>{progress == 1 ? "Cancel" : "Back"}
                </button>
                <button className={`${s.button_next} ${nextDisabled() ? s.button_disabled : ""}`} onClick={() => {
-                  nextDisabled() ? "" : (progress == 3 ? handleFinish() : setProgress(prevProgress => prevProgress + 1))}
+                  nextDisabled() ? "" : (progress == 3 ? setSuccessPopup(true) : setProgress(prevProgress => prevProgress + 1))}
                   }>{progress == 3 ? "Finish" : "Next"}
                </button>
             </div>
@@ -236,5 +238,12 @@ export default function PatientNewTherapy(props) {
             <h1 className={s.tagline}>RECOVERY<br /><span>BEGINS HERE.</span></h1>
          </div>
       </div>
-   )
+
+      {successPopup && <SuccessPopup 
+         text1="You have filled in all the information and your therapy request is now being processed by our administrator."
+         text2="Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard."
+         buttonText="Go to dash"
+         clickFunction={handleFinish}
+      />}
+   </>)
 }
