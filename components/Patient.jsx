@@ -7,13 +7,14 @@ import PatientProfile from './PatientProfile'
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
-   const [subPageName, setSubPageName] = useState("profile")           // sluzi za navigaciju
+   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
    const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
       id: "",
       firstName: "",
       lastName: "",
       email: "",
       password: "",
+      registeredSince: new Date("2023-12-15"),
       active: "",
       role: "",
    })
@@ -136,6 +137,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             formatWeek={formatWeek}
             formatDate={formatDate}
             formatFullDate={formatFullDate}
+            navigate={navigate}
          />
       </>,
    }

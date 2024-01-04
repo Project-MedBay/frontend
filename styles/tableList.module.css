@@ -1,0 +1,99 @@
+.table_wrapper {
+   padding: 15px 15px;
+   background: #FFF;
+   box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.25);
+   border-radius: 10px;
+}
+
+.main_table {
+   display: grid;
+   align-items: center;
+   padding: 0 15px;
+   align-items: center;
+   text-align: center;
+   overflow: auto;
+   max-height: 820px;
+}
+
+.patients {
+   /* dobro dode za testirat max dimenzije */
+   /* grid-template-columns: 80px 180px 200px 320px 350px 130px 150px 150px 240px; */
+   grid-template-columns: fit-content(80px) fit-content(180px) fit-content(200px) fit-content(320px)
+                          fit-content(350px) fit-content(130px) fit-content(150px) fit-content(150px) fit-content(240px);
+}
+
+.therapists {
+   /* dobro dode za testirat max dimenzije */
+   /* grid-template-columns: 50px 180px 200px 320px 300px 220px 220px; */
+   grid-template-columns: fit-content(50px) fit-content(180px) fit-content(200px) fit-content(320px)
+                          fit-content(300px) fit-content(220px) fit-content(200px);
+}
+
+.hidden {
+   visibility: hidden;
+}
+
+.header_item, .header_buttons {
+   position: sticky;
+   top: 0px;
+   color: #22006a;
+   font-size: 24px;
+   margin: 0;
+   padding: 15px;
+   background-color: #fff;
+   border-bottom: 3px solid #22006a;
+}
+
+.header_buttons {
+   padding: 9px 0;
+}
+
+.table_item_wrapper {
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 14px 20px;
+   margin: 0;
+   border-top: 1px solid #636363;
+   overflow-wrap: anywhere;
+}
+
+.button_wrapper {
+   gap: 12px;
+   padding: 8px 20px;
+}
+
+.table_first {
+   border: none;
+}
+
+.table_item {
+   font-size: 18px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.table_button, .header_add {
+   width: fit-content;
+   height: fit-content;
+   color: #fff;
+   font-family: "Barlow", sans-serif;
+   font-size: 18px;
+   font-weight: 600;
+   padding: 6px 12px;
+   background-color: #22006a;
+   border-radius: 5px;
+   border: none;
+   cursor: pointer;
+}
+
+.header_add {
+   font-size: 24px;
+   margin: 0 auto;
+}
+
+.button_green, .header_add {
+   font-weight: 700;
+   background-color: #70D8AC;
+}

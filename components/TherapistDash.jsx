@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { testSessions } from "./TestingData"
 import SessionSelection from "./SessionSelection"
 import SessionSelection2 from "./SessionSelection2"
+import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
-   const {userToken, formatWeek, formatDate, formatFullDatetime, mySchedule} = props
+   const {userToken, formatWeek, formatDate, formatFullDate, mySchedule} = props
    
    const [selectedWeek, setSelectedWeek] = useState(new Date())                                       // const za dash
    let nextSessionWeek
@@ -16,7 +18,9 @@ export default function TherapistDash(props) {
       break
    }
    const [selectedSession, setSelectedSession] = useState(mySchedule[nextSessionWeek][0])
-   const [notesDisabled, setNotesDisabled] = useState(false)
+   const [patientPopup, setPatientPopup] = useState(false)
+
+   const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
    const [editingNotes, setEditingNotes] = useState(false)
    const [notesInput, setNotesInput] = useState("")
 
@@ -101,8 +105,10 @@ export default function TherapistDash(props) {
    }
    
    function popupExit() {
-      setReschedulePopup(false)
-      setRescheduledSession(selectedSession)
+      if (reschedulePopup) {
+         setReschedulePopup(false)
+         setRescheduledSession(selectedSession)
+      } else {setPatientPopup(false)}
    }
 
    function rescheduleSession() {
@@ -113,7 +119,7 @@ export default function TherapistDash(props) {
 
    return (
       <>
-         <div className={`${s.therapist_dash_main} ${reschedulePopup && s.covered_by_popup}`}>
+         <div className={`${s.therapist_dash_main} ${(patientPopup || reschedulePopup) && s.covered_by_popup}`}>
             <div className={s.container_left}>
                <h2 className={s.container_title}>My schedule:</h2>
 
@@ -151,7 +157,9 @@ export default function TherapistDash(props) {
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
                         <p>{selectedSession.location}</p>
                         <p>{selectedSession.sessionNumber}</p>
-                        <p className={s.patient_link}>{selectedSession.therapist}</p>
+                        <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
+                           {selectedSession.patient.name + " " + selectedSession.patient.surname}
+                        </p>
                      </div>
                   </div>
 
@@ -194,7 +202,18 @@ export default function TherapistDash(props) {
          </div>
 
 
-         {reschedulePopup && <div className={s.popup_separate} onClick={popupExit}></div>}
+         {(patientPopup || reschedulePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
+
+         {patientPopup &&
+            <TherapyOrPatientPopup
+               popupType="patient"
+               popupData={selectedSession.patient}
+               popupSessions={testSessions}     // NOTE zamijeniti s dohvacenim sessionima
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               popupExit={popupExit}
+            />
+         }
 
          {reschedulePopup && <div className={s.session_popup}>             {/* uvjetni render popupa za reschedule */}
             <div className={s.popup_header}>

@@ -100,8 +100,8 @@ export default function PatientNewTherapy(props) {
             <div className={s.therapy_header}>
                <h2 className={s.header_step}>STEP 1: PICK A THERAPY</h2>
                <p className={s.header_prompt}>or enter therapy code provided by your doctor:</p>
-               <input className={`${s.header_input} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}
-                      type="text" onChange={handleCodeInput} placeholder="#4JG5E" name="therapyCode" value={codeInput}
+               <input className={`${s.header_input} ${(nextDisabled() && codeInput != "") && s.invalid_input}`} type="text"
+                      onChange={handleCodeInput} placeholder="#4JG5E" name="therapyCode" value={codeInput} autoComplete="off"
                />
                <p className={`${s.invalid_text} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}>Invalid code.</p>
             </div>
@@ -182,7 +182,7 @@ export default function PatientNewTherapy(props) {
                   <div className={s.final_verification}>
                      <h3 className={s.section_title}>verification:</h3>
 
-                     <form className={s.verification_form}>
+                     <form className={s.verification_form} autoComplete="off">
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Referral number:</p>
                            <input className={s.input_field} onChange={event => setVerificationData(prevData => ({

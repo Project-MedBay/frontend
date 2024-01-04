@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { mySchedule } from "./TestingData"
+import { therapistSchedule } from "./TestingData"
 import TherapistHeader from './TherapistHeader'
 import TherapistDash from './TherapistDash'
+import TherapistPatients from './TherapistPatients'
 
 export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken} = props
@@ -112,13 +113,18 @@ export default function Therapist(props) {           // glavna komponenta uloge,
             userToken={userToken}
             formatWeek={formatWeek}
             formatDate={formatDate}
-            formatFullDatetime={formatFullDatetime}
-            mySchedule={mySchedule}
+            formatFullDate={formatFullDate}
+            mySchedule={therapistSchedule}
          />
       </>,
       patients: <>
          <TherapistHeader navigate={navigate} />
-         <h1>PATIENTS</h1>
+         <TherapistPatients
+            userToken={userToken}
+            userData={userData}
+            formatDate={formatDate}
+            formatFullDate={formatFullDate}
+         />
       </>
    }
   
