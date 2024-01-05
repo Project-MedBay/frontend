@@ -1,4 +1,4 @@
-.profile_main {
+.patient_profile_main {
    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%,
                rgba(134, 113, 255, 0.4) 100%) /*,url("../assets/login_bg4.jpg")*/ ;
    background-size: cover;
@@ -37,7 +37,7 @@
 .header_user {
    display: flex;
    gap: 50px;
-   width: 49%;
+   width: 59%;
    background-color: #fff;
    border-radius: 125px 10px 10px 125px;
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -89,12 +89,56 @@
    margin: 0;
 }
 
-.header_something {
+.header_thanks {
+   background: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.8) 100%),
+               url("../assets/handshake.jpg");
+   background-size: cover;
+   background-position: center;
    display: flex;
-   width: 49%;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 39%;
+   padding-top: 10px;
+   gap: 20px;
    background-color: #fff;
    border-radius: 10px;
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.thanks_title {
+   font-size: 48px;
+   font-weight: 800;
+   letter-spacing: 15px;
+   margin: 0;
+}
+
+.thanks_subtitle {
+   color: #636363;
+   font-size: 28px;
+   margin: 0;
+   margin-top: -20px;
+}
+
+.thanks_age {
+   color: #22006a;
+   font-size: 36px;
+   margin: 0;
+}
+
+.thanks_age > span {
+   font-size: 48px;
+}
+
+.thanks_deactivate {
+   color: #636363;
+   font-size: 15px;
+   font-weight: 500;
+   /* font-style: italic; */
+   text-decoration: underline;
+   margin: 0;
+   margin-top: -10px;
+   cursor: pointer;
 }
 
 .profile_therapies {
@@ -118,6 +162,24 @@
    grid-template-columns: 49% 49%;
    grid-column-gap: 2%;
    overflow: auto;
+}
+
+.no_therapies {
+   color: #000;
+   font-size: 24px;
+   font-weight: 500;
+   width: fit-content;
+   padding: 20px 30px;
+   margin: 20px 0;
+   border-radius: 5px;
+   background-color: #fff;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.no_therapies > span {
+   color: #22006a;
+   font-weight: 400;
+   padding: 0 5px;
 }
 
 .therapy_card {
@@ -169,20 +231,80 @@ p.therapy_more {
    margin-top: 5px;
 }
 
-.session_popup {
+.deactivate_popup {
    position: absolute;
-   display: flex;
-   flex-direction: column;
    left: 50vw;
    top: 50vh;
    transform: translate(-50%, -50%);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   width: 650px;
+   padding: 30px 40px;
+   gap: 30px;
+   font-weight: 700;
+   background: #FFFFFF;
+   box-shadow: 5px 8px 8px 6px rgba(0, 0, 0, 0.15);
+   border-radius: 10px;
+}
+
+.deactivate_title {
+   font-size: 48px;
+   font-weight: 800;
+   margin: 0;
+}
+
+.deactivate_subtitle {
+   color: hsl(0, 100%, 40%);
+   font-size: 28px;
+   margin: 0;
+}
+
+.deactivate_text {
+   font-size: 22px;
+   text-align: center;
+   margin: 0;
+   margin-top: -20px;
+}
+
+.deactivate_buttons {
+   display: flex;
+   gap: 50px;
+}
+
+.deactivate_yes, .deactivate_no {
+   width: 250px;
+   height: 100px;
+   font-family: "Barlow", sans-serif;
+   color: #fff;
+   font-size: 32px;
+   font-weight: 800;
+   background-color: #70D8AC;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+}
+
+.deactivate_yes {
+   background-color: #22006a;
+   font-weight: 700;
+}
+
+.session_popup {
+   position: absolute;
+   left: 50vw;
+   top: 50vh;
+   transform: translate(-50%, -50%);
+   display: flex;
+   flex-direction: column;
    align-items: center;
    justify-content: center;
    gap: 20px;
    font-weight: 700;
    background: #FFFFFF;
    box-shadow: 5px 8px 8px 6px rgba(0, 0, 0, 0.15);
-   border-radius: 12px;
+   border-radius: 10px;
    width: max-content;
    max-width: 800px;
 }

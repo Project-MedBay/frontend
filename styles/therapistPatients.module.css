@@ -1,0 +1,56 @@
+.therapist_patients_main {
+   background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 20%,
+             rgba(112, 216, 172, 0.3) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
+   background-size: cover;
+   background-position: top center;
+   background-attachment: fixed;
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 40px;
+   padding: 50px;
+   height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
+   min-height: 650px;
+}
+
+.covered_by_popup {
+   opacity: 50%;
+   filter: blur(4px);
+   -webkit-filter: blur(4px);
+}
+
+.popup_separate {
+   position: absolute;
+   left: 0;
+   top: max(calc(60px * 0.6), calc(60vh * 59 / 725));
+   width: 100%;
+   height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
+}
+
+.patients_title {
+   color: #000;
+   font-size: 36px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.patients_title > span {
+   color: #22006a;
+   font-size: 40px;
+   font-weight: 700;
+}
+
+.table_search {
+   width: 500px;
+   font-size: 20px;
+   padding: 10px;
+   padding-left: 14px;
+   /* background: #F4F3F3; */
+   border: 2px solid hsl(0, 0%, 90%);
+   border-radius: 10px;
+}
+
+.table_search:focus {
+   outline: none;
+}

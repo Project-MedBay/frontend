@@ -122,6 +122,13 @@
    font-weight: 700;
 }
 
+.form_tip {
+   /* color: #636363; */      /* NOTE idk jel bolje */
+   font-size: 16px;
+   font-weight: 400;
+   margin: 0;
+}
+
 .form_search {
    width: 100%;
    font-size: 20px;
@@ -142,7 +149,7 @@
    overflow: auto;
    align-items: flex-start;
    gap: 15px;
-   height: 230px;                               /* bilo je 175 da se vide 3, nezz jel ovo bolje */
+   height: 175px;                               /* NOTE 175 da se vide 3, 230 za 4, nezz koje je bolje */
    padding: 0 10px;
    /* border: 2px solid red; */
 }
@@ -209,7 +216,7 @@
 .header_counter {
    display: flex;
    height: fit-content;
-   padding: 10px 50px;
+   padding: 10px 70px;
    background-color: #C7FFE7;
    transform: skewX(-30deg);
    margin-right: 38px;
@@ -236,6 +243,21 @@
 .sessions_info > span {
    font-weight: 700;
    line-height: 200%;
+}
+
+.reschedule_legend {
+   font-size: 16px;
+   font-weight: 400;
+   margin: 0;
+   margin-top: -14px;
+}
+
+.legend_purple {
+   background-color: #22006a;
+   color: #fff;
+   font-weight: 600;
+   padding: 3px 5px;
+   border-radius: 5px;
 }
 
 .final_main {
@@ -411,6 +433,18 @@
 
 .input_field:focus {
    outline: none;
+}
+
+.verification_tip {
+   color: #fff;
+   font-size: 14px;
+   font-weight: 700;
+   padding: 2px 7px;
+   margin: 0;
+   background-color: #636363;
+   opacity: 0.5;
+   border-radius: 50%;
+   cursor: help;
 }
 
 .final_finish {

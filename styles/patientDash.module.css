@@ -92,7 +92,6 @@
    width: 400px;
    text-align: center;
    color: #656565;
-   font-family: Barlow;
    font-size: 24px;
    font-weight: 500;
    margin: 320px 20px;
@@ -114,11 +113,10 @@
 
 .session_passed {
    background: linear-gradient(to right, #f0f0f0, #d6d6d6);
-   color: #6c757d;
+   /* color: #6c757d; */
    font-style: italic;
-   opacity: 0.5;
+   opacity: 0.75;
 }
-
 
 .session_date {
    color: #000;
@@ -167,6 +165,10 @@
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
    width: 700px;
    min-height: 810px;
+}
+
+.no_sessions_container {      /* NOTE myb add some kinda bg for this later */
+   height: 810px;
 }
 
 .session_info {
@@ -339,8 +341,6 @@
 }
 
 .reschedule_legend {
-   color: #656565;
-   font-family: Barlow;
    font-size: 16px;
    font-weight: 400;
    text-align: center;
@@ -352,14 +352,14 @@
    background-color: #22006a;
    color: #fff;
    font-weight: 600;
-   border: #22006a solid 2px;
+   padding: 3px 5px;
    border-radius: 5px;
 }
 
 .legend_green {
+   padding: 0px 3px;
    border: #70D8AC solid 2px;
    border-radius: 5px;
-   padding: 0px 2px;
 }
 
 .reschedule_button, .confirm_yes, .confirm_no {
