@@ -71,12 +71,17 @@ export default function TableList(props) {
 
       return rowElements
    })
+   if (tableListElements.length == 0) {tableListElements.push(
+      <h3 className={s.no_results}>
+         There are no items that match this query.
+      </h3>
+   )}
 
    return (
       <div className={s.table_wrapper}>
          <div className={`${s.main_table} ${tableOf == "patients" ? s.patients : s.therapists}`}>
             {tableHeaderElements}
-            <div className={s.header_buttons}>
+            <div className={`${s.header_buttons} ${(tableOf == "patients" && tableList.length == 0) && s.reduced_header}`}>
                <button className={`${s.header_add} ${tableOf == "patients" && s.hidden}`}
                   onClick={handleAdd}>ADD NEW
                </button>

@@ -155,6 +155,20 @@
    margin: 10px 0;
 }
 
+textarea.note_box {
+   height: 165px;
+   font-family: "Barlow", sans-serif;
+   font-weight: 600;
+   font-size: 20px;
+   resize: none;
+   border: 2px solid #22006a;
+   background-color: hsl(0, 0%, 95%);
+}
+
+.note_box:focus {
+   outline: none;
+}
+
 .box_container {
    display: flex;
 }
@@ -167,4 +181,28 @@
    margin: 0;
    font-weight: 600;
    font-size: 20px;
+}
+
+.buttons_container{
+   display: flex;
+   justify-content: center;
+   margin-top: -5px;
+}
+
+.note_edit, .note_cancel {
+   color: #FFF;
+   font-family: Barlow;
+   font-size: 22px;
+   font-weight: 600;
+   width: 120px;
+   padding: 5px;
+   border: 0;
+   border-radius: 10px;
+   background: #70D8AC;
+   cursor: pointer;
+}
+
+.note_cancel {
+   background: #22006a;
+   margin-right: -250px;
 }

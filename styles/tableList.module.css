@@ -24,9 +24,9 @@
 
 .therapists {
    /* dobro dode za testirat max dimenzije */
-   /* grid-template-columns: 50px 180px 200px 320px 300px 220px 220px; */
-   grid-template-columns: fit-content(50px) fit-content(180px) fit-content(200px) fit-content(320px)
-                          fit-content(300px) fit-content(220px) fit-content(200px);
+   /* grid-template-columns: 80px 180px 200px 320px 300px 220px 240px; */
+   grid-template-columns: fit-content(80px) fit-content(180px) fit-content(200px) fit-content(320px)
+                          fit-content(300px) fit-content(220px) fit-content(240px);
 }
 
 .hidden {
@@ -72,6 +72,18 @@
    font-size: 18px;
    font-weight: 500;
    margin: 0;
+}
+
+.no_results {
+   grid-column: 1 / -1 ;
+   color: #636363;
+   font-size: 20px;
+   margin: 10px 0;
+   margin-top: 20px;
+}
+
+.reduced_header {
+   display: none;
 }
 
 .table_button, .header_add {

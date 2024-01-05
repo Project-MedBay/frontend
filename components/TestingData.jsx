@@ -117,7 +117,7 @@ export const therapistSchedule = {
             code: "#User452"
          },
          notes: ""
-      },
+      }
    ],
    "8th January - 14th January": [
       {

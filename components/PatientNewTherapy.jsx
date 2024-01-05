@@ -10,7 +10,11 @@ export default function PatientNewTherapy(props) {
    const {userToken, formatWeek, formatDate, mySchedule, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
-
+   const tooltips = {
+      referral: "A unique sequence of letters and numbers found on the\nreferral note provided by your doctor.\nIf you're unsure where to find it, ask your doctor for help.",
+      doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
+   }
+   
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
    const [searchInput, setSearchInput] = useState("")
    const [selectedBodypart, setSelectedBodypart] = useState("any")
@@ -111,6 +115,7 @@ export default function PatientNewTherapy(props) {
 
                <form className={s.therapy_form} autoComplete="off">
                   <h2 className={s.form_title}>FILTER BY: <span>{selectedBodypart.toUpperCase()}</span></h2>
+                  <p className={s.form_tip}>Select a body part to filter or use the search bar below to find your therapy</p>
                   <input className={s.form_search} type="text" onChange={event => setSearchInput(event.target.value)}
                      placeholder="Search" name="search" value={searchInput} />
                   <div className={s.therapies_container}>
@@ -125,7 +130,7 @@ export default function PatientNewTherapy(props) {
             <div className={s.sessions_header}>
                <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
                <div className={s.header_counter}>
-                  <h2 className={s.counter_text}>SELECTED: {selectedSessions.length}/{numberOfSessions}</h2>
+                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numberOfSessions}</h2>
                </div>
             </div>
 
@@ -133,6 +138,9 @@ export default function PatientNewTherapy(props) {
                <span>Restrictions:</span><br />
                1.&#160; Selected sessions must be at least 24h apart.<br />      {/* extra space za poravnanje */}
                2. The total duration of the therapy must not exceed 30 days.
+            </p>
+            <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
+               Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
 
             <SessionSelection2 
@@ -189,6 +197,7 @@ export default function PatientNewTherapy(props) {
                               ...prevData,
                               referral: event.target.value
                            }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral} />
+                           <p className={s.verification_tip} title={tooltips.referral}>?</p>
                         </div>
                         
                         <div className={s.verification_input}>
@@ -197,6 +206,7 @@ export default function PatientNewTherapy(props) {
                               ...prevData,
                               hlkid: event.target.value
                            }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid} />
+                           <p className={s.verification_tip} title={tooltips.doctor}>?</p>
                         </div>
                      </form>
                   </div>

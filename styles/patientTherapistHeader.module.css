@@ -1,9 +1,11 @@
 .header {
    display: flex;
    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
-   justify-content: space-around;
+   justify-content: space-between;
    align-items: center;
    padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
+   padding-left: max(calc(450px * 0.6), calc(450vh * 59 / 725));
+   padding-right: max(calc(350px * 0.6), calc(350vh * 59 / 725));
 }
 
 .header_logo {
@@ -19,7 +21,6 @@
 }
 
 .logo_title {
-   font-family: "Barlow", sans-serif;
    font-size: max(calc(35px * 0.6), calc(35vh * 59 / 725));
    font-weight: 700;
    letter-spacing: -0.07em;
@@ -28,14 +29,14 @@
 }
 
 .header_nav {
-   display: flex;
-   justify-content: space-around;
+   display: grid;
+   grid-template-columns: repeat(4, 160px);
+   justify-items: flex-end;
    align-items: center;
-   gap: max(calc(85px * 0.6), calc(85vh * 59 / 725));
+   direction: rtl;
 }
 
-.nav_item, .nav_logout {
-   font-family: "Barlow", sans-serif;
+.nav_item, .nav_logout, .nav_check_logout {
    font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
    font-weight: 400;
    color: rgb(34, 0, 106);
@@ -43,5 +44,19 @@
 }
 
 .nav_logout {
-   color: #FF0000
+   color: #FF0000;
+}
+
+.nav_check_logout > span {
+   padding: 0 5px;
+   font-weight: 700;
+}
+
+.nav_check_logout > span#yes {
+   color: #FF0000;
+}
+
+.nav_check_logout > span#no {
+   color: #4CAF50;
+   padding-right: 0;
 }

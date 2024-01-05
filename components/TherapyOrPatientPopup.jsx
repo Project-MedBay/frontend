@@ -6,7 +6,15 @@ import s from "../styles/therapyOrPatientPopup.module.css"
 export default function TherapyOrPatientPopup(props) {
    const {popupType, popupData, popupSessions, formatDate, formatFullDate, popupExit} = props
    
-   const [viewingNotes, setViewingNotes] = useState(0)
+   const [viewingNotesOf, setViewingNotesOf] = useState("")
+   const [editingNotes, setEditingNotes] = useState(false)
+   const [notesInput, setNotesInput] = useState("")
+
+   useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
+      if (viewingNotesOf != "") {
+         setNotesInput(viewingNotesOf.notes)
+      } else {setNotesInput("")}
+   }, [viewingNotesOf])
 
    var title, rows
    if (popupType == "therapy") {
@@ -32,17 +40,20 @@ export default function TherapyOrPatientPopup(props) {
    }
    
    const sessionElements = popupSessions?.map(session => {
+      let sessionPassed = session.datetime < new Date()
       let sessionInfo = <> 
          <p className={s.session_datetime}>{formatDate(session.datetime)} at {session.datetime.getHours()}:00</p>
-         {session.notes == "" ?
+         {session.notes != "" ?
+            <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session)}>
+               {viewingNotesOf.id === session.id ? "Collapse" : "View notes"}
+            </p> :
+            popupType == "therapy" || !sessionPassed || viewingNotesOf.id == session.id ?
             <p className={s.session_notes}>No notes</p> :
-            <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session.id)}>
-               {viewingNotes === session.id ? "Collapse" : "View notes"}
-            </p>
+            <button className={s.note_edit} onClick={() => handleNotesEdit("add", session)}>Add note</button>
          }
       </>
       return (
-         <div className={s.session_card} key={session.id}>
+         <div className={`${s.session_card} ${sessionPassed && s.session_passed}`} key={session.id}>
             <div className={s.session_info}>
                {popupType == "patient" ? <>
                   <p className={s.session_therapy}>{session.therapy.toUpperCase()}</p>
@@ -50,25 +61,67 @@ export default function TherapyOrPatientPopup(props) {
                </> : sessionInfo}
             </div>
             
-            {viewingNotes === session.id && <div className={s.box_container}>
-               <div className={s.box_bounds}></div>
-               <div className={s.note_box}>
-                  <p className={s.note_contents}>{session.notes}</p>
+            {viewingNotesOf.id === session.id && <>
+               <div className={s.box_container}>
+                  <div className={s.box_bounds}></div>
+
+                  {editingNotes ?
+                  <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                     className={s.note_box} type="text" onChange={event => setNotesInput(event.target.value)}
+                     placeholder="No notes yet." name="note" value={notesInput}
+                  /> :
+                  <div className={s.note_box}>
+                     <p className={s.note_contents}>{viewingNotesOf.notes}</p>
+                  </div>}
+                  
+                  <div className={s.box_bounds}></div>
                </div>
-               <div className={s.box_bounds}></div>
-            </div>}
+
+               {sessionPassed && <div className={s.buttons_container}>
+                  {editingNotes &&
+                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button>
+                  }  
+
+                  <button className={s.note_edit} onClick={() => handleNotesEdit("save")}>
+                     {editingNotes ? "Save note" : "Edit note"}
+                  </button>
+               </div>}
+            </>}
          </div>
       )
    })
    
-   function viewNote(sessionId) {
-      if (viewingNotes != sessionId) {
-         setViewingNotes(sessionId)
-      } else {setViewingNotes(0)}
+   function viewNote(session) {
+      if (viewingNotesOf.id != session.id) {
+         setViewingNotesOf(session)
+      } else {
+         setViewingNotesOf("")
+      }
+      setEditingNotes(false)
+   }
+
+   function handleNotesEdit(action, session) {
+      if (action == "add") {
+         setViewingNotesOf(session)
+      } else if ((action == "save" && notesInput == "") ||
+                 (action == "cancel" && viewingNotesOf.notes == "")) {
+         setViewingNotesOf("")
+      } else { 
+         if (action == "cancel") {
+            setNotesInput(viewingNotesOf.notes)
+         } else if (editingNotes) {
+               setViewingNotesOf(prevSession => ({
+                  ...prevSession,
+                  notes: notesInput
+               }))
+            }
+            // axios koji ce poslat informaciju o novom noteu
+      }
+      setEditingNotes(prevState => !prevState)
    }
 
    function handleExit() {
-      setViewingNotes(0)
+      setViewingNotesOf("")
       popupExit()
    }
 

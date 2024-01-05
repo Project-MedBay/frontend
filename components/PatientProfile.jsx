@@ -14,16 +14,22 @@ export default function PatientProfile(props) {
    const [deactivatePopup, setDeactivatePopup] = useState(false)
 
    const therapyElements = myTherapies.map(therapy => {
-      return(
-      <div className={s.therapy_card} key={therapy.id}>
-         <h3 className={s.therapy_name}>{therapy.name.toUpperCase()}</h3>
-         <p className={s.therapy_code}>THERAPY CODE {therapy.code}</p>
-         <p className={s.therapy_info}>DATE STARTED: <span>{formatFullDate(therapy["date started"])}</span></p>
-         <p className={s.therapy_info}>DATE FINISHED: <span>{formatFullDate(therapy["date finished"])}</span></p>
-         <p className={s.therapy_info}>TOTAL SESSIONS: <span>{therapy.sessions.length}</span></p>
-         <p className={s.therapy_more} onClick={() => setSelectedTherapy(therapy)}>View more</p>
-      </div>
-   )})
+      return (
+         <div className={s.therapy_card} key={therapy.id}>
+            <h3 className={s.therapy_name}>{therapy.name.toUpperCase()}</h3>
+            <p className={s.therapy_code}>THERAPY CODE {therapy.code}</p>
+            <p className={s.therapy_info}>DATE STARTED: <span>{formatFullDate(therapy["date started"])}</span></p>
+            <p className={s.therapy_info}>DATE FINISHED: <span>{formatFullDate(therapy["date finished"])}</span></p>
+            <p className={s.therapy_info}>TOTAL SESSIONS: <span>{therapy.sessions.length}</span></p>
+            <p className={s.therapy_more} onClick={() => setSelectedTherapy(therapy)}>View more</p>
+         </div>
+      )
+   })
+   if (therapyElements.length == 0) {therapyElements.push(
+      <h3 className={s.no_therapies}>
+         You have no therapies yet. Sign up through the <span>NEW THERAPY</span> tab!
+      </h3>
+   )}
 
    function popupExit() {
       if (deactivatePopup) { setDeactivatePopup(false) }
@@ -105,7 +111,7 @@ export default function PatientProfile(props) {
          <div className={s.profile_therapies}>
             <h1 className={s.therapies_title}>My therapies:</h1>
             <div className={s.therapies_container}>
-               {therapyElements}
+               {/* {therapyElements} */}
                {therapyElements}    {/* NOTE ovo uklonit, tu je samo za visual testing */}
             </div>
          </div>

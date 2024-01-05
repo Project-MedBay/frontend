@@ -92,7 +92,6 @@
    width: 400px;
    text-align: center;
    color: #656565;
-   font-family: Barlow;
    font-size: 24px;
    font-weight: 500;
    margin: 320px 20px;
@@ -113,7 +112,10 @@
 }
 
 .session_passed {
-   background: lightgrey;
+   background: linear-gradient(to right, #f0f0f0, #d6d6d6);
+   /* color: #6c757d; */
+   font-style: italic;
+   opacity: 0.75;
 }
 
 .session_date {
@@ -163,6 +165,10 @@
    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
    width: 700px;
    /* min-height: 500px; */
+}
+
+.no_sessions_container {      /* NOTE myb add some kinda bg for this later */
+   height: 810px;
 }
 
 .session_info {

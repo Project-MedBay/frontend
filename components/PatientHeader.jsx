@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import logo from "../assets/plus_icon.png"
 import s from "../styles/patientTherapistHeader.module.css"
 
 export default function PatientHeader(props) {
+    const [logOut, setLogOut] = useState(false)
+
     return (
         <div className={s.header}>
             <div className={s.header_logo} onClick={() => props.navigate("dash")}>
@@ -10,10 +12,17 @@ export default function PatientHeader(props) {
                 <h1 className={s.logo_title}>MedBay</h1>
             </div>
             <nav className={s.header_nav}>
-                <h2 className={s.nav_item} onClick={() => props.navigate("dash")}>DASHBOARD</h2>
-                <h2 className={s.nav_item} onClick={() => props.navigate("newTherapy")}>NEW THERAPY</h2>
-                <h2 className={s.nav_item} onClick={() => props.navigate("profile")}>MY PROFILE</h2>
-                <h2 className={s.nav_logout} onClick={() => props.navigate("login")}>LOG OUT</h2>
+               {logOut ? 
+                  <h2 className={s.nav_check_logout}>LOG OUT?&#160;
+                     <span id={s.yes} onClick={() => props.navigate("login")}>YES</span> /&#160;
+                     <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
+                  </h2>
+                  :
+                  <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
+               }
+               <h2 className={s.nav_item} onClick={() => props.navigate("profile")}>MY PROFILE</h2>
+               <h2 className={s.nav_item} onClick={() => props.navigate("newTherapy")}>NEW THERAPY</h2>
+               <h2 className={s.nav_item} onClick={() => props.navigate("dash")}>DASHBOARD</h2>
             </nav>
         </div>
     )
