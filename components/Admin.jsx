@@ -3,7 +3,7 @@ import AdminHeader from './AdminHeader'
 import AdminWelcome from './AdminWelcome'
 //import AdminCalendar from './AdminCalendar.jsx'
 //import AdminVerifications from './AdminVerifications'
-//import AdminManage from './AdminManage'
+import AdminManage from './AdminManage'
 //import AdminStatistics from './AdminStatistics'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
@@ -34,7 +34,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
                 {subPageName == "welcome" && <AdminWelcome userToken={userToken} navigate={navigate}/>}
                 {/* {subPageName == "calendar" && <AdminCalendar userToken={userToken}/>} */}
                 {/* {subPageName == "verifications" && <AdminVerifications userToken={userToken}/>} */}
-                {/* {subPageName == "manage" && <AdminManage userToken={userToken}/>} */}
+                {subPageName == "manage" && <AdminManage userToken={userToken} navigate={navigate}/>}
                 {/* {subPageName == "statistics" && <AdminStatistics userToken={userToken}/>} */}
             </div>
         </>
