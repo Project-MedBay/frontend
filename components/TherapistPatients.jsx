@@ -28,7 +28,7 @@ export default function TherapistPatients(props) {
                 placeholder="Search" name="search" value={searchInput} autoComplete="off" />
 
          <TableList
-            tableItems={patients.concat(patients.concat(patients.concat(patients)))}
+            tableItems={patients.concat(patients.concat(patients.concat(patients)))}    // NOTE maknit ove concatove lol
             tableOf="patients"
             user={userData.id}
             searchInput={searchInput}

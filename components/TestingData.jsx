@@ -1,11 +1,11 @@
 export const mySchedule = {
-   "1st January - 7th January": [
+   "1st January - 7th January": [          // bit ce datum samo prvog u tjednu
       {
          id: 0,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-01 09:00"),
          location: "Electrotherapy room",
-         sessionNumber: "4/11",
+         sessionNumber: "4/11",           // bit ce completed sessions i total sessions
          therapist: "Ante Pavlović",
          notes: {
             datetime: new Date("2024-01-01 17:53"),
@@ -159,7 +159,7 @@ export const therapistSchedule = {
    ]
 }
 
-export const availableSessions = {
+export const availableSessions = {                          // treba poslat therapy (code), broj dana, bit ce druga funkcija za reschedule al vraca isto u biti
    "Thursday, 28th December": [9, 11, 12, 14, 15, 17, 19],
    "Friday, 29th December": [10, 12, 13, 14, 17, 18, 19],
    "Monday, 1st January": [8, 9, 10, 12, 13, 14, 17, 18, 19],
@@ -221,7 +221,8 @@ export const therapies = {
    "upper torso": [],
    "lower torso": [],
    "leg": [],
-   "foot": []
+   "foot": [],
+   "any": []      // dodaj any
 }
 
 export const myTherapies = [
@@ -231,7 +232,7 @@ export const myTherapies = [
       code: "#4JG5E",
       "date started": new Date("2023-10-27"),
       "date finished": new Date("2023-11-21"),
-      therapist: "Ante Pavlović",
+      therapist: "Ante Pavlović",               // bit ce odvojeno ime prezime
       location: "Electrotherapy room",
       sessions: [
          {
@@ -572,5 +573,95 @@ export const testSessions = [
       therapy: "Severe shoulder fracture",
       datetime: new Date("2024-01-12 19:00"),
       notes: ""
+   }
+]
+
+export const resources = [
+   {
+      name: "Electrotherapy machine",
+      capacity: 4,
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+   },
+   {
+      name: "Electrotherapy machine",
+      capacity: 4,
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+   },
+   {
+      name: "Electrotherapy machine",
+      capacity: 4,
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+   },
+   {
+      name: "Electrotherapy machine",
+      capacity: 4,
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+   }
+]
+
+export const adminTherapies = [
+   {
+      name: "Shoulder impingement",
+      code: "#4JG5E",
+      numberOfSessions: 3,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["shoulder"]
+   },
+   {
+      name: "Shoulder tendon injury",
+      code: "#56JG3",
+      numberOfSessions: 5,
+      resource: "Electrotherapy machine machine machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["shoulder"]
+   },
+   {
+      name: "Post operation shoulder recovery",
+      code: "#43GE4",
+      numberOfSessions: 4,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["shoulder"]
+   },
+   {
+      name: "Impingement 2 electric bogaloo",
+      code: "#4JF9F",
+      numberOfSessions: 5,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["shoulder"]
+   },
+   {
+      name: "Please scroll",
+      code: "#Please",
+      numberOfSessions: 2,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["shoulder"]
+   },
+   {
+      name: "Elbow impingement",
+      code: "#4JG5F",
+      numberOfSessions: 4,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["arm"]
+   },
+   {
+      name: "Elbow tendon injury",
+      code: "#56JG6",
+      numberOfSessions: 3,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["arm"]
+   },
+   {
+      name: "Post operation elbow recovery",
+      code: "#43HE4",
+      numberOfSessions: 5,
+      resource: "Electrotherapy machine",
+      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      bodyparts: ["arm"]
    }
 ]

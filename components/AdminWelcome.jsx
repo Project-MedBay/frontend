@@ -1,6 +1,6 @@
 import React from "react"
-import s from "../styles/adminWelcome.module.css"
 import WelcomeButton from "./admin_utils/welcomeButton"
+import s from "../styles/adminWelcome.module.css"
 
 
 export default function AdminWelcome(props) {
@@ -34,8 +34,6 @@ export default function AdminWelcome(props) {
                 {buttons}
             </div>
         </div>
-
-
     )
 }
 

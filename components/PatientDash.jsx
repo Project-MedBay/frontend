@@ -92,15 +92,15 @@ export default function PatientDash(props) {
       })
    }
    
-   function popupExit() {
-      if (notesPopup) setNotesPopup(false)
-      else {setReschedulePopup(false); setRescheduledSession(selectedSession)}
-   }
-
    function rescheduleSession() {
       // send new session data to db to reschedule session and update schedule
       setReschedulePopup(false)
       setRescheduleConfirmBox(false)
+   }
+   
+   function popupExit() {
+      if (notesPopup) setNotesPopup(false)
+      else {setReschedulePopup(false); setRescheduledSession(selectedSession)}
    }
 
    return (<>
