@@ -1,0 +1,200 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blurContainer{
+    filter: blur(5px);
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 80px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 8vw;
+}
+
+.card{
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 15px 4px rgba(0, 0, 0, 0.25);
+    padding: 8px 3vw;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.regTherapyTitle{
+    color: #000;
+    font-family: Barlow;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 97.2%; /* 46.656px */
+    text-align: center;
+}
+
+.requestNumerator{
+    color: var(--ljubicasta-nova, #200063);
+    font-family: Barlow;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 97.2%; /* 34.992px */
+}
+
+.reviewBtn {
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: green;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid green;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviewBtn:hover {
+    background-color: green;
+    color: white;
+    border-color: darkgreen;
+}
+
+.reviewBtn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.reviewBtn:disabled {
+    background-color: grey;
+    color: #ffffff; /* Optional: change text color for disabled state */
+    cursor: not-allowed; /* Optional: change cursor to indicate the button is not clickable */
+    border: 1px solid #cccccc; /* Optional: change the border color for disabled state */
+}
+
+.requestDate{
+    font-weight: 600;
+}
+
+
+.popupContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    max-height: 80vh; /* maximum height of the popup */
+    overflow-y: auto; /* enables vertical scrolling if content overflows */
+    width: 500px; /* or any width you prefer */
+}
+
+.userDataFrame{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 4px 20px 6px rgba(0, 0, 0, 0.25);
+    padding: 8px 3vw;
+    line-height: 0.5;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 1.15rem;
+}
+
+.requestNumerator {
+    color: --ljubicasta-nova;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;;
+}
+
+
+.userDataTitle {
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.keyValuePair {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.key {
+    color: #888;
+    font-weight: 600;
+    margin-right: 10px;
+    min-width: 150px;
+}
+
+.value {
+    color: #333;
+    font-weight: 400;
+}
+
+.requestInfo {
+    color: #444;
+    font-size: 0.9rem;
+    margin-bottom: 1.15rem;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.approveBtn,
+.rejectBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.approveBtn {
+    background-color: #4CAF50;
+}
+
+.approveBtn:hover {
+    background-color: #45a049;
+}
+
+.rejectBtn {
+    background-color: #f44336;
+}
+
+.rejectBtn:hover {
+    background-color: #e31b0c;
+}
