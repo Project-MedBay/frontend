@@ -2,17 +2,22 @@
 
 import React from "react"
 import s from "../styles/adminVerifications.module.css"
-import data from "./admin_utils/verificationsData.js"
+import registrationData from "./admin_utils/verificationsRegisterData.js"
+import therapyData from "./admin_utils/verificationsTherapyData.js"
 import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
     const {userToken, formatFullDateAndTime} = props
 
-    const [verificationsData, setVerificationsData] = React.useState(data)
-    const [popup, setPopup] = React.useState(false)
-    const [popupData, setPopupData] = React.useState({
-        request_datetime: "",
+    const [popup, setPopup] = React.useState({
+        set: false, 
+        popupType: null // 'registration' or 'therapy'
+    })
+
+    const [registrationsData, setRegistrationsData] = React.useState(registrationData)
+    const [registrationPopupData, setRegistrationPopupData] = React.useState({
+        date_time: "",
         request_id: 0,
         user_id: 0,
         full_name: "",
@@ -21,6 +26,18 @@ export default function AdminVerifications(props) {
         date_of_birth: "",
         phone_number: "",
         insurance_policy_number: 0
+    })
+
+    const [therapiesData, setTherapiesData] = React.useState(therapyData)
+    const [therapyPopupData, setTherapyPopupData] = React.useState({
+        name: "",
+        request_id: 0,
+        therapy_id: 0,
+        duration: "",
+        number_of_sessions: 0,
+        date_time: "",
+        user_id: 0,
+        sessions: []
     })
 
     function formatDummyDateString(dateString) {
@@ -34,23 +51,25 @@ export default function AdminVerifications(props) {
     }
 
 
-    const therapies = verificationsData.filter(x => x.type == "therapy").map(x => (<VerificationCard 
-        key={x.id}
+    const therapies = therapiesData.map(x => (<VerificationCard 
+        key={x.request_id}
         info={x} 
         formatDummyDateString={formatDummyDateString} 
         formatFullDateAndTime={formatFullDateAndTime} 
         popup={popup}
+        cardType="therapy"
         setPopup={setPopup}
-        setPopupData={setPopupData}
+        setPopupData={setTherapyPopupData}
         />))
-    const registrations = verificationsData.filter(x => x.type == "registration").map(x => (<VerificationCard
+    const registrations = registrationsData.map(x => (<VerificationCard
         key={x.id}
         info={x} 
         formatFullDateAndTime={formatFullDateAndTime} 
         dummyDateFunction={formatDummyDateString} 
         popup={popup}
+        cardType="registration"
         setPopup={setPopup}
-        setPopupData={setPopupData}
+        setPopupData={setRegistrationPopupData}
         />))
 
     return (
@@ -69,10 +88,19 @@ export default function AdminVerifications(props) {
                 </div>
             </div>
             {
-                popup && <VerificationPopup 
-                    popupData={popupData} 
-                    setPopup={setPopup} 
+                popup.set && (popup.type === "registration" ? 
+                    <VerificationPopup 
+                        popupData={registrationPopupData} 
+                        setPopup={setPopup} 
+                        type="registration"
                     />
+                :
+                    <VerificationPopup 
+                        popupData={therapyPopupData} 
+                        setPopup={setPopup} 
+                        type="therapy"
+                    />
+                )
             }
         </>
     )

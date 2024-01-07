@@ -1,3 +1,9 @@
+@property --ljubicasta-nova{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #200063;
+}
+
 .mainContainer{
     display: flex;
     flex-direction: column;
@@ -111,7 +117,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     max-height: 80vh; /* maximum height of the popup */
     overflow-y: auto; /* enables vertical scrolling if content overflows */
-    width: 500px; /* or any width you prefer */
+    width: 30vw; /* or any width you prefer */
 }
 
 .userDataFrame{
@@ -140,6 +146,8 @@
 
 .userDataTitle {
     color: #555;
+    text-align: center;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
@@ -213,7 +221,8 @@
 
 .confirmationButtons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 15px;
 }
 
@@ -263,4 +272,73 @@
 
 .closeBtn:hover {
     color: #f44336; /* Color change on hover */
+}
+
+.therapyDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.therapyInfo {
+    width: 48%;
+}
+
+.sessionTab{
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sessionList {
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px 6px rgba(0, 0, 0, 0.25);
+    padding: 8px;
+    margin-bottom: 8px;
+    overflow-y: auto;
+}
+
+.session {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 0px 8px;
+}
+
+.expandBtn {
+    background: none;
+    border: none;
+    color: var(--ljubicasta-nova); /* Typical hyperlink color */
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline; /* Underline like a hyperlink */
+    text-align: left;
+    font-size: 0.8rem;
+    display: inline; /* To align it like text */
+    margin: 0; /* Remove any default margins */
+    font-family: inherit; /* To match the surrounding text */
+}
+
+.therapyInfo, .userDataFrame {
+    background-color: #f4f4f8; /* Light background */
+    border-left: 4px solid var(--ljubicasta-nova); /* Accent border on the left */
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 15px; /* Spacing from other elements */
+}
+
+.userDataTitle {
+    color: var(--ljubicasta-nova); 
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.therapyInfo p {
+    color: #333; 
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    line-height: 1.4; 
 }
