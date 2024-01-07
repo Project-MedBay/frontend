@@ -1,4 +1,4 @@
-.facilityCard {
+.facility_card {
    display: flex;
    flex-direction: column;
    width: 700px;
@@ -8,7 +8,7 @@
    box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.25);
 }
 
-.facilityCardFirst {
+.card_name_buttons {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
@@ -16,14 +16,14 @@
    margin: 0px;
 }
 
-.objectName {
+.card_name {
    color: #22006a;
    font-size: 28px;
    font-weight: 600;
    margin: 0;
 }
 
-.buttons {
+.button_wrapper {
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -49,7 +49,7 @@
    background-color: #22006a;
 }
 
-.facilityCardSecond {
+.card_description_value {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
@@ -58,7 +58,7 @@
    margin-bottom: 5px;
 }
 
-.descriptionResourceCapacity {
+.description_resource_capacity {
    display: flex;
    color: #636363;
    font-size: 24px;

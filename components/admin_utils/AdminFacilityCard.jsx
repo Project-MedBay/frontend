@@ -10,17 +10,17 @@ export default function AdminFacilityCard(props) {
     }
 
     return (
-        <div className={s.facilityCard}>
-            <div className={s.facilityCardFirst}>
-                <h2 className={s.objectName}>{title.toUpperCase()}</h2>
-                <div className={s.buttons}>
-                    <button className={`${s.card_button} ${s.button_edit}`}>EDIT</button>
+        <div className={s.facility_card}>
+            <div className={s.card_name_buttons}>
+                <h2 className={s.card_name}>{title.toUpperCase()}</h2>
+                <div className={s.button_wrapper}>
+                    <button className={s.card_button}>EDIT</button>
                     <button className={`${s.card_button} ${s.button_delete}`}>DELETE</button>
                 </div>
             </div>
-            <div className={s.facilityCardSecond}>
-                <h3 className={s.descriptionResourceCapacity}>DESCRIPTION: </h3>
-                <h3 className={s.descriptionResourceCapacity}>{cardType == "resource" ?
+            <div className={s.card_description_value}>
+                <h3 className={s.description_resource_capacity}>DESCRIPTION: </h3>
+                <h3 className={s.description_resource_capacity}>{cardType == "resource" ?
                     <>CAPACITY:&#160;<div className={s.value_wrapper}>{capacity}</div></> :
                     <>RESOURCE:&#160;<div className={s.value_wrapper}>{resource}</div></>
                 }</h3>
