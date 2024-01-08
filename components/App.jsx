@@ -9,7 +9,7 @@ import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("admin")           // sluzi za navigaciju
+  const [pageName, setPageName] = useState("patient")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("")
 
   const pages = {
