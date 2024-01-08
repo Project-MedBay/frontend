@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { myTherapies } from "./TestingData"
+import AccountEditPopup from "./EditPopup"
+import DeactivatePopup from "./DeactivatePopup"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import user_img from "../assets/user_img.png"
 import x_icon from "../assets/x_icon.svg"
@@ -11,6 +13,7 @@ export default function PatientProfile(props) {
 
    const [selectedTherapy, setSelectedTherapy] = useState("")
 
+   const [editPopup, setEditPopup] = useState(false)
    const [deactivatePopup, setDeactivatePopup] = useState(false)
 
    const therapyElements = myTherapies.map(therapy => {
@@ -32,10 +35,9 @@ export default function PatientProfile(props) {
    )}
 
    function popupExit() {
-      if (deactivatePopup) { setDeactivatePopup(false) }
-      else {
-         setSelectedTherapy("")
-      }
+      if (deactivatePopup) setDeactivatePopup(false)
+      else if (editPopup) setEditPopup(false)
+      else setSelectedTherapy("")
    }
 
    var accountAge = computeAccountAge()
@@ -56,6 +58,13 @@ export default function PatientProfile(props) {
       else { age = <>OVER <span>{Math.floor(days / 365.25)}</span> YEARS</> }
       return age
    }
+
+   function handleEdit(data) {
+      if (editPopup) {
+         // axios za editat user acc
+      }
+      setEditPopup(prevState => !prevState)
+   }
    
    function handleDeactivate() {
       navigate("login")
@@ -63,39 +72,39 @@ export default function PatientProfile(props) {
    }
 
    return (<>
-      <div className={`${s.patient_profile_main} ${(selectedTherapy != "" || deactivatePopup) && s.covered_by_popup}`}>
+      <div className={`${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>
          <div className={s.profile_header}>
             <div className={s.header_user}>
                <img className={s.user_image} src={user_img} />
                <div className={s.user_info}>
                   <div className={s.info_item}>
-                     <h2 className={s.info_title}>Petar Petrović</h2>
-                     <p className={s.info_id}>{"(#User452)"}</p>
+                     <h2 className={s.info_title}>{userData.firstName} {userData.lastName}</h2>
+                     <p className={s.info_id}>{"(#User" + userData.id + ")"}</p>
                   </div>
 
                   <div className={s.info_item}>
                      <p>E-mail: </p>
-                     <span>petar.petrovic@gmail.com</span>
+                     <span>{userData.email}</span>
                   </div>
                   
                   <div className={s.info_item}>
                      <p>Address: </p>
-                     <span>Ulica Petra Snačića 5, Petrinja</span>
+                     <span>{userData.address}</span>
                   </div>
                   
                   <div className={s.info_item}>
                      <p>Date of Birth: </p>
-                     <span>05/05/1955</span>
+                     <span>{formatFullDate(userData.dob)}</span>
                   </div>
                   
                   <div className={s.info_item}>
                      <p>Phone Number: </p>
-                     <span>095/505-5555</span>
+                     <span>{userData.phone}</span>
                   </div>
                   
                   <div className={s.info_item}>
                      <p>MBO: </p>
-                     <span>15253545565</span>
+                     <span>{userData.mbo}</span>
                   </div>
                </div>
             </div>
@@ -104,7 +113,10 @@ export default function PatientProfile(props) {
                <h1 className={s.thanks_title}>THANK YOU</h1>
                <h2 className={s.thanks_subtitle}>FOR BEING WITH US FOR</h2>
                <h2 className={s.thanks_age}>{accountAge}</h2>
-               <h3 className={s.thanks_deactivate} onClick={() => setDeactivatePopup(true)}>Deactivate account</h3>
+               <div className={s.thanks_buttons}>
+                  <h3 className={s.thanks_edit} onClick={() => setEditPopup(true)}>Edit account data</h3>
+                  <h3 className={s.thanks_deactivate} onClick={() => setDeactivatePopup(true)}>Deactivate account</h3>
+               </div>
             </div>
          </div>
 
@@ -117,20 +129,35 @@ export default function PatientProfile(props) {
          </div>
       </div>
 
-      {(selectedTherapy != "" || deactivatePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
+      {(selectedTherapy != "" || editPopup || deactivatePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
 
-      {deactivatePopup && <div className={s.deactivate_popup}>
-         <h1 className={s.deactivate_title}>Are you sure?</h1>
-         <h3 className={s.deactivate_subtitle}>This action is irreversible.</h3>
-         <p className={s.deactivate_text}>
-            If you deactivate your account, you will lose access to your account and all your data permanently,
-            and will need to register again to request new therapies in the future.
-         </p>
-         <div className={s.deactivate_buttons}>
-            <button className={s.deactivate_yes} onClick={handleDeactivate}>YES, DEACTIVATE</button>
-            <button className={s.deactivate_no} onClick={popupExit}>NO, DON'T DEACTIVATE</button>
-         </div>
-      </div>}
+      {editPopup &&
+         <AccountEditPopup
+            popupType={"edit"}
+            popupFor={"patient"}
+            popupData={{
+               name: userData.firstName,
+               surname: userData.lastName,
+               "e-mail": userData.email,
+               address: userData.address,
+               dob: userData.dob,
+               phone: userData.phone,
+               mbo: userData.mbo
+            }}
+            handleEdit={handleEdit}
+            popupExit={popupExit}
+            formatFullDate={formatFullDate}
+         />
+      }
+
+      {deactivatePopup &&
+         <DeactivatePopup
+            popupData={"self"}
+            popupFor={"patient"}
+            handleDeactivate={handleDeactivate}
+            popupExit={popupExit}
+         />
+      }
 
       {selectedTherapy != "" &&
          <TherapyOrPatientPopup

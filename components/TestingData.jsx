@@ -8,7 +8,7 @@ export const mySchedule = {
          sessionNumber: "4/11",           // bit ce completed sessions i total sessions
          therapist: "Ante Pavlović",
          notes: {
-            datetime: new Date("2024-01-01 17:53"),
+            datetime: new Date("2024-01-01 17:53"),      // NOTE izbacit ovo
             contents: "Pacijent je odradio normalno i dobro... ovaj put"
          }
       },
@@ -580,21 +580,25 @@ export const resources = [
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Electrotherapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Massage therapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Electrotherapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Massage therapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    }
 ]

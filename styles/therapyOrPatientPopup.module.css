@@ -50,6 +50,26 @@
    cursor: pointer;
 }
 
+.popup_main {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   gap: 40px;
+   width: 100%;
+   padding: 0 35px;
+}
+
+.main_image {
+   height: 125px;
+   width: 125px;
+}
+
+.main_info {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
 .popup_row {
    display: flex;
    justify-content: space-between;
@@ -59,7 +79,8 @@
 }
 
 .row_patients {
-   justify-content: space-evenly;
+   /* justify-content: space-evenly; */
+   padding: 0;
 }
 
 .popup_info {
@@ -183,7 +204,7 @@ textarea.note_box {
    font-size: 20px;
 }
 
-.buttons_container{
+.buttons_container {
    display: flex;
    justify-content: center;
    margin-top: -5px;

@@ -203,7 +203,6 @@ export default function RegisterMain(props) {
       setPasswordShown(prevState => !prevState)
    }
 
-
    return (
       <>
          <div className={`${s.register_main} ${successPopup && s.covered_by_popup}`}>        {/* uvjetna klasa za fade effect */}
