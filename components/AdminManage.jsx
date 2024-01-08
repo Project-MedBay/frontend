@@ -3,14 +3,14 @@ import axios, { formToJSON } from "axios"
 import { therapists, patients, resources, adminTherapies } from "./TestingData"
 import TableList from "./TableList"
 import AdminFacilityCard from "./admin_utils/AdminFacilityCard"
-import AdminEditPopup from "./admin_utils/AdminEditPopup"
-import AdminDeactivatePopup from "./admin_utils/AdminDeactivatePopup"
+import AccountEditPopup from "./EditPopup"
+import DeactivatePopup from "./DeactivatePopup"
 import s from "../styles/adminManage.module.css"
 
 export default function AdminManage(props) {
    const {userToken, formatFullDate} = props;
 
-   const [currentManage, setCurrentManage] = useState("facility")       // global const
+   const [currentManage, setCurrentManage] = useState("therapists")       // global const
    const [searchInput, setSearchInput] = useState({
       therapists: "",
       patients: "",
@@ -18,19 +18,27 @@ export default function AdminManage(props) {
       therapies: ""
    })
 
+   const [addPopup, setAddPopup] = useState(false)
    const [editPopup, setEditPopup] = useState(false)
    const [deactivatePopup, setDeactivatePopup] = useState(false)
+   const [popupData, setPopupData] = useState("")
+   const popupFor = () => {
+      if (popupData.numberOfSessions != null) return "therapy"
+      else if (popupData.capacity != null) return "resource"
+      else if (popupData.mbo != null) return "patient"
+      else return "therapist"
+   }
 
    const resourceElements = resources
       .filter(resource => { for (let term of searchInput.resources.trim().split(" ")) {
          if (resource.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(resource => (
          <AdminFacilityCard
-            // key={resource.name}
-            title={resource.name}
             cardType="resource"
-            capacity={resource.capacity}
-            description={resource.description}
+            cardContent={resource}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            handleDeactivate={handleDeactivate}
          />
       )
    )
@@ -45,11 +53,11 @@ export default function AdminManage(props) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
          <AdminFacilityCard
-            // key={therapy.name}
-            title={therapy.name}
             cardType="therapy"
-            resource={therapy.resource}
-            description={therapy.description}
+            cardContent={therapy}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            handleDeactivate={handleDeactivate}
          />
       )
    )
@@ -67,27 +75,85 @@ export default function AdminManage(props) {
    }
 
    function handleAdd(subject) {
-      setEditPopup(true)
-      // vjv settat neki state o tome sta editamo na sve prazno ili tako nes
+      if (!addPopup) {
+         if (subject == "therapist") setPopupData({
+            name: "",
+            surname: "",
+            "e-mail": "",
+            specialization: "",
+            "employed since": ""
+         })
+         else if (subject == "resource") setPopupData({
+            name: "",
+            capacity: "",
+            specialization: "",
+            description: ""
+         })
+         else if (subject == "therapy") setPopupData({
+            name: "",
+            code: "",
+            numberOfSessions: "",
+            resource: "",
+            description: "",
+            bodyparts: {
+               "head": false,
+               "shoulder": false, "arm": false,
+               "hand": false,
+               "upper torso": false,
+               "lower torso": false,
+               "leg": false,
+               "foot": false
+            }
+         })
+      } else {
+         // axios za dodat acc, resurs, terapiju
+      }
+      setAddPopup(prevState => !prevState)
    }
 
    function handleEdit(subject) {
-      setEditPopup(true)
-      // vjv settat neki state o tome sta editamo
+      if (!editPopup) {
+         if (subject.bodyparts != null) {
+            for (let bodypart of subject.bodyparts) {
+               setPopupData({
+                  ...subject,
+                  bodyparts: {
+                     "head": false,
+                     "shoulder": false, "arm": false,
+                     "hand": false,
+                     "upper torso": false,
+                     "lower torso": false,
+                     "leg": false,
+                     "foot": false,
+                     [bodypart]: true
+                  }
+               })
+            }
+         }
+         else setPopupData(subject)
+      } else {
+         // axios za editat acc, resurs, terapiju
+      }
+      setEditPopup(prevState => !prevState)
    }
 
    function handleDeactivate(subject) {
-      setDeactivatePopup(true)
-      // myb napisat specificno koga deaktiviras? inace samo set popup
+      if (!deactivatePopup) {
+         setPopupData(subject)
+      } else {
+         // axios za deaktivirat acc, resurs, terapiju
+      }
+      setDeactivatePopup(prevState => !prevState)
    }
 
    function popupExit() {
-      if (editPopup) setEditPopup(false)
+      if (addPopup) setAddPopup(false)
+      else if (editPopup) setEditPopup(false)
       else setDeactivatePopup(false)
    }
 
    return (<>
-      <div className={`${s.admin_manage_main} ${(editPopup || deactivatePopup) && s.covered_by_popup}`}>
+      <div className={`${s.admin_manage_main} ${(addPopup || editPopup || deactivatePopup) && s.covered_by_popup}`}>
          <div className={s.three_options}>
             <h2 className={`${s.options_item} ${currentManage == "therapists" ? s.current_option : ''}`}
                id={s.left} onClick={() => setCurrentManage("therapists")}>Therapists
@@ -140,7 +206,7 @@ export default function AdminManage(props) {
                   <h1 className={s.section_title}>RESOURCES</h1>
                   <div className={s.card_container}>
                      {resourceElements}
-                     <button className={s.section_button}>ADD NEW</button>
+                     <button className={s.section_button} onClick={() => handleAdd("resource")}>ADD NEW</button>
                   </div>
                   <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>
@@ -152,7 +218,7 @@ export default function AdminManage(props) {
                   <h1 className={s.section_title}>THERAPIES</h1>
                   <div className={s.card_container}>
                      {therapyElements}
-                     <button className={s.section_button}>ADD NEW</button>
+                     <button className={s.section_button} onClick={() => handleAdd("therapy")}>ADD NEW</button>
                   </div>
                   <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>
@@ -161,15 +227,26 @@ export default function AdminManage(props) {
 
       </div>
 
-      {(editPopup || deactivatePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
+      {(addPopup || editPopup || deactivatePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
 
-      {editPopup &&
-         <AdminEditPopup
+      {(addPopup || editPopup) &&
+         <AccountEditPopup
+            popupType={addPopup ? "add" : "edit"}
+            popupFor={popupFor()}
+            popupData={popupData}
+            handleAdd={handleAdd}
+            handleEdit={handleEdit}
+            popupExit={popupExit}
+            formatFullDate={formatFullDate}
          />
       }
 
       {deactivatePopup &&
-         <AdminDeactivatePopup
+         <DeactivatePopup
+            popupData={popupData}
+            popupFor={popupFor()}
+            handleDeactivate={handleDeactivate}
+            popupExit={popupExit}
          />
       }
    </>)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import x_icon from "../assets/x_icon.svg"
+import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
@@ -134,7 +135,15 @@ export default function TherapyOrPatientPopup(props) {
             <img src={x_icon} className={s.popup_exit} onClick={handleExit} />
          </div>
          
-         {infoElements}
+         {popupType == "patient" ?
+            <div className={s.popup_main}>
+               <img src={profile_image} className={s.main_image} />
+               <div className={s.main_info}>
+                  {infoElements}
+               </div>
+            </div>
+         : infoElements
+         }
 
          <h2 className={s.popup_sessions}>{popupSessions.length} SESSIONS:</h2>
          <div className={`${s.sessions_container} ${popupType == "patient" && s.popup_tall}`}>

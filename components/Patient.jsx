@@ -9,10 +9,14 @@ export default function Patient(props) {           // glavna komponenta uloge, u
    const {setPageName, userToken} = props
    const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
    const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
-      id: "",
-      firstName: "",
-      lastName: "",
-      email: "",
+      id: "452",
+      firstName: "Petar",
+      lastName: "Petrović",
+      email: "petar.petrovic@gmail.com",
+      address: "Ulica Petra Snačića 5, Petrinja",
+      dob: new Date("1955-05-05"),
+      phone: "0955055555",
+      mbo: "15253545565",
       password: "",
       registeredSince: new Date("2023-12-15"),
       active: "",

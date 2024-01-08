@@ -59,8 +59,10 @@ export default function TableList(props) {
 
       if (user == "admin") {
          rowElements.push(<div className={`${divClass} ${s.button_wrapper}`} key={"admin" + index}>
-            <button className={`${s.table_button} ${s.button_green}`} onClick={handleEdit}>EDIT</button>
-            <button className={s.table_button} onClick={handleDeactivate}>DEACTIVATE</button>
+            {tableOf == "therapists" &&
+               <button className={`${s.table_button} ${s.button_green}`} onClick={() => handleEdit(item)}>EDIT</button>
+            }
+            <button className={s.table_button} onClick={() => handleDeactivate(item)}>DEACTIVATE</button>
          </div>)
       }
       else {
@@ -83,7 +85,7 @@ export default function TableList(props) {
             {tableHeaderElements}
             <div className={`${s.header_buttons} ${(tableOf == "patients" && tableList.length == 0) && s.reduced_header}`}>
                <button className={`${s.header_add} ${tableOf == "patients" && s.hidden}`}
-                  onClick={handleAdd}>ADD NEW
+                   onClick={() => handleAdd("therapist")}>ADD NEW
                </button>
             </div>
             {tableListElements}

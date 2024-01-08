@@ -34,6 +34,7 @@ export default function PatientNewTherapy(props) {
 
    const [expandSessions, setExpandSessions] = useState(false)           // page 3 const
    const [verificationData, setVerificationData] = useState({referral: "", hlkid: ""})
+   const [verificationFailed, setVerificationFailed] = useState(false)
    const [finishAgreement, setFinishAgreement] = useState(false)
 
    var nextDisabled = () => {switch (progress) {         // ovdi uvjete za nastavit dalje u svakom koraku
@@ -52,8 +53,8 @@ export default function PatientNewTherapy(props) {
       }).map(therapy => (
       <div className={s.therapy_wrapper} key={therapy.code}
            onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.code)}}>
-         <div className={s.therapy_checkbox}>
-            <div className={`${s.checkbox_filled} ${selectedTherapy?.code == therapy.code && s.checkbox_selected}`}></div>
+         <div className={s.custom_checkbox}>
+            <div className={`${s.checkbox_fill} ${selectedTherapy?.code == therapy.code && s.checkbox_selected}`}></div>
          </div>
          <label className={s.therapy_info}>
             <p className={s.therapy_name}>{therapy.name}</p>
@@ -88,6 +89,15 @@ export default function PatientNewTherapy(props) {
    ))
 
    function handleFinish() {
+      let returnValue = (verificationData.referral == "123" && verificationData.hlkid == "123")
+      // axios koji ce provjerit uputnicu i hlkid
+      if (returnValue) {
+         setVerificationFailed(false)
+         setSuccessPopup(true)
+      } else setVerificationFailed(true) 
+   }
+
+   function handleSuccess() {
       navigate("dash")
       // ovdi axios za poslat podatke o novonastaloj terapiji u bazu
    }
@@ -193,29 +203,37 @@ export default function PatientNewTherapy(props) {
                      <form className={s.verification_form} autoComplete="off">
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Referral number:</p>
-                           <input className={s.input_field} onChange={event => setVerificationData(prevData => ({
-                              ...prevData,
-                              referral: event.target.value
-                           }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral} />
+                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                              onChange={event => setVerificationData(prevData => ({
+                                 ...prevData,
+                                 referral: event.target.value
+                              }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral}
+                           />
                            <p className={s.verification_tip} title={tooltips.referral}>?</p>
                         </div>
                         
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Doctor id (hlkid):</p>
-                           <input className={s.input_field} onChange={event => setVerificationData(prevData => ({
-                              ...prevData,
-                              hlkid: event.target.value
-                           }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid} />
+                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                              onChange={event => setVerificationData(prevData => ({
+                                 ...prevData,
+                                 hlkid: event.target.value
+                              }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid}
+                           />
                            <p className={s.verification_tip} title={tooltips.doctor}>?</p>
                         </div>
+
+                        <p className={`${s.verification_failed} ${verificationFailed && s.visible}`}>
+                           Incorrect referral number or doctor hlkid.
+                        </p>
                      </form>
                   </div>
                </div>
                <div className={s.final_finish}>
                   <p className={s.finish_note}>Once your therapy is approved by admin, we will notify you by email.</p>
                   <div className={s.checkbox_container} onClick={() => setFinishAgreement(prevState => !prevState)}>
-                     <div className={s.therapy_checkbox}>
-                        <div className={`${s.checkbox_filled} ${finishAgreement && s.checkbox_selected}`}></div>
+                     <div className={s.custom_checkbox}>
+                        <div className={`${s.checkbox_fill} ${finishAgreement && s.checkbox_selected}`}></div>
                      </div>
                      <p className={s.finish_label}>I understand</p>
                   </div>
@@ -229,7 +247,7 @@ export default function PatientNewTherapy(props) {
                   }>{progress == 1 ? "Cancel" : "Back"}
                </button>
                <button className={`${s.button_next} ${nextDisabled() ? s.button_disabled : ""}`} onClick={() => {
-                  nextDisabled() ? "" : (progress == 3 ? setSuccessPopup(true) : setProgress(prevProgress => prevProgress + 1))}
+                  nextDisabled() ? "" : (progress == 3 ? handleFinish() : setProgress(prevProgress => prevProgress + 1))}
                   }>{progress == 3 ? "Finish" : "Next"}
                </button>
             </div>
@@ -253,7 +271,7 @@ export default function PatientNewTherapy(props) {
          text1="You have filled in all the information and your therapy request is now being processed by our administrator."
          text2="Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard."
          buttonText="Go to dash"
-         clickFunction={handleFinish}
+         clickFunction={handleSuccess}
       />}
    </>)
 }
