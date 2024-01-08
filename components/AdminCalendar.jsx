@@ -46,14 +46,20 @@ export default function AdminCalendar() {
         }
 
         return appointments.filter(appointment => {
-            if (filterOption === 'Patient') {
-                return `${appointment.patientFirstName} ${appointment.patientLastName}`.toLowerCase().includes(searchTerm.toLowerCase());
-            } else if (filterOption === 'Therapist') {
-                return `${appointment.employeeFirstName} ${appointment.employeeLastName}`.toLowerCase().includes(searchTerm.toLowerCase());
-            } else if (filterOption === 'Therapy name') {
-                return appointment.therapyTypeName.toLowerCase().includes(searchTerm.toLowerCase());
-            } else if (filterOption === 'All') {
-                return `${appointment.patientFirstName} ${appointment.patientLastName} ${appointment.employeeFirstName} ${appointment.employeeLastName} ${appointment.therapyTypeName}`.toLowerCase().includes(searchTerm.toLowerCase());
+            if (filterOption === 'Patient' || filterOption === 'All') {
+                if (`${appointment.patientFirstName} ${appointment.patientLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return true;
+                }
+            }
+            if (filterOption === 'Therapist' || filterOption === 'All') {
+                if (`${appointment.employeeFirstName} ${appointment.employeeLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return true;
+                }
+            }
+            if (filterOption === 'Therapy name' || filterOption === 'All') {
+                if (appointment.therapyTypeName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return true;
+                }
             }
             return false;
         }).length;
