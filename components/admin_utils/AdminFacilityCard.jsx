@@ -1,5 +1,5 @@
 import React from "react"
-import s from "../../styles/adminFacilityCard.module.css";
+import s from "../../styles/admin_utils/adminFacilityCard.module.css";
 
 export default function AdminFacilityCard(props) {
     const {title, description, cardType} = props;
