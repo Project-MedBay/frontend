@@ -182,7 +182,9 @@
 }
 
 .approveBtn,
-.rejectBtn {
+.rejectBtn,
+.confirmBtn,
+.cancelBtn {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -190,6 +192,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 30%;
+    height: 2rem;
 }
 
 .approveBtn {
@@ -226,15 +230,6 @@
     margin-bottom: 15px;
 }
 
-.confirmBtn,
-.cancelBtn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
 
 .confirmBtn {
     background-color: #4CAF50;

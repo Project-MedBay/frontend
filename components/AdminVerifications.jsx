@@ -1,4 +1,3 @@
-// TODO: Implement AdminVerifications component
 
 import React from "react"
 import s from "../styles/adminVerifications.module.css"

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import AdminHeader from './AdminHeader'
 import AdminWelcome from './AdminWelcome'
-//import AdminCalendar from './AdminCalendar.jsx'
+import AdminCalendar from './AdminCalendar.jsx'
 import AdminVerifications from './AdminVerifications'
 import AdminManage from './AdminManage'
 //import AdminStatistics from './AdminStatistics'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
     const {setPageName, userToken} = props
-    const [subPageName, setSubPageName] = useState("verifications")           // sluzi za navigaciju
+    const [subPageName, setSubPageName] = useState("calendar")           // sluzi za navigaciju
     const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
         id: "",
         firstName: "",
@@ -55,7 +55,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
             <AdminHeader subPageName={subPageName} navigate={navigate} />
             <>
                 {subPageName == "welcome" && <AdminWelcome userToken={userToken} navigate={navigate} />}
-                {/* {subPageName == "calendar" && <AdminCalendar userToken={userToken} />} */}
+                {subPageName == "calendar" && <AdminCalendar userToken={userToken} />}
                 {subPageName == "verifications" && <AdminVerifications userToken={userToken}  formatFullDateAndTime={formatFullDateAndTime}/>}
                 {subPageName == "manage" && <AdminManage userToken={userToken} formatFullDate={formatFullDate} />}
                 {/* {subPageName == "statistics" && <AdminStatistics userToken={userToken} />} */}
