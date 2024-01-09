@@ -4,7 +4,7 @@ import AdminWelcome from './AdminWelcome'
 //import AdminCalendar from './AdminCalendar.jsx'
 //import AdminVerifications from './AdminVerifications'
 import AdminManage from './AdminManage'
-//import AdminStatistics from './AdminStatistics'
+import AdminStatistics from './AdminStatistics'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken, userData} = props
@@ -36,7 +36,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
             {/* {subPageName == "calendar" && <AdminCalendar userToken={userToken} />} */}
             {/* {subPageName == "verifications" && <AdminVerifications userToken={userToken} />} */}
             {subPageName == "manage" && <AdminManage userToken={userToken} formatFullDate={formatFullDate} />}
-            {/* {subPageName == "statistics" && <AdminStatistics userToken={userToken} />} */}
+            {subPageName == "statistics" && <AdminStatistics userToken={userToken} />}
          </>
       </>
    )
