@@ -30,7 +30,8 @@ export default function App() {           // glavna komponenta, u njoj se render
 
    function handleLogin(token) {
       setUserToken(token)
-      setPageName(jwtDecode(token).role.toLowerCase())
+      let navigateTo = jwtDecode(token).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(token).role.toLowerCase()
+      setPageName(navigateTo)
    }
    
   
@@ -43,7 +44,7 @@ export default function App() {           // glavna komponenta, u njoj se render
       <LogRegHeader navigate={setPageName} />
       <RegisterMain navigate={setPageName} />
     </>,
-    patient: <Patient 
+    patient: <Patient
       setPageName={setPageName}
       userToken={userToken}
       userData={userData}
