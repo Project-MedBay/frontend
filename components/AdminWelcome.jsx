@@ -1,5 +1,5 @@
 import React from "react"
-import WelcomeButton from "./admin_utils/welcomeButton"
+import WelcomeButton from "./admin_utils/WelcomeButton"
 import s from "../styles/adminWelcome.module.css"
 
 

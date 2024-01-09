@@ -8,10 +8,10 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   gap: 40px;
-   padding: 50px;
+   gap: calc(40 * var(--scale-by-height));
+   padding: calc(50 * var(--scale-by-height));
    height: calc(100vh - max(calc(60px * 0.6), calc(60vh * 59 / 725)));
-   min-height: 650px;
+   min-height: 675px;
 }
 
 .covered_by_popup {
@@ -30,25 +30,25 @@
 
 .patients_title {
    color: #000;
-   font-size: 36px;
+   font-size: calc(36 * var(--scale-by-height));
    font-weight: 500;
    margin: 0;
 }
 
 .patients_title > span {
    color: #22006a;
-   font-size: 40px;
+   font-size: calc(40 * var(--scale-by-height));
    font-weight: 700;
 }
 
 .table_search {
-   width: 500px;
-   font-size: 20px;
-   padding: 10px;
-   padding-left: 14px;
+   width: calc(500 * var(--scale-by-height));
+   font-size: calc(20 * var(--scale-by-height));
+   padding: calc(10 * var(--scale-by-height));
+   padding-left: calc(14 * var(--scale-by-height));
    /* background: #F4F3F3; */
-   border: 2px solid hsl(0, 0%, 90%);
-   border-radius: 10px;
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
 }
 
 .table_search:focus {

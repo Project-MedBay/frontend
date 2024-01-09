@@ -11,13 +11,13 @@
    padding: max(calc(40px * 0.6), calc(40vh * 59 / 725)) max(calc(60px * 0.6), calc(60vh * 59 / 725));
    font-weight: 700;
    background: #FFFFFF;
-   box-shadow: 0px 4px 25px 12px #00000026;
-   border-radius: 10px;
+   box-shadow: 0 calc(4 * var(--scale-by-height)) calc(25 * var(--scale-by-height)) calc(12 * var(--scale-by-height)) #00000026;
+   border-radius: calc(10 * var(--scale-by-height));
 }
 
 .popup_title {
    /* color: #22006a; */
-   font-size: 42px;
+   font-size: calc(42 * var(--scale-by-height));
    font-weight: 800;
    margin: 0;
 }
@@ -89,7 +89,7 @@
 .input_label > span {
    color: #636363;
    text-decoration: underline;
-   margin-left: 50px;
+   margin-left: calc(50 * var(--scale-by-height));
    cursor: pointer;
 }
 
@@ -98,8 +98,8 @@
    font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
    padding: max(calc(10px * 0.6), calc(10vh * 59 / 725));
    padding-left: max(calc(14px * 0.6), calc(14vh * 59 / 725));
-   border: 2px solid hsl(0, 0%, 90%);
-   border-radius: 10px;
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
 }
 
 .input_box:focus {
@@ -116,12 +116,12 @@
 
 .desc_box {
    font-family: "Barlow", sans-serif;
-   font-size: 20px;
+   font-size: calc(20 * var(--scale-by-height));
    font-weight: 500;
-   border: 2px solid hsl(0, 0%, 90%);
-   border-radius: 10px;
-   height: 200px;
-   padding: 15px;
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
+   height: calc(200 * var(--scale-by-height));
+   padding: calc(15 * var(--scale-by-height));
    margin: 0;
    resize: none;
 }
@@ -130,27 +130,23 @@
    outline: none;
 }
 
-.bodyparts_box {
-   display: flex;
-   flex-direction: column;
-   border: 2px solid hsl(0, 0%, 90%);
-   border-radius: 10px;
-   gap: 10px;
-   padding: 10px;
-   padding-top: 11px;
+.bodypart_box {
+   display: grid;
+   grid-template-columns: calc(125 * var(--scale-by-height)) calc(100 * var(--scale-by-height)) calc(70 * var(--scale-by-height));
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
+   column-gap: calc(12 * var(--scale-by-height));
+   row-gap: calc(18 * var(--scale-by-height));
+   padding: calc(20 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
+   height: calc(152 * var(--scale-by-height));
    margin: 0;
-}
-
-.bodyparts_row {
-   display: flex;
-   width: 100%;
 }
 
 .checkbox_wrapper {
    display: flex;
    align-items: center;
-   gap: 10px;
-   width: 50%;
+   gap: calc(10 * var(--scale-by-height));
+   width: fit-content;
    cursor: pointer;
 }
 
@@ -158,23 +154,23 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   width: 22px;
-   height: 22px;
-   padding: 2px;
-   border: 2px solid #636363;
-   border-radius: 5px;
+   width: calc(20 * var(--scale-by-height));
+   height: calc(20 * var(--scale-by-height));
+   padding: calc(2 * var(--scale-by-height));
+   border: calc(2 * var(--scale-by-height)) solid #636363;
+   border-radius: calc(5 * var(--scale-by-height));
 }
 
 .checkbox_fill {
    width: 100%;
    height: 100%;
    background-color: #22006a;
-   border-radius: 3px;
+   border-radius: calc(3 * var(--scale-by-height));
    visibility: hidden;
 }
 
 .checkbox_label {
-   font-size: 20px;
+   font-size: calc(18 * var(--scale-by-height));
    font-weight: 500;
    margin: 0;
 }
@@ -184,7 +180,7 @@
 }
 
 .failed_input {
-   border: 1.5px solid #FF0000;
+   border: calc(1.5 * var(--scale-by-height)) solid #FF0000;
 }
 
 .edit_failed {
@@ -216,7 +212,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 .password_eye {
    position: absolute;
    right: 47.75%;
-   bottom: 36px;
+   bottom: calc(36 * var(--scale-by-height));
    width: max(calc(25px * 0.6), calc(25vh * 59 / 725));
    cursor: pointer;
 }
@@ -224,36 +220,35 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 .popup_buttons {
    display: flex;
    justify-content: center;
-   gap: 100px;
+   gap: calc(100 * var(--scale-by-height));
 }
 
 .change_password, .button_save, .button_cancel {
    color: #FFF;
-   font-family: Barlow;
-   font-size: 32px;
+   font-size: calc(32 * var(--scale-by-height));
    font-weight: 700;
-   width: 150px;
-   padding: 5px;
+   width: calc(150 * var(--scale-by-height));
+   padding: calc(5 * var(--scale-by-height));
    border: 0;
-   border-radius: 10px;
+   border-radius: calc(10 * var(--scale-by-height));
    background: #70D8AC;
    cursor: pointer;
 }
 
 .change_password {
-   font-size: 22px;
+   font-size: calc(22 * var(--scale-by-height));
    width: fit-content;
-   padding: 5px 10px;
+   padding: calc(5 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
    margin: auto;
 }
 
 .change_password_note {
    color: #636363;
-   font-size: 14px;
+   font-size: calc(14 * var(--scale-by-height));
    font-weight: 500;
    margin: 0 auto;
-   margin-top: 20px;
-   margin-bottom: -20px;
+   margin-top: calc(15 * var(--scale-by-height));
+   margin-bottom: calc(-25 * var(--scale-by-height));
 }
 
 .button_cancel {

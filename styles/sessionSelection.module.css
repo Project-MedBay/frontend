@@ -1,11 +1,11 @@
 .selection_main {
    display: flex;
    align-items: center;
-   gap: 50px;
+   gap: calc(50 * var(--scale-by-height));
 }
 
 .scroll_container {
-   padding: 10px;
+   padding: calc(10 * var(--scale-by-height));
 }
 
 .dates_container, .times_container {
@@ -14,28 +14,27 @@
    overflow: auto;
    align-items: center;
    width: max-content;
-   gap: 15px;
-   height: 500px;
-   padding: 0 15px;
+   gap: calc(15 * var(--scale-by-height));
+   height: calc(490 * var(--scale-by-height));
+   padding: 0 calc(15 * var(--scale-by-height));
 }
 
 .container_small {
-   height: 380px;
+   height: calc(379 * var(--scale-by-height));
 }
 
 .weekdate, .datetime {
    color: #000;
-   font-family: Barlow;
-   font-size: 24px;
+   font-size: calc(24 * var(--scale-by-height));
    font-weight: 500;
    text-align: center;
    margin: 0;
-   padding: 5px;
+   padding: calc(5 * var(--scale-by-height));
    cursor: pointer;
 }
 
 .container_small > h3 {
-   font-size: 24px;
+   font-size: calc(24 * var(--scale-by-height));
 }
 
 .vertical_center {
@@ -49,21 +48,21 @@
 }
 
 .weekdate_in_sessions {
-   border: #70D8AC solid 2px;
-   border-radius: 5px;
+   border: #70D8AC solid calc(2 * var(--scale-by-height));
+   border-radius: calc(5 * var(--scale-by-height));
 }
 
 .weekdate_selected, .datetime_selected {
    background-color: #22006a;
    color: #fff;
    font-weight: 600;
-   border: #22006a solid 2px;
-   border-radius: 5px;
+   border: #22006a solid calc(2 * var(--scale-by-height));
+   border-radius: calc(5 * var(--scale-by-height));
 }
 
 .session_deselect {
-   height: 15px;
-   margin-top: 3px;
-   margin-left: 8px;
+   height: calc(15 * var(--scale-by-height));
+   margin-top: calc(3 * var(--scale-by-height));
+   margin-left: calc(8 * var(--scale-by-height));
    cursor: pointer;
 }

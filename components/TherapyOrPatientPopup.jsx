@@ -78,7 +78,7 @@ export default function TherapyOrPatientPopup(props) {
                   <div className={s.box_bounds}></div>
                </div>
 
-               {sessionPassed && <div className={s.buttons_container}>
+               {popupType == "patient" && sessionPassed && <div className={s.buttons_container}>
                   {editingNotes &&
                      <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button>
                   }  
