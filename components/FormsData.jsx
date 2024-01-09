@@ -196,10 +196,10 @@ export const therapyFields = [
       name:"resource"
    },
    {
-      label:"Relevant part(s) of the body",
+      label:"Relevant part of the body",
       placeholder:"",
       id:"grid_two_thirds_square",
-      name:"bodyparts"
+      name:"bodypart"
    },
    {
       label:"Sessions",

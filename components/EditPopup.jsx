@@ -33,7 +33,7 @@ export default function AdminEditPopup(props) {
       numberOfSessions: {failed: false, text: "Must be digits only"},
       resource: {failed: false, text: "Resource is required."},
       description: {failed: false, text: "Description is required."},
-      bodyparts: {failed: false, text: "Relevant body parts are required."},
+      bodypart: {failed: false, text: "Relevant body part is required."},
    })
    const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
    const [editingPassword, setEditingPassword] = useState((popupType == "add" && popupFor == "therapist"))
@@ -49,31 +49,17 @@ export default function AdminEditPopup(props) {
    }
 
    if (popupFor == "therapy") {
-      const bodypartRowsList = [["head", "shoulder"], ["arm", "hand"], ["upper torso", "lower torso"], ["leg", "foot"]]
-      var bodypartElements = bodypartRowsList.map((bodypartRow, index) => (
-         <div className={s.bodyparts_row} key={index}>
-            <div className={s.checkbox_wrapper} onClick={() => handleChange({target: {
-                  name: "bodyparts",
-                  bodypart: bodypartRow[0],
-                  value: !formData.bodyparts[bodypartRow[0]]
+      const bodypartList = ["head", "shoulder", "leg", "upper torso", "arm", "foot", "lower torso", "hand", "any"]
+      var bodypartElements = bodypartList.map((bodypart, index) => (
+            <div className={s.checkbox_wrapper} key={index} onClick={() => handleChange({target: {
+                  name: "bodypart",
+                  value: bodypart
                }})}>
                <div className={s.custom_checkbox}>
-                  <div className={`${s.checkbox_fill} ${formData.bodyparts[bodypartRow[0]] && s.checkbox_selected}`}></div>
+                  <div className={`${s.checkbox_fill} ${formData.bodypart == bodypart && s.checkbox_selected}`}></div>
                </div>
-               <p className={s.checkbox_label}>{bodypartRow[0][0].toUpperCase() + bodypartRow[0].slice(1)}</p>
+               <p className={s.checkbox_label}>{bodypart[0].toUpperCase() + bodypart.slice(1)}</p>
             </div>
-
-            <div className={s.checkbox_wrapper} onClick={() => handleChange({target: {
-                  name: "bodyparts",
-                  bodypart: bodypartRow[1],
-                  value: !formData.bodyparts[bodypartRow[1]]
-               }})}>
-               <div className={s.custom_checkbox}>
-                  <div className={`${s.checkbox_fill} ${formData.bodyparts[bodypartRow[1]] && s.checkbox_selected}`}></div>
-               </div>
-               <p className={s.checkbox_label}>{bodypartRow[1][0].toUpperCase() + bodypartRow[1].slice(1)}</p>
-            </div>
-         </div>
       ))
    }
    const formElements = formFields().map(field => {               // mapiranje podataka iz formsdata na jsx (html) elemente za ispis
@@ -101,16 +87,17 @@ export default function AdminEditPopup(props) {
                   <p className={s.input_disabled}>
                      {name == "dob" || name == "employed since" ?
                      formatFullDate(formData[name]) : formData[name]}
-                  </p> :
-               name == "description" ?
+                  </p>
+               : name == "description" ?
                   <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                      className={`${s.desc_box} ${inputFailed[name].failed && s.failed_input}`} type="text"
                      onChange={handleChange} placeholder={placeholder} name={name} value={formData[name]}
-                  /> :
-               name == "bodyparts" ?
-                  <div className={`${s.bodyparts_box} ${inputFailed[name].failed && s.failed_input}`}>
+                  />
+               : name == "bodypart" ?
+                  <div className={`${s.bodypart_box} ${inputFailed[name].failed && s.failed_input}`}>
                      {bodypartElements}
-                  </div> :
+                  </div>
+               :
                   <input
                      className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}
                      type={type} onChange={handleChange} placeholder={placeholder}
@@ -126,14 +113,12 @@ export default function AdminEditPopup(props) {
    })
 
    function handleChange(event) {
+      console.log(event.target)
       const {name, value} = event.target
-      if (name == "bodyparts") setFormData(prevFormData => ({
-            ...prevFormData,
-            [name]: {
-               ...prevFormData.bodyparts,
-               [event.target.bodypart]: value
-            }
-         }))
+      if (name == "code") setFormData(prevFormData => ({
+         ...prevFormData,
+         [name]: value.toUpperCase()
+      }))
       else setFormData(prevFormData => ({
          ...prevFormData,
          [name]: value
@@ -183,9 +168,6 @@ export default function AdminEditPopup(props) {
             case "code":
                updateInputFailedTo = checkCodeRules(value)
                break
-            case "bodyparts":
-               updateInputFailedTo = checkBodypartRules(value, event.target.bodypart)
-               break
          }
          setInputFailed(prevState => ({
             ...prevState,
@@ -231,26 +213,9 @@ export default function AdminEditPopup(props) {
    }
 
    function checkCodeRules(value) {
-      let failed = value.length != 5
+      let failed = !/^#[A-Z0-9]{5}$/.test(value)
       let text = "Must be #[5 characters]."
       return {failed: failed, text: text}
-   }
-   
-   function checkBodypartRules(value, selectedBodypart) {
-      let allEmpty = true
-      let text = "Field is required."
-      for (let bodypart in formData.bodyparts) {
-         if (bodypart == selectedBodypart) {
-            if (value) {
-               allEmpty = false
-               break
-            }
-         } else if (formData.bodyparts[bodypart]) {
-            allEmpty = false
-            break
-         }
-      }
-      return {failed: allEmpty, text: text}
    }
 
    function checkPasswordsMatch(value, name) {     // provjera za potvrdu lozinke (aktivira se pri pisanju lozinke i pri pisanju potvrdene lozinke)
@@ -322,14 +287,6 @@ export default function AdminEditPopup(props) {
                [name]: {failed: true, text: "Field is required."}
             }))
             failedAny = true
-         } else if (name == "bodyparts") {
-            if (checkBodypartRules().failed) {
-               setInputFailed(prevState => ({
-                  ...prevState,
-                  [name]: {failed: true, text: "Field is required."}
-               }))
-               failedAny = true
-            }
          }
       }
       return failedAny

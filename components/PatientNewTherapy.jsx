@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
-import axios, { formToJSON } from "axios"
-import { therapies } from "./TestingData"
+import axios from "axios"
 import BodypartSelection from "./BodypartSelection"
-import SessionSelection2 from "./SessionSelection2"
+import SessionSelection from "./SessionSelection"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, mySchedule, navigate} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
@@ -15,22 +14,29 @@ export default function PatientNewTherapy(props) {
       doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
    }
    
+   const [therapies, setTherapies] = useState([])
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
    const [searchInput, setSearchInput] = useState("")
    const [selectedBodypart, setSelectedBodypart] = useState("any")
    const [selectedTherapy, setSelectedTherapy] = useState("")
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapyType",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => setTherapies(res.data))
+      .catch(error => console.log(error));
+   }, [])
 
    const [selectedSessions, setSelectedSessions] = useState([])         // page 2 const (and var)
-   var therapiesList = []
-   for (let array of Object.values(therapies)) {
-      therapiesList = therapiesList.concat(array)
-   }
-   therapiesList = [...new Set(therapiesList)]
    var codeList = []
-   for (let therapy of therapiesList) {
-      codeList.push(therapy.code)
+   for (let therapy of therapies) {
+      codeList.push(therapy.therapyCode)
    }
-   const numberOfSessions = selectedTherapy?.numberOfSessions
+   const numOfSessions = selectedTherapy?.numOfSessions
 
    const [expandSessions, setExpandSessions] = useState(false)           // page 3 const
    const [verificationData, setVerificationData] = useState({referral: "", hlkid: ""})
@@ -39,33 +45,33 @@ export default function PatientNewTherapy(props) {
 
    var nextDisabled = () => {switch (progress) {         // ovdi uvjete za nastavit dalje u svakom koraku
       case 1:
-         return !codeList.includes(selectedTherapy?.code)
+         return !codeList.includes(selectedTherapy?.therapyCode)
       case 2:
-         return selectedSessions.length != numberOfSessions
+         return selectedSessions.length != numOfSessions
       case 3:
          return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
    
-   const therapyElements = therapiesList
-      .filter(therapy => (selectedBodypart == "any" ? true : therapies[selectedBodypart].includes(therapy)))
+   const therapyElements = therapies
+      .filter(therapy => (selectedBodypart == "any" ? true : therapy.bodyPart == selectedBodypart))
       .filter(therapy => { for (let term of searchInput.trim().split(" ")) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
-      <div className={s.therapy_wrapper} key={therapy.code}
-           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.code)}}>
+      <div className={s.therapy_wrapper} key={therapy.therapyCode}
+           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.therapyCode)}}>
          <div className={s.custom_checkbox}>
-            <div className={`${s.checkbox_fill} ${selectedTherapy?.code == therapy.code && s.checkbox_selected}`}></div>
+            <div className={`${s.checkbox_fill} ${selectedTherapy?.therapyCode == therapy.therapyCode && s.checkbox_selected}`}></div>
          </div>
          <label className={s.therapy_info}>
             <p className={s.therapy_name}>{therapy.name}</p>
-            <p className={s.therapy_code}>{therapy.code}</p>
+            <p className={s.therapy_code}>{therapy.therapyCode}</p>
          </label>
       </div>
    ))
 
    function handleCodeInput(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       setCodeInput(event.target.value.toUpperCase())
-      setSelectedTherapy(therapiesList[codeList.indexOf(event.target.value.toUpperCase())])
+      setSelectedTherapy(therapies[codeList.indexOf(event.target.value.toUpperCase())])
    }
 
    function formatString(string) {
@@ -89,17 +95,31 @@ export default function PatientNewTherapy(props) {
    ))
 
    function handleFinish() {
-      let returnValue = (verificationData.referral == "123" && verificationData.hlkid == "123")
-      // axios koji ce provjerit uputnicu i hlkid
-      if (returnValue) {
-         setVerificationFailed(false)
-         setSuccessPopup(true)
-      } else setVerificationFailed(true) 
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/create",
+         method: "POST",
+         headers: {
+            Authorization: `Bearer ${userToken}`          // korisnikov access token potreban za dohvacanje podataka iz baze
+         },
+         data: {
+            healthReferralId: verificationData.referral,
+            hlkid: verificationData.hlkid,
+            therapyCode: "#3N4P6",     // NOTE tu stavit kod
+            appointmentDates: selectedSessions
+         }
+      })
+      .then(res => handleSuccess())
+      .catch(error => handleError(error));
    }
 
    function handleSuccess() {
-      navigate("dash")
-      // ovdi axios za poslat podatke o novonastaloj terapiji u bazu
+      setVerificationFailed(false)
+      setSuccessPopup(true)
+   }
+   
+   function handleError(error) {
+      // NOTE tu neka provjera je li zbog hlkid i to
+      setVerificationFailed(true)
    }
 
    return (<>
@@ -109,6 +129,7 @@ export default function PatientNewTherapy(props) {
          <div className={s.green_shape}></div>
          
          <div className={s.create_container}>
+            <div className={s.create_wrapper}>
             
             {progress == 1 && <>
             <div className={s.therapy_header}>
@@ -140,7 +161,7 @@ export default function PatientNewTherapy(props) {
             <div className={s.sessions_header}>
                <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
                <div className={s.header_counter}>
-                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numberOfSessions}</h2>
+                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
                </div>
             </div>
 
@@ -153,14 +174,18 @@ export default function PatientNewTherapy(props) {
                Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
 
-            <SessionSelection2 
+            <SessionSelection
+               userToken = {userToken}
                formatDate = {formatDate}
+               formatFullDate = {formatFullDate}
                formatWeek = {formatWeek}
                selectedSessions = {selectedSessions}
                setSelectedSessions = {setSelectedSessions}
                currentSession = ""
                mySchedule = {mySchedule}
-               numberOfSessions = {numberOfSessions}
+               numOfSessions = {numOfSessions}
+               numberOfDays = {20}
+               therapyCode = {selectedTherapy.therapyCode}
             />
             </>}
 
@@ -176,11 +201,11 @@ export default function PatientNewTherapy(props) {
                            {formatString(selectedTherapy.name).second.toUpperCase()}
                         </h3>
                         <div className={s.review_details}>
-                           <p>{selectedTherapy.code}</p>
+                           <p>{selectedTherapy.therapyCode}</p>
                            <p>duration: {Math.floor(
                               (selectedSessions[selectedSessions.length-1] - selectedSessions[0]) / 1000 / 60 / 60 / 24
                            ) + 1} days</p>
-                           <p>number of sessions: {selectedTherapy.numberOfSessions}</p>
+                           <p>number of sessions: {selectedTherapy.numOfSessions}</p>
                         </div>
                      </div>
                   </div>
@@ -260,6 +285,8 @@ export default function PatientNewTherapy(props) {
                </div>
                <div className={s.progress_label}>{progress}/3</div>
             </div>
+            
+            </div>
          </div>
 
          <div className={s.tagline_container}>
@@ -271,7 +298,7 @@ export default function PatientNewTherapy(props) {
          text1="You have filled in all the information and your therapy request is now being processed by our administrator."
          text2="Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard."
          buttonText="Go to dash"
-         clickFunction={handleSuccess}
+         clickFunction={() => navigate("dash")}
       />}
    </>)
 }

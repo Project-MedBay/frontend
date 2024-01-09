@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { testSessions } from "./TestingData"
 import SessionSelection from "./SessionSelection"
-import SessionSelection2 from "./SessionSelection2"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
-import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, mySchedule} = props
+   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, mySchedule} = props
    
-   const [selectedWeek, setSelectedWeek] = useState(new Date())                                       // const za dash
+   const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
    var nextSession = {
       text: "No upcoming sessions.",
       datetime: "--"
@@ -53,14 +51,14 @@ export default function TherapistDash(props) {
             setNotesDisabled(true)
          } else {setNotesDisabled(false)}
          if (selectedSession.notes != "") {
-            setNotesInput(selectedSession.notes.contents)
+            setNotesInput(selectedSession.notes)
          } else {setNotesInput("")}
       }
    }, [selectedSession])
 
    var scheduleElements
-   if (mySchedule[formatWeek(selectedWeek)] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
-      scheduleElements = mySchedule[formatWeek(selectedWeek)].map(session => {               // kartice sesija u rasporedu
+   if (mySchedule[selectedWeek] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+      scheduleElements = mySchedule[selectedWeek].map(session => {               // kartice sesija u rasporedu
          const { id, datetime, location } = session
          let cardClass = s.session_card
          if (datetime < new Date()) {
@@ -72,7 +70,7 @@ export default function TherapistDash(props) {
                <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
                <p className={s.session_location}>{location}</p>
                <p className={s.session_more} onClick={() => {
-                  setSelectedSession(mySchedule[formatWeek(selectedWeek)][id])}}>View more
+                  setSelectedSession(mySchedule[selectedWeek][id])}}>View more
                </p>
             </div>
          )
@@ -101,14 +99,11 @@ export default function TherapistDash(props) {
 
    function handleNotesEdit(action) {
       if (action == "cancel") {
-         setNotesInput(selectedSession.notes.contents)
+         setNotesInput(selectedSession.notes)
       } else if (editingNotes) {
          setSelectedSession(prevSession => ({
             ...prevSession,
-            notes:{
-               datetime: new Date(),
-               contents: notesInput
-            }
+            notes: notesInput
          }))
          // axios koji ce poslat informaciju o novom noteu
       }
@@ -138,7 +133,7 @@ export default function TherapistDash(props) {
                <p className={s.container_date}>{formatWeek(selectedWeek)}</p>
                <span className={s.date_arrow} onClick={goForwardWeek}>&#62;</span>
             </div>
-            <img src={refresh} className={s.date_reset} onClick={() => setSelectedWeek(new Date())} />
+            <img src={refresh} className={s.date_reset} onClick={() => setSelectedWeek(getWeekFirst(new Date()))} />
             
             <div className={s.scroll_container}>
                <div className={s.schedule_card}>
@@ -175,19 +170,11 @@ export default function TherapistDash(props) {
                         <p>{selectedSession.therapy}</p>
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
                         <p>{selectedSession.location}</p>
-                        <p>{selectedSession.sessionNumber}</p>
+                        <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
                         <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
                            {selectedSession.patient.name + " " + selectedSession.patient.surname}
                         </p>
                      </div>
-                  </div>
-
-                  <div className={s.session_buttons}>
-                     <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
-                        onClick={() => rescheduleDisabled ? {} : setReschedulePopup(true)}>Reschedule
-                     </button>
-                     <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
-                        Cannot reschedule.<br />{rescheduleText}</p>
                   </div>
                </div>
 
@@ -214,7 +201,7 @@ export default function TherapistDash(props) {
                      placeholder="No notes yet." name="note" value={notesInput}
                   /> :
                   <div className={s.note_box}>
-                     <p className={s.note_contents}>{selectedSession.notes.contents}</p>
+                     <p className={s.note_contents}>{selectedSession.notes}</p>
                   </div>}
                </div>
             </>}
@@ -251,7 +238,7 @@ export default function TherapistDash(props) {
          <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
             The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span></p>
 
-         <SessionSelection2 
+         <SessionSelection 
             formatDate = {formatDate}
             formatWeek = {formatWeek}
             selectedSessions = {[rescheduledSession.datetime]}

@@ -6,7 +6,7 @@ export default function AdminFacilityCard(props) {
     if (cardType == "resource") {
         var {name, capacity, specialization, description} = cardContent
     } else if (cardType == "therapy") {
-        var {name, code, numberOfSessions, resource, description, bodyparts} = cardContent
+        var {name, code, numberOfSessions, resource, description, bodypart} = cardContent
     }
 
     // function capitalize(string) {
@@ -48,26 +48,19 @@ export default function AdminFacilityCard(props) {
                         </h3>
                     </div>
                     <div className={s.card_info_row}>
-                        <h3 className={s.row_info_value}>DESCRIPTION: </h3>
+                        <h3 className={s.row_info_value}>
+                            RELEVANT PART OF THE BODY:&#160;
+                            <div className={s.value_wrapper}>{bodypart[0].toUpperCase() + bodypart.slice(1)}</div>
+                        </h3>
                         <h3 className={s.row_info_value}>
                             CODE:&#160;<div className={s.value_wrapper}>{code}</div>
                         </h3>
                     </div>
+                    <div className={s.card_info_row}>
+                            <h3 className={s.row_info_value}>DESCRIPTION: </h3>
+                    </div>
                 </>}
             <div className={s.card_description}>{description}</div>
-            {cardType == "therapy" &&
-                <div className={s.card_info_row}>
-                    <h3 className={s.row_info_value}>
-                        RELEVANT PART&#40;S&#41; OF THE BODY:&#160;<div className={s.value_wrapper}>{
-                            bodyparts.map(bodypart => {
-                                if (bodypart == bodyparts[bodyparts.length - 1])
-                                return <>{bodypart}</>
-                                else return <>{bodypart}, </>
-                            })
-                        }</div>
-                    </h3>
-                </div>
-            }
         </div>
     )
 }

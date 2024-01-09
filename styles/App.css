@@ -7,8 +7,12 @@ body {
   font-family: "Barlow", sans-serif;
 }
 
+button {
+  font-family: "Barlow", sans-serif;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: max(6px * 0.8, calc(6vh * 59 / 725));
 }
  
 ::-webkit-scrollbar-thumb {
@@ -18,4 +22,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #636363; 
+}
+
+html {
+  --scale-by-height: max(0.6px, calc(1vh * 59 / 725));
+  
+  --scale-by-width: max(0.6px, calc(1vw * 59 / 725));
 }

@@ -95,15 +95,7 @@ export default function AdminManage(props) {
             numberOfSessions: "",
             resource: "",
             description: "",
-            bodyparts: {
-               "head": false,
-               "shoulder": false, "arm": false,
-               "hand": false,
-               "upper torso": false,
-               "lower torso": false,
-               "leg": false,
-               "foot": false
-            }
+            bodypart: ""
          })
       } else {
          // axios za dodat acc, resurs, terapiju
@@ -113,24 +105,7 @@ export default function AdminManage(props) {
 
    function handleEdit(subject) {
       if (!editPopup) {
-         if (subject.bodyparts != null) {
-            for (let bodypart of subject.bodyparts) {
-               setPopupData({
-                  ...subject,
-                  bodyparts: {
-                     "head": false,
-                     "shoulder": false, "arm": false,
-                     "hand": false,
-                     "upper torso": false,
-                     "lower torso": false,
-                     "leg": false,
-                     "foot": false,
-                     [bodypart]: true
-                  }
-               })
-            }
-         }
-         else setPopupData(subject)
+         setPopupData(subject)
       } else {
          // axios za editat acc, resurs, terapiju
       }

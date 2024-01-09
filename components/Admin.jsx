@@ -7,17 +7,8 @@ import AdminManage from './AdminManage'
 //import AdminStatistics from './AdminStatistics'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {setPageName, userToken} = props
+   const {setPageName, userToken, userData} = props
    const [subPageName, setSubPageName] = useState("manage")           // sluzi za navigaciju
-   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
-      id: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      active: "",
-      role: "",
-   })
 
    function navigate(toWhere) {
       if (toWhere == "login") {

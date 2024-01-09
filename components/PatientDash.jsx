@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import SessionSelection from "./SessionSelection"
-import SessionSelection2 from "./SessionSelection2"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {userToken, formatWeek, formatDate, formatFullDatetime, mySchedule} = props
+   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDatetime, mySchedule} = props
    
-   const [selectedWeek, setSelectedWeek] = useState(new Date())                                       // const za dash
+   const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
    var nextSession = {
       text: "No upcoming sessions.",
       datetime: "--"
@@ -52,8 +51,8 @@ export default function PatientDash(props) {
    }, [selectedSession])
 
    var scheduleElements
-   if (mySchedule[formatWeek(selectedWeek)] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
-      scheduleElements = mySchedule[formatWeek(selectedWeek)].map(session => {               // kartice sesija u rasporedu
+   if (mySchedule[selectedWeek] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+      scheduleElements = mySchedule[selectedWeek].map(session => {               // kartice sesija u rasporedu
          const { id, datetime, location } = session
          let cardClass = s.session_card
          if (datetime.getTime() < new Date().getTime()) {
@@ -65,7 +64,7 @@ export default function PatientDash(props) {
                <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
                <p className={s.session_location}>{location}</p>
                <p className={s.session_more} onClick={() => {
-                  setSelectedSession(mySchedule[formatWeek(selectedWeek)][id])}}>View more
+                  setSelectedSession(mySchedule[selectedWeek][id])}}>View more
                </p>
             </div>
          )
@@ -113,7 +112,7 @@ export default function PatientDash(props) {
                <p className={s.container_date}>{formatWeek(selectedWeek)}</p>
                <span className={s.date_arrow} onClick={goForwardWeek}>&#62;</span>
             </div>
-            <img src={refresh} className={s.date_reset} onClick={() => setSelectedWeek(new Date())} />
+            <img src={refresh} className={s.date_reset} onClick={() => setSelectedWeek(getWeekFirst(new Date()))} />
             
             <div className={s.scroll_container}>
                <div className={s.schedule_card}>
@@ -150,7 +149,7 @@ export default function PatientDash(props) {
                         <p>{selectedSession.therapy}</p>
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
                         <p>{selectedSession.location}</p>
-                        <p>{selectedSession.sessionNumber}</p>
+                        <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
                         <p>{selectedSession.therapist}</p>
                      </div>
                   </div>
@@ -158,17 +157,22 @@ export default function PatientDash(props) {
                   <img src={map} className={s.session_image} />
 
                   <div className={s.session_buttons}>
-                     <button className={`${s.session_button} ${notesDisabled && s.button_disabled}`}
-                        onClick={() => notesDisabled ? "" : setNotesPopup(true)}>View notes
-                     </button>
-                     <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
-                        onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>Reschedule
-                     </button>
-                     
-                     <p className={`${s.notes_text} ${notesDisabled && s.disabled_text}`}>
-                        No notes so far.<br />­</p>                           {/* iza br sam ubacio ALT + 0173 za poravnanje */}
-                     <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
-                        Cannot reschedule.<br />{rescheduleText}</p>
+                     <div className={s.button_wrapper}>
+                        <button className={`${s.session_button} ${notesDisabled && s.button_disabled}`}
+                           onClick={() => notesDisabled ? "" : setNotesPopup(true)}>View notes
+                        </button>
+                        <p className={`${s.notes_text} ${notesDisabled && s.disabled_text}`}>
+                           No notes so far.<br />
+                        </p>
+                     </div>
+                     <div className={s.button_wrapper}>
+                        <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
+                           onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>Reschedule
+                        </button>
+                        <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
+                           Cannot reschedule.<br />{rescheduleText}
+                        </p>
+                     </div>
                   </div>
                </div>
             </>}
@@ -185,16 +189,14 @@ export default function PatientDash(props) {
          </div>
 
          <div className={s.notes_info}>
-            <p><span>Session {selectedSession.sessionNumber}</span></p>
+            <p><span>Session {selectedSession.completedSessions}/{selectedSession.totalSessions}</span></p>
             <p>{formatDate(selectedSession.datetime)}</p>
          </div>
 
          <div className={s.notes_note}>
-            <p className={s.note_details}>
-               {selectedSession.therapist}, {formatFullDatetime(selectedSession.notes.datetime)}
-            </p>
+            <p className={s.note_details}>{selectedSession.therapist}:</p>
             <div className={s.note_box}>
-               <p className={s.note_contents}>{selectedSession.notes.contents}</p>
+               <p className={s.note_contents}>{selectedSession.notes}</p>
             </div>
          </div>
       </div>}
@@ -218,7 +220,7 @@ export default function PatientDash(props) {
             with a <span className={s.legend_green}>green box.</span>
          </p>
 
-         <SessionSelection2 
+         <SessionSelection 
             formatDate = {formatDate}
             formatWeek = {formatWeek}
             selectedSessions = {[rescheduledSession.datetime]}

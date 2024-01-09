@@ -123,7 +123,7 @@ export default function PatientProfile(props) {
          <div className={s.profile_therapies}>
             <h1 className={s.therapies_title}>My therapies:</h1>
             <div className={s.therapies_container}>
-               {/* {therapyElements} */}
+               {therapyElements}
                {therapyElements}    {/* NOTE ovo uklonit, tu je samo za visual testing */}
             </div>
          </div>

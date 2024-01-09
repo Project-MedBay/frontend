@@ -1,8 +1,8 @@
 .human_body {
-   width: 207px;
+   width: calc(207 * var(--scale-by-height));
    position: relative;
-   height: 260px;
-   display: block;
+   height: calc(260 * var(--scale-by-height));
+   display: flex;
 }
 
 .human_body svg:hover {
@@ -23,70 +23,96 @@
 }
 
 .human_body svg#head {
-   margin-left: -28.5px;
-   top: -6px;
+   width: calc(56.5 * var(--scale-by-height));
+   height: calc(95 * var(--scale-by-height));
+   left: calc(-28.5 * var(--scale-by-height));
+   top: calc(-6 * var(--scale-by-height));
 }
 
 .human_body svg#left_shoulder {
-   margin-left: -53.5px;
-   top: 69px;
+   width: calc(109.5 * var(--scale-by-height));
+   height: calc(46.5 * var(--scale-by-height));
+   left: calc(-53.5 * var(--scale-by-height));
+   top: calc(69 * var(--scale-by-height));
 }
 
 .human_body svg#right_shoulder {
-   margin-left: 13.5px;
-   top: 69px;
+   width: calc(109.5 * var(--scale-by-height));
+   height: calc(46.5 * var(--scale-by-height));
+   left: calc(13.5 * var(--scale-by-height));
+   top: calc(69 * var(--scale-by-height));
 }
 
 .human_body svg#left_arm {
-   margin-left: -78px;
-   top: 112px;
+   width: calc(156.5 * var(--scale-by-height));
+   height: calc(119 * var(--scale-by-height));
+   left: calc(-78 * var(--scale-by-height));
+   top: calc(112 * var(--scale-by-height));
 }
 
 .human_body svg#right_arm {
-   margin-left: 38px;
-   top: 112px;
+   width: calc(156.5 * var(--scale-by-height));
+   height: calc(119 * var(--scale-by-height));
+   left: calc(38 * var(--scale-by-height));
+   top: calc(112 * var(--scale-by-height));
    z-index: 10001;
 }
 
 .human_body svg#chest {
-   margin-left: -43.5px;
-   top: 88px;
+   width: calc(86.5 * var(--scale-by-height));
+   height: calc(45 * var(--scale-by-height));
+   left: calc(-43.5 * var(--scale-by-height));
+   top: calc(88 * var(--scale-by-height));
 }
 
 .human_body svg#stomach {
-   margin-left: -37.5px;
-   top: 130px;
+   width: calc(75 * var(--scale-by-height));
+   height: calc(107.5 * var(--scale-by-height));
+   left: calc(-37.5 * var(--scale-by-height));
+   top: calc(130 * var(--scale-by-height));
 }
 
 .human_body svg#left_leg {
-   margin-left: -46.5px;
-   top: 205px;
+   width: calc(93.5 * var(--scale-by-height));
+   height: calc(250 * var(--scale-by-height));
+   left: calc(-49.5 * var(--scale-by-height));
+   top: calc(202 * var(--scale-by-height));
    z-index: 9999;
 }
 
 .human_body svg#right_leg {
-   margin-left: 1.5px;
-   top: 205px;
+   width: calc(93.5 * var(--scale-by-height));
+   height: calc(250 * var(--scale-by-height));
+   left: calc(-2 * var(--scale-by-height));
+   top: calc(202 * var(--scale-by-height));
    z-index: 9999;
 }
 
 .human_body svg#left_hand {
-   margin-left: -102.5px;
-   top: 224px;
+   width: calc(90 * var(--scale-by-height));
+   height: calc(39 * var(--scale-by-height));
+   left: calc(-102.5 * var(--scale-by-height));
+   top: calc(224 * var(--scale-by-height));
 }
 
 .human_body svg#right_hand {
-   margin-left: 66.5px;
-   top: 224px;
+   width: calc(90 * var(--scale-by-height));
+   height: calc(39 * var(--scale-by-height));
+   left: calc(66.5 * var(--scale-by-height));
+   top: calc(224 * var(--scale-by-height));
    z-index: 10000;
 }
 
 .human_body svg#left_foot {
-   margin-left: -35.5px;
-   top: 455px;
+   width: calc(30 * var(--scale-by-height));
+   height: calc(30 * var(--scale-by-height));
+   left: calc(-37.5 * var(--scale-by-height));
+   top: calc(450 * var(--scale-by-height));
 }
 
 .human_body svg#right_foot {
-   margin-left: 5.5px;
-   top: 455px;
+   width: calc(82 * var(--scale-by-height));
+   height: calc(85 * var(--scale-by-height));
+   left: calc(10.5 * var(--scale-by-height));
+   top: calc(426 * var(--scale-by-height));
 }
