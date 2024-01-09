@@ -59,7 +59,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
                 {subPageName == "calendar" && <AdminCalendar userToken={userToken} />}
                 {subPageName == "verifications" && <AdminVerifications userToken={userToken}  formatFullDateAndTime={formatFullDateAndTime}/>}
                 {subPageName == "manage" && <AdminManage userToken={userToken} formatFullDate={formatFullDate} />}
-                {/* {subPageName == "statistics" && <AdminStatistics userToken={userToken} />} */}
+                {subPageName == "statistics" && <AdminStatistics userToken={userToken} />}
             </>
         </>
     )

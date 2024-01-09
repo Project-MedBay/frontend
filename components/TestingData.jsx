@@ -28,7 +28,7 @@ export const mySchedule = {
          completedSessions: 6,
          totalSessions: 11,
          therapist: "Ante Pavlović",
-         notes: ""
+         notes: "Vrlo kvalitetna sesija, veselim se sljedećoj"
       }
    ],
    [new Date("2024-01-08 00:00:00")]: [
@@ -40,7 +40,7 @@ export const mySchedule = {
          completedSessions: 7,
          totalSessions: 11,
          therapist: "Ante Pavlović",
-         notes: ""
+         notes: "Najbolja sesija ikada"
       },
       {
          id: 1,
@@ -70,8 +70,8 @@ export const therapistSchedule = {
             "e-mail": "karlo.vrancic@medbay.hr",
             address: "Ulica Gustava Krkleca 12, Zagreb",
             dob: new Date("10/12/2023"),
-            phone: "0955555555",
-            mbo: "15253545565",
+            phone: "091111111",
+            mbo: "12345678901",
             code: "#User452"
          },
          notes: "Pacijent je odradio normalno i dobro... ovaj put"
@@ -89,11 +89,11 @@ export const therapistSchedule = {
             "e-mail": "karlo.vrancic@medbay.hr",
             address: "Ulica Gustava Krkleca 12, Zagreb",
             dob: new Date("10/12/2023"),
-            phone: "0955555555",
-            mbo: "15253545565",
+            phone: "091111111",
+            mbo: "12345678901",
             code: "#User452"
          },
-         notes: "Pacijent je odradio normalno i dobro."
+         notes: "Pacijent je odradio normalno i dobro. Odlična sesija."
       },
       {
          id: 2,
@@ -108,11 +108,11 @@ export const therapistSchedule = {
             "e-mail": "karlo.vrancic@medbay.hr",
             address: "Ulica Gustava Krkleca 12, Zagreb",
             dob: new Date("10/12/2023"),
-            phone: "0955555555",
-            mbo: "15253545565",
+            phone: "091111111",
+            mbo: "12345678901",
             code: "#User452"
          },
-         notes: ""
+         notes: "Vrlo kvalitetna sesija."
       }
    ],
    [new Date("2024-01-08 00:00:00")]: [
@@ -124,33 +124,33 @@ export const therapistSchedule = {
          completedSessions: 7,
          totalSessions: 11,
          patient: {
-            name: "Karlo",
-            surname: "Vrančić",
+            name: "Tea",
+            surname: "Ćetojević-Tisaj",
             "e-mail": "karlo.vrancic@medbay.hr",
-            address: "Ulica Gustava Krkleca 12, Zagreb",
-            dob: new Date("10/12/2023"),
-            phone: "0955555555",
-            mbo: "15253545565",
-            code: "#User452"
+            address: "Unska ulica 3, Zagreb",
+            dob: new Date("10/12/2003"),
+            phone: "091222222",
+            mbo: "23456789012",
+            code: "#User453"
          },
-         notes: ""
+         notes: "Vrlo dobra sesija"
       },
       {
          id: 1,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-11 11:00"),
-         location: "Electrotherapy room",
+         location: "Cryotherapy machine",
          completedSessions: 8,
          totalSessions: 11,
          patient: {
-            name: "Karlo",
-            surname: "Vrančić",
+            name: "Ian",
+            surname: "Balen",
             "e-mail": "karlo.vrancic@medbay.hr",
-            address: "Ulica Gustava Krkleca 12, Zagreb",
-            dob: new Date("10/12/2023"),
-            phone: "0955555555",
-            mbo: "15253545565",
-            code: "#User452"
+            address: "Obala kneza Trpimira 26, Zadar",
+            dob: new Date("11/11/1987"),
+            phone: "091333333",
+            mbo: "34567890123",
+            code: "#User454"
          },
          notes: ""
       }
@@ -188,13 +188,13 @@ export const therapies = {
          numberOfSessions: 4
       },
       {
-         name: "Impingement 2 electric bogaloo",
+         name: "Shoulder Impingement 2",
          code: "#4JF9F",
          numberOfSessions: 5
       },
       {
-         name: "Please scroll",
-         code: "#Please",
+         name: "Broken shoulder",
+         code: "#4JU5L",
          numberOfSessions: 2
       }
    ],
@@ -236,7 +236,7 @@ export const myTherapies = [
       code: "#4JG5E",
       "date started": new Date("2023-10-27"),
       "date finished": new Date("2023-11-21"),
-      therapist: "Ante Pavlović",               // bit ce odvojeno ime prezime
+      therapist: "Ante Petrović",               // bit ce odvojeno ime prezime
       location: "Electrotherapy room",
       sessions: [
          {
@@ -252,22 +252,22 @@ export const myTherapies = [
          {
             id: 3,
             datetime: new Date("2024-01-04 15:00"),
-            notes: " Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro.Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro."
+            notes: "Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro.Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro. Pacijent je odradio normalno i dobro."
          },
          {
             id: 4,
             datetime: new Date("2024-01-05 13:00"),
-            notes: ""
+            notes: "Pacijent odrađuje sve po planu"
          },
          {
             id: 5,
             datetime: new Date("2024-01-08 13:00"),
-            notes: ""
+            notes: "Pacijent pokazuje odličan napredak"
          },
          {
             id: 6,
             datetime: new Date("2024-01-09 08:00"),
-            notes: ""
+            notes: "Pacijentovo stanje se ubrzano poboljšava"
          },
          {
             id: 7,
@@ -285,9 +285,9 @@ export const myTherapies = [
       id: 1,
       name: "Post operation shoulder recovery",
       code: "#4JG5E",
-      "date started": new Date("2023-10-27"),
-      "date finished": new Date("2023-11-21"),
-      therapist: "Ante Pavlović",
+      "date started": new Date("2023-10-28"),
+      "date finished": new Date("2023-12-21"),
+      therapist: "Josip Lončar",
       location: "Electrotherapy room",
       sessions: [
          {
@@ -298,17 +298,17 @@ export const myTherapies = [
          {
             id: 2,
             datetime: new Date("2024-01-02 11:00"),
-            notes: "Pacijent je odradio normalno i dobro."
+            notes: "Pacijent je odradio odličnp i fenomenalno."
          },
          {
             id: 3,
             datetime: new Date("2024-01-04 15:00"),
-            notes: ""
+            notes: "Pacijentovo stanje se konstantno popravlja"
          },
          {
             id: 4,
             datetime: new Date("2024-01-05 13:00"),
-            notes: ""
+            notes: "Pacijent je uspješno završio cijelu terapiju"
          }
       ]
    },
@@ -316,10 +316,10 @@ export const myTherapies = [
       id: 2,
       name: "Shoulder impingement",
       code: "#4JG5E",
-      "date started": new Date("2023-10-27"),
-      "date finished": new Date("2023-11-21"),
-      therapist: "Ante Pavlović",
-      location: "Electrotherapy room",
+      "date started": new Date("2023-11-11"),
+      "date finished": new Date("2023-11-28"),
+      therapist: "Ivan Ivanovič",
+      location: "Hydro Rehab Pool",
       sessions: [
          {
             id: 1,
@@ -334,12 +334,12 @@ export const myTherapies = [
          {
             id: 3,
             datetime: new Date("2024-01-04 15:00"),
-            notes: ""
+            notes: "Odličan napredak"
          },
          {
             id: 4,
             datetime: new Date("2024-01-05 13:00"),
-            notes: ""
+            notes: "Pacijent je terapiju završio na fenomenalan način"
          }
       ]
    },
@@ -347,10 +347,10 @@ export const myTherapies = [
       id: 3,
       name: "Shoulder impingement",
       code: "#4JG5E",
-      "date started": new Date("2023-10-27"),
-      "date finished": new Date("2023-11-21"),
-      therapist: "Ante Pavlović",
-      location: "Electrotherapy room",
+      "date started": new Date("2023-12-01"),
+      "date finished": new Date("2023-12-12"),
+      therapist: "Stjepan Kovačević",
+      location: "Cryo Recovery Room",
       sessions: [
          {
             id: 1,
@@ -365,12 +365,12 @@ export const myTherapies = [
          {
             id: 3,
             datetime: new Date("2024-01-04 15:00"),
-            notes: ""
+            notes: "Odlična sesija"
          },
          {
             id: 4,
             datetime: new Date("2024-01-05 13:00"),
-            notes: ""
+            notes: "Nevjerojatno kvalitenta sesija s pacijentom"
          }
       ]
    },
@@ -383,9 +383,9 @@ export const patients = [
       surname: "Vrančić",
       "e-mail": "karlo.vrancic@medbay.hr",
       address: "Ulica Gustava Krkleca 12, Zagreb",
-      dob: new Date("10/12/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      dob: new Date("10/12/2021"),
+      phone: "0911111111",
+      mbo: "12345678901",
       show: true,
       code: "#User452"
    },
@@ -395,9 +395,9 @@ export const patients = [
       surname: "Ćetojević-Tisaj",
       "e-mail": "tea.cetojevic-tisaj@medbay.hr",
       address: "Unska ulica 3, Zagreb",
-      dob: new Date("10/13/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      dob: new Date("10/16/2020"),
+      phone: "091222222",
+      mbo: "23456789012",
       show: true,
       code: "#User453"
    },
@@ -407,9 +407,9 @@ export const patients = [
       surname: "Balen",
       "e-mail": "ian.balen@medbay.hr",
       address: "Obala kneza Trpimira 26, Zadar",
-      dob: new Date("10/14/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      dob: new Date("10/14/2002"),
+      phone: "091333333",
+      mbo: "34567890123",
       show: false,
       code: "#User454"
    },
@@ -418,10 +418,10 @@ export const patients = [
       name: "Nikola",
       surname: "Baretić",
       "e-mail": "nikola.baretic@medbay.hr",
-      address: "Ulica Gustava Krkleca 12, Zagreb",
-      dob: new Date("10/15/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      address: "Ulica Josipa Jelačića 4, Zagreb",
+      dob: new Date("11/19/2007"),
+      phone: "091444444",
+      mbo: "45678901234",
       show: true,
       code: "#User455"
    },
@@ -430,10 +430,10 @@ export const patients = [
       name: "Niko",
       surname: "Kaštelan",
       "e-mail": "niko.kastelan@medbay.hr",
-      address: "Unska ulica 3, Zagreb",
-      dob: new Date("10/16/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      address: "Zelinska ulica 17, Zagreb",
+      dob: new Date("10/20/2016"),
+      phone: "091555555",
+      mbo: "56789012345",
       show: true,
       code: "#User456"
    },
@@ -442,10 +442,10 @@ export const patients = [
       name: "Ivan",
       surname: "Kordić",
       "e-mail": "ivan.kordic@medbay.hr",
-      address: "Obala kneza Trpimira 26, Zadar",
-      dob: new Date("10/17/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      address: "Ulica Petra Krešimira 11, Zadar",
+      dob: new Date("10/17/2010"),
+      phone: "091666666",
+      mbo: "67890123456",
       show: false,
       code: "#User457"
    },
@@ -454,10 +454,10 @@ export const patients = [
       name: "Lovro",
       surname: "Dujić",
       "e-mail": "lovro.dujic@medbay.hr",
-      address: "Ulica Gustava Krkleca 12, Zagreb",
-      dob: new Date("01/01/2023"),
-      phone: "0955555555",
-      mbo: "15253545565",
+      address: "Ulica grada Vukovara 15, Zagreb",
+      dob: new Date("01/01/2024"),
+      phone: "091777777",
+      mbo: "78901234567",
       show: true,
       code: "#User458"
    },
@@ -479,7 +479,7 @@ export const therapists = [
       surname: "Ćetojević-Tisaj",
       "e-mail": "tea.cetojevic-tisaj@medbay.hr",
       specialization: "Microwave therapist",
-      "employed since": new Date("10/13/2023"),
+      "employed since": new Date("10/13/2022"),
       show: true
    },
    {
@@ -488,7 +488,7 @@ export const therapists = [
       surname: "Balen",
       "e-mail": "ian.balen@medbay.hr",
       specialization: "Traction therapist",
-      "employed since": new Date("10/14/2023"),
+      "employed since": new Date("10/14/2019"),
       show: false
    },
    {
@@ -497,7 +497,7 @@ export const therapists = [
       surname: "Baretić",
       "e-mail": "nikola.baretic@medbay.hr",
       specialization: "Electrotherapist",
-      "employed since": new Date("10/15/2023"),
+      "employed since": new Date("10/15/2016"),
       show: true
    },
    {
@@ -506,7 +506,7 @@ export const therapists = [
       surname: "Kaštelan",
       "e-mail": "niko.kastelan@medbay.hr",
       specialization: "Microwave therapist",
-      "employed since": new Date("10/16/2023"),
+      "employed since": new Date("10/16/2022"),
       show: true
    },
    {
@@ -515,7 +515,7 @@ export const therapists = [
       surname: "Kordić",
       "e-mail": "ivan.kordic@medbay.hr",
       specialization: "Traction therapist",
-      "employed since": new Date("10/17/2023"),
+      "employed since": new Date("10/17/2021"),
       show: false
    },
    {
@@ -524,7 +524,7 @@ export const therapists = [
       surname: "Dujić",
       "e-mail": "lovro.dujic@medbay.hr",
       specialization: "Electrotherapist",
-      "employed since": new Date("01/01/2023"),
+      "employed since": new Date("01/01/2024"),
       show: true
    },
 ]
@@ -552,19 +552,19 @@ export const testSessions = [
       id: 4,
       therapy: "Shoulder impingement",
       datetime: new Date("2024-01-05 13:00"),
-      notes: ""
+      notes: "Vrlo dobra sesija"
    },
    {
       id: 5,
       therapy: "Severe shoulder fracture",
       datetime: new Date("2024-01-08 13:00"),
-      notes: ""
+      notes: "Podosta solidna sesija"
    },
    {
       id: 6,
       therapy: "Post operation shoulder recovery",
       datetime: new Date("2024-01-09 08:00"),
-      notes: ""
+      notes: "Nevjerojatno kvalitetna sesija s pacijentom koji odlično surađuje"
    },
    {
       id: 7,
@@ -588,22 +588,22 @@ export const resources = [
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
-      name: "Electrotherapy machine",
-      capacity: 4,
-      specialization: "Massage therapist",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+      name: "Gym",
+      capacity: 2,
+      specialization: "Physical therapist",
+      description: "Physical therapy focuses on neck strengthening and range of motion exercises to alleviate pain and stiffness."
    },
    {
-      name: "Electrotherapy machine",
-      capacity: 4,
-      specialization: "Electrotherapist",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+      name: "Cryotherapy machine",
+      capacity: 6,
+      specialization: "Cryotherapist",
+      description: "Cryotherapy is used immediately after an acute sports injury to minimize swelling, numb the area, and provide pain relief while facilitating faster recovery."
    },
    {
-      name: "Electrotherapy machine",
-      capacity: 4,
-      specialization: "Massage therapist",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
+      name: "Hydrotherapy pool",
+      capacity: 1,
+      specialization: "Hydrotherapist",
+      description: "Hydrotherapy offers a supportive and buoyant environment for stroke survivors to work on regaining."
    }
 ]
 
@@ -628,16 +628,16 @@ export const adminTherapies = [
       name: "Post operation shoulder recovery",
       code: "#43GE4",
       numberOfSessions: 4,
-      resource: "Electrotherapy machine",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      resource: "Cryotherapy machine",
+      description: "Cryotherapy is used immediately after an acute sports injury to minimize swelling, numb the area, and provide pain relief while facilitating faster recovery.",
       bodypart: "shoulder"
    },
    {
       name: "Impingement 2 electric bogaloo",
       code: "#4JF9F",
       numberOfSessions: 5,
-      resource: "Electrotherapy machine",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      resource: "Hydrotherapy pool",
+      description: "Hydrotherapy offers a supportive and buoyant environment for stroke survivors to work on regaining.",
       bodypart: "shoulder"
    },
    {
@@ -660,16 +660,16 @@ export const adminTherapies = [
       name: "Elbow tendon injury",
       code: "#56JG6",
       numberOfSessions: 3,
-      resource: "Electrotherapy machine",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      resource: "Hydrotherapy pool",
+      description: "Hydrotherapy offers a supportive and buoyant environment for stroke survivors to work on regaining.",
       bodypart: "arm"
    },
    {
       name: "Post operation elbow recovery",
       code: "#43HE4",
       numberOfSessions: 5,
-      resource: "Electrotherapy machine",
-      description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
+      resource: "Cryotherapy machine",
+      description: "Cryotherapy is used immediately after an acute sports injury to minimize swelling, numb the area, and provide pain relief while facilitating faster recovery.",
       bodypart: "arm"
    }
 ]
@@ -682,7 +682,7 @@ export const adminSessions = [
       },
       {
          name: "Shoulder impingement",
-         therapist: "Ante Pavlović",
+         therapist: "Ivan Slamnig",
          patient: "Karlo Vrančić"
       },
       {
@@ -697,7 +697,7 @@ export const adminSessions = [
       },
       {
          name: "Arthritis pain management",
-         therapist: "Vladimir Sruk",
+         therapist: "Šime Šimunović",
          patient: "Nikola Baretić"
       },
       {
@@ -712,7 +712,75 @@ export const adminSessions = [
       },
       {
          name: "Scoliosis",
-         therapist: "Nikolina Frid",
-         patient: "Miljenko Krhen"
+         therapist: "Ivko Ivković",
+         patient: "Marin Marinković"
       }
 ]
+
+export const adminStatsPatients = [
+   {
+      name: "Karlo Vrančić",
+      noOfPatients: 200,
+      percentage: 83
+   },
+   {
+      name: "Ian Balen",
+      noOfPatients: 146,
+      percentage: 67
+   },
+   {
+      name: "Ivan Kordić",
+      noOfPatients: 130,
+      percentage: 75
+   },
+   {
+      name: "Tea Ćetojević-Tisaj",
+      noOfPatients: 125,
+      percentage: 58
+   },
+   {
+      name: "Niko Kaštelan",
+      noOfPatients: 122,
+      percentage: 79
+   },
+   {
+      name: "Tomislav Šikić",
+      noOfPatients: 108,
+      percentage: 70
+   },
+   {
+      name: "Nikola Baretić",
+      noOfPatients: 100,
+      percentage: 83
+   },
+   {
+      name: "Lovro Dujić",
+      noOfPatients: 91,
+      percentage: 67
+   },
+   {
+      name: "Lana Ćetojević-Tisaj",
+      noOfPatients: 87,
+      percentage: 75
+   },
+   {
+      name: "Marko Marković",
+      noOfPatients: 84,
+      percentage: 58
+   },
+   {
+      name: "Luka Dujić",
+      noOfPatients: 77,
+      percentage: 79
+   },
+   {
+      name: "Mirna Ćetojević-Tisaj",
+      noOfPatients: 76,
+      percentage: 70
+   },
+   {
+      name: "Josip Josipović",
+      noOfPatients: 5,
+      percentage: 83
+   }
+] 
