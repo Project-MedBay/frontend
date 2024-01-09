@@ -1,0 +1,212 @@
+@property --ljubicasta-nova{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #200063;
+}
+
+.calendarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.topBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 56%;
+    padding: 10px;
+}
+
+.bottomTopBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.arrows {
+    display: flex;
+    align-items: center;
+}
+
+.calendarButton {
+    background-color: #e4e4e4;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.calendarButton:hover {
+    background-color: #d4d4d4;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0 20px; /* added margin for proper centering */
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.selectInput, .textInput {
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.textInput {
+    padding: 5px 10px;
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.selectInput, .textInput {
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.arrows {
+    flex-grow: 1;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.calendarButton {
+    background-color: var(--ljubicasta-nova); /* White button background */
+    color: white; /* Green color text */
+    border: 2px solid white; /* Green border */
+    padding: 12px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    box-shadow: 0px 4px 8px rgba(76, 175, 80, 0.3); /* Green shadow */
+    transition: all 0.3s ease;
+}
+
+.calendarButton:hover {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    box-shadow: 0px 6px 12px rgba(76, 175, 80, 0.5);
+}
+
+.calendarTable {
+    border-collapse: separate;
+    border-spacing: 8px; /* Adjust space between cells */
+    width: 56%;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0px 8px 28px rgba(76, 175, 80, 0.4);
+    border-radius: 5px;
+    margin-bottom: 100px;
+    padding: 10px;
+    /* set fixed column width */ 
+    table-layout: fixed;
+}
+
+.dateTime{
+    font-size: 2rem;
+    font-weight: 1200;
+    color: var(--ljubicasta-nova);
+}
+
+.tableDoW {
+    color: grey;
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.tableSquare {
+    height: 50px;
+    width: 50px;
+    margin:auto;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: var(--ljubicasta-nova);
+    background-color: white; /* Default background color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 2px 2px 5px rgb(49, 0, 146); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.tableHour{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.calendarTable td {
+    padding: 6px;
+}
+
+.tableSquare:hover {
+    background-color: green;
+    color: white;
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 3px 3px 10px rgba(0, 128, 0, 0.4); /* Enhanced shadow */
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    .calendarTable th, .calendarTable td {
+        padding: 8px;
+    }
+    .calendarButton {
+        padding: 8px 16px;
+    }
+}
