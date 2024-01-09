@@ -121,7 +121,6 @@ export default function PatientDash(props) {
             <div className={s.scroll_container}>
                <div className={s.schedule_card}>
                   {scheduleElements}
-                  {scheduleElements}
                </div>
             </div>
          </div>

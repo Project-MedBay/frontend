@@ -1,4 +1,5 @@
-import { useState} from 'react'
+import { useState } from 'react'
+import { jwtDecode } from 'jwt-decode'
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
@@ -9,8 +10,8 @@ import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("admin")           // sluzi za navigaciju
-  const [userToken, setUserToken] = useState("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpYW4uYmFsZW42N0BnbWFpbC5jb20iLCJpYXQiOjE3MDQ3NTEwNzgsImV4cCI6MTcwNDc1Mjg3OH0.4xw0j63RbLRvTGrA7nPXoqLDhVPrsFRYSsoJhu50Qkk")
+  const [pageName, setPageName] = useState("login")           // sluzi za navigaciju
+  const [userToken, setUserToken] = useState("")
   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
     id: "452",
     firstName: "Petar",
@@ -27,28 +28,16 @@ export default function App() {           // glavna komponenta, u njoj se render
     userImage: null
   })
 
-   // axios({
-   //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
-   //    method: "GET",
-   //    headers: {
-   //       Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
-   //    }
-   // })
-   // .then(res => setUserData({
-   //    id: res.data.id,
-   //    firstName: res.data.firstName,
-   //    lastName: res.data.lastName,
-   //    email: res.data.email,
-   //    password: res.data.password,
-   //    active: res.data.active,
-   //    role: res.data.role
-   // }))
-   // .catch(error => console.log(error));
+   function handleLogin(token) {
+      setUserToken(token)
+      setPageName(jwtDecode(token).role.toLowerCase())
+   }
+   
   
   const pages = {
     login: <>
       <LogRegHeader navigate={setPageName} />
-      <LoginMain navigate={setPageName} setUserToken={setUserToken} />
+      <LoginMain handleLogin={handleLogin} navigate={setPageName} />
     </>,
     register: <>
       <LogRegHeader navigate={setPageName} />

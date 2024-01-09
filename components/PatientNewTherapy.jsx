@@ -104,7 +104,7 @@ export default function PatientNewTherapy(props) {
          data: {
             healthReferralId: verificationData.referral,
             hlkid: verificationData.hlkid,
-            therapyCode: "#3N4P6",     // NOTE tu stavit kod
+            therapyCode: selectedTherapy.therapyCode,
             appointmentDates: selectedSessions
          }
       })

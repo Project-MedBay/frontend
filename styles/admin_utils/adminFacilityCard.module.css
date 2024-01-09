@@ -1,26 +1,26 @@
 .facility_card {
    display: flex;
    flex-direction: column;
-   gap: 4px;
-   width: 700px;
-   padding: 15px 20px;
-   border-radius: 10px;
+   gap: calc(4 * var(--scale-by-height));
+   width: calc(700 * var(--scale-by-height));
+   padding: calc(15 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
+   border-radius: calc(10 * var(--scale-by-height));
    background: #FFF;
-   box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.25);
+   box-shadow: 0 calc(4 * var(--scale-by-height)) calc(10 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) rgba(0, 0, 0, 0.25);
 }
 
 .card_name_buttons {
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
-   gap: 50px;
-   margin: 0px;
-   margin-bottom: 5px;
+   gap: calc(50 * var(--scale-by-height));
+   margin: 0;
+   margin-bottom: calc(5 * var(--scale-by-height));
 }
 
 .card_name {
    color: #22006a;
-   font-size: 26px;
+   font-size: calc(26 * var(--scale-by-height));
    font-weight: 600;
    margin: 0;
 }
@@ -29,20 +29,19 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   gap: 10px;
+   gap: calc(10 * var(--scale-by-height));
 }
 
 .card_button {
    color: #FFF;
-   font-family: "Barlow", sans-serif;
-   font-size: 22px;
+   font-size: calc(22 * var(--scale-by-height));
    font-weight: 700;
    text-align: center;
    vertical-align: middle;
-   padding: 4px 12px;
+   padding: calc(4 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
    background-color: #70D8AC;
    border: none;
-   border-radius: 10px;
+   border-radius: calc(10 * var(--scale-by-height));
    cursor: pointer;
 }
 
@@ -55,14 +54,14 @@
    display: flex;
    justify-content: space-between;
    align-items: flex-start;
-   gap: 40px;
-   margin-top: 5px 0;
+   gap: calc(40 * var(--scale-by-height));
+   margin-top: calc(5 * var(--scale-by-height)) 0;
 }
 
 .row_info_value {
    display: flex;
    color: #636363;
-   font-size: 20px;
+   font-size: calc(20 * var(--scale-by-height));
    font-weight: 400;
    margin: 0;
 }
@@ -73,11 +72,11 @@
 
 .value_wrapper, .card_description {
    color: #000;
-   font-size: 20px;
+   font-size: calc(20 * var(--scale-by-height));
    font-weight: 500;
 }
 
 .card_description {
-   font-size: 20px;
+   font-size: calc(20 * var(--scale-by-height));
    line-height: 105%;
 }
