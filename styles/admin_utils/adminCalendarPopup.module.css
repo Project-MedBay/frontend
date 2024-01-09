@@ -1,0 +1,66 @@
+.admin_calendar_popup {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border: 2px solid black;
+   margin: auto;
+   margin-top: 50px;
+   padding-bottom: 40px;
+   width: 1000px;
+   border-radius: 15px;
+   background: #FFF;
+   box-shadow: 0px 4px 25px 6px rgba(0, 0, 0, 0.25);
+}
+
+.popup_header {
+   display: flex;
+   justify-content: space-between;
+   gap: 400px;
+   align-items: center;
+}
+
+.header_date {
+   color: var(--TAMNO-SIVA, #636363);
+   font-size: 40px;
+   font-weight: 600;
+   line-height: 97.2%; /* 44.712px */
+   letter-spacing: -3.22px;
+   margin: 30px;
+   margin-bottom: 50px;
+}
+
+.header_time {
+   color: #000;
+   font-size: 50px;
+   font-weight: 600;
+   line-height: 97.2%; /* 58.32px */
+   letter-spacing: -4.2px;
+   margin: 30px;
+   margin-bottom: 50px;
+}
+
+.popup_container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 85%;
+}
+
+.container_card {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   padding: 15px;
+   border-radius: 10px;
+   background: #FFF;
+   box-shadow: 0px 4px 15px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card_header {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   width: 100%;
+   gap: 20px;
+}
