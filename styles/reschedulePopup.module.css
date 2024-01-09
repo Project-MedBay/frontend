@@ -1,0 +1,106 @@
+.reschedule_popup {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   left: 50vw;
+   top: 50vh;
+   transform: translate(-50%, -50%);
+   align-items: center;
+   justify-content: center;
+   gap: calc(15 * var(--scale-by-height));
+   font-weight: 700;
+   background: #FFFFFF;
+   box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
+   border-radius: calc(12 * var(--scale-by-height));
+   width: max-content;
+}
+
+.popup_header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   padding: calc(20 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+   border-bottom: #656565 solid calc(1 * var(--scale-by-height));
+   margin-bottom: calc(10 * var(--scale-by-height));
+}
+
+.popup_title {
+   color: #000;
+   font-size:  calc(32 * var(--scale-by-height));
+   font-weight: 700;
+   margin: 0;
+}
+
+.popup_exit {
+   margin-top: calc(3 * var(--scale-by-height));
+   cursor: pointer;
+}
+
+.reschedule_info {
+   color: #000;
+   font-size: calc(24 * var(--scale-by-height));
+   font-weight: 400;
+   margin: 0 calc(40 * var(--scale-by-height));
+}
+
+.reschedule_info > span {
+   font-size: calc(32 * var(--scale-by-height));
+}
+
+.reschedule_legend {
+   font-size: calc(16 * var(--scale-by-height));
+   font-weight: 400;
+   text-align: center;
+   margin: calc(10 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+   line-height: 150%;
+}
+
+.legend_purple {
+   background-color: #22006a;
+   color: #fff;
+   font-weight: 600;
+   padding: calc(3 * var(--scale-by-height)) calc(5 * var(--scale-by-height));
+   border-radius: calc(5 * var(--scale-by-height));
+}
+
+.legend_green {
+   padding: 0 calc(3 * var(--scale-by-height));
+   border: #70D8AC solid calc(2 * var(--scale-by-height));
+   border-radius: calc(5 * var(--scale-by-height));
+}
+
+.reschedule_button, .confirm_yes, .confirm_no {
+   width: calc(250 * var(--scale-by-height));
+   height: calc(60 * var(--scale-by-height));
+   color: #FFF;
+   font-size:  calc(32 * var(--scale-by-height));
+   font-weight: 600;
+   border: 0;
+   margin: calc(20 * var(--scale-by-height));
+   margin-bottom: calc(40 * var(--scale-by-height));
+   border-radius: calc(10 * var(--scale-by-height));
+   background-color: #70D8AC;
+   cursor: pointer;
+}
+
+.reschedule_confirm {
+   display: flex;
+   align-items: center;
+   margin-bottom: calc(20 * var(--scale-by-height));
+}
+
+.confirm_text {
+   font-size: calc(36 * var(--scale-by-height));
+   font-weight: 700;
+   margin: 0 calc(10 * var(--scale-by-height));
+}
+
+.confirm_yes, .confirm_no {
+   width: calc(100 * var(--scale-by-height));
+   margin: calc(20 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+}
+
+.confirm_no {
+   background-color: #22006a;
+}

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { testAvailableSessions } from "./TestingData"
 import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  mySchedule, numOfSessions, numberOfDays, therapyCode} = props     // i think ill need current for axios, will see
+   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode} = props     // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
-   const [availableSessions, setAvailableSessions] = useState({})
+   const [availableSessions, setAvailableSessions] = useState(testAvailableSessions)   // NOTE maknit
    const [viewingSession, setViewingSession] = useState(reschedule ? selectedSessions[0] : null)
    const [blockedSessions, setBlockedSessions] = useState({})
 
@@ -46,8 +47,8 @@ export default function SessionSelection(props) {
       } else if (Object.keys(availableSessions).includes(formatFullDate(weekDate)) == false ||
                 blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
-         if (reschedule && Object.keys(mySchedule).includes(formatWeek(weekDate))) {
-            for (let session of mySchedule[formatWeek(weekDate)]) {
+         if (reschedule && Object.keys(patientSchedule).includes(formatWeek(weekDate))) {
+            for (let session of patientSchedule[formatWeek(weekDate)]) {
                if (formatDate(weekDate) == formatDate(session.datetime)) {
                   h3Class += ` ${s.weekdate_in_sessions}`
                   break

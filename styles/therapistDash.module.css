@@ -41,7 +41,7 @@
    justify-content: space-between;
    align-items: center;
    margin-top: calc(-10 * var(--scale-by-height));
-   width: calc(420 * var(--scale-by-height));
+   width: calc(415 * var(--scale-by-height));
 }
 
 .container_date, .date_arrow {
@@ -129,6 +129,11 @@
    margin: 0;
 }
 
+.session_footer {
+   display: flex;
+   justify-content: space-between;
+}
+
 .session_location {
    color: #000;
    font-size: calc(16 * var(--scale-by-height));
@@ -143,9 +148,17 @@
    font-weight: 600;
    text-decoration: underline;
    margin: 0;
-   margin-top: calc(-10 * var(--scale-by-height));
+   margin-top: calc(10 * var(--scale-by-height));
    margin-bottom: calc(5 * var(--scale-by-height));
    cursor: pointer;
+}
+
+.right_cards {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: calc(25 * var(--scale-by-height));
+   min-height: calc(810 * var(--scale-by-height));
 }
 
 .selected_session {
@@ -165,15 +178,19 @@
 }
 
 .session_info {
-   display: flex;
-   gap: calc(15 * var(--scale-by-height));
-   align-items: center;
+   display: grid;
+   grid-template-columns: calc(180 * var(--scale-by-height)) fit-content(calc(400 * var(--scale-by-height)));
+   row-gap: calc(25 * var(--scale-by-height));
+   column-gap: calc(10 * var(--scale-by-height));
+   align-items: top;
+   min-height: calc(250 * var(--scale-by-height));
 }
 
-.info_labels > p {
+.session_info > p {
    color: #656565;
    font-size: calc(24 * var(--scale-by-height));
    font-weight: 500;
+   margin: 0;
 }
 
 .info_values {
@@ -184,6 +201,7 @@
    color: #000;
    font-size: calc(24 * var(--scale-by-height));
    font-weight: 500;
+   margin: 0;
 }
 
 p.patient_link {
@@ -202,7 +220,6 @@ p.patient_link {
    background: #FFF;
    box-shadow: 0 calc(4 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) 0 rgba(0, 0, 0, 0.25);
    width: calc(700 * var(--scale-by-height));
-   margin-top: calc(30 * var(--scale-by-height));
    padding: calc(10 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
 }
 
@@ -252,7 +269,7 @@ p.patient_link {
    background-color: hsl(0, 0%, 90%);
    border-radius: calc(5 * var(--scale-by-height));
    width: 100%;
-   height: calc(335 * var(--scale-by-height));
+   height: calc(360 * var(--scale-by-height));
    padding: calc(15 * var(--scale-by-height));
    margin: calc(10 * var(--scale-by-height)) 0;
 }

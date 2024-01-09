@@ -1,40 +1,9 @@
 export const mySchedule = {
-   [new Date("2024-01-01 00:00:00")]: [
-      {
-         id: 0,
-         therapy: "Shoulder impingement",
-         datetime: new Date ("2024-01-01 09:00"),
-         location: "Electrotherapy room",
-         completedSessions: 4,
-         totalSessions: 11,
-         therapist: "Ante Pavlović",
-         notes: "Pacijent je odradio normalno i dobro... ovaj put"
-      },
-      {
-         id: 1,
-         therapy: "Shoulder impingement",
-         datetime: new Date ("2024-01-03 17:00"),
-         location: "Electrotherapy room",
-         completedSessions: 5,
-         totalSessions: 11,
-         therapist: "Ante Pavlović",
-         notes: "Pacijent je odradio normalno i dobro."
-      },
-      {
-         id: 2,
-         therapy: "Shoulder impingement",
-         datetime: new Date ("2024-01-05 17:00"),
-         location: "Electrotherapy room",
-         completedSessions: 6,
-         totalSessions: 11,
-         therapist: "Ante Pavlović",
-         notes: "Vrlo kvalitetna sesija, veselim se sljedećoj"
-      }
-   ],
    [new Date("2024-01-08 00:00:00")]: [
       {
          id: 0,
          therapy: "Shoulder impingement",
+         therapyCode: "4GH8J",
          datetime: new Date ("2024-01-09 17:00"),
          location: "Electrotherapy room",
          completedSessions: 7,
@@ -45,9 +14,45 @@ export const mySchedule = {
       {
          id: 1,
          therapy: "Shoulder impingement",
+         therapyCode: "4GH8J",
          datetime: new Date ("2024-01-11 11:00"),
          location: "Electrotherapy room",
          completedSessions: 8,
+         totalSessions: 11,
+         therapist: "Ante Pavlović",
+         notes: ""
+      }
+   ],
+   [new Date("2024-01-15 00:00:00")]: [
+      {
+         id: 0,
+         therapy: "Shoulder impingement Shoulder impingement Shoulder impingement",
+         therapyCode: "4GH8J",
+         datetime: new Date ("2024-01-15 09:00"),
+         location: "Electrotherapy room",
+         completedSessions: 9,
+         totalSessions: 11,
+         therapist: "Ante Pavlović",
+         notes: "Pacijent je odradio normalno i dobro... ovaj put"
+      },
+      {
+         id: 1,
+         therapy: "Shoulder impingement",
+         therapyCode: "4GH8J",
+         datetime: new Date ("2024-01-17 17:00"),
+         location: "Electrotherapy room",
+         completedSessions: 10,
+         totalSessions: 11,
+         therapist: "Ante Pavlović",
+         notes: "Pacijent je odradio normalno i dobro."
+      },
+      {
+         id: 2,
+         therapy: "Shoulder impingement",
+         therapyCode: "4GH8J",
+         datetime: new Date ("2024-01-19 17:00"),
+         location: "Electrotherapy room",
+         completedSessions: 11,
          totalSessions: 11,
          therapist: "Ante Pavlović",
          notes: ""
@@ -59,7 +64,7 @@ export const therapistSchedule = {
    [new Date("2024-01-01 00:00:00")]: [
       {
          id: 0,
-         therapy: "Shoulder impingement",
+         therapy: "Shoulder impingement Shoulder impingement Shoulder impingement",
          datetime: new Date ("2024-01-01 09:00"),
          location: "Electrotherapy room",
          completedSessions: 4,
@@ -157,16 +162,15 @@ export const therapistSchedule = {
    ]
 }
 
-export const availableSessions = {                          // treba poslat therapy (code), broj dana, bit ce druga funkcija za reschedule al vraca isto u biti
-   "Tuesday, 9th January": [8, 12, 13, 15, 18],
-   "Wednesday, 10th January": [10, 14, 16, 17, 19],
-   "Thursday, 11th January": [9, 11, 12, 14, 15, 17, 19],
-   "Friday, 12th January": [10, 12, 13, 14, 17, 18, 19],
-   "Monday, 15th January": [8, 9, 10, 12, 13, 14, 17, 18, 19],
-   "Wednesday, 17th January": [9, 11, 13, 14, 16, 17, 19],
-   "Thursday, 18th January": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-   "Friday, 19th January": [9, 11, 13, 14, 16, 17, 19],
-   dateMax: new Date("2024-01-22 00:00")
+export const testAvailableSessions = {                          // treba poslat therapy (code), broj dana, bit ce druga funkcija za reschedule al vraca isto u biti
+   "09/01/2024": [8, 12, 13, 15, 18],
+   "10/01/2024": [10, 14, 16, 17, 19],
+   "11/01/2024": [9, 11, 12, 14, 15, 17, 19],
+   "12/01/2024": [10, 12, 13, 14, 17, 18, 19],
+   "15/01/2024": [8, 9, 10, 12, 13, 14, 17, 18, 19],
+   "17/01/2024": [9, 11, 13, 14, 16, 17, 19],
+   "18/01/2024": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+   "19/01/2024": [9, 11, 13, 14, 16, 17, 19]
 }
 
 export const therapies = {

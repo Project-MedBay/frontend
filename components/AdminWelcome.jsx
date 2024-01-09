@@ -1,5 +1,8 @@
 import React from "react"
 import WelcomeButton from "./admin_utils/WelcomeButton"
+import adminWelcomeCalendar from "../assets/adminWelcomeCalendar.png"
+import adminWelcomeVerifications from "../assets/adminWelcomeVerifications.png"
+import adminWelcomeManage from "../assets/adminWelcomeManage.png"
 import s from "../styles/adminWelcome.module.css"
 
 
@@ -9,19 +12,19 @@ export default function AdminWelcome(props) {
     const buttons = [
         <WelcomeButton 
             key="calendar"
-            icon="../assets/adminWelcomeCalendar.png"
+            icon={adminWelcomeCalendar}
             title="Calendar"
             navigate={() => navigate("calendar")}
         />, 
         <WelcomeButton 
             key="verifications"
-            icon="../assets/adminWelcomeVerifications.png"
+            icon={adminWelcomeVerifications}
             title="Verifications"
             navigate={() => navigate("verifications")}
         />,
         <WelcomeButton 
             key="manage"
-            icon="../assets/adminWelcomeManage.png"
+            icon={adminWelcomeManage}
             title="Manage"
             navigate={() => navigate("manage")}
         />

@@ -45,7 +45,7 @@
    justify-content: space-between;
    align-items: center;
    margin-top: calc(-10 * var(--scale-by-height));
-   width: calc(420 * var(--scale-by-height));
+   width: calc(415 * var(--scale-by-height));
 }
 
 .container_date, .date_arrow {
@@ -86,7 +86,7 @@
    overflow: auto;
    align-items: center;
    width: max-content;
-   gap: calc(20 * var(--scale-by-height));
+   gap: calc(25 * var(--scale-by-height));
    height: calc(750 * var(--scale-by-height));
 }
 
@@ -104,12 +104,13 @@
    flex-direction: column;
    width: calc(400 * var(--scale-by-height));
    margin: 0 calc(20 * var(--scale-by-height));
-   padding: calc(10 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
+   padding: calc(15 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
    border-radius: calc(10 * var(--scale-by-height));
    gap: calc(5 * var(--scale-by-height));
    background: #FFF;
    box-shadow: 0 calc(4 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) 0 rgba(0, 0, 0, 0.25);
    margin-bottom: calc(5 * var(--scale-by-height));
+   cursor: pointer;
 }
 
 .session_passed {
@@ -120,9 +121,9 @@
 }
 
 .session_date {
-   color: #000;
+   color: #22006a;
    font-size: calc(24 * var(--scale-by-height));
-   font-weight: 300;
+   font-weight: 500;
    margin: 0;
 }
 
@@ -133,28 +134,26 @@
    margin: 0;
 }
 
+.session_footer {
+   display: flex;
+   justify-content: space-between;
+}
+
 .session_location {
    color: #000;
-   font-size: calc(16 * var(--scale-by-height));
-   font-weight: 500;
+   font-size: calc(20 * var(--scale-by-height));
+   font-weight: 400;
    margin: 0;
 }
 
 .session_more {
-   text-align: right;
-   color: #22006a;
-   font-size: calc(18 * var(--scale-by-height));
-   font-weight: 600;
-   text-decoration: underline;
-   margin: 0;
-   margin-top: calc(-10 * var(--scale-by-height));
-   margin-bottom: calc(5 * var(--scale-by-height));
-   cursor: pointer;
+   display: none;
 }
 
 .selected_session {
    display: flex;
    flex-direction: column;
+   justify-content: space-between;
    align-items: center;
    padding: calc(30 * var(--scale-by-height)) calc(50 * var(--scale-by-height));
    border-radius: calc(12 * var(--scale-by-height));
@@ -165,15 +164,19 @@
 }
 
 .session_info {
-   display: flex;
-   gap: calc(15 * var(--scale-by-height));
-   align-items: center;
+   display: grid;
+   grid-template-columns: calc(180 * var(--scale-by-height)) fit-content(calc(400 * var(--scale-by-height)));
+   row-gap: calc(25 * var(--scale-by-height));
+   column-gap: calc(10 * var(--scale-by-height));
+   align-items: top;
+   min-height: calc(250 * var(--scale-by-height));
 }
 
-.info_labels > p {
+.session_info > p {
    color: #656565;
    font-size: calc(24 * var(--scale-by-height));
    font-weight: 500;
+   margin: 0;
 }
 
 .info_values {
@@ -184,11 +187,16 @@
    color: #000;
    font-size: calc(24 * var(--scale-by-height));
    font-weight: 500;
+   margin: 0;
 }
 
 .session_image {
    height: calc(340 * var(--scale-by-height));
-   margin: calc(10 * var(--scale-by-height));
+   margin: calc(20 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+}
+
+.view_map {
+   display: none;
 }
 
 .session_buttons {
@@ -388,4 +396,278 @@
 
 .confirm_no {
    background-color: #22006a;
+}
+
+@media only screen and ((max-aspect-ratio: 11 / 10) or (max-width: 815px)) {
+   /* .session_card {background-color: #000;} */
+
+   .mobile_hidden {
+      display: none;
+   }
+
+   .patient_dash_main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: calc(50 * var(--scale-by-height));
+      gap: 3vh;
+      height: fit-content;
+      min-height: calc(100vh - calc(60 * var(--scale-by-height)));
+      /* min-height: 600px */
+   }
+
+   .popup_separate {
+      position: absolute;
+      left: 0;
+      top: calc(60 * var(--scale-by-height));
+      width: 100%;
+      height: 100%;     /* NOTE vidit za ovo */
+   }
+
+   .container_left, .container_right {
+      margin-bottom: 0;
+   }
+
+   .container_title {
+      margin-bottom: calc(10 * var(--scale-by-height));
+   }
+
+   .date_wrapper {
+      width: calc(430 * var(--scale-by-height));
+      margin-left: calc(50 * var(--scale-by-height));
+      margin-right: calc(20 * var(--scale-by-height));
+   }
+   
+   .scroll_container {
+      padding: calc(10 * var(--scale-by-height));
+   }
+
+   .schedule_card {
+      gap: calc(15 * var(--scale-by-height));
+      height: calc(390 * var(--scale-by-height));
+   }
+   
+   .no_sessions {
+      width: calc(550 * var(--scale-by-height));
+      margin: calc(150 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
+   }
+   
+   .session_card {
+      padding: calc(10 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
+      width: calc(550 * var(--scale-by-height));
+   }
+
+   .session_footer {
+      align-items: flex-start;
+   }
+
+   .session_more {
+      color: #fff;
+      font-size: calc(20 * var(--scale-by-height));
+      font-weight: 600;
+      text-decoration: none;
+      width: fit-content;
+      padding: calc(12 * var(--scale-by-height));
+      margin: 0;
+      margin-top: calc(-30 * var(--scale-by-height));
+      background-color: #22006a;
+      border-radius: calc(10 * var(--scale-by-height));
+      cursor: pointer;
+      display: block;
+   }
+
+   .selected_session {
+      padding: calc(30 * var(--scale-by-height));
+      width: calc(610 * var(--scale-by-height));
+      gap: calc(20 * var(--scale-by-height));
+      min-height: 0;
+   }
+
+   .session_info {
+      min-height: 0;
+      row-gap: calc(15 * var(--scale-by-height));
+   }
+
+   .session_image {
+      height: calc(300 * var(--scale-by-height));
+      margin: 0;
+   }
+
+   .view_map {
+      display: block;
+      color: #fff;
+      font-size: calc(22 * var(--scale-by-height));
+      font-weight: 600;
+      padding: calc(5 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
+      background-color: #22006a;
+      border: none;
+      border-radius: calc(10 * var(--scale-by-height));
+      cursor: pointer;
+   }
+
+   .session_buttons {
+      width: calc(460 * var(--scale-by-height));
+   }
+
+   .session_button {
+      width: calc(200 * var(--scale-by-height));
+      height: calc(45 * var(--scale-by-height));
+      margin-top: 0;
+   }
+
+   .notes_text, .reschedule_text {
+      width: calc(200 * var(--scale-by-height));
+   }
+                                                            /* TU SMO STALI */
+   .session_popup {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+      align-items: center;
+      justify-content: center;
+      gap: calc(15 * var(--scale-by-height));
+      font-weight: 700;
+      background: #FFFFFF;
+      box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(12 * var(--scale-by-height));
+      width: max-content;
+   }
+
+   .popup_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: calc(20 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+      border-bottom: #656565 solid calc(1 * var(--scale-by-height));
+      margin-bottom: calc(10 * var(--scale-by-height));
+   }
+
+   .popup_title {
+      color: #000;
+      font-size:  calc(32 * var(--scale-by-height));
+      font-weight: 700;
+      margin: 0;
+   }
+
+   .popup_exit {
+      margin-top: calc(3 * var(--scale-by-height));
+      cursor: pointer;
+   }
+
+   .notes_info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 calc(30 * var(--scale-by-height));
+   }
+
+   .notes_info > p {
+      font-size: calc(28 * var(--scale-by-height));
+      font-weight: 400;
+      margin: 0;
+   }
+
+   .notes_info span {
+      font-weight: 600;
+   }
+
+   .notes_note {
+      margin: calc(30 * var(--scale-by-height));
+      margin-top: calc(15 * var(--scale-by-height));
+   }
+
+   .note_details {
+      font-size: calc(20 * var(--scale-by-height));
+      font-weight: 600;
+      margin: calc(5 * var(--scale-by-height));
+      color: #22006a;
+   }
+
+   .note_box {
+      display: flex;
+      background-color: hsl(0, 0%, 90%);
+      border-radius: calc(5 * var(--scale-by-height));
+      width: calc(700 * var(--scale-by-height));
+      min-height: calc(250 * var(--scale-by-height));
+      padding: calc(15 * var(--scale-by-height));
+   }
+
+   .note_contents {
+      margin: 0;
+      font-weight: 600;
+      font-size: calc(20 * var(--scale-by-height));
+   }
+
+   .reschedule_info {
+      color: #000;
+      font-size: calc(24 * var(--scale-by-height));
+      font-weight: 400;
+      margin: 0 calc(40 * var(--scale-by-height));
+   }
+
+   .reschedule_info > span {
+      font-size: calc(32 * var(--scale-by-height));
+   }
+
+   .reschedule_legend {
+      font-size: calc(16 * var(--scale-by-height));
+      font-weight: 400;
+      text-align: center;
+      margin: calc(10 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+      line-height: 150%;
+   }
+
+   .legend_purple {
+      background-color: #22006a;
+      color: #fff;
+      font-weight: 600;
+      padding: calc(3 * var(--scale-by-height)) calc(5 * var(--scale-by-height));
+      border-radius: calc(5 * var(--scale-by-height));
+   }
+
+   .legend_green {
+      padding: 0 calc(3 * var(--scale-by-height));
+      border: #70D8AC solid calc(2 * var(--scale-by-height));
+      border-radius: calc(5 * var(--scale-by-height));
+   }
+
+   .reschedule_button, .confirm_yes, .confirm_no {
+      width: calc(250 * var(--scale-by-height));
+      height: calc(60 * var(--scale-by-height));
+      color: #FFF;
+      font-size:  calc(32 * var(--scale-by-height));
+      font-weight: 600;
+      border: 0;
+      margin: calc(20 * var(--scale-by-height));
+      margin-bottom: calc(40 * var(--scale-by-height));
+      border-radius: calc(10 * var(--scale-by-height));
+      background-color: #70D8AC;
+      cursor: pointer;
+   }
+
+   .reschedule_confirm {
+      display: flex;
+      align-items: center;
+      margin-bottom: calc(20 * var(--scale-by-height));
+   }
+
+   .confirm_text {
+      font-size: calc(36 * var(--scale-by-height));
+      font-weight: 700;
+      margin: 0 calc(10 * var(--scale-by-height));
+   }
+
+   .confirm_yes, .confirm_no {
+      width: calc(100 * var(--scale-by-height));
+      margin: calc(20 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+   }
+
+   .confirm_no {
+      background-color: #22006a;
+   }
 }

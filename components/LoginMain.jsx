@@ -31,13 +31,8 @@ export default function LoginMain(props) {
          method: "POST",
          data: formData
       })
-      .then(res => res.status == 200 && handleLogIn(res.data.accessToken))       // uspjeh - handleLogin
+      .then(res => res.status == 200 && props.handleLogin(res.data.accessToken))       // uspjeh - handleLogin
       .catch(error => handleError(error));                                       // greska (na backu) - handleError
-   }
-
-   function handleLogIn(token) {          // preko propsa updateamo stanje u stateovima na visoj razini (App)
-      props.setUserToken(token)
-      props.navigate("patient")
    }
 
    function handleError(error) {          // ispisuje error u konzoli, ako je error code 403 (bad request - forbidden) znaci da baza nije dopustila unos

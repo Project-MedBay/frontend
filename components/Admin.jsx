@@ -7,9 +7,8 @@ import AdminManage from './AdminManage'
 import AdminStatistics from './AdminStatistics'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-
     const {setPageName, userToken} = props
-    const [subPageName, setSubPageName] = useState("calendar")           // sluzi za navigaciju
+    const [subPageName, setSubPageName] = useState("welcome")           // sluzi za navigaciju
     const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
         id: "",
         firstName: "",
@@ -28,14 +27,13 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
         }
     }
 
-
     function formatFullDate(datetime) {
         let formattedDate = ""
         datetime.getDate() < 10 ? formattedDate += "0" : ""
         formattedDate += datetime.getDate() + "/"
         datetime.getMonth() + 1 < 10 ? formattedDate += "0" : ""
         formattedDate += (datetime.getMonth() + 1) + "/"
-        formattedDate += datetime.getFullYear() + " "
+        formattedDate += datetime.getFullYear()
         return formattedDate
     }
 

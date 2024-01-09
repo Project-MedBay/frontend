@@ -60,3 +60,12 @@
    color: #4CAF50;
    padding-right: 0;
 }
+
+@media only screen and ((max-aspect-ratio: 3 / 2) or (max-width: 1105px)) {
+   .nav_item {background-color: black;}
+   .header {
+      justify-content: space-between;
+      gap: 0;
+      padding: calc(5 * var(--scale-by-height)) calc(50 * (2 / 3) * var(--scale-by-width));
+   }
+}
