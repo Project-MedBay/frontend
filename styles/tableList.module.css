@@ -1,32 +1,37 @@
 .table_wrapper {
-   padding: 15px 15px;
+   padding: calc(15 * var(--scale-by-height)) calc(15 * var(--scale-by-height));
    background: #FFF;
-   box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.25);
-   border-radius: 10px;
+   box-shadow: 0 calc(8 * var(--scale-by-height)) calc(12 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.25);
+   border-radius: calc(10 * var(--scale-by-height));
 }
 
 .main_table {
    display: grid;
    align-items: center;
-   padding: 0 15px;
+   padding: 0 calc(15 * var(--scale-by-height));
    align-items: center;
    text-align: center;
    overflow: auto;
-   max-height: 820px;
+   max-height: calc(820 * var(--scale-by-height));
 }
 
 .patients {
    /* dobro dode za testirat max dimenzije */
    /* grid-template-columns: 80px 180px 200px 320px 350px 130px 150px 150px 240px; */
-   grid-template-columns: fit-content(80px) fit-content(180px) fit-content(200px) fit-content(320px)
-                          fit-content(350px) fit-content(130px) fit-content(150px) fit-content(150px) fit-content(240px);
+   grid-template-columns: fit-content(calc(80 * var(--scale-by-height))) fit-content(calc(180 * var(--scale-by-height)))
+                          fit-content(calc(200 * var(--scale-by-height))) fit-content(calc(320 * var(--scale-by-height)))
+                          fit-content(calc(350 * var(--scale-by-height))) fit-content(calc(130 * var(--scale-by-height)))
+                          fit-content(calc(150 * var(--scale-by-height))) fit-content(calc(150 * var(--scale-by-height)))
+                          fit-content(calc(240 * var(--scale-by-height)));
 }
 
 .therapists {
    /* dobro dode za testirat max dimenzije */
    /* grid-template-columns: 80px 180px 200px 320px 300px 220px 240px; */
-   grid-template-columns: fit-content(80px) fit-content(180px) fit-content(200px) fit-content(320px)
-                          fit-content(300px) fit-content(220px) fit-content(240px);
+   grid-template-columns: fit-content(calc(80 * var(--scale-by-height))) fit-content(calc(180 * var(--scale-by-height)))
+                          fit-content(calc(200 * var(--scale-by-height))) fit-content(calc(320 * var(--scale-by-height)))
+                          fit-content(calc(300 * var(--scale-by-height))) fit-content(calc(220 * var(--scale-by-height)))
+                          fit-content(calc(240 * var(--scale-by-height)));
 }
 
 .hidden {
@@ -35,17 +40,17 @@
 
 .header_item, .header_buttons {
    position: sticky;
-   top: 0px;
+   top: 0;
    color: #22006a;
-   font-size: 24px;
+   font-size: calc(24 * var(--scale-by-height));
    margin: 0;
-   padding: 15px;
+   padding: calc(15 * var(--scale-by-height));
    background-color: #fff;
-   border-bottom: 3px solid #22006a;
+   border-bottom: calc(3 * var(--scale-by-height)) solid #22006a;
 }
 
 .header_buttons {
-   padding: 9px 0;
+   padding: calc(9 * var(--scale-by-height)) 0;
 }
 
 .table_item_wrapper {
@@ -53,15 +58,15 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   padding: 14px 20px;
+   padding: calc(14 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
    margin: 0;
-   border-top: 1px solid #636363;
+   border-top: calc(1 * var(--scale-by-height)) solid #636363;
    overflow-wrap: anywhere;
 }
 
 .button_wrapper {
-   gap: 12px;
-   padding: 8px 20px;
+   gap: calc(12 * var(--scale-by-height));
+   padding: calc(8 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
 }
 
 .table_first {
@@ -69,7 +74,7 @@
 }
 
 .table_item {
-   font-size: 18px;
+   font-size: calc(18 * var(--scale-by-height));
    font-weight: 500;
    margin: 0;
 }
@@ -77,10 +82,10 @@
 .no_results {
    grid-column: 1 / -1 ;
    color: #636363;
-   font-size: 20px;
+   font-size: calc(20 * var(--scale-by-height));
    font-weight: 600;
-   margin: 10px 0;
-   margin-top: 20px;
+   margin: calc(10 * var(--scale-by-height)) 0;
+   margin-top: calc(20 * var(--scale-by-height));
 }
 
 .reduced_header {
@@ -91,18 +96,17 @@
    width: fit-content;
    height: fit-content;
    color: #fff;
-   font-family: "Barlow", sans-serif;
-   font-size: 18px;
+   font-size: calc(18 * var(--scale-by-height));
    font-weight: 600;
-   padding: 6px 12px;
+   padding: calc(6 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
    background-color: #22006a;
-   border-radius: 10px;
+   border-radius: calc(10 * var(--scale-by-height));
    border: none;
    cursor: pointer;
 }
 
 .header_add {
-   font-size: 24px;
+   font-size: calc(24 * var(--scale-by-height));
    margin: 0 auto;
 }
 

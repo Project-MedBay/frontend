@@ -1,11 +1,10 @@
 .header {
    display: flex;
    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
-   justify-content: space-between;
+   justify-content: center;
    align-items: center;
+   gap:  max(calc(850px * 0.6), calc(850vh * 59 / 725));
    padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
-   padding-left: max(calc(450px * 0.6), calc(450vh * 59 / 725));
-   padding-right: max(calc(350px * 0.6), calc(350vh * 59 / 725));
 }
 
 .header_logo {
@@ -13,6 +12,7 @@
    justify-content: center;
    align-items: center;
    cursor: pointer;
+   margin-left: max(calc(90px * 0.6), calc(90vh * 59 / 725));
 }
 
 .logo_img {
@@ -30,7 +30,7 @@
 
 .header_nav {
    display: grid;
-   grid-template-columns: repeat(4, 160px);
+   grid-template-columns: repeat(4, max(calc(160px * 0.6), calc(160vh * 59 / 725)));
    justify-items: flex-end;
    align-items: center;
    direction: rtl;
@@ -48,7 +48,7 @@
 }
 
 .nav_check_logout > span {
-   padding: 0 5px;
+   padding: 0 max(calc(5px * 0.6), calc(5vh * 59 / 725));
    font-weight: 700;
 }
 

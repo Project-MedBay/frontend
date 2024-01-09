@@ -1,0 +1,257 @@
+.edit_popup {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   left: 50vw;
+   top: 50vh;
+   transform: translate(-50%, -50%);
+   align-items: center;
+   justify-content: center;
+   gap: max(calc(30px * 0.6), calc(30vh * 59 / 725));
+   padding: max(calc(40px * 0.6), calc(40vh * 59 / 725)) max(calc(60px * 0.6), calc(60vh * 59 / 725));
+   font-weight: 700;
+   background: #FFFFFF;
+   box-shadow: 0 calc(4 * var(--scale-by-height)) calc(25 * var(--scale-by-height)) calc(12 * var(--scale-by-height)) #00000026;
+   border-radius: calc(10 * var(--scale-by-height));
+}
+
+.popup_title {
+   /* color: #22006a; */
+   font-size: calc(42 * var(--scale-by-height));
+   font-weight: 800;
+   margin: 0;
+}
+
+.grid_container {
+   position: relative;
+   display: grid;
+   grid-template-columns: auto auto auto auto auto auto;
+   column-gap: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+   row-gap: max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   margin: 0;
+}
+
+#grid_full_row {
+   grid-column: 1 / 7;
+   width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
+}
+#grid_half_left {
+   grid-column: 1 / 4;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+#grid_half_right {
+   grid-column: 4 / 7;
+   width: max(calc(270px * 0.6), calc(270vh * 59 / 725));
+}
+#grid_third_left {
+   grid-column: 1 / 3;
+   width: max(calc(173px * 0.6), calc(173vh * 59 / 725));
+}
+#grid_third_middle {
+   grid-column: 3 / 5;
+   width: max(calc(173px * 0.6), calc(173vh * 59 / 725));
+}
+#grid_third_right {
+   grid-column: 5 / 7;
+   width: max(calc(173px * 0.6), calc(173vh * 59 / 725));
+}
+#grid_two_thirds_left {
+   grid-column: 1 / 5;
+   width: max(calc(346px * 0.6), calc(346vh * 59 / 725));
+}
+#grid_two_thirds_square {
+   grid-column: 1 / 5;
+   grid-row: 3 / 5;
+   width: max(calc(346px * 0.6), calc(346vh * 59 / 725));
+}
+#grid_half_left_stub {
+   grid-column: 1 / 4;
+   width: max(calc(260px * 0.6), calc(260vh * 59 / 725));
+}
+#grid_half_right_stub {
+   grid-column: 4 / 7;
+   width: max(calc(260px * 0.6), calc(260vh * 59 / 725));
+   margin-left: auto;
+}
+
+.form_input {
+   display: flex;
+   flex-direction: column;
+   width: max-content;
+}
+
+.input_label {
+   font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
+   font-weight: 500;
+   margin: max(calc(4px * 0.6), calc(4vh * 59 / 725)) 0;
+}
+
+.input_label > span {
+   color: #636363;
+   text-decoration: underline;
+   margin-left: calc(50 * var(--scale-by-height));
+   cursor: pointer;
+}
+
+.input_box {
+   width: max(calc(540px * 0.6), calc(540vh * 59 / 725));
+   font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+   padding: max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   padding-left: max(calc(14px * 0.6), calc(14vh * 59 / 725));
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
+}
+
+.input_box:focus {
+   outline: none;
+}
+
+.input_disabled {
+   font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+   font-weight: 600;
+   padding-top: max(calc(11px * 0.6), calc(11vh * 59 / 725));
+   padding-bottom: max(calc(12px * 0.6), calc(12vh * 59 / 725));
+   margin: 0;
+}
+
+.desc_box {
+   font-family: "Barlow", sans-serif;
+   font-size: calc(20 * var(--scale-by-height));
+   font-weight: 500;
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
+   height: calc(200 * var(--scale-by-height));
+   padding: calc(15 * var(--scale-by-height));
+   margin: 0;
+   resize: none;
+}
+
+.desc_box:focus {
+   outline: none;
+}
+
+.bodypart_box {
+   display: grid;
+   grid-template-columns: calc(125 * var(--scale-by-height)) calc(100 * var(--scale-by-height)) calc(70 * var(--scale-by-height));
+   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height));
+   column-gap: calc(12 * var(--scale-by-height));
+   row-gap: calc(18 * var(--scale-by-height));
+   padding: calc(20 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
+   height: calc(152 * var(--scale-by-height));
+   margin: 0;
+}
+
+.checkbox_wrapper {
+   display: flex;
+   align-items: center;
+   gap: calc(10 * var(--scale-by-height));
+   width: fit-content;
+   cursor: pointer;
+}
+
+.custom_checkbox {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: calc(20 * var(--scale-by-height));
+   height: calc(20 * var(--scale-by-height));
+   padding: calc(2 * var(--scale-by-height));
+   border: calc(2 * var(--scale-by-height)) solid #636363;
+   border-radius: calc(5 * var(--scale-by-height));
+}
+
+.checkbox_fill {
+   width: 100%;
+   height: 100%;
+   background-color: #22006a;
+   border-radius: calc(3 * var(--scale-by-height));
+   visibility: hidden;
+}
+
+.checkbox_label {
+   font-size: calc(18 * var(--scale-by-height));
+   font-weight: 500;
+   margin: 0;
+}
+
+.checkbox_selected {
+   visibility: visible;
+}
+
+.failed_input {
+   border: calc(1.5 * var(--scale-by-height)) solid #FF0000;
+}
+
+.edit_failed {
+   color: #FF0000;
+   font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
+   font-weight: 500;
+   margin: 0;
+   margin-top: max(calc(2px * 0.6), calc(2vh * 59 / 725));
+   visibility: hidden;
+}
+
+.failed_text {
+   visibility: visible;
+}
+
+input[type=password] {
+   letter-spacing: 0.1em;
+}
+
+input[type=password]::placeholder, input[type=text]::placeholder {
+   letter-spacing: normal;
+}
+
+.password_container {
+   position: relative;
+   display: flex;
+}
+
+.password_eye {
+   position: absolute;
+   right: 47.75%;
+   bottom: calc(36 * var(--scale-by-height));
+   width: max(calc(25px * 0.6), calc(25vh * 59 / 725));
+   cursor: pointer;
+}
+
+.popup_buttons {
+   display: flex;
+   justify-content: center;
+   gap: calc(100 * var(--scale-by-height));
+}
+
+.change_password, .button_save, .button_cancel {
+   color: #FFF;
+   font-size: calc(32 * var(--scale-by-height));
+   font-weight: 700;
+   width: calc(150 * var(--scale-by-height));
+   padding: calc(5 * var(--scale-by-height));
+   border: 0;
+   border-radius: calc(10 * var(--scale-by-height));
+   background: #70D8AC;
+   cursor: pointer;
+}
+
+.change_password {
+   font-size: calc(22 * var(--scale-by-height));
+   width: fit-content;
+   padding: calc(5 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+   margin: auto;
+}
+
+.change_password_note {
+   color: #636363;
+   font-size: calc(14 * var(--scale-by-height));
+   font-weight: 500;
+   margin: 0 auto;
+   margin-top: calc(15 * var(--scale-by-height));
+   margin-bottom: calc(-25 * var(--scale-by-height));
+}
+
+.button_cancel {
+   background: #22006a;
+   font-weight: 600;
+}

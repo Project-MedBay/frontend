@@ -6,36 +6,8 @@ import PatientNewTherapy from './PatientNewTherapy'
 import PatientProfile from './PatientProfile'
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {setPageName, userToken} = props
+   const {setPageName, userToken, userData} = props
    const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
-   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
-      id: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      registeredSince: new Date("2023-12-15"),
-      active: "",
-      role: "",
-   })
-   
-   // axios({
-   //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
-   //    method: "GET",
-   //    headers: {
-   //       Authorization: `Bearer ${props.userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
-   //    }
-   // })
-   // .then(res => setUserData({
-   //    id: res.data.id,
-   //    firstName: res.data.firstName,
-   //    lastName: res.data.lastName,
-   //    email: res.data.email,
-   //    password: res.data.password,
-   //    active: res.data.active,
-   //    role: res.data.role
-   // }))
-   // .catch(error => console.log(error));
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -49,10 +21,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
    }
    
    function formatWeek(datetime) {
-      let tempDate = new Date(datetime)
-      let weekday = tempDate.getDay()
-      let offset = weekday == 0 ? 6 : (weekday - 1)
-      tempDate.setDate(tempDate.getDate() - offset)
+      let tempDate = getWeekFirst(new Date(datetime))
       let date = tempDate.getDate()
       let formattedWeek = date.toString() + addExtension(date) + " " + 
                         month[tempDate.getMonth()] + " - "
@@ -61,6 +30,14 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       formattedWeek += date.toString() + addExtension(date) + " " +
                         month[tempDate.getMonth()]
       return formattedWeek
+   }
+
+   function getWeekFirst(datetime) {
+      let tempDate = new Date(datetime)
+      let weekday = tempDate.getDay()
+      let offset = weekday == 0 ? 6 : (weekday - 1)
+      tempDate.setDate(tempDate.getDate() - offset)
+      return new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate())
    }
 
    function formatDate(datetime) {
@@ -95,7 +72,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       formattedDate += datetime.getDate() + "/"
       datetime.getMonth() + 1 < 10 ? formattedDate += "0" : ""
       formattedDate += (datetime.getMonth() + 1) + "/"
-      formattedDate += datetime.getFullYear() + " "
+      formattedDate += datetime.getFullYear()
       return formattedDate
    }
 
@@ -114,6 +91,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <PatientDash
             userToken={userToken}
             formatWeek={formatWeek}
+            getWeekFirst={getWeekFirst}
             formatDate={formatDate}
             formatFullDatetime={formatFullDatetime}
             mySchedule={mySchedule}
@@ -125,6 +103,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             userToken={userToken}
             formatWeek={formatWeek}
             formatDate={formatDate}
+            formatFullDate={formatFullDate}
             mySchedule={mySchedule}
             navigate={navigate}
          />

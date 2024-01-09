@@ -1,46 +1,44 @@
 export const mySchedule = {
-   "1st January - 7th January": [          // bit ce datum samo prvog u tjednu
+   [new Date("2024-01-01 00:00:00")]: [
       {
          id: 0,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-01 09:00"),
          location: "Electrotherapy room",
-         sessionNumber: "4/11",           // bit ce completed sessions i total sessions
+         completedSessions: 4,
+         totalSessions: 11,
          therapist: "Ante Pavlović",
-         notes: {
-            datetime: new Date("2024-01-01 17:53"),
-            contents: "Pacijent je odradio normalno i dobro... ovaj put"
-         }
+         notes: "Pacijent je odradio normalno i dobro... ovaj put"
       },
       {
          id: 1,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-03 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "5/11",
+         completedSessions: 5,
+         totalSessions: 11,
          therapist: "Ante Pavlović",
-         notes: {
-            datetime: new Date("2024-01-03 17:53"),
-            contents: "Pacijent je odradio normalno i dobro."
-         }
+         notes: "Pacijent je odradio normalno i dobro."
       },
       {
          id: 2,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-05 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "6/11",
+         completedSessions: 6,
+         totalSessions: 11,
          therapist: "Ante Pavlović",
          notes: ""
-      },
+      }
    ],
-   "8th January - 14th January": [
+   [new Date("2024-01-08 00:00:00")]: [
       {
          id: 0,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-09 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "7/11",
+         completedSessions: 7,
+         totalSessions: 11,
          therapist: "Ante Pavlović",
          notes: ""
       },
@@ -49,7 +47,8 @@ export const mySchedule = {
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-11 11:00"),
          location: "Electrotherapy room",
-         sessionNumber: "8/11",
+         completedSessions: 8,
+         totalSessions: 11,
          therapist: "Ante Pavlović",
          notes: ""
       }
@@ -57,13 +56,14 @@ export const mySchedule = {
 }
 
 export const therapistSchedule = {
-   "1st January - 7th January": [
+   [new Date("2024-01-01 00:00:00")]: [
       {
          id: 0,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-01 09:00"),
          location: "Electrotherapy room",
-         sessionNumber: "4/11",
+         completedSessions: 4,
+         totalSessions: 11,
          patient: {
             name: "Karlo",
             surname: "Vrančić",
@@ -74,17 +74,15 @@ export const therapistSchedule = {
             mbo: "15253545565",
             code: "#User452"
          },
-         notes: {
-            datetime: new Date("2024-01-01 17:53"),
-            contents: "Pacijent je odradio normalno i dobro... ovaj put"
-         }
+         notes: "Pacijent je odradio normalno i dobro... ovaj put"
       },
       {
          id: 1,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-03 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "5/11",
+         completedSessions: 5,
+         totalSessions: 11,
          patient: {
             name: "Karlo",
             surname: "Vrančić",
@@ -95,17 +93,15 @@ export const therapistSchedule = {
             mbo: "15253545565",
             code: "#User452"
          },
-         notes: {
-            datetime: new Date("2024-01-03 17:53"),
-            contents: "Pacijent je odradio normalno i dobro."
-         }
+         notes: "Pacijent je odradio normalno i dobro."
       },
       {
          id: 2,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-05 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "6/11",
+         completedSessions: 6,
+         totalSessions: 11,
          patient: {
             name: "Karlo",
             surname: "Vrančić",
@@ -119,13 +115,14 @@ export const therapistSchedule = {
          notes: ""
       }
    ],
-   "8th January - 14th January": [
+   [new Date("2024-01-08 00:00:00")]: [
       {
          id: 0,
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-09 17:00"),
          location: "Electrotherapy room",
-         sessionNumber: "7/11",
+         completedSessions: 7,
+         totalSessions: 11,
          patient: {
             name: "Karlo",
             surname: "Vrančić",
@@ -143,7 +140,8 @@ export const therapistSchedule = {
          therapy: "Shoulder impingement",
          datetime: new Date ("2024-01-11 11:00"),
          location: "Electrotherapy room",
-         sessionNumber: "8/11",
+         completedSessions: 8,
+         totalSessions: 11,
          patient: {
             name: "Karlo",
             surname: "Vrančić",
@@ -160,15 +158,15 @@ export const therapistSchedule = {
 }
 
 export const availableSessions = {                          // treba poslat therapy (code), broj dana, bit ce druga funkcija za reschedule al vraca isto u biti
-   "Thursday, 28th December": [9, 11, 12, 14, 15, 17, 19],
-   "Friday, 29th December": [10, 12, 13, 14, 17, 18, 19],
-   "Monday, 1st January": [8, 9, 10, 12, 13, 14, 17, 18, 19],
-   "Wednesday, 3rd January": [9, 11, 13, 14, 16, 17, 19],
-   "Thursday, 4th January": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-   "Friday, 5th January": [9, 11, 13, 14, 16, 17, 19],
    "Tuesday, 9th January": [8, 12, 13, 15, 18],
    "Wednesday, 10th January": [10, 14, 16, 17, 19],
-   dateMax: new Date("2024-01-15 00:00")
+   "Thursday, 11th January": [9, 11, 12, 14, 15, 17, 19],
+   "Friday, 12th January": [10, 12, 13, 14, 17, 18, 19],
+   "Monday, 15th January": [8, 9, 10, 12, 13, 14, 17, 18, 19],
+   "Wednesday, 17th January": [9, 11, 13, 14, 16, 17, 19],
+   "Thursday, 18th January": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+   "Friday, 19th January": [9, 11, 13, 14, 16, 17, 19],
+   dateMax: new Date("2024-01-22 00:00")
 }
 
 export const therapies = {
@@ -222,7 +220,13 @@ export const therapies = {
    "lower torso": [],
    "leg": [],
    "foot": [],
-   "any": []      // dodaj any
+   "any": [
+      {
+         name: "Full body recovery",
+         code: "#3G67K",
+         numberOfSessions: 4
+      }
+   ]
 }
 
 export const myTherapies = [
@@ -580,21 +584,25 @@ export const resources = [
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Electrotherapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Massage therapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Electrotherapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    },
    {
       name: "Electrotherapy machine",
       capacity: 4,
+      specialization: "Massage therapist",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease."
    }
 ]
@@ -606,7 +614,7 @@ export const adminTherapies = [
       numberOfSessions: 3,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["shoulder"]
+      bodypart: "shoulder"
    },
    {
       name: "Shoulder tendon injury",
@@ -614,7 +622,7 @@ export const adminTherapies = [
       numberOfSessions: 5,
       resource: "Electrotherapy machine machine machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["shoulder"]
+      bodypart: "shoulder"
    },
    {
       name: "Post operation shoulder recovery",
@@ -622,7 +630,7 @@ export const adminTherapies = [
       numberOfSessions: 4,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["shoulder"]
+      bodypart: "shoulder"
    },
    {
       name: "Impingement 2 electric bogaloo",
@@ -630,7 +638,7 @@ export const adminTherapies = [
       numberOfSessions: 5,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["shoulder"]
+      bodypart: "shoulder"
    },
    {
       name: "Please scroll",
@@ -638,7 +646,7 @@ export const adminTherapies = [
       numberOfSessions: 2,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["shoulder"]
+      bodypart: "shoulder"
    },
    {
       name: "Elbow impingement",
@@ -646,7 +654,7 @@ export const adminTherapies = [
       numberOfSessions: 4,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["arm"]
+      bodypart: "arm"
    },
    {
       name: "Elbow tendon injury",
@@ -654,7 +662,7 @@ export const adminTherapies = [
       numberOfSessions: 3,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["arm"]
+      bodypart: "arm"
    },
    {
       name: "Post operation elbow recovery",
@@ -662,6 +670,49 @@ export const adminTherapies = [
       numberOfSessions: 5,
       resource: "Electrotherapy machine",
       description: "Electrotherapy is the use of electrical energy as a medical treatment. In medicine, the term electrotherapy can apply to a variety of treatments, including the use of electrical devices such as deep brain stimulators for neurological disease.",
-      bodyparts: ["arm"]
+      bodypart: "arm"
    }
+]
+
+export const adminSessions = [
+      {
+         name: "Rotator cuff tear",
+         therapist: "Ante Petrović",
+         patient: "Niko Kaštelan"
+      },
+      {
+         name: "Shoulder impingement",
+         therapist: "Ante Pavlović",
+         patient: "Karlo Vrančić"
+      },
+      {
+         name: "Tendon injury",
+         therapist: "Mirko Mirković",
+         patient: "Lovro Dujić"
+      },
+      {
+         name: "Frozen shoulder",
+         therapist: "Petar Petrović",
+         patient: "Ivan Kordić"
+      },
+      {
+         name: "Arthritis pain management",
+         therapist: "Vladimir Sruk",
+         patient: "Nikola Baretić"
+      },
+      {
+         name: "Stress fractures",
+         therapist: "Stjepan Stjepanović",
+         patient: "Tea Ćetojević-Tisaj"
+      },
+      {
+         name: "Post operation shoulder injury",
+         therapist: "Ivan Ivanovič Ivanovski",
+         patient: "Ian Balen"
+      },
+      {
+         name: "Scoliosis",
+         therapist: "Nikolina Frid",
+         patient: "Miljenko Krhen"
+      }
 ]

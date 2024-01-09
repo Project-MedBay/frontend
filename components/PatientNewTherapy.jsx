@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
-import axios, { formToJSON } from "axios"
-import { therapies } from "./TestingData"
+import axios from "axios"
 import BodypartSelection from "./BodypartSelection"
-import SessionSelection2 from "./SessionSelection2"
+import SessionSelection from "./SessionSelection"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, mySchedule, navigate} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
@@ -15,56 +14,64 @@ export default function PatientNewTherapy(props) {
       doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
    }
    
+   const [therapies, setTherapies] = useState([])
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
    const [searchInput, setSearchInput] = useState("")
    const [selectedBodypart, setSelectedBodypart] = useState("any")
    const [selectedTherapy, setSelectedTherapy] = useState("")
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapyType",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => setTherapies(res.data))
+      .catch(error => console.log(error));
+   }, [])
 
    const [selectedSessions, setSelectedSessions] = useState([])         // page 2 const (and var)
-   var therapiesList = []
-   for (let array of Object.values(therapies)) {
-      therapiesList = therapiesList.concat(array)
-   }
-   therapiesList = [...new Set(therapiesList)]
    var codeList = []
-   for (let therapy of therapiesList) {
-      codeList.push(therapy.code)
+   for (let therapy of therapies) {
+      codeList.push(therapy.therapyCode)
    }
-   const numberOfSessions = selectedTherapy?.numberOfSessions
+   const numOfSessions = selectedTherapy?.numOfSessions
 
    const [expandSessions, setExpandSessions] = useState(false)           // page 3 const
    const [verificationData, setVerificationData] = useState({referral: "", hlkid: ""})
+   const [verificationFailed, setVerificationFailed] = useState(false)
    const [finishAgreement, setFinishAgreement] = useState(false)
 
    var nextDisabled = () => {switch (progress) {         // ovdi uvjete za nastavit dalje u svakom koraku
       case 1:
-         return !codeList.includes(selectedTherapy?.code)
+         return !codeList.includes(selectedTherapy?.therapyCode)
       case 2:
-         return selectedSessions.length != numberOfSessions
+         return selectedSessions.length != numOfSessions
       case 3:
          return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
    
-   const therapyElements = therapiesList
-      .filter(therapy => (selectedBodypart == "any" ? true : therapies[selectedBodypart].includes(therapy)))
+   const therapyElements = therapies
+      .filter(therapy => (selectedBodypart == "any" ? true : therapy.bodyPart == selectedBodypart))
       .filter(therapy => { for (let term of searchInput.trim().split(" ")) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
-      <div className={s.therapy_wrapper} key={therapy.code}
-           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.code)}}>
-         <div className={s.therapy_checkbox}>
-            <div className={`${s.checkbox_filled} ${selectedTherapy?.code == therapy.code && s.checkbox_selected}`}></div>
+      <div className={s.therapy_wrapper} key={therapy.therapyCode}
+           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.therapyCode)}}>
+         <div className={s.custom_checkbox}>
+            <div className={`${s.checkbox_fill} ${selectedTherapy?.therapyCode == therapy.therapyCode && s.checkbox_selected}`}></div>
          </div>
          <label className={s.therapy_info}>
             <p className={s.therapy_name}>{therapy.name}</p>
-            <p className={s.therapy_code}>{therapy.code}</p>
+            <p className={s.therapy_code}>{therapy.therapyCode}</p>
          </label>
       </div>
    ))
 
    function handleCodeInput(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       setCodeInput(event.target.value.toUpperCase())
-      setSelectedTherapy(therapiesList[codeList.indexOf(event.target.value.toUpperCase())])
+      setSelectedTherapy(therapies[codeList.indexOf(event.target.value.toUpperCase())])
    }
 
    function formatString(string) {
@@ -88,8 +95,31 @@ export default function PatientNewTherapy(props) {
    ))
 
    function handleFinish() {
-      navigate("dash")
-      // ovdi axios za poslat podatke o novonastaloj terapiji u bazu
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/create",
+         method: "POST",
+         headers: {
+            Authorization: `Bearer ${userToken}`          // korisnikov access token potreban za dohvacanje podataka iz baze
+         },
+         data: {
+            healthReferralId: verificationData.referral,
+            hlkid: verificationData.hlkid,
+            therapyCode: "#3N4P6",     // NOTE tu stavit kod
+            appointmentDates: selectedSessions
+         }
+      })
+      .then(res => handleSuccess())
+      .catch(error => handleError(error));
+   }
+
+   function handleSuccess() {
+      setVerificationFailed(false)
+      setSuccessPopup(true)
+   }
+   
+   function handleError(error) {
+      // NOTE tu neka provjera je li zbog hlkid i to
+      setVerificationFailed(true)
    }
 
    return (<>
@@ -99,6 +129,7 @@ export default function PatientNewTherapy(props) {
          <div className={s.green_shape}></div>
          
          <div className={s.create_container}>
+            <div className={s.create_wrapper}>
             
             {progress == 1 && <>
             <div className={s.therapy_header}>
@@ -130,7 +161,7 @@ export default function PatientNewTherapy(props) {
             <div className={s.sessions_header}>
                <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
                <div className={s.header_counter}>
-                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numberOfSessions}</h2>
+                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
                </div>
             </div>
 
@@ -143,14 +174,18 @@ export default function PatientNewTherapy(props) {
                Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
 
-            <SessionSelection2 
+            <SessionSelection
+               userToken = {userToken}
                formatDate = {formatDate}
+               formatFullDate = {formatFullDate}
                formatWeek = {formatWeek}
                selectedSessions = {selectedSessions}
                setSelectedSessions = {setSelectedSessions}
                currentSession = ""
                mySchedule = {mySchedule}
-               numberOfSessions = {numberOfSessions}
+               numOfSessions = {numOfSessions}
+               numberOfDays = {20}
+               therapyCode = {selectedTherapy.therapyCode}
             />
             </>}
 
@@ -166,11 +201,11 @@ export default function PatientNewTherapy(props) {
                            {formatString(selectedTherapy.name).second.toUpperCase()}
                         </h3>
                         <div className={s.review_details}>
-                           <p>{selectedTherapy.code}</p>
+                           <p>{selectedTherapy.therapyCode}</p>
                            <p>duration: {Math.floor(
                               (selectedSessions[selectedSessions.length-1] - selectedSessions[0]) / 1000 / 60 / 60 / 24
                            ) + 1} days</p>
-                           <p>number of sessions: {selectedTherapy.numberOfSessions}</p>
+                           <p>number of sessions: {selectedTherapy.numOfSessions}</p>
                         </div>
                      </div>
                   </div>
@@ -193,29 +228,37 @@ export default function PatientNewTherapy(props) {
                      <form className={s.verification_form} autoComplete="off">
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Referral number:</p>
-                           <input className={s.input_field} onChange={event => setVerificationData(prevData => ({
-                              ...prevData,
-                              referral: event.target.value
-                           }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral} />
+                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                              onChange={event => setVerificationData(prevData => ({
+                                 ...prevData,
+                                 referral: event.target.value
+                              }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral}
+                           />
                            <p className={s.verification_tip} title={tooltips.referral}>?</p>
                         </div>
                         
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Doctor id (hlkid):</p>
-                           <input className={s.input_field} onChange={event => setVerificationData(prevData => ({
-                              ...prevData,
-                              hlkid: event.target.value
-                           }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid} />
+                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                              onChange={event => setVerificationData(prevData => ({
+                                 ...prevData,
+                                 hlkid: event.target.value
+                              }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid}
+                           />
                            <p className={s.verification_tip} title={tooltips.doctor}>?</p>
                         </div>
+
+                        <p className={`${s.verification_failed} ${verificationFailed && s.visible}`}>
+                           Incorrect referral number or doctor hlkid.
+                        </p>
                      </form>
                   </div>
                </div>
                <div className={s.final_finish}>
                   <p className={s.finish_note}>Once your therapy is approved by admin, we will notify you by email.</p>
                   <div className={s.checkbox_container} onClick={() => setFinishAgreement(prevState => !prevState)}>
-                     <div className={s.therapy_checkbox}>
-                        <div className={`${s.checkbox_filled} ${finishAgreement && s.checkbox_selected}`}></div>
+                     <div className={s.custom_checkbox}>
+                        <div className={`${s.checkbox_fill} ${finishAgreement && s.checkbox_selected}`}></div>
                      </div>
                      <p className={s.finish_label}>I understand</p>
                   </div>
@@ -229,7 +272,7 @@ export default function PatientNewTherapy(props) {
                   }>{progress == 1 ? "Cancel" : "Back"}
                </button>
                <button className={`${s.button_next} ${nextDisabled() ? s.button_disabled : ""}`} onClick={() => {
-                  nextDisabled() ? "" : (progress == 3 ? setSuccessPopup(true) : setProgress(prevProgress => prevProgress + 1))}
+                  nextDisabled() ? "" : (progress == 3 ? handleFinish() : setProgress(prevProgress => prevProgress + 1))}
                   }>{progress == 3 ? "Finish" : "Next"}
                </button>
             </div>
@@ -242,6 +285,8 @@ export default function PatientNewTherapy(props) {
                </div>
                <div className={s.progress_label}>{progress}/3</div>
             </div>
+            
+            </div>
          </div>
 
          <div className={s.tagline_container}>
@@ -253,7 +298,7 @@ export default function PatientNewTherapy(props) {
          text1="You have filled in all the information and your therapy request is now being processed by our administrator."
          text2="Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard."
          buttonText="Go to dash"
-         clickFunction={handleFinish}
+         clickFunction={() => navigate("dash")}
       />}
    </>)
 }
