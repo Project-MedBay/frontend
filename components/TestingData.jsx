@@ -673,3 +673,46 @@ export const adminTherapies = [
       bodypart: "arm"
    }
 ]
+
+export const adminSessions = [
+      {
+         name: "Rotator cuff tear",
+         therapist: "Ante Petrović",
+         patient: "Niko Kaštelan"
+      },
+      {
+         name: "Shoulder impingement",
+         therapist: "Ante Pavlović",
+         patient: "Karlo Vrančić"
+      },
+      {
+         name: "Tendon injury",
+         therapist: "Mirko Mirković",
+         patient: "Lovro Dujić"
+      },
+      {
+         name: "Frozen shoulder",
+         therapist: "Petar Petrović",
+         patient: "Ivan Kordić"
+      },
+      {
+         name: "Arthritis pain management",
+         therapist: "Vladimir Sruk",
+         patient: "Nikola Baretić"
+      },
+      {
+         name: "Stress fractures",
+         therapist: "Stjepan Stjepanović",
+         patient: "Tea Ćetojević-Tisaj"
+      },
+      {
+         name: "Post operation shoulder injury",
+         therapist: "Ivan Ivanovič Ivanovski",
+         patient: "Ian Balen"
+      },
+      {
+         name: "Scoliosis",
+         therapist: "Nikolina Frid",
+         patient: "Miljenko Krhen"
+      }
+]

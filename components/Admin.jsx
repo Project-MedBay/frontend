@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import AdminHeader from './AdminHeader'
 import AdminWelcome from './AdminWelcome'
-//import AdminCalendar from './AdminCalendar.jsx'
+import AdminCalendar from './AdminCalendar.jsx'
 //import AdminVerifications from './AdminVerifications'
 import AdminManage from './AdminManage'
 import AdminStatistics from './AdminStatistics'
@@ -24,7 +24,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
       formattedDate += datetime.getDate() + "/"
       datetime.getMonth() + 1 < 10 ? formattedDate += "0" : ""
       formattedDate += (datetime.getMonth() + 1) + "/"
-      formattedDate += datetime.getFullYear() + " "
+      formattedDate += datetime.getFullYear()
       return formattedDate
    }
 
@@ -33,7 +33,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
          <AdminHeader subPageName={subPageName} navigate={navigate} />
          <>
             {subPageName == "welcome" && <AdminWelcome userToken={userToken} navigate={navigate} />}
-            {/* {subPageName == "calendar" && <AdminCalendar userToken={userToken} />} */}
+            {subPageName == "calendar" && <AdminCalendar userToken={userToken} />}
             {/* {subPageName == "verifications" && <AdminVerifications userToken={userToken} />} */}
             {subPageName == "manage" && <AdminManage userToken={userToken} formatFullDate={formatFullDate} />}
             {subPageName == "statistics" && <AdminStatistics userToken={userToken} />}

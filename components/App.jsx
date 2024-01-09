@@ -9,7 +9,7 @@ import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("patient")           // sluzi za navigaciju
+  const [pageName, setPageName] = useState("admin")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpYW4uYmFsZW42N0BnbWFpbC5jb20iLCJpYXQiOjE3MDQ3NTEwNzgsImV4cCI6MTcwNDc1Mjg3OH0.4xw0j63RbLRvTGrA7nPXoqLDhVPrsFRYSsoJhu50Qkk")
   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
     id: "452",
