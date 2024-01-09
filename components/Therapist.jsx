@@ -71,7 +71,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       formattedDate += datetime.getDate() + "/"
       datetime.getMonth() + 1 < 10 ? formattedDate += "0" : ""
       formattedDate += (datetime.getMonth() + 1) + "/"
-      formattedDate += datetime.getFullYear() + " "
+      formattedDate += datetime.getFullYear()
       return formattedDate
    }
 

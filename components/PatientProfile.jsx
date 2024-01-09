@@ -4,14 +4,15 @@ import { myTherapies } from "./TestingData"
 import AccountEditPopup from "./EditPopup"
 import DeactivatePopup from "./DeactivatePopup"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
-import user_img from "../assets/user_img.png"
-import x_icon from "../assets/x_icon.svg"
+import profile_image from "../assets/profile_image.png"
+import input_image from "../assets/input_image.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props
+   const {userToken, userData, setUserData, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props
 
    const [selectedTherapy, setSelectedTherapy] = useState("")
+   const [inputImage, setInputImage] = useState("")
 
    const [editPopup, setEditPopup] = useState(false)
    const [deactivatePopup, setDeactivatePopup] = useState(false)
@@ -34,12 +35,6 @@ export default function PatientProfile(props) {
       </h3>
    )}
 
-   function popupExit() {
-      if (deactivatePopup) setDeactivatePopup(false)
-      else if (editPopup) setEditPopup(false)
-      else setSelectedTherapy("")
-   }
-
    var accountAge = computeAccountAge()
    function computeAccountAge() {
       let age
@@ -59,6 +54,22 @@ export default function PatientProfile(props) {
       return age
    }
 
+   function toggleInputImage() {
+      if (inputImage) setInputImage("")
+      else {
+         if (userData.userImage) setInputImage("change")
+         else setInputImage("add")
+      }
+   }
+
+   function handleImageInput(event) {
+      if (event.target.files[0] != null) setUserData(prevState => ({
+         ...prevState,
+         userImage: event.target.files[0]
+      }))
+      console.log(event.target.files[0])
+   }
+
    function handleEdit(data) {
       if (editPopup) {
          // axios za editat user acc
@@ -71,11 +82,24 @@ export default function PatientProfile(props) {
       // axios za deaktivaciju accounta
    }
 
+   function popupExit() {
+      if (deactivatePopup) setDeactivatePopup(false)
+      else if (editPopup) setEditPopup(false)
+      else setSelectedTherapy("")
+   }
+
    return (<>
       <div className={`${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>
          <div className={s.profile_header}>
             <div className={s.header_user}>
-               <img className={s.user_image} src={user_img} />
+               <label className={s.image_wrapper} htmlFor={s.image_input}
+                     onMouseEnter={toggleInputImage} onMouseLeave={toggleInputImage}>
+                  <input id={s.image_input} type="file" onChange={handleImageInput} name="userImage" />
+                  <img className={s.user_image} src={
+                     userData.userImage == null ? profile_image : URL.createObjectURL(userData.userImage)
+                  }/>
+                  {inputImage && <img className={s.user_image} src={input_image} />}
+               </label>
                <div className={s.user_info}>
                   <div className={s.info_item}>
                      <h2 className={s.info_title}>{userData.firstName} {userData.lastName}</h2>

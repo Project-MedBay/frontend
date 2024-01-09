@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { testSessions } from "./TestingData"
-import SessionSelection from "./SessionSelection"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import refresh from "../assets/refresh.png"
-import x_icon from "../assets/x_icon.svg"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
@@ -31,22 +29,8 @@ export default function TherapistDash(props) {
    const [editingNotes, setEditingNotes] = useState(false)
    const [notesInput, setNotesInput] = useState("")
 
-   const [rescheduleText, setRescheduleText] = useState("Appointment is in less than 48 hours.")      // const za reschedule
-   const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
-   const [reschedulePopup, setReschedulePopup] = useState(false)
-   const [rescheduledSession, setRescheduledSession] = useState()
-   const [rescheduleConfirmBox, setRescheduleConfirmBox] = useState(false)
-
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (selectedSession.datetime != "--") {
-         if (selectedSession.datetime.getTime() <= new Date().getTime() + 48*60*60*1000) {
-            setRescheduleDisabled(true)
-         } else {setRescheduleDisabled(false)}
-         if (selectedSession.datetime.getTime() <= new Date().getTime()) {
-            setRescheduleText("Appointment has passed.")
-         } else {setRescheduleText("Appointment is in less than 48 hours.")}
-         setRescheduledSession(selectedSession)
-         
          if (selectedSession.datetime > new Date()) {
             setNotesDisabled(true)
          } else {setNotesDisabled(false)}
@@ -111,20 +95,11 @@ export default function TherapistDash(props) {
    }
    
    function popupExit() {
-      if (reschedulePopup) {
-         setReschedulePopup(false)
-         setRescheduledSession(selectedSession)
-      } else {setPatientPopup(false)}
-   }
-
-   function rescheduleSession() {
-      // send new session data to db to reschedule session and update schedule
-      setReschedulePopup(false)
-      setRescheduleConfirmBox(false)
+      setPatientPopup(false)
    }
 
    return (<>
-      <div className={`${s.therapist_dash_main} ${(patientPopup || reschedulePopup) && s.covered_by_popup}`}>
+      <div className={`${s.therapist_dash_main} ${patientPopup && s.covered_by_popup}`}>
          <div className={s.container_left}>
             <h2 className={s.container_title}>My schedule:</h2>
 
@@ -148,29 +123,40 @@ export default function TherapistDash(props) {
             </h2>
             
             {selectedSession.datetime == "--" ? <>
-               <p className={s.container_date}>{selectedSession.datetime}</p>
-            
-               <div className={`${s.selected_session} ${s.no_sessions_container}`}>
-                  <p className={s.no_sessions}>{selectedSession.text}</p>
-               </div>
+            <p className={s.container_date}>{selectedSession.datetime}</p>
+         
+            <div className={`${s.selected_session} ${s.no_sessions_container}`}>
+               <p className={s.no_sessions}>{selectedSession.text}</p>
+            </div>
             
             </> : <>
-               <p className={s.container_date}>{formatDate(selectedSession.datetime)}</p>
+            <p className={s.container_date}>{formatDate(selectedSession.datetime)}</p>
             
+            <div className={s.right_cards}>
                <div className={s.selected_session}>
                   <div className={s.session_info}>
-                     <div className={s.info_labels}>
-                        <p>Therapy:</p>
-                        <p>Time:</p>
-                        <p>Location:</p>
-                        <p>Session number:</p>
-                        <p>Patient:</p>
-                     </div>
+                  <p>Therapy:</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.therapy}</p>
+                     </div>
+
+                     <p>Time:</p>
+                     <div className={s.info_values}>
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
+                     </div>
+                     
+                     <p>Location:</p>
+                     <div className={s.info_values}>
                         <p>{selectedSession.location}</p>
+                     </div>
+                     
+                     <p>Session number:</p>
+                     <div className={s.info_values}>
                         <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
+                     </div>
+                     
+                     <p>Therapist:</p>
+                     <div className={s.info_values}>
                         <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
                            {selectedSession.patient.name + " " + selectedSession.patient.surname}
                         </p>
@@ -204,12 +190,13 @@ export default function TherapistDash(props) {
                      <p className={s.note_contents}>{selectedSession.notes}</p>
                   </div>}
                </div>
+            </div>
             </>}
          </div>
       </div>
 
 
-      {(patientPopup || reschedulePopup) && <div className={s.popup_separate} onClick={popupExit}></div>}
+      {patientPopup && <div className={s.popup_separate} onClick={popupExit}></div>}
 
       {patientPopup &&
          <TherapyOrPatientPopup
@@ -221,41 +208,5 @@ export default function TherapistDash(props) {
             popupExit={popupExit}
          />
       }
-
-      {reschedulePopup && <div className={s.session_popup}>             {/* uvjetni render popupa za reschedule */}
-         <div className={s.popup_header}>
-            <h3 className={s.popup_title}>RESCHEDULE SESSION:</h3>
-            <img src={x_icon} className={s.popup_exit} onClick={popupExit}/>
-         </div>
-
-         <p className={s.reschedule_info}>CURRENT SESSION:&#160;
-            <span>{formatDate(selectedSession.datetime)} {selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</span>
-         </p>
-         <p className={s.reschedule_info}>NEW SESSION:&#160;
-            <span>{formatDate(rescheduledSession.datetime)} {rescheduledSession.datetime.getHours()}:00 - {rescheduledSession.datetime.getHours()+1}:00</span>
-         </p>
-
-         <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
-            The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span></p>
-
-         <SessionSelection 
-            formatDate = {formatDate}
-            formatWeek = {formatWeek}
-            selectedSessions = {[rescheduledSession.datetime]}
-            setSelectedSessions = {setRescheduledSession}
-            currentSession = {selectedSession}
-            mySchedule = {{}}
-            numberOfSessions = {1}
-         />
-
-         {!rescheduleConfirmBox ?
-            <button className={s.reschedule_button} onClick={() => setRescheduleConfirmBox(true)}>Reschedule</button> :
-            <div className={s.reschedule_confirm}>
-               <p className={s.confirm_text}>Are you sure?</p>
-               <button className={s.confirm_yes} onClick={rescheduleSession}>Yes</button>
-               <button className={s.confirm_no} onClick={() => setRescheduleConfirmBox(false)}>No</button>
-            </div>
-         }
-      </div>}
    </>)
 }

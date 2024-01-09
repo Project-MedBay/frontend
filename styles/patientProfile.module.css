@@ -31,7 +31,7 @@
    display: flex;
    justify-content: space-between;
    width: calc(1750 * var(--scale-by-height));
-   height: calc(250 * var(--scale-by-height));
+   min-height: calc(250 * var(--scale-by-height));
 }
 
 .header_user {
@@ -44,8 +44,26 @@
    box-shadow: 0 calc(4 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) 0 rgba(0, 0, 0, 0.25);
 }
 
+.image_wrapper {
+   height: 100%;
+   aspect-ratio: 1 / 1;
+   border-radius: calc(125 * var(--scale-by-height));
+   box-shadow: calc(6 * var(--scale-by-height)) calc(2 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) rgba(0, 0, 0, 0.25);
+}
+
 .user_image {
-   height: 103%;
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   max-height: calc(250 * var(--scale-by-height));
+   max-width: calc(250 * var(--scale-by-height));
+   object-fit: contain;    /* NOTE cover ili contain? */
+   border-radius: calc(125 * var(--scale-by-height));
+   cursor: pointer;
+}
+
+#image_input {
+   display: none;
 }
 
 .user_info {
@@ -221,7 +239,7 @@ p.therapy_code {
    margin-bottom: calc(5 * var(--scale-by-height));
 }
 
-.therapy_info {
+.therapy_info, .therapy_more {
    color: #22006a;
    font-size: calc(16 * var(--scale-by-height));
 }

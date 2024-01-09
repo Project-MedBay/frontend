@@ -24,7 +24,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
       formattedDate += datetime.getDate() + "/"
       datetime.getMonth() + 1 < 10 ? formattedDate += "0" : ""
       formattedDate += (datetime.getMonth() + 1) + "/"
-      formattedDate += datetime.getFullYear() + " "
+      formattedDate += datetime.getFullYear()
       return formattedDate
    }
 

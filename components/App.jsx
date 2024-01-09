@@ -24,6 +24,7 @@ export default function App() {           // glavna komponenta, u njoj se render
     registeredSince: new Date("2023-12-15"),
     active: "",
     role: "",
+    userImage: null
   })
 
    // axios({
@@ -57,6 +58,7 @@ export default function App() {           // glavna komponenta, u njoj se render
       setPageName={setPageName}
       userToken={userToken}
       userData={userData}
+      setUserData={setUserData}
     />,
     therapist: <Therapist
       setPageName={setPageName}

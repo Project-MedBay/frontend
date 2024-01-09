@@ -6,7 +6,7 @@ import PatientNewTherapy from './PatientNewTherapy'
 import PatientProfile from './PatientProfile'
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {setPageName, userToken, userData} = props
+   const {setPageName, userToken, userData, setUserData} = props
    const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
@@ -90,10 +90,11 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <PatientHeader navigate={navigate} />
          <PatientDash
             userToken={userToken}
-            formatWeek={formatWeek}
             getWeekFirst={getWeekFirst}
             formatDate={formatDate}
+            formatFullDate={formatFullDate}
             formatFullDatetime={formatFullDatetime}
+            formatWeek={formatWeek}
             mySchedule={mySchedule}
          />
       </>,
@@ -113,6 +114,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <PatientProfile
             userToken={userToken}
             userData={userData}
+            setUserData={setUserData}
             formatWeek={formatWeek}
             formatDate={formatDate}
             formatFullDate={formatFullDate}

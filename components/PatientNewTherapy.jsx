@@ -144,7 +144,7 @@ export default function PatientNewTherapy(props) {
             <div className={s.therapy_select}>
                <BodypartSelection selectedBodypart={selectedBodypart} setSelectedBodypart={setSelectedBodypart} />
 
-               <form className={s.therapy_form} autoComplete="off">
+               <form className={s.therapy_form} autoComplete="off" onSubmit={event => event.preventDefault()}>
                   <h2 className={s.form_title}>FILTER BY: <span>{selectedBodypart.toUpperCase()}</span></h2>
                   <p className={s.form_tip}>Select a body part to filter or use the search bar below to find your therapy</p>
                   <input className={s.form_search} type="text" onChange={event => setSearchInput(event.target.value)}
