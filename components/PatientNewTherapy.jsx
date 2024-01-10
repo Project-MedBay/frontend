@@ -37,6 +37,12 @@ export default function PatientNewTherapy(props) {
       codeList.push(therapy.therapyCode)
    }
    const numOfSessions = selectedTherapy?.numOfSessions
+   const duration = selectedSessions.length ?
+      Math.floor((
+         new Date(selectedSessions[selectedSessions.length-1]).setHours(0) - 
+         new Date(selectedSessions[0]).setHours(0) + (1000 * 60 * 60)   // offset zbog pomicanja sata
+         ) / 1000 / 60 / 60 / 24) + 1
+      : 0
 
    const [expandSessions, setExpandSessions] = useState(false)           // page 3 const
    const [verificationData, setVerificationData] = useState({referral: "", hlkid: ""})
@@ -47,7 +53,7 @@ export default function PatientNewTherapy(props) {
       case 1:
          return !codeList.includes(selectedTherapy?.therapyCode)
       case 2:
-         return selectedSessions.length != numOfSessions
+         return selectedSessions.length != numOfSessions || duration > numOfSessions*5
       case 3:
          return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
@@ -128,7 +134,7 @@ export default function PatientNewTherapy(props) {
          <div className={s.white_shape}></div>
          <div className={s.green_shape}></div>
          
-         <div className={s.create_container}>
+         <div className={s.create_container} onClick={() => console.log(selectedSessions)}>
             <div className={s.create_wrapper}>
             
             {progress == 1 && <>
@@ -164,29 +170,36 @@ export default function PatientNewTherapy(props) {
                   <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
                </div>
             </div>
-
-            <p className={s.sessions_info}>
-               <span>Restrictions:</span><br />
-               1.&#160; Selected sessions must be at least 24h apart.<br />      {/* extra space za poravnanje */}
-               2. The total duration of the therapy must not exceed 30 days.
-            </p>
-            <p className={s.reschedule_legend}>Grayed out dates/times are inelligible or full.
+            
+            <p className={s.sessions_subtitle}>Restrictions:</p>
+            <div className={s.sessions_info}>
+               <p className={s.sessions_restrictions}>
+                  1.&#160; Selected sessions must be at least <span>24h apart.</span><br />      {/* extra space za poravnanje */}
+                  2. The total duration of the therapy must not exceed <span>{numOfSessions*5} days.</span><br />
+                  3. Sessions cannot be scheduled more than <span>3 months</span> in advance.
+               </p>
+               <div className={s.info_duration}>
+                  <h2 className={s.duration_text}>duration: {duration} {duration == 1 ? "day" : "days"}</h2>
+               </div>
+            </div>
+            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.
                Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
-
-            <SessionSelection
-               userToken = {userToken}
-               formatDate = {formatDate}
-               formatFullDate = {formatFullDate}
-               formatWeek = {formatWeek}
-               selectedSessions = {selectedSessions}
-               setSelectedSessions = {setSelectedSessions}
-               currentSession = ""
-               mySchedule = {mySchedule}
-               numOfSessions = {numOfSessions}
-               numberOfDays = {20}
-               therapyCode = {selectedTherapy.therapyCode}
-            />
+            <div className={s.selection_wrapper}>
+               <SessionSelection
+                  userToken = {userToken}
+                  formatDate = {formatDate}
+                  formatFullDate = {formatFullDate}
+                  formatWeek = {formatWeek}
+                  selectedSessions = {selectedSessions}
+                  setSelectedSessions = {setSelectedSessions}
+                  currentSession = ""
+                  mySchedule = {mySchedule}
+                  numOfSessions = {numOfSessions}
+                  numberOfDays = {90}
+                  therapyCode = {selectedTherapy.therapyCode}
+               />
+            </div>
             </>}
 
 
@@ -202,9 +215,7 @@ export default function PatientNewTherapy(props) {
                         </h3>
                         <div className={s.review_details}>
                            <p>{selectedTherapy.therapyCode}</p>
-                           <p>duration: {Math.floor(
-                              (selectedSessions[selectedSessions.length-1] - selectedSessions[0]) / 1000 / 60 / 60 / 24
-                           ) + 1} days</p>
+                           <p>duration: {duration} days</p>
                            <p>number of sessions: {selectedTherapy.numOfSessions}</p>
                         </div>
                      </div>

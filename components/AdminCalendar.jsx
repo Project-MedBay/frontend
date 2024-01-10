@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import s from "../styles/adminCalendar.module.css";
 import initialCalendarData from "./admin_utils/adminCalendarData.js";
 import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
+import ReschedulePopup from "./ReschedulePopup.jsx";
 
-export default function AdminCalendar() {
+export default function AdminCalendar(props) {
+    const {userToken, formatDate, formatFullDate} = props
+
     const [weekOffset, setWeekOffset] = useState(0);
     const [calendarData, setCalendarData] = useState(initialCalendarData);
     const [filterOption, setFilterOption] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDate, setSelectedDate] = useState({date: "", hour: ""});
-    const [renderPopup, setRenderPopup] = useState(false)
+
+    const [calendarPopup, setCalendarPopup] = useState(false)
+
+    const [rescheduledSession, setRescheduledSession] = useState("")
+    
 
     useEffect(() => {
         // Once connected to backend, fetch data here and update calendarData using setCalendarData
@@ -26,7 +33,7 @@ export default function AdminCalendar() {
         });
     };
 
-    function formatDate(dateString) {
+    function formatDateAdmin(dateString) {
         const date = new Date(dateString);
         const optionsDate = { month: 'short', day: 'numeric' };
         const optionsDay = { weekday: 'long' };
@@ -70,8 +77,13 @@ export default function AdminCalendar() {
     
     const weekDates = getDatesForWeek(weekOffset);
 
+    function popupExit() {
+        if (rescheduledSession != "") setRescheduledSession("")
+        else setCalendarPopup(false)
+    }
+
     return ( <>
-        <div className={`${s.calendarContainer} ${renderPopup && s.covered_by_popup}`}>
+        <div className={`${s.calendarContainer} ${calendarPopup && s.covered_by_popup}`}>
             <div className={s.topBar}>
                 <div className={s.title}>
                     <h2>Appointment Calendar</h2>
@@ -102,7 +114,7 @@ export default function AdminCalendar() {
             <table className={s.calendarTable}>
                 <thead className={s.tableHeader}>
                         <th className={s.dateTime}>Time / Date</th>
-                        {weekDates.map(date => <th className={s.tableDoW} key={date}>{formatDate(date)}</th>)}
+                        {weekDates.map(date => <th className={s.tableDoW} key={date}>{formatDateAdmin(date)}</th>)}
                 </thead>
                 <tbody className={s.tableBody}>
                     {hours.map(hour => (
@@ -110,9 +122,8 @@ export default function AdminCalendar() {
                             <th className={s.tableHour}>{hour}</th>
                             {weekDates.map(date => (
                                 <td key={date + hour}  onClick={() => {
-                                    console.log(`Details for ${date} at ${hour}`)
                                         setSelectedDate({date: date, hour: hour})
-                                        setRenderPopup(true);
+                                        setCalendarPopup(true);
                                     }}>
                                     <div className={s.tableSquare}>{getAppointmentCount(hour, date)}</div>
                                 </td>
@@ -122,11 +133,31 @@ export default function AdminCalendar() {
                 </tbody>
             </table>
         </div>
-        {renderPopup && <div className={s.popup_separate} onClick={() => setRenderPopup(false)}></div>}
-        {renderPopup && <AdminCalendarPopup 
-            selectedDate={selectedDate.date}
-            selectedHour={selectedDate.hour} 
-            />}
+
+        {calendarPopup && <div className={s.popup_separate} onClick={popupExit}></div>}
+        
+        {calendarPopup &&
+            <AdminCalendarPopup 
+                selectedDate={selectedDate.date}
+                selectedHour={selectedDate.hour}
+                setRescheduledSession={setRescheduledSession}
+                popupExit={popupExit}
+            />
+        }
+
+        {rescheduledSession != "" &&
+            <ReschedulePopup
+                userToken = {userToken}
+                user = "admin"
+                formatDate = {formatDate}
+                formatFullDate = {formatFullDate}
+                formatWeek = {arg => arg}            // NOTE vidicu kad spojim u kojem mi je obliku kljuc u mySchedule
+                currentSession = {{...rescheduledSession, therapyCode: "#4C7X3"}}
+                rescheduledSession = {rescheduledSession}
+                setRescheduledSession = {setRescheduledSession}
+                popupExit = {popupExit}
+            />
+        }
     </>
     );
 }

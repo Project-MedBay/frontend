@@ -11,7 +11,11 @@ export default function SessionSelection(props) {
    const [availableSessions, setAvailableSessions] = useState(testAvailableSessions)   // NOTE maknit
    const [viewingSession, setViewingSession] = useState(reschedule ? selectedSessions[0] : null)
    const [blockedSessions, setBlockedSessions] = useState({})
-
+   const [therapyMaxDates, setTherapyMaxDates] = useState({
+      earliest: new Date("2024-01-01"),
+      latest: new Date("5000-01-01")
+   })
+   
    var formattedSessions = {}
    for (let session of selectedSessions) {
       formattedSessions[formatDate(session)] = session.getHours()
@@ -45,6 +49,7 @@ export default function SessionSelection(props) {
          h3Class += ` ${s.weekdate_selected}`
          h3OnClick = () => {setViewingSession(weekDate)}
       } else if (Object.keys(availableSessions).includes(formatFullDate(weekDate)) == false ||
+               (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
                 blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
          if (reschedule && Object.keys(patientSchedule).includes(formatWeek(weekDate))) {
@@ -85,7 +90,7 @@ export default function SessionSelection(props) {
       } else if (Object.keys(formattedSessions).includes(formatDate(viewingSession)) &&
                time == formattedSessions[formatDate(viewingSession)]) {
          h3Class += ` ${s.datetime_selected}`
-      } else if (availableSessions[formatFullDate(viewingSession)].includes(time) == false ||
+      } else if (availableSessions[formatFullDate(viewingSession)]?.includes(time) == false ||
                  blockedSessions[formatDate(viewingSession)]?.includes(time)) {
          h3Class += ` ${s.datetime_disabled}`
       } else {
@@ -118,6 +123,19 @@ export default function SessionSelection(props) {
             updateBlockedSessions(session, newBlockedSessions)
          }
          setBlockedSessions(newBlockedSessions)
+      
+         if (selectedSessions.length != 0) {
+            let earliest = new Date(selectedSessions[selectedSessions.length - 1])
+                          .setDate(selectedSessions[selectedSessions.length - 1].getDate() - numOfSessions*5)
+            let latest = new Date(selectedSessions[0]).setDate(selectedSessions[0].getDate() + numOfSessions*5)
+            setTherapyMaxDates({
+               earliest: new Date(earliest).setHours(0),
+               latest: new Date(latest).setHours(0)
+            })
+         } else setTherapyMaxDates({
+            earliest: new Date("2024-01-01"),
+            latest: new Date("5000-01-01")
+         })
       }
    }, [selectedSessions])
 
@@ -126,7 +144,7 @@ export default function SessionSelection(props) {
       let blockedTimes
       for (let i = -1; i < 2; i = i + 2) {
          blockedTimes = []
-         blockedDate.setHours(date.getHours() + 24 * i)     // i=-1: blokiraj 36h unazad, i=1: blokiraj 36h unaprid
+         blockedDate.setHours(date.getHours() + 23 * i)     // i=-1: blokiraj 24h unazad, i=1: blokiraj 24h unaprid
          while (blockedDate.getDate() != date.getDate()) {
             if (blockedDate.getDay() != 0 && blockedDate.getDay() != 6 && 
                blockedDate.getHours() >= 8 && blockedDate.getHours() <= 19) {

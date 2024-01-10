@@ -40,7 +40,7 @@ export default function ReschedulePopup(props) {
          <p className={s.reschedule_legend}>
             Grayed out dates/times are inelligible or full.
             The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
-            Dates when you have other sessions scheduled are emphasized 
+            Dates when {user == "patient" ? "you" : "they"} have other sessions scheduled are emphasized 
             with a <span className={s.legend_green}>green box.</span>
          </p>
 
