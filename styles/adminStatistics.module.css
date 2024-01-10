@@ -69,16 +69,33 @@
 
 .left_small_circles {
    display: grid;
-   grid-template-columns: repeat(6, auto);
-   align-items: center;
-   justify-items: center;
+   grid-template-columns: repeat(6, 85px);
+   row-gap: 15px;
+   align-items: flex-start;
+   justify-items: flex-start;
    /* flex-wrap: wrap; */
    /* justify-content: space-evenly; */
    width: 90%;
+   max-height: 270px;
+   overflow: auto;
 }
 
 .small_circle {
    width: 20%;
+}
+
+.one_circle-container {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   justify-content: flex-start;
+   max-width: 80px;
+   min-height: 125px;
+}
+
+.circle_name {
+   max-width: 80px;
+   overflow-wrap: break-word;
 }
 
 .container_right {
@@ -103,12 +120,8 @@
 .container_secondary_text {
    color: var(--TAMNO-SIVA, #636363);
    text-align: center;
-   font-family: Barlow;
    font-size: 28px;
-   font-style: normal;
    font-weight: 600;
-   line-height: 97.2%; /* 31.104px */
-   letter-spacing: -2.24px;
    margin: 0;
    margin-bottom: 20px;
 }
@@ -118,7 +131,7 @@
    flex-direction: column;
    align-items: center;
    gap: 20px;
-   max-height: 360px;
+   max-height: 345px;
    overflow: auto;
    padding: 5px 20px;
 }
@@ -131,13 +144,14 @@
    gap: 20px;
 }
 
-.therapist_name {
+.item_name {
    color: #000;
    text-align: right;
    font-size: 20px;
    font-weight: 600;
    width: 200px;
    margin: 0;
+   overflow-wrap: break-word;
 }
 
 .coloured_bar_wrapper {
@@ -151,13 +165,9 @@
    background-color: #70D8AC;
    border-radius: 0px 5px 5px 0px;
    height: 25px;
-   /* align-items: left;
-   justify-self: left;
-   align-self: left;
-   place-self: left; */
 }
 
-.therapist_patient_number {
+.item_patient_number {
    color: var(--ljubicasta-nova, #200063);
    text-align: center;
    font-size: 24px;

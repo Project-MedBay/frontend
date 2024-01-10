@@ -5,7 +5,7 @@ import s from "../../styles//admin_utils/adminCalendarPopup.module.css"
 
 export default function AdminCalendarPopup(props) {
 
-   const {fullDate, calendarHours} = props;
+   const {selectedDate, selectedHour} = props;
    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
    const adminSessionElements = adminSessions.map(session => (
@@ -33,16 +33,26 @@ export default function AdminCalendarPopup(props) {
       </div>
    ))
 
-   function formatDate() {
+   function formatDate(selectedDate) {
       let formattedDate = "";
-      let date = new Date(fullDate.slice(6) + "-" + fullDate.slice(3, 5) + "-" + fullDate.slice(0, 3));
+      // let date = new Date(fullDate.slice(6) + "-" + fullDate.slice(3, 5) + "-" + fullDate.slice(0, 3));
+      let date = new Date(selectedDate);
       formattedDate += weekdays[date.getDay()];
       formattedDate += ", ";
-      formattedDate += fullDate.slice(0, 5);
+      formattedDate += selectedDate.slice(8);
+      formattedDate += "/";
+      formattedDate += selectedDate.slice(5, 7)
       return formattedDate;
    }
 
-   function formatHours() {
+   function formatHours(selectedHour) {
+      let calendarHours;
+      if (selectedHour.length == 4) {
+         calendarHours = selectedHour[0];
+      } else {
+         calendarHours = selectedHour.slice(0, 2);
+      }
+      calendarHours = parseInt(calendarHours);
       let formattedHours = "";
       if (calendarHours < 9) {
          formattedHours += "0" + calendarHours + ":00 - 0" + (calendarHours + 1) + ":00";
@@ -57,8 +67,8 @@ export default function AdminCalendarPopup(props) {
     return (
         <div className={s.admin_calendar_popup}>
             <div className={s.popup_header}>
-               <h2 className={s.header_date}>{formatDate()}</h2>
-               <h2 className={s.header_time}>{formatHours()}</h2>
+               <h2 className={s.header_date}>{formatDate(selectedDate)}</h2>
+               <h2 className={s.header_time}>{formatHours(selectedHour)}</h2>
             </div>
             <div className={s.popup_container}>
                 {adminSessionElements}

@@ -155,7 +155,7 @@ export default function TherapistDash(props) {
                         <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
                      </div>
                      
-                     <p>Therapist:</p>
+                     <p>Patient:</p>
                      <div className={s.info_values}>
                         <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
                            {selectedSession.patient.name + " " + selectedSession.patient.surname}

@@ -168,7 +168,7 @@ export const testAvailableSessions = {                          // treba poslat 
    "11/01/2024": [9, 11, 12, 14, 15, 17, 19],
    "12/01/2024": [10, 12, 13, 14, 17, 18, 19],
    "15/01/2024": [8, 9, 10, 12, 13, 14, 17, 18, 19],
-   "17/01/2024": [9, 11, 13, 14, 16, 17, 19],
+   // "17/01/2024": [9, 11, 13, 14, 16, 17, 19],
    "18/01/2024": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
    "19/01/2024": [9, 11, 13, 14, 16, 17, 19]
 }
@@ -723,6 +723,11 @@ export const adminSessions = [
 
 export const adminStatsPatients = [
    {
+      name: "Lovro Dujić",
+      noOfPatients: 230,
+      percentage: 93
+   },
+   {
       name: "Karlo Vrančić",
       noOfPatients: 200,
       percentage: 83
@@ -738,7 +743,7 @@ export const adminStatsPatients = [
       percentage: 75
    },
    {
-      name: "Tea Ćetojević-Tisaj",
+      name: "Tea Tisaj",
       noOfPatients: 125,
       percentage: 58
    },
@@ -758,12 +763,7 @@ export const adminStatsPatients = [
       percentage: 83
    },
    {
-      name: "Lovro Dujić",
-      noOfPatients: 91,
-      percentage: 67
-   },
-   {
-      name: "Lana Ćetojević-Tisaj",
+      name: "Lana Tisaj",
       noOfPatients: 87,
       percentage: 75
    },
@@ -778,13 +778,78 @@ export const adminStatsPatients = [
       percentage: 79
    },
    {
-      name: "Mirna Ćetojević-Tisaj",
+      name: "Mirna Ćetojević",
       noOfPatients: 76,
       percentage: 70
+   },
+   {
+      name: "Ivo Josipović",
+      noOfPatients: 21,
+      percentage: 95
    },
    {
       name: "Josip Josipović",
       noOfPatients: 5,
       percentage: 83
    }
-] 
+   
+]
+
+export const adminStatsResources = [
+   {
+      name: "Electrotherapy machine",
+      noOfPatients: 471,
+      percentage: 83
+   },
+   {
+      name: "Microwave therapy unit",
+      noOfPatients: 438,
+      percentage: 67
+   },
+   {
+      name: "Traction therapy unit",
+      noOfPatients: 417,
+      percentage: 75
+   },
+   {
+      name: "Cryotherapy machine",
+      noOfPatients: 375,
+      percentage: 58
+   },
+   {
+      name: "Hydrotherapy pool",
+      noOfPatients: 366,
+      percentage: 79
+   },
+   {
+      name: "Physiotherapy suite",
+      noOfPatients: 324,
+      percentage: 70
+   },
+   {
+      name: "Electrotherapy machine",
+      noOfPatients: 300,
+      percentage: 83
+   },
+   {
+      name: "Hydrotherapy pool",
+      noOfPatients: 273,
+      percentage: 67
+   },
+   {
+      name: "Microwave therapy unit",
+      noOfPatients: 261,
+      percentage: 75
+   },
+   {
+      name: "Physiotherapy suite",
+      noOfPatients: 252,
+      percentage: 58
+   },
+   {
+      name: "Electrotherapy machine",
+      noOfPatients: 231,
+      percentage: 79
+   }
+
+]

@@ -4,6 +4,21 @@
     initial-value: #200063;
 }
 
+.covered_by_popup {
+    opacity: 50%;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+ }
+ 
+ .popup_separate {
+    position: absolute;
+    left: 0;
+    top: calc(60 * var(--scale-by-height));
+    width: 100%;
+    height: 100%;
+    /* height: calc(100% - calc(60 * var(--scale-by-height))); */
+ }
+
 .calendarContainer {
     display: flex;
     flex-direction: column;

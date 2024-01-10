@@ -1,46 +1,57 @@
 import React, { useState } from "react"
 import axios, { formToJSON } from "axios"
 // TestingData
-import { adminSessions, adminStatsPatients } from "./TestingData"
+import { adminSessions, adminStatsPatients, adminStatsResources } from "./TestingData"
 import AdminStatisticsCircle from "./admin_utils/AdminStatisticsCircle"
 import s from "../styles/adminStatistics.module.css"
 
+// NOTE: Posloziti postotke ili abecedno ili silazno
 
 export default function AdminStatistics(props) {
 
     const [currentStatistic, setCurrentStatistic] = useState("therapists")
+    const [pageInfo, setPageInfo] = useState(adminStatsPatients);
     const [searchInput, setSearchInput] = useState({
         therapists: "",
         resources: ""
      })
 
-     let bestTherapist = adminStatsPatients[0].noOfPatients;
+     let bestItem = pageInfo[0].noOfPatients;
 
-     const smallCircles = adminStatsPatients.map(therapist => (
-        <AdminStatisticsCircle 
-            percentage={therapist.percentage}
-            size={80}
-            strokeWidth={10}
-            fontSize={18} />
-     ))
-
-     const noOfPatients = adminStatsPatients.filter(therapist => {
-        for (let term of searchInput.therapists.trim().split(" ")) {
-            if (therapist.name.toLowerCase().includes(term.toLowerCase())) return true}
-     }).map(therapist => (
-        <div className={s.bar_item}>
-            <h3 className={s.therapist_name}>{therapist.name}</h3>
-            <div className={s.coloured_bar_wrapper}>
-                <div className={s.coloured_bar} style={{width:`${100 * (therapist.noOfPatients / bestTherapist)}%`}}>­</div>
+     const smallCircles = pageInfo.
+        filter(item => { for (let term of searchInput[currentStatistic].trim().split(" ")) {
+        if (item.name.toLowerCase().includes(term.toLowerCase())) return true}})
+        .map(item => (
+        <div className={s.one_circle_container}>
+            <AdminStatisticsCircle 
+                percentage={item.percentage}
+                size={80}
+                strokeWidth={10}
+                fontSize={18} />
+            <div className={s.circle_name}>
+                {item.name}
             </div>
-            <h3 className={s.therapist_patient_number}>{therapist.noOfPatients}</h3>
+        </div>
+     ))
+        
+
+     const noOfPatients = pageInfo.filter(item => {
+        for (let term of searchInput[currentStatistic].trim().split(" ")) {
+            if (item.name.toLowerCase().includes(term.toLowerCase())) return true}
+     }).map(item => (
+        <div className={s.bar_item}>
+            <h3 className={s.item_name}>{item.name}</h3>
+            <div className={s.coloured_bar_wrapper}>
+                <div className={s.coloured_bar} style={{width:`${100 * (item.noOfPatients / bestItem)}%`}}>­</div>
+            </div>
+            <h3 className={s.item_patient_number}>{item.noOfPatients}</h3>
         </div>
      ))
 
-     function handleSearch(input, searchFor) {
+     function handleSearch(input) {
         setSearchInput(prevState => ({
            ...prevState,
-           [searchFor]: input
+           [currentStatistic]: input
         }))
      }
 
@@ -48,16 +59,22 @@ export default function AdminStatistics(props) {
         <div className={s.admin_stats_main}>
             <div className={s.stats_two_options}>
                 <h2 className={`${s.options_item} ${currentStatistic == "therapists" ? s.current_option : ''}`}
-                    onClick={() => setCurrentStatistic("therapists")}>Therapists
+                    onClick={() => {
+                        setCurrentStatistic("therapists")
+                        setPageInfo(adminStatsPatients)}
+                    }>Therapists
                 </h2>
                 <h2 className={`${s.options_item} ${currentStatistic == "resources" ? s.current_option : ''}`}
-                    onClick={() => setCurrentStatistic("resources")}>Resources
+                    onClick={() => {
+                        setCurrentStatistic("resources")
+                        setPageInfo(adminStatsResources)}
+                    }>Resources
                 </h2>
             </div>
 
-            {currentStatistic == "therapists" && <>
+            
                 <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "therapists")}
-                    placeholder="Search" name="search" value={searchInput.therapists} autoComplete="off" />
+                    placeholder="Search" name="search" value={searchInput[currentStatistic]} autoComplete="off" />
                 <div className={s.stats_container}>
                     <div className={s.container_left}>
                         <h2 className={s.container_main_text}>WORK HOURS AT APPOINTMENTS</h2>
@@ -81,26 +98,6 @@ export default function AdminStatistics(props) {
                         </div>
                     </div>
                 </div>
-            </>}
         </div>
     )
 }
-
-
-{/* <div className={s.bar_one}>
-                                <h3>Karlo Vrančić</h3>
-                                <div style={myStyle}>.</div>
-                                <h3>157</h3>
-                            </div>
-
-                            <div className={s.bar_one}>
-                                <h3>Ian Balen</h3>
-                                <div>Boja</div>
-                                <h3>146</h3>
-                            </div>
-
-                            <div className={s.bar_one}>
-                                <h3>Lovro Dujić</h3>
-                                <div>Boja</div>
-                                <h3>130</h3>
-                            </div> */}

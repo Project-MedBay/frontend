@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import s from "../styles/adminCalendar.module.css";
 import initialCalendarData from "./admin_utils/adminCalendarData.js";
+import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
 
 export default function AdminCalendar() {
     const [weekOffset, setWeekOffset] = useState(0);
     const [calendarData, setCalendarData] = useState(initialCalendarData);
     const [filterOption, setFilterOption] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedDate, setSelectedDate] = useState({date: "", hour: ""});
+    const [renderPopup, setRenderPopup] = useState(false)
 
     useEffect(() => {
         // Once connected to backend, fetch data here and update calendarData using setCalendarData
@@ -67,8 +70,8 @@ export default function AdminCalendar() {
     
     const weekDates = getDatesForWeek(weekOffset);
 
-    return (
-        <div className={s.calendarContainer}>
+    return ( <>
+        <div className={`${s.calendarContainer} ${renderPopup && s.covered_by_popup}`}>
             <div className={s.topBar}>
                 <div className={s.title}>
                     <h2>Appointment Calendar</h2>
@@ -106,7 +109,11 @@ export default function AdminCalendar() {
                         <tr key={hour}>
                             <th className={s.tableHour}>{hour}</th>
                             {weekDates.map(date => (
-                                <td key={date + hour}  onClick={() => console.log(`Details for ${date} at ${hour}`)}>
+                                <td key={date + hour}  onClick={() => {
+                                    console.log(`Details for ${date} at ${hour}`)
+                                        setSelectedDate({date: date, hour: hour})
+                                        setRenderPopup(true);
+                                    }}>
                                     <div className={s.tableSquare}>{getAppointmentCount(hour, date)}</div>
                                 </td>
                             ))}
@@ -115,5 +122,11 @@ export default function AdminCalendar() {
                 </tbody>
             </table>
         </div>
+        {renderPopup && <div className={s.popup_separate} onClick={() => setRenderPopup(false)}></div>}
+        {renderPopup && <AdminCalendarPopup 
+            selectedDate={selectedDate.date}
+            selectedHour={selectedDate.hour} 
+            />}
+    </>
     );
 }
