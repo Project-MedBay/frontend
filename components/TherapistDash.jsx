@@ -6,23 +6,23 @@ import refresh from "../assets/refresh.png"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
-   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, mySchedule} = props
+   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, formatFullDateISO, mySchedule, setMySchedule} = props
    
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
    var nextSession = {
       text: "No upcoming sessions.",
-      datetime: "--"
+      dateTime: "--"
    }
    for (let week in mySchedule) {
       for (let session of mySchedule[week]) {
-         if (session.datetime > new Date()) {
+         if (new Date(session.dateTime) > new Date()) {
             nextSession = session
             break
          }
       }
-      if (nextSession.datetime != "--") break
+      if (nextSession.dateTime != "--") break
    }
-   const [selectedSession, setSelectedSession] = useState(nextSession)
+   const [selectedSession, setSelectedSession] = useState(nextSession)     // NOTE sinkronizirat ovo kako triba
    const [patientPopup, setPatientPopup] = useState(false)
 
    const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
@@ -30,32 +30,30 @@ export default function TherapistDash(props) {
    const [notesInput, setNotesInput] = useState("")
 
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
-      if (selectedSession.datetime != "--") {
-         if (selectedSession.datetime > new Date()) {
+      if (selectedSession.dateTime != "--") {
+         if (new Date(selectedSession.dateTime) > new Date()) {
             setNotesDisabled(true)
          } else {setNotesDisabled(false)}
-         if (selectedSession.notes != "") {
-            setNotesInput(selectedSession.notes)
+         if (selectedSession.sessionNotes != "") {
+            setNotesInput(selectedSession.sessionNotes)
          } else {setNotesInput("")}
       }
    }, [selectedSession])
-
+      
    var scheduleElements
-   if (mySchedule[selectedWeek] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+   if (mySchedule[selectedWeek] != null) {                                 // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
       scheduleElements = mySchedule[selectedWeek].map(session => {               // kartice sesija u rasporedu
-         const { id, datetime, location } = session
+         const { id, dateTime, equipmentRoomName } = session
          let cardClass = s.session_card
-         if (datetime < new Date()) {
+         if (new Date(dateTime) < new Date()) {
             cardClass += ` ${s.session_passed}`
          }
          return (
-            <div className={cardClass} key={id}>
-               <h3 className={s.session_date}>{formatDate(datetime)}</h3>
-               <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
-               <p className={s.session_location}>{location}</p>
-               <p className={s.session_more} onClick={() => {
-                  setSelectedSession(mySchedule[selectedWeek][id])}}>View more
-               </p>
+            <div className={cardClass} key={id} onClick={() => {setSelectedSession(session)}}>
+               <h3 className={s.session_date}>{formatDate(new Date(dateTime))}</h3>
+               <h3 className={s.session_time}>{new Date(dateTime).getHours()}:00 - {new Date(dateTime).getHours()+1}:00</h3>
+               <p className={s.session_location}>{equipmentRoomName}</p>
+               <p className={s.session_more}>View more</p>
             </div>
          )
       })
@@ -67,8 +65,8 @@ export default function TherapistDash(props) {
       // ako je selected week (format week) == week earliest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
-         newDate.setDate(prevDate.getDate() - 7)
-         return newDate
+         newDate.setDate(newDate.getDate() - 7)
+         return formatFullDateISO(newDate)
       })
    }
 
@@ -76,20 +74,40 @@ export default function TherapistDash(props) {
       // ako je selected week (format week) == week latest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
-         newDate.setDate(prevDate.getDate() + 7)
-         return newDate
+         newDate.setDate(newDate.getDate() + 7)
+         return formatFullDateISO(newDate)
       })
    }
 
    function handleNotesEdit(action) {
       if (action == "cancel") {
-         setNotesInput(selectedSession.notes)
+         setNotesInput(selectedSession.sessionNotes)
       } else if (editingNotes) {
          setSelectedSession(prevSession => ({
             ...prevSession,
-            notes: notesInput
+            sessionNotes: notesInput
          }))
-         // axios koji ce poslat informaciju o novom noteu
+         setMySchedule(prevSchedule => ({
+            ...prevSchedule,
+            [selectedWeek]: [
+               ...prevSchedule[selectedWeek].filter(session => session.dateTime != selectedSession.dateTime),
+               {
+                  ...selectedSession,
+                  sessionNotes: notesInput
+               }  
+            ]
+         }))
+         
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/session-notes/"
+                  + selectedSession.appointmentId + "?sessionNotes=" + notesInput,
+            method: "PUT",
+            headers: {
+               Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+            }
+         })
+         .then(res => console.log(res.status))
+         .catch(error => console.log(error));
       }
       setEditingNotes(prevState => !prevState)
    }
@@ -119,46 +137,46 @@ export default function TherapistDash(props) {
 
          <div className={s.container_right}>
             <h2 className={s.container_title}>
-               {selectedSession.datetime == nextSession.datetime ? "Next session:" : "Selected session:"}
+               {selectedSession.dateTime == nextSession.dateTime ? "Next session:" : "Selected session:"}
             </h2>
             
-            {selectedSession.datetime == "--" ? <>
-            <p className={s.container_date}>{selectedSession.datetime}</p>
+            {selectedSession.dateTime == "--" ? <>
+            <p className={s.container_date}>{selectedSession.dateTime}</p>
          
             <div className={`${s.selected_session} ${s.no_sessions_container}`}>
                <p className={s.no_sessions}>{selectedSession.text}</p>
             </div>
             
             </> : <>
-            <p className={s.container_date}>{formatDate(selectedSession.datetime)}</p>
+            <p className={s.container_date}>{formatDate(new Date(selectedSession.dateTime))}</p>
             
             <div className={s.right_cards}>
                <div className={s.selected_session}>
                   <div className={s.session_info}>
                   <p>Therapy:</p>
                      <div className={s.info_values}>
-                        <p>{selectedSession.therapy}</p>
+                        <p>{selectedSession.therapyTypeName}</p>
                      </div>
 
                      <p>Time:</p>
                      <div className={s.info_values}>
-                        <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
+                        <p>{new Date(selectedSession.dateTime).getHours()}:00 - {new Date(selectedSession.dateTime).getHours()+1}:00</p>
                      </div>
                      
                      <p>Location:</p>
                      <div className={s.info_values}>
-                        <p>{selectedSession.location}</p>
+                        <p>{selectedSession.equipmentRoomName}</p>
                      </div>
                      
                      <p>Session number:</p>
                      <div className={s.info_values}>
-                        <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
+                        <p>{selectedSession.numberOfSessionsCompleted}/{selectedSession.numberOfSessions}</p>
                      </div>
                      
                      <p>Patient:</p>
                      <div className={s.info_values}>
                         <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
-                           {selectedSession.patient.name + " " + selectedSession.patient.surname}
+                           {selectedSession.patient.firstName + " " + selectedSession.patient.lastName}
                         </p>
                      </div>
                   </div>
@@ -177,7 +195,7 @@ export default function TherapistDash(props) {
                      <button className={`${s.note_edit} ${notesDisabled && s.button_disabled}`}
                         onClick={() => notesDisabled ? {} : handleNotesEdit("edit")}>
                         {editingNotes ? "Save note" :
-                        selectedSession.notes == "" ? "Add note" : "Edit note"}
+                        selectedSession.sessionNotes == "" ? "Add note" : "Edit note"}
                      </button>
                   
                   </div>
@@ -187,7 +205,7 @@ export default function TherapistDash(props) {
                      placeholder="No notes yet." name="note" value={notesInput}
                   /> :
                   <div className={s.note_box}>
-                     <p className={s.note_contents}>{selectedSession.notes}</p>
+                     <p className={s.note_contents}>{selectedSession.sessionNotes}</p>
                   </div>}
                </div>
             </div>
@@ -202,7 +220,8 @@ export default function TherapistDash(props) {
          <TherapyOrPatientPopup
             popupType="patient"
             popupData={selectedSession.patient}
-            popupSessions={testSessions}     // NOTE zamijeniti s dohvacenim sessionima
+            // setPopupData={newNotes => setSelectedSession(prevSession => )}
+            popupSessions={selectedSession.patient.appointments}     // NOTE zamijeniti s dohvacenim sessionima
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}

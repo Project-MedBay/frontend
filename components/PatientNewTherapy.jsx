@@ -131,20 +131,21 @@ export default function PatientNewTherapy(props) {
    return (<>
       <div className={`${s.patient_therapy_main} ${successPopup && s.covered_by_popup}`}>
          <h1 className={s.create_title}>REQUEST A NEW THERAPY</h1>
-         <div className={s.white_shape}></div>
          <div className={s.green_shape}></div>
          
-         <div className={s.create_container} onClick={() => console.log(selectedSessions)}>
+         <div className={s.create_container}>
             <div className={s.create_wrapper}>
             
             {progress == 1 && <>
             <div className={s.therapy_header}>
                <h2 className={s.header_step}>STEP 1: PICK A THERAPY</h2>
-               <p className={s.header_prompt}>or enter therapy code provided by your doctor:</p>
-               <input className={`${s.header_input} ${(nextDisabled() && codeInput != "") && s.invalid_input}`} type="text"
-                      onChange={handleCodeInput} placeholder="#4JG5E" name="therapyCode" value={codeInput} autoComplete="off"
-               />
-               <p className={`${s.invalid_text} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}>Invalid code.</p>
+               <div className={s.header_input}>
+                  <p className={s.header_prompt}>or enter therapy code provided by your doctor:</p>
+                  <input className={`${s.code_input} ${(nextDisabled() && codeInput != "") && s.invalid_input}`} type="text"
+                        onChange={handleCodeInput} placeholder="#4JG5E" name="therapyCode" value={codeInput} autoComplete="off"
+                  />
+                  <p className={`${s.invalid_text} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}>Invalid code.</p>
+               </div>
             </div>
 
             <div className={s.therapy_select}>
@@ -166,8 +167,13 @@ export default function PatientNewTherapy(props) {
             {progress == 2 && <>
             <div className={s.sessions_header}>
                <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
-               <div className={s.header_counter}>
-                  <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
+               <div className={s.header_shapes}>
+                  <div className={s.header_counter}>
+                     <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
+                  </div>
+                  <div className={s.info_duration}>
+                     <h2 className={s.duration_text}>duration: {duration} {duration == 1 ? "day" : "days"}</h2>
+                  </div>
                </div>
             </div>
             
@@ -178,11 +184,8 @@ export default function PatientNewTherapy(props) {
                   2. The total duration of the therapy must not exceed <span>{numOfSessions*5} days.</span><br />
                   3. Sessions cannot be scheduled more than <span>3 months</span> in advance.
                </p>
-               <div className={s.info_duration}>
-                  <h2 className={s.duration_text}>duration: {duration} {duration == 1 ? "day" : "days"}</h2>
-               </div>
             </div>
-            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.
+            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.<br className={s.mobile_only} />
                Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
             <div className={s.selection_wrapper}>
@@ -239,28 +242,32 @@ export default function PatientNewTherapy(props) {
                      <form className={s.verification_form} autoComplete="off">
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Referral number:</p>
-                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
-                              onChange={event => setVerificationData(prevData => ({
-                                 ...prevData,
-                                 referral: event.target.value
-                              }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral}
-                           />
-                           <p className={s.verification_tip} title={tooltips.referral}>?</p>
+                           <div className={s.input_wrapper}>
+                              <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                                 onChange={event => setVerificationData(prevData => ({
+                                    ...prevData,
+                                    referral: event.target.value
+                                 }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral}
+                              />
+                              <p className={s.verification_tip} title={tooltips.referral}>?</p>
+                           </div>
                         </div>
                         
                         <div className={s.verification_input}>
                            <p className={s.input_label}>Doctor id (hlkid):</p>
-                           <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
-                              onChange={event => setVerificationData(prevData => ({
-                                 ...prevData,
-                                 hlkid: event.target.value
-                              }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid}
-                           />
-                           <p className={s.verification_tip} title={tooltips.doctor}>?</p>
+                           <div className={s.input_wrapper}>
+                              <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
+                                 onChange={event => setVerificationData(prevData => ({
+                                    ...prevData,
+                                    hlkid: event.target.value
+                                 }))} type="text" placeholder="123456789" name="hlkid" value={verificationData.hlkid}
+                              />
+                              <p className={s.verification_tip} title={tooltips.doctor}>?</p>
+                           </div>
                         </div>
 
                         <p className={`${s.verification_failed} ${verificationFailed && s.visible}`}>
-                           Incorrect referral number or doctor hlkid.
+                           Incorrect referral number or hlkid.
                         </p>
                      </form>
                   </div>

@@ -134,8 +134,10 @@ export default function PatientProfile(props) {
             </div>
 
             <div className={s.header_thanks}>   {/* NOTE dodati neku drugu sliku za bg */}
-               <h1 className={s.thanks_title}>THANK YOU</h1>
-               <h2 className={s.thanks_subtitle}>FOR BEING WITH US FOR</h2>
+               <div className={s.thanks_message}>
+                  <h1 className={s.message_title}>THANK YOU</h1>
+                  <h2 className={s.message_subtitle}>FOR BEING WITH US FOR</h2>
+               </div>
                <h2 className={s.thanks_age}>{accountAge}</h2>
                <div className={s.thanks_buttons}>
                   <h3 className={s.thanks_edit} onClick={() => setEditPopup(true)}>Edit account data</h3>

@@ -13,25 +13,28 @@ export default function VerificationCard(props){
             type: cardType
         });
         cardType === 'registration' ? setPopupData({
-            date_time: info.date_time,
-            request_id: info.request_id,
-            user_id: info.user_data.user_id,
-            full_name: info.user_data.full_name,
-            email: info.user_data.email,
-            address: info.user_data.address,
-            date_of_birth: info.user_data.date_of_birth,
-            phone_number: info.user_data.phone_number,
-            insurance_policy_number: info.user_data.insurance_policy_number
+            date_time: formatFullDateAndTime(new Date(info.createdAt)),
+            request_id: info.id,
+            user_id: info.id,
+            full_name: info.firstName + " " + info.lastName,
+            email: info.email,
+            address: info.address,
+            date_of_birth: info.dateOfBirth,
+            phone_number: info.phoneNumber,
+            insurance_policy_number: info.mbo
         }) :
         setPopupData({
-            name: info.name,
-            request_id: info.request_id,
-            therapy_id: info.therapy_id,
-            duration: info.duration,
-            number_of_sessions: info.number_of_sessions,
-            date_time: info.date_time,
-            user_id: info.user_id,
-            sessions: info.sessions
+            name: info.therapyTypeName,
+            request_id: info.therapyId,
+            therapy_id: info.therapyId,
+            duration: Math.floor((
+                new Date(info.sessionDates[info.sessionDates.length-1]).setHours(0) - 
+                new Date(info.sessionDates[0]).setHours(0) + (1000 * 60 * 60)   // offset zbog pomicanja sata
+                ) / 1000 / 60 / 60 / 24) + 1,
+            number_of_sessions: info.numberOfSessions,
+            date_time: formatFullDateAndTime(new Date(info.requestDate)),
+            user_id: info.patientId,
+            sessions: info.sessionDates
         });
     }
 
@@ -39,8 +42,10 @@ export default function VerificationCard(props){
 
     return(
         <div className={s.card}>
-                <h3 className={s.requestNumerator}>Request #{info.request_id}</h3>
-                <h4 className={s.requestDate}>{info.date_time}</h4>
+                <h3 className={s.requestNumerator}>Request #{cardType == "registration" ? info.id : info.therapyId}</h3>
+                <h4 className={s.requestDate}>
+                    {formatFullDateAndTime(new Date(cardType == "registration" ? info.createdAt : info.requestDate))}
+                </h4>
                 <button 
                     className={s.reviewBtn} 
                     disabled={popup === true ? true : false}

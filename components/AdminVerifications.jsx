@@ -1,21 +1,36 @@
 
-import React from "react"
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 import s from "../styles/adminVerifications.module.css"
-import registrationData from "./admin_utils/verificationsRegisterData.js"
-import therapyData from "./admin_utils/verificationsTherapyData.js"
 import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
     const {userToken, formatFullDateAndTime} = props
 
-    const [popup, setPopup] = React.useState({
+    const [popup, setPopup] = useState({
         set: false, 
         popupType: null // 'registration' or 'therapy'
     })
 
-    const [registrationsData, setRegistrationsData] = React.useState(registrationData)
-    const [registrationPopupData, setRegistrationPopupData] = React.useState({
+    useEffect(() => {
+        axios({
+           url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/verifications",
+           method: "GET",
+           headers: {
+              Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+           }
+        })
+        .then(res => {
+            setRegistrationsData(res.data.patients)
+            setTherapiesData(res.data.therapies)
+            console.log(res.status)
+        })
+        .catch(error => console.log(error));
+     }, [])
+
+    const [registrationsData, setRegistrationsData] = useState([])
+    const [registrationPopupData, setRegistrationPopupData] = useState({
         date_time: "",
         request_id: 0,
         user_id: 0,
@@ -27,8 +42,8 @@ export default function AdminVerifications(props) {
         insurance_policy_number: 0
     })
 
-    const [therapiesData, setTherapiesData] = React.useState(therapyData)
-    const [therapyPopupData, setTherapyPopupData] = React.useState({
+    const [therapiesData, setTherapiesData] = useState([])
+    const [therapyPopupData, setTherapyPopupData] = useState({
         name: "",
         request_id: 0,
         therapy_id: 0,
@@ -71,6 +86,15 @@ export default function AdminVerifications(props) {
         setPopupData={setRegistrationPopupData}
         />))
 
+    function handleProcess(requestFor, id) {
+        if (requestFor == "registration") setRegistrationsData(prevData => ([
+            ...prevData.filter(request => request.id != id)
+        ]))
+        else setTherapiesData(prevData => ([
+            ...prevData.filter(request => request.therapyId != id)
+        ]))
+    }
+
     return (
         <>
             <div className={`${s.main_container} ${popup === true ? s.blurContainer : ''}`}>
@@ -89,15 +113,19 @@ export default function AdminVerifications(props) {
             {
                 popup.set && (popup.type === "registration" ? 
                     <VerificationPopup 
+                        userToken={userToken}
                         popupData={registrationPopupData} 
                         setPopup={setPopup} 
                         type="registration"
+                        handleProcess={handleProcess}
                     />
                 :
                     <VerificationPopup 
+                        userToken={userToken}
                         popupData={therapyPopupData} 
                         setPopup={setPopup} 
                         type="therapy"
+                        handleProcess={handleProcess}
                     />
                 )
             }

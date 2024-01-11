@@ -1,8 +1,9 @@
 import React from 'react';
+import axios from 'axios'
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
-    const {popupData, setPopup, type} = props;
+    const {userToken, popupData, setPopup, type, handleProcess} = props;
 
     const [action, setAction] = React.useState(null); // 'reject', 'approve', or null
     const [rejectionReason, setRejectionReason] = React.useState("");
@@ -17,11 +18,32 @@ export default function VerificationCard(props){
     };
 
     const confirmAction = () => {
-        if (action === 'reject') {
-            console.log('Rejected for reason:', rejectionReason);
-        } else if (action === 'approve') {
-            console.log('Approved');
+        if (type === 'registration') {
+            axios({
+                url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/activity/"
+                     + popupData.user_id + "?status=" + (action == "approve" ? "ACTIVE" :
+                     "DEACTIVATED" + "&rejectionReason=" + rejectionReason),
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+                }
+            })
+            .then(res => console.log(res.status))
+            .catch(error => console.log(error));
+        } else if (type === 'therapy') {
+            axios({
+                url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/change-status/"
+                     + popupData.therapy_id + "?status=" + (action == "approve" ? "VERIFIED" :
+                     "DECLINED" + "&rejectionReason=" + rejectionReason),
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+                }
+            })
+            .then(res => console.log(res.status))
+            .catch(error => console.log(error));
         }
+        handleProcess(type, popupData.request_id)
         setPopup({
             set: false,
             type: null
@@ -36,7 +58,9 @@ export default function VerificationCard(props){
         <div className={s.popupContainer}>
             <div className={s.popup} style={{ width: type === "therapy" ? '60vw' : 'default'}}>
                 <button className={s.closeBtn} onClick={() => setPopup(false)}>✖</button>
-                <h2 className={s.requestNumerator}>Registration Request #{popupData.request_id}</h2>
+                <h2 className={s.requestNumerator}>
+                    {type == "registration" ? "Registration" : "Therapy"} Request #{popupData.request_id}
+                </h2>
                 {
                     type === 'registration' ? (
                         <div className={s.userDataFrame}>
@@ -93,8 +117,8 @@ export default function VerificationCard(props){
                                 <div className={s.sessionList}>
                                     {popupData.sessions.map((session, index) => (
                                         <div key={index} className={s.session}>
-                                            <p>{session.session_date}</p>
-                                            <p>{session.session_start_time} - {session.session_end_time}</p>
+                                            <p>{session.slice(0, 10)}</p>
+                                            <p>{session.slice(11, 13)} - {session.slice(11, 13)}</p>    {/* NOTE prominit ovo */}
                                         </div>
                                         
                                     ))}

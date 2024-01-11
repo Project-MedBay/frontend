@@ -13,7 +13,7 @@ export default function TherapyOrPatientPopup(props) {
 
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (viewingNotesOf != "") {
-         setNotesInput(viewingNotesOf.notes)
+         setNotesInput(viewingNotesOf.sessionNotes)
       } else {setNotesInput("")}
    }, [viewingNotesOf])
 
@@ -22,8 +22,8 @@ export default function TherapyOrPatientPopup(props) {
       title = popupData.name
       rows = [["date started", "therapist"], ["date finished", "location"]]
    } else if (popupType == "patient") {
-      title = popupData.name + " " + popupData.surname
-      rows = [["e-mail"], ["address"], ["dob", "phone", "mbo"]]
+      title = popupData.firstName + " " + popupData.lastName
+      rows = [["email"], ["address"], ["dateOfBirth", "phoneNumber", "mbo"]]        // NOTE promini labele da ne koriste ovo
    }
    var infoElements = []
    for (let row of rows) {
@@ -41,28 +41,28 @@ export default function TherapyOrPatientPopup(props) {
    }
    
    const sessionElements = popupSessions?.map(session => {
-      let sessionPassed = session.datetime < new Date()
+      let sessionPassed = new Date(session.appointmentDate) < new Date()
       let sessionInfo = <> 
-         <p className={s.session_datetime}>{formatDate(session.datetime)} at {session.datetime.getHours()}:00</p>
-         {session.notes != "" ?
+         <p className={s.session_datetime}>{formatDate(new Date(session.appointmentDate))} at {new Date(session.appointmentDate).getHours()}:00</p>
+         {session.sessionNotes != "" ?
             <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session)}>
-               {viewingNotesOf.id === session.id ? "Collapse" : "View notes"}
+               {viewingNotesOf.appointmentId === session.appointmentId ? "Collapse" : "View notes"}
             </p> :
-            popupType == "therapy" || !sessionPassed || viewingNotesOf.id == session.id ?
+            popupType == "therapy" || !session.show || !sessionPassed || viewingNotesOf.appointmentId == session.appointmentId ?
             <p className={s.session_notes}>No notes</p> :
             <button className={s.note_edit} onClick={() => handleNotesEdit("add", session)}>Add note</button>
          }
       </>
       return (
-         <div className={`${s.session_card} ${sessionPassed && s.session_passed}`} key={session.id}>
+         <div className={`${s.session_card} ${sessionPassed && s.session_passed}`} key={session.appointmentId}>
             <div className={s.session_info}>
                {popupType == "patient" ? <>
-                  <p className={s.session_therapy}>{session.therapy.toUpperCase()}</p>
+                  <p className={s.session_therapy}>{session.therapyName.toUpperCase()}</p>
                   <div className={s.info_section}>{sessionInfo}</div>
                </> : sessionInfo}
             </div>
             
-            {viewingNotesOf.id === session.id && <>
+            {viewingNotesOf.appointmentId === session.appointmentId && <>
                <div className={s.box_container}>
                   <div className={s.box_bounds}></div>
 
@@ -72,13 +72,13 @@ export default function TherapyOrPatientPopup(props) {
                      placeholder="No notes yet." name="note" value={notesInput}
                   /> :
                   <div className={s.note_box}>
-                     <p className={s.note_contents}>{viewingNotesOf.notes}</p>
+                     <p className={s.note_contents}>{viewingNotesOf.sessionNotes}</p>
                   </div>}
                   
                   <div className={s.box_bounds}></div>
                </div>
 
-               {popupType == "patient" && sessionPassed && <div className={s.buttons_container}>
+               {popupType == "patient" && session.show && sessionPassed && <div className={s.buttons_container}>
                   {editingNotes &&
                      <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button>
                   }  
@@ -93,7 +93,7 @@ export default function TherapyOrPatientPopup(props) {
    })
    
    function viewNote(session) {
-      if (viewingNotesOf.id != session.id) {
+      if (viewingNotesOf.appointmentId != session.appointmentId) {
          setViewingNotesOf(session)
       } else {
          setViewingNotesOf("")
@@ -105,18 +105,29 @@ export default function TherapyOrPatientPopup(props) {
       if (action == "add") {
          setViewingNotesOf(session)
       } else if ((action == "save" && notesInput == "") ||
-                 (action == "cancel" && viewingNotesOf.notes == "")) {
+                 (action == "cancel" && viewingNotesOf.sessionNotes == "")) {
          setViewingNotesOf("")
       } else { 
          if (action == "cancel") {
-            setNotesInput(viewingNotesOf.notes)
+            setNotesInput(viewingNotesOf.sessionNotes)
          } else if (editingNotes) {
-               setViewingNotesOf(prevSession => ({
-                  ...prevSession,
-                  notes: notesInput
-               }))
+            setViewingNotesOf(prevSession => ({
+               ...prevSession,
+               sessionNotes: notesInput
+            }))
+         }
+      }
+      if (action == "save") {
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/session-notes/"
+                  + viewingNotesOf.appointmentId + "?sessionNotes=" + notesInput,
+            method: "PUT",
+            headers: {
+               Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
             }
-            // axios koji ce poslat informaciju o novom noteu
+         })
+         .then(res => console.log(res.status))
+         .catch(error => console.log(error));
       }
       setEditingNotes(prevState => !prevState)
    }
@@ -130,7 +141,7 @@ export default function TherapyOrPatientPopup(props) {
       <div className={`${s.popup} ${popupType == "patient" && s.popup_wide}`}>
          <div className={s.popup_header}>
             <h1 className={s.popup_title}>{title.toUpperCase()}
-               <span>{` (${popupData.code})`}</span>
+               <span>{` #(${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}
             </h1>
             <img src={x_icon} className={s.popup_exit} onClick={handleExit} />
          </div>

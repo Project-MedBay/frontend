@@ -330,73 +330,6 @@
    font-size: calc(20 * var(--scale-by-height));
 }
 
-.reschedule_info {
-   color: #000;
-   font-size: calc(24 * var(--scale-by-height));
-   font-weight: 400;
-   margin: 0 calc(40 * var(--scale-by-height));
-}
-
-.reschedule_info > span {
-   font-size: calc(32 * var(--scale-by-height));
-}
-
-.reschedule_legend {
-   font-size: calc(16 * var(--scale-by-height));
-   font-weight: 400;
-   text-align: center;
-   margin: calc(10 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
-   line-height: 150%;
-}
-
-.legend_purple {
-   background-color: #22006a;
-   color: #fff;
-   font-weight: 600;
-   padding: calc(3 * var(--scale-by-height)) calc(5 * var(--scale-by-height));
-   border-radius: calc(5 * var(--scale-by-height));
-}
-
-.legend_green {
-   padding: 0 calc(3 * var(--scale-by-height));
-   border: #70D8AC solid calc(2 * var(--scale-by-height));
-   border-radius: calc(5 * var(--scale-by-height));
-}
-
-.reschedule_button, .confirm_yes, .confirm_no {
-   width: calc(250 * var(--scale-by-height));
-   height: calc(60 * var(--scale-by-height));
-   color: #FFF;
-   font-size:  calc(32 * var(--scale-by-height));
-   font-weight: 600;
-   border: 0;
-   margin: calc(20 * var(--scale-by-height));
-   margin-bottom: calc(40 * var(--scale-by-height));
-   border-radius: calc(10 * var(--scale-by-height));
-   background-color: #70D8AC;
-   cursor: pointer;
-}
-
-.reschedule_confirm {
-   display: flex;
-   align-items: center;
-   margin-bottom: calc(20 * var(--scale-by-height));
-}
-
-.confirm_text {
-   font-size: calc(36 * var(--scale-by-height));
-   font-weight: 700;
-   margin: 0 calc(10 * var(--scale-by-height));
-}
-
-.confirm_yes, .confirm_no {
-   width: calc(100 * var(--scale-by-height));
-   margin: calc(20 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
-}
-
-.confirm_no {
-   background-color: #22006a;
-}
 
 @media only screen and ((max-aspect-ratio: 11 / 10) or (max-width: 815px)) {
    /* .session_card {background-color: #000;} */
@@ -406,7 +339,6 @@
    }
 
    .patient_dash_main {
-      display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
@@ -601,73 +533,5 @@
       margin: 0;
       font-weight: 600;
       font-size: calc(20 * var(--scale-by-height));
-   }
-
-   .reschedule_info {
-      color: #000;
-      font-size: calc(24 * var(--scale-by-height));
-      font-weight: 400;
-      margin: 0 calc(40 * var(--scale-by-height));
-   }
-
-   .reschedule_info > span {
-      font-size: calc(32 * var(--scale-by-height));
-   }
-
-   .reschedule_legend {
-      font-size: calc(16 * var(--scale-by-height));
-      font-weight: 400;
-      text-align: center;
-      margin: calc(10 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
-      line-height: 150%;
-   }
-
-   .legend_purple {
-      background-color: #22006a;
-      color: #fff;
-      font-weight: 600;
-      padding: calc(3 * var(--scale-by-height)) calc(5 * var(--scale-by-height));
-      border-radius: calc(5 * var(--scale-by-height));
-   }
-
-   .legend_green {
-      padding: 0 calc(3 * var(--scale-by-height));
-      border: #70D8AC solid calc(2 * var(--scale-by-height));
-      border-radius: calc(5 * var(--scale-by-height));
-   }
-
-   .reschedule_button, .confirm_yes, .confirm_no {
-      width: calc(250 * var(--scale-by-height));
-      height: calc(60 * var(--scale-by-height));
-      color: #FFF;
-      font-size:  calc(32 * var(--scale-by-height));
-      font-weight: 600;
-      border: 0;
-      margin: calc(20 * var(--scale-by-height));
-      margin-bottom: calc(40 * var(--scale-by-height));
-      border-radius: calc(10 * var(--scale-by-height));
-      background-color: #70D8AC;
-      cursor: pointer;
-   }
-
-   .reschedule_confirm {
-      display: flex;
-      align-items: center;
-      margin-bottom: calc(20 * var(--scale-by-height));
-   }
-
-   .confirm_text {
-      font-size: calc(36 * var(--scale-by-height));
-      font-weight: 700;
-      margin: 0 calc(10 * var(--scale-by-height));
-   }
-
-   .confirm_yes, .confirm_no {
-      width: calc(100 * var(--scale-by-height));
-      margin: calc(20 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
-   }
-
-   .confirm_no {
-      background-color: #22006a;
    }
 }

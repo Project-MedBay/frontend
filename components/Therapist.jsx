@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { therapistSchedule } from "./TestingData"
+import axios from 'axios'
 import TherapistHeader from './TherapistHeader'
 import TherapistDash from './TherapistDash'
 import TherapistPatients from './TherapistPatients'
@@ -7,10 +7,22 @@ import TherapistPatients from './TherapistPatients'
 export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken, userData} = props
    const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const [mySchedule, setMySchedule] = useState("")
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-   
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/employee/appointments",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => setMySchedule(res.data))
+      .catch(error => console.log(error));
+   }, [])
+
    function navigate(toWhere) {
       if (toWhere == "login") {
          setPageName("login")
@@ -20,7 +32,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
    }
    
    function formatWeek(datetime) {
-      let tempDate = getWeekFirst(new Date(datetime))
+      let tempDate = new Date(getWeekFirst(datetime))
       let date = tempDate.getDate()
       let formattedWeek = date.toString() + addExtension(date) + " " + 
                         month[tempDate.getMonth()] + " - "
@@ -36,7 +48,8 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       let weekday = tempDate.getDay()
       let offset = weekday == 0 ? 6 : (weekday - 1)
       tempDate.setDate(tempDate.getDate() - offset)
-      return new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate())
+      let weekFirst = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate())
+      return formatFullDateISO(weekFirst)
    }
 
    function formatDate(datetime) {
@@ -63,6 +76,11 @@ export default function Therapist(props) {           // glavna komponenta uloge,
          default:
             return "th"
       }
+   }
+
+   function formatFullDateISO(datetime) {
+      let fullDate = formatFullDate(datetime)
+      return fullDate.slice(6) + "-" + fullDate.slice(3, 5) + "-" + fullDate.slice(0, 2)
    }
 
    function formatFullDate(datetime) {
@@ -93,7 +111,9 @@ export default function Therapist(props) {           // glavna komponenta uloge,
             getWeekFirst={getWeekFirst}
             formatDate={formatDate}
             formatFullDate={formatFullDate}
-            mySchedule={therapistSchedule}
+            formatFullDateISO={formatFullDateISO}
+            mySchedule={mySchedule}
+            setMySchedule={setMySchedule}
          />
       </>,
       patients: <>

@@ -33,7 +33,6 @@ export default function App() {           // glavna komponenta, u njoj se render
       let navigateTo = jwtDecode(token).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(token).role.toLowerCase()
       setPageName(navigateTo)
    }
-   
   
   const pages = {
     login: <>

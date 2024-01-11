@@ -125,18 +125,27 @@
    box-shadow: 0 calc(4 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) 0 rgba(0, 0, 0, 0.25);
 }
 
-.thanks_title {
+.thanks_message {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.message_title {
    font-size: calc(48 * var(--scale-by-height));
    font-weight: 800;
    letter-spacing: calc(15 * var(--scale-by-height));
+   text-align: center;
+   width: fit-content;
    margin: 0;
+   padding-left: calc(15 * var(--scale-by-height));
 }
 
-.thanks_subtitle {
+.message_subtitle {
    color: #636363;
    font-size: calc(28 * var(--scale-by-height));
+   width: fit-content;
    margin: 0;
-   margin-top: calc(-20 * var(--scale-by-height));
 }
 
 .thanks_age {
@@ -402,4 +411,256 @@ p.therapy_more {
    margin: 0;
    font-weight: 600;
    font-size: calc(20 * var(--scale-by-height));
+}
+
+@media only screen and ((max-aspect-ratio: 3 / 2) or (max-width: 1105px)) {
+
+   .patient_profile_main {
+      justify-content: flex-start;
+      gap: 1.4vh;
+      padding: calc(50 * var(--scale-by-height));
+      height: fit-content;
+      min-height: calc(100vh - calc(60 * var(--scale-by-height)));
+   }
+   
+   .profile_header {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 1vh;
+      width: calc(750 * var(--scale-by-height));
+   }
+   
+   .header_user {
+      display: flex;
+      align-items: center;
+      width: 100%;
+   }
+   
+   .image_wrapper {
+      min-height: calc(220 * var(--scale-by-height));
+   }
+
+   .user_image {
+      max-height: calc(220 * var(--scale-by-height));
+      max-width: calc(220 * var(--scale-by-height));
+   }
+   
+   .header_thanks {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: calc(10 * var(--scale-by-height));
+      gap: calc(20 * var(--scale-by-height));
+   }
+   
+   .message_title {
+      font-size: calc(26 * var(--scale-by-height));
+      letter-spacing: calc(10 * var(--scale-by-height));
+      padding-left: calc(10 * var(--scale-by-height));
+   }
+   
+   .message_subtitle {
+      font-size: calc(20 * var(--scale-by-height));
+   }
+   
+   .thanks_age {
+      font-size: calc(32 * var(--scale-by-height));
+   }
+   
+   .thanks_age > span {
+      font-size: calc(38 * var(--scale-by-height));
+   }
+   
+   .thanks_buttons {
+      flex-direction: column;
+      justify-content: space-between;
+      width: fit-content;
+      text-align: right;
+      gap: calc(15 * var(--scale-by-height));
+      padding: 0;
+      padding-right: calc(10 * var(--scale-by-height));
+   }
+   
+   .thanks_edit, .thanks_deactivate {
+      color: #000;
+      font-size: calc(15 * var(--scale-by-height));
+   }
+   
+   .profile_therapies {
+      align-items: center;
+      gap: calc(10 * var(--scale-by-height));
+      width: calc(750 * var(--scale-by-height));
+   }
+   
+   .therapies_title {
+      margin: 0;
+   }
+   
+   .therapies_container {
+      justify-items: center;
+      width: 100%;
+      max-height: calc(690 * var(--scale-by-height));
+      grid-template-columns: 100%;
+   }
+   
+   .no_therapies {
+      font-size: calc(22 * var(--scale-by-height));
+   }
+   
+   .therapy_card {
+      width: 100%;
+   }
+   
+   p.therapy_more {
+      font-size: calc(18 * var(--scale-by-height));
+      margin-top: 0;
+   }
+                                                                  /* TU SMO STALI */
+   .session_popup {
+      position: absolute;
+      left: 50vw;
+      top: 50vh;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: calc(20 * var(--scale-by-height));
+      font-weight: 700;
+      background: #FFFFFF;
+      box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(10 * var(--scale-by-height));
+      width: max-content;
+      max-width: calc(800 * var(--scale-by-height));
+   }
+   
+   .popup_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: calc(50 * var(--scale-by-height));
+      padding: calc(20 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+      border-bottom: #656565 solid calc(1 * var(--scale-by-height));
+      margin-bottom: calc(10 * var(--scale-by-height));
+   }
+   
+   .popup_title {
+      color: #000;
+      font-size:  calc(32 * var(--scale-by-height));
+      font-weight: 700;
+      margin: 0;
+   }
+   
+   .popup_title > span {
+      color: #656565;
+      font-size: calc(28 * var(--scale-by-height));
+      font-style: italic;
+      font-weight: 500;
+   }
+   
+   .popup_exit {
+      margin-top: calc(4 * var(--scale-by-height));
+      cursor: pointer;
+   }
+   
+   .popup_row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: calc(50 * var(--scale-by-height));
+      padding: 0 calc(30 * var(--scale-by-height));
+   }
+   
+   .popup_info {
+      font-size: calc(24 * var(--scale-by-height));
+      font-weight: 500;
+      margin: 0;
+   }
+   
+   .popup_info > span {
+      color: #22006a;
+      font-weight: 700;
+   }
+   
+   .popup_sessions {
+      color: #22006a;
+      font-size: calc(30 * var(--scale-by-height));
+      margin: calc(10 * var(--scale-by-height));
+      margin-bottom: 0;
+   }
+   
+   .sessions_container {
+      display: flex;
+      flex-direction: column;
+      max-height: calc(420 * var(--scale-by-height));
+      overflow: auto;
+      padding: 0 calc(15 * var(--scale-by-height));
+      gap: calc(20 * var(--scale-by-height));
+      margin-bottom: calc(40 * var(--scale-by-height));
+   }
+   
+   .session_card {
+      display: flex;
+      flex-direction: column;
+      gap: calc(5 * var(--scale-by-height));
+      padding: calc(10 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
+      background-color: #fff;
+      border-radius: calc(10 * var(--scale-by-height));
+      box-shadow: 0 calc(4 * var(--scale-by-height)) calc(4 * var(--scale-by-height)) 0 rgba(0, 0, 0, 0.25);
+      margin-bottom: calc(5 * var(--scale-by-height));
+   }
+   
+   .session_info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: calc(70 * var(--scale-by-height));
+      width: 100%;
+   }
+   
+   .session_datetime, .session_notes {
+      font-size: calc(24 * var(--scale-by-height));
+      font-weight: 600;
+      margin: 0;
+   }
+   
+   .session_notes {
+      color: #636363;
+      font-weight: 500;
+   }
+   
+   .notes_link {
+      color: #22006a;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+   }
+   
+   .note_box {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: hsl(0, 0%, 90%);
+      border-radius: calc(5 * var(--scale-by-height));
+      max-height: calc(210 * var(--scale-by-height));
+      width: min-content;
+      flex-grow: 1;
+      overflow: auto;
+      padding: calc(15 * var(--scale-by-height));
+      margin: calc(10 * var(--scale-by-height)) 0;
+   }
+   
+   .box_container {
+      display: flex;
+   }
+   
+   .box_bounds {
+      width: calc(1 * var(--scale-by-height));
+   }
+   
+   .note_contents {
+      margin: 0;
+      font-weight: 600;
+      font-size: calc(20 * var(--scale-by-height));
+   }
 }

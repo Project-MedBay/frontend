@@ -3,6 +3,7 @@
    position: relative;
    height: calc(260 * var(--scale-by-height));
    display: flex;
+   margin-top: calc(15 * var(--scale-by-height));
 }
 
 .human_body svg:hover {

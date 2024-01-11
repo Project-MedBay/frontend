@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import AdminHeader from './AdminHeader'
 import AdminWelcome from './AdminWelcome'
 import AdminCalendar from './AdminCalendar.jsx'
@@ -66,14 +66,11 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
     }
 
     function formatFullDateAndTime(datetime) {
-        let formattedDate = formatFullDate(datetime)
+        let formattedDate = formatFullDate(datetime) + " "
         datetime.getHours() < 10 ? formattedDate += "0" : "";
         formattedDate += datetime.getHours() + ":";
         datetime.getMinutes() < 10 ? formattedDate += "0" : "";
-        formattedDate += datetime.getMinutes() + ":";
-        datetime.getSeconds() < 10 ? formattedDate += "0" : "";
-        formattedDate += datetime.getSeconds();
-        
+        formattedDate += datetime.getMinutes()
         return formattedDate;
     }
 
