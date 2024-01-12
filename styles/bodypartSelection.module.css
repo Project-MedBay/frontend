@@ -117,3 +117,16 @@
    left: calc(10.5 * var(--scale-by-height));
    top: calc(426 * var(--scale-by-height));
 }
+
+.dark svg:hover path{
+   fill: #22006a;
+}
+
+.dark svg {
+   position: absolute;
+   fill: #70D8AC;
+}
+
+.dark svg.part_selected{
+   fill: #22006a;
+}

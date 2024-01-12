@@ -8,8 +8,11 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule} = props
-   
+   const {userToken, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
+   console.log(theme);
+
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
    var nextSession = {
       text: "No upcoming sessions.",
@@ -106,8 +109,9 @@ export default function PatientDash(props) {
       }
    }
 
-   return (<>
-      <div className={`${s.patient_dash_main} ${(reschedulePopup || notesPopup) && s.covered_by_popup}`}>
+   return (<div className={darkModeClass}>
+      <div className={`${s.patient_dash_main} ${darkModeClass} ${((reschedulePopup || notesPopup) ? s.covered_by_popup : '')}`}>
+
          <div className={s.container_left}>
             <h2 className={s.container_title}>My schedule:</h2>
 
@@ -230,7 +234,8 @@ export default function PatientDash(props) {
             setRescheduledSession = {setRescheduledSession}
             patientSchedule = {mySchedule}
             popupExit = {popupExit}
+            theme={theme}
          />
       }
-   </>)
+   </div>)
 }

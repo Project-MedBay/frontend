@@ -6,11 +6,12 @@ import RegisterMain from './RegisterMain'
 import Patient from './Patient'
 import Therapist from './Therapist'
 import Admin from './Admin'
+import { ThemeProvider } from './ThemeContext'; 
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("login")           // sluzi za navigaciju
+  const [pageName, setPageName] = useState("patient")           // sluzi za navigaciju
   const [userToken, setUserToken] = useState("")
   const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
     id: "452",
@@ -61,5 +62,9 @@ export default function App() {           // glavna komponenta, u njoj se render
     />
   }
 
-  return pages[pageName]
+  return (
+    <ThemeProvider>
+        {pages[pageName]}
+    </ThemeProvider>
+);
 }

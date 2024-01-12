@@ -5,7 +5,8 @@ import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode} = props     // i think ill need current for axios, will see
+   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
+   const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
    const [availableSessions, setAvailableSessions] = useState(testAvailableSessions)   // NOTE maknit
@@ -163,7 +164,7 @@ export default function SessionSelection(props) {
 
 
    return (
-      <div className={s.selection_main}>
+      <div className={`${s.selection_main} ${darkModeClass}`}>
          <div className={s.scroll_container}>
             <div className={`${s.dates_container} ${!reschedule && s.container_small}`}>     {/* s ovim mozemo minjat visinu containera i velicinu fonta npr za new therapy */}
                {weekElements}
