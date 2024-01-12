@@ -1,7 +1,12 @@
 import React, { useState } from "react"
 import logo from "../assets/plus_icon.png"
 import { useTheme } from './ThemeContext';
+import Toggle from 'react-toggle'
+import "react-toggle/style.css" 
 import s from "../styles/patientTherapistHeader.module.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faSun } from '@fortawesome/free-solid-svg-icons'
 
 export default function PatientHeader(props) {
     const [logOut, setLogOut] = useState(false)
@@ -22,7 +27,15 @@ export default function PatientHeader(props) {
                     :
                     <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
                 }
-                <button className={s.toggleThemeButton} onClick={toggleTheme}>TOGGLE THEME</button> {/* Add a button to switch themes */}
+                <Toggle
+                    defaultChecked={theme === 'dark' ? true : false}
+                    icons={{
+                    checked: <FontAwesomeIcon icon={faMoon} className={s.moonIcon}/>,
+                    unchecked: <FontAwesomeIcon icon={faSun} className={s.sunIcon}/>,
+                    }}
+                    onClick={toggleTheme} 
+                    className={s.toggle}
+                />
                 <h2 className={s.nav_item} onClick={() => props.navigate("profile")}>MY PROFILE</h2>
                 <h2 className={s.nav_item} onClick={() => props.navigate("newTherapy")}>NEW THERAPY</h2>
                 <h2 className={s.nav_item} onClick={() => props.navigate("dash")}>DASHBOARD</h2>

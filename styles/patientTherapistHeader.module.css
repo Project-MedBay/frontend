@@ -115,3 +115,15 @@
    direction: rtl;
 }
 
+.sunIcon{
+   color: white;
+   position: relative;
+   top: -2px;
+   right: -2px;
+}
+.moonIcon{
+   color: white;
+   position: relative;
+   top: -2px;
+   right: -2px;
+}
