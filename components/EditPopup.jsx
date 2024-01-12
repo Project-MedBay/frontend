@@ -6,7 +6,9 @@ import s from "../styles/editPopup.module.css"
 import { all } from "axios"
 
 export default function AdminEditPopup(props) {
-   const {popupType, popupFor, popupData, handleAdd, handleEdit, popupExit, formatFullDate} = props
+   const {popupType, popupFor, popupData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [formData, setFormData] = useState(() => {
       if (popupFor == "therapist" || popupFor == "patient") return {
@@ -303,7 +305,7 @@ export default function AdminEditPopup(props) {
    }
 
    return (
-      <div className={s.edit_popup}>
+      <div className={`${s.edit_popup} ${darkModeClass}`}>
          <h1 className={s.popup_title}>
             {popupType == "add" ? "ADD" : "EDIT"}&#160;
             {popupFor == "patient" ? "ACCOUNT DATA" : popupFor.toUpperCase()}

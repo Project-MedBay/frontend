@@ -5,7 +5,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/reschedulePopup.module.css"
 
 export default function ReschedulePopup(props) {
-   const {userToken, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, popupExit} = props
+   const {userToken, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, popupExit, theme} = props
    const patientSchedule = () => {
       if (user == "patient") return props.patientSchedule
       else {
@@ -14,6 +14,8 @@ export default function ReschedulePopup(props) {
          return mySchedule
       }
    }
+
+   const darkModeClass = theme === 'dark' ? s.dark : ''; // define dark mode class
 
    const [rescheduleConfirmBox, setRescheduleConfirmBox] = useState(false)
    
@@ -24,7 +26,7 @@ export default function ReschedulePopup(props) {
    }
 
    return (
-      <div className={s.reschedule_popup}>
+      <div className={`${s.reschedule_popup} ${darkModeClass}`}>
          <div className={s.popup_header}>
             <h3 className={s.popup_title}>RESCHEDULE SESSION:</h3>
             <img src={x_icon} className={s.popup_exit} onClick={popupExit}/>
@@ -56,6 +58,7 @@ export default function ReschedulePopup(props) {
             numOfSessions = {1}
             numberOfDays= {20} // NOTE namistit ovo
             therapyCode = {currentSession.therapyCode}
+            theme={theme}
          />
 
          {!rescheduleConfirmBox ?

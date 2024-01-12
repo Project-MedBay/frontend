@@ -2,7 +2,9 @@ import React from "react"
 import s from "../styles/deactivatePopup.module.css"
 
 export default function DeactivatePopup(props) {
-   const {popupData, popupFor, handleDeactivate, popupExit} = props
+   const {popupData, popupFor, handleDeactivate, popupExit, theme} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
 
    var deactivateText
    if (popupData == "self")
@@ -32,7 +34,7 @@ export default function DeactivatePopup(props) {
    else action = "DEACTIVATE"
 
    return (
-      <div className={s.deactivate_popup}>
+      <div className={`${s.deactivate_popup} ${darkModeClass}`}>
          <h1 className={s.deactivate_title}>Are you sure?</h1>
          <h3 className={s.deactivate_subtitle}>This action is irreversible.</h3>
 

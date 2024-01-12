@@ -4,10 +4,12 @@ import PatientHeader from './PatientHeader'
 import PatientDash from './PatientDash'
 import PatientNewTherapy from './PatientNewTherapy'
 import PatientProfile from './PatientProfile'
+import { useTheme } from './ThemeContext';
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {setPageName, userToken, userData, setUserData} = props
    const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const { theme } = useTheme();
 
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -96,6 +98,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             formatFullDatetime={formatFullDatetime}
             formatWeek={formatWeek}
             mySchedule={mySchedule}
+            theme={theme}
          />
       </>,
       newTherapy: <>
@@ -107,6 +110,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             formatFullDate={formatFullDate}
             mySchedule={mySchedule}
             navigate={navigate}
+            theme={theme}
          />
       </>,
       profile: <>
@@ -119,6 +123,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             navigate={navigate}
+            theme={theme}
          />
       </>,
    }

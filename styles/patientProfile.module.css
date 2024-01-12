@@ -664,3 +664,49 @@ p.therapy_more {
       font-size: calc(20 * var(--scale-by-height));
    }
 }
+
+.dark {
+   background: linear-gradient(180deg, rgba(25, 25, 25, 0.97) 10%, rgba(18, 15, 34, 0.8) 80%,
+   rgba(17, 11, 65, 0.863) 100%);
+}
+
+.dark .therapy_card, .dark .info_item, .dark .thanks_message {
+   color: #ccc; /* Adjust text color for dark mode */
+}
+
+.dark .header_thanks{
+   background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 100%, rgba(255, 255, 255, 0.6) 20%),
+   url("../assets/handshake.jpg");
+   background-size: cover;
+   background-position: center;
+}
+
+.dark .header_user{
+   background-color: #181818;
+}
+
+.dark .info_item > span,
+.dark .thanks_age{
+   color: var(--zelena)
+}
+
+.dark .therapy_card {
+   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 100%, rgba(255, 255, 255, 0.6) 20%), url("../assets/therapy_card.png");
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
+}
+
+.dark .therapy_card > *{
+   color: #fff;
+}
+
+
+.dark .therapy_info{
+   color: var(--zelena);
+}
+
+.therapies_title{
+   color: #fff;
+}
