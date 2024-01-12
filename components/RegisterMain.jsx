@@ -220,6 +220,13 @@ export default function RegisterMain(props) {
 
             <div className={s.greeting_container}>
                <h1 className={s.greeting}>Where Healing<br />Begins With Care.</h1>
+               <div className={s.login_container}>
+                  <p className={s.login_q}>Already have an account?</p>
+                  <button className={s.login_button}
+                     onClick={() => props.navigate("login")}>Login here
+                  </button>
+               </div>
+
             </div>
 
             <form className={s.register_form} onSubmit={handleSubmit} autoComplete="off">

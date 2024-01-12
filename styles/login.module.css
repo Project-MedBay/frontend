@@ -159,6 +159,26 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    cursor: pointer;
 }
 
+.register_button:hover {
+   background: var(--zelena);
+   box-shadow: 0px 4px 50px 8px #00000026;
+   color: white;
+   /* make button bigger and push it up a little with transition */
+   transform: scale(1.05) translateY(-2px);
+   transition: all 0.2s ease-in-out;
+   border: #F4F3F3;
+}
+
+.form_button:hover {
+   background: var(--zelena);
+   box-shadow: 0px 4px 50px 8px #00000026;
+   color: white;
+   /* make button bigger and push it up a little with transition */
+   transform: scale(1.05) translateY(-2px);
+   transition: all 0.2s ease-in-out;
+   border: #F4F3F3;
+}
+
 @media only screen and ((max-aspect-ratio: 8 / 7) or (max-width: 950px)) {
    /* za testiranje
       .form_button {
