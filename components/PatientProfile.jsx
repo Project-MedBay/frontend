@@ -9,7 +9,9 @@ import input_image from "../assets/input_image.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, setUserData, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props
+   const {userToken, userData, setUserData, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [selectedTherapy, setSelectedTherapy] = useState("")
    const [inputImage, setInputImage] = useState("")
@@ -89,7 +91,7 @@ export default function PatientProfile(props) {
    }
 
    return (<>
-      <div className={`${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>
+      <div className={`${darkModeClass} ${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>
          <div className={s.profile_header}>
             <div className={s.header_user}>
                <label className={s.image_wrapper} htmlFor={s.image_input}
@@ -173,6 +175,7 @@ export default function PatientProfile(props) {
             handleEdit={handleEdit}
             popupExit={popupExit}
             formatFullDate={formatFullDate}
+            theme={theme}
          />
       }
 
@@ -182,6 +185,7 @@ export default function PatientProfile(props) {
             popupFor={"patient"}
             handleDeactivate={handleDeactivate}
             popupExit={popupExit}
+            theme={theme}
          />
       }
 
@@ -193,6 +197,7 @@ export default function PatientProfile(props) {
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}
+            theme={theme}
          />
       }
    </>)

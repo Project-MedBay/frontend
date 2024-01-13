@@ -8,6 +8,7 @@ import Patient from './Patient'
 import Therapist from './Therapist'
 import Admin from './Admin'
 import NoMatchRoute from './NoMatchRoute'
+import { ThemeProvider } from './ThemeContext'; 
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
@@ -46,41 +47,43 @@ export default function App() {           // glavna komponenta, u njoj se render
 
 
   return (
-      <Routes>
-         <Route index element={<>
-            <LogRegHeader globalNavigate={globalNavigate} />
-            <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
-         </>} />
-         <Route path="/login" element={<>
-            <LogRegHeader globalNavigate={globalNavigate} />
-            <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
-         </>} />
+      <ThemeProvider>
+         <Routes>
+            <Route index element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+            </>} />
+            <Route path="/login" element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+            </>} />
 
-         <Route path="/register" element={<>
-            <LogRegHeader globalNavigate={globalNavigate} />
-            <RegisterMain globalNavigate={globalNavigate} />
-         </>} />
+            <Route path="/register" element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <RegisterMain globalNavigate={globalNavigate} />
+            </>} />
 
-         <Route path="/patient/*" element={<Patient
-            globalNavigate={globalNavigate}
-            userToken={userToken}
-            handleLogout={handleLogout}
+            <Route path="/patient/*" element={<Patient
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
+            />} />
+
+         <Route path="/therapist/*" element={<Therapist
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
          />} />
 
-        <Route path="/therapist/*" element={<Therapist
-            globalNavigate={globalNavigate}
-            userToken={userToken}
-            handleLogout={handleLogout}
-        />} />
-
-         <Route path="/admin/*" element={<Admin
-            globalNavigate={globalNavigate}
-            userToken={userToken}
-            handleLogout={handleLogout}
-         />} />
-         
-         <Route path="/notFound" element={<NoMatchRoute back={-2} handleLogout={handleLogout} />} />
-         <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
-      </Routes>
+            <Route path="/admin/*" element={<Admin
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
+            />} />
+            
+            <Route path="/notFound" element={<NoMatchRoute back={-2} handleLogout={handleLogout} />} />
+            <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
+         </Routes>
+      </ThemeProvider>
    )
 }

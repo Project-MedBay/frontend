@@ -5,6 +5,7 @@ import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function RegisterMain(props) {
    const {globalNavigate} = props
@@ -34,6 +35,12 @@ export default function RegisterMain(props) {
    })
    const [successPopup, setSuccessPopup] = useState(false)        // state za uvjetni render popupa o uspjesnoj registraciji
    const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
+
+   const [recaptchaValue, setRecaptchaValue] = useState(null);
+
+   const onRecaptchaChange = (value) => {
+      setRecaptchaValue(value);
+   };
 
    const formFields = registerFields.map(field => {               // mapiranje podataka iz formsdata na jsx (html) elemente za ispis
       const {id, label, name, placeholder} = field
@@ -162,6 +169,10 @@ export default function RegisterMain(props) {
       
    function handleSubmit(event) {               // submit - axios poziv na odgovarajuci url za obradu na backendu
       event.preventDefault()
+      if (!recaptchaValue) {
+         alert('Please verify that you are not a robot.');
+         return;
+     }
       setInputFailed(prevState => ({
          ...prevState,
          unexpectedError: {failed: false, text: "Error"}
@@ -209,6 +220,13 @@ export default function RegisterMain(props) {
 
             <div className={s.greeting_container}>
                <h1 className={s.greeting}>Where Healing<br />Begins With Care.</h1>
+               <div className={s.login_container}>
+                  <p className={s.login_q}>Already have an account?</p>
+                  <button className={s.login_button}
+                     onClick={() => props.navigate("login")}>Login here
+                  </button>
+               </div>
+
             </div>
 
             <form className={s.register_form} onSubmit={handleSubmit} autoComplete="off">
@@ -224,6 +242,11 @@ export default function RegisterMain(props) {
                      className={s.password_eye} onClick={togglePassword}
                   />
                </div>
+
+               <ReCAPTCHA
+                  sitekey="6LehQE8pAAAAACkeL6kBATsk3sgGJ7h4NYxqZmnv"
+                  onChange={onRecaptchaChange}
+               />
 
                <button className={s.form_button}>Register</button>
             </form>

@@ -6,13 +6,14 @@ import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, navigate} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
       referral: "A unique sequence of letters and numbers found on the\nreferral note provided by your doctor.\nIf you're unsure where to find it, ask your doctor for help.",
       doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
    }
+   const darkModeClass = theme === 'dark' ? s.dark : '';
    
    const [therapies, setTherapies] = useState([])
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
@@ -129,7 +130,7 @@ export default function PatientNewTherapy(props) {
    }
 
    return (<>
-      <div className={`${s.patient_therapy_main} ${successPopup && s.covered_by_popup}`}>
+      <div className={`${s.patient_therapy_main} ${darkModeClass} ${successPopup && s.covered_by_popup}`}>
          <h1 className={s.create_title}>REQUEST A NEW THERAPY</h1>
          <div className={s.green_shape}></div>
          
@@ -149,7 +150,7 @@ export default function PatientNewTherapy(props) {
             </div>
 
             <div className={s.therapy_select}>
-               <BodypartSelection selectedBodypart={selectedBodypart} setSelectedBodypart={setSelectedBodypart} />
+               <BodypartSelection selectedBodypart={selectedBodypart} setSelectedBodypart={setSelectedBodypart} theme={theme}/>
 
                <form className={s.therapy_form} autoComplete="off" onSubmit={event => event.preventDefault()}>
                   <h2 className={s.form_title}>FILTER BY: <span>{selectedBodypart.toUpperCase()}</span></h2>
@@ -200,6 +201,7 @@ export default function PatientNewTherapy(props) {
                   numOfSessions = {numOfSessions}
                   numberOfDays = {90}
                   therapyCode = {selectedTherapy.therapyCode}
+                  theme = {theme}
                />
             </div>
             </>}

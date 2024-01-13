@@ -9,6 +9,8 @@ import s from "../styles/editPopup.module.css"
 export default function AccountEditPopup(props) {
    const {popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate} = props
 
+   const darkModeClass = theme === 'dark' ? s.dark : '';
+
    const [formData, setFormData] = useState(() => {
       if (popupFor == "therapist" || popupFor == "patient") return {
          ...popupData,
@@ -300,7 +302,7 @@ export default function AccountEditPopup(props) {
    }
 
    return (
-      <div className={s.edit_popup}>
+      <div className={`${s.edit_popup} ${darkModeClass}`}>
          <h1 className={s.popup_title}>
             {popupType == "add" ? "ADD" : "EDIT"}&#160;
             {popupFor == "patient" ? "ACCOUNT DATA" : popupFor.toUpperCase()}

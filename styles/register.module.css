@@ -190,6 +190,52 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    text-shadow: 2px 5px 5px #FFFFFF;
 }
 
+.login_container {
+   display: flex;
+   flex-direction: column;
+   width: max-content;
+   justify-content: center;
+}
+
+.login_q {
+   margin: max(calc(8px * 0.6), calc(8vh * 59 / 725));
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   font-weight: 500;
+   margin-top: 45%;
+}
+
+.login_button {
+   font-family: "Barlow", sans-serif;
+   font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
+   font-weight: 500;
+   padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(25px * 0.6), calc(25vh * 59 / 725));
+   border-radius: 12px;
+   background: rgb(34, 0, 106);
+   box-shadow: 0px 4px 50px 8px #00000026;
+   color: white;
+   cursor: pointer;
+}
+
+.login_button:hover {
+   background: var(--zelena);
+   box-shadow: 0px 4px 50px 8px #00000026;
+   color: white;
+   /* make button bigger and push it up a little with transition */
+   transform: scale(1.05) translateY(-2px);
+   transition: all 0.2s ease-in-out;
+   border: #F4F3F3;
+}
+
+.form_button:hover {
+   background: var(--zelena);
+   box-shadow: 0px 4px 50px 8px #00000026;
+   color: white;
+   /* make button bigger and push it up a little with transition */
+   transform: scale(1.05) translateY(-2px);
+   transition: all 0.2s ease-in-out;
+   border: #F4F3F3;
+}
+
 @media only screen and ((max-aspect-ratio: 6 / 5) or (max-width: 1050px)) {
    /* za testiranje
       .form_button {

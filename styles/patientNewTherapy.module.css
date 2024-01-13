@@ -1,3 +1,15 @@
+@property --ljubicasta-nova{
+   syntax: "<color>";
+   inherits: false;
+   initial-value: #22006a;
+}
+
+@property --zelena{
+   syntax: "<color>";
+   inherits: false;
+   initial-value: #70D8AC;
+}
+
 .patient_therapy_main {
    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(134, 113, 255, 0.25) 30%,
                rgba(134, 113, 255, 0.5) 75%) /*,url("../assets/login_bg4.jpg")*/ ;
@@ -333,6 +345,7 @@
 .selection_wrapper {
    margin-top: calc(-8 * var(--scale-by-height));
    margin-bottom: calc(-15 * var(--scale-by-height));
+   width: 60%;
 }
 
 /* PAGE 3 */
@@ -919,4 +932,54 @@
    .green_shape, .tagline_container {
       display: none;
    }
+}
+
+.dark {
+   background: linear-gradient(180deg, rgba(25, 25, 25, 0.97) 10%, rgba(18, 15, 34, 0.8) 80%,
+   rgba(17, 11, 65, 0.863) 100%);
+}
+
+.dark .header_step, .dark .therapy_name, .dark .therapy_code, .dark .header_prompt, .dark .form_title,
+.dark .form_tip, 
+.dark .therapies_container > *,
+.dark .sessions_subtitle,
+.dark .sessions_info,
+.dark .sessions_restrictions > *,
+.dark .schedule_legend,
+.dark .final_review .section_title,
+.dark .final_verification,
+.dark .verification_form,
+.dark .verification_input > *,
+.dark .finish_note,
+.dark .finish_label,
+.dark .create_progress > *,
+.dark .progress_bg,
+.dark .progress_line
+{
+   color: #ccc; /* Adjust text color for dark mode */
+}
+
+.dark .final_sessions > *{
+   background-color: #fff;
+}
+
+.dark .tagline,
+.dark .form_title span{
+   color: var(--zelena)
+}
+
+.dark .tagline > *{
+   color: #fff;
+}
+
+.dark .green_shape{
+   background-image: url("../assets/notsogreen_shape.png");
+}
+
+.dark .create_container{
+   background-image: url("../assets/notsowhite_shape.png");
+}
+
+.dark .checkbox_fill{
+   background-color: var(--zelena);
 }
