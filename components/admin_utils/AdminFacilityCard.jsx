@@ -4,7 +4,7 @@ import s from "../../styles/admin_utils/adminFacilityCard.module.css";
 export default function AdminFacilityCard(props) {
     const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate} = props;
     if (cardType == "resource") {
-        var {name, capacity, specialization, description} = cardContent
+        var {name, capacity, specialization, location, description} = cardContent
     } else if (cardType == "therapy") {
         var {name, code, numberOfSessions, resource, description, bodypart} = cardContent
     }
@@ -29,10 +29,15 @@ export default function AdminFacilityCard(props) {
                 {cardType == "resource" ? <>
                     <div className={s.card_info_row}>
                         <h3 className={s.row_info_value}>
-                            SPECIALIZATION:&#160;<div className={s.value_wrapper}>{specialization}</div>
+                            SPECIALIZATION:&#160;<div className={s.value_wrapper}>{specialization.name}</div>
                         </h3>
                         <h3 className={s.row_info_value}>
                             CAPACITY:&#160;<div className={s.value_wrapper}>{capacity}</div>
+                        </h3>
+                    </div>
+                    <div className={s.card_info_row}>
+                        <h3 className={s.row_info_value}>
+                            LOCATION:&#160;<div className={s.value_wrapper}>{location}</div>
                         </h3>
                     </div>
                     <div className={s.card_info_row}>
@@ -41,7 +46,7 @@ export default function AdminFacilityCard(props) {
                 </> : <>
                     <div className={s.card_info_row}>
                         <h3 className={s.row_info_value}>
-                            RESOURCE:&#160;<div className={s.value_wrapper}>{resource}</div>
+                            RESOURCE:&#160;<div className={s.value_wrapper}>{resource.name}</div>
                         </h3>
                         <h3 className={s.row_info_value}>
                             SESSIONS:&#160;<div className={s.value_wrapper}>{numberOfSessions}</div>

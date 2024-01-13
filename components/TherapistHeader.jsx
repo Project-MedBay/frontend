@@ -14,7 +14,7 @@ export default function TherapistHeader(props) {
             <nav className={s.header_nav}>
                {logOut ? 
                   <h2 className={s.nav_check_logout}>LOG OUT?&#160;
-                     <span id={s.yes} onClick={() => props.navigate("login")}>YES</span> /&#160;
+                     <span id={s.yes} onClick={() => props.handleLogout()}>YES</span> /&#160;
                      <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
                   </h2>
                   :

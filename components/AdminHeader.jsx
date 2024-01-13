@@ -3,7 +3,7 @@ import logo from "../assets/plus_icon.png";
 import s from "../styles/adminHeader.module.css";
 
 export default function AdminHeader(props) {
-    const { subPageName, navigate } = props;
+    const { subPageName, navigate, handleLogout } = props;
 
     return (
         <div className={s.header}>
@@ -36,7 +36,7 @@ export default function AdminHeader(props) {
                 </h2>
                 <h2 
                     className={s.nav_logout} 
-                    onClick={() => navigate("login")}>
+                    onClick={handleLogout}>
                     LOG OUT
                 </h2>
             </nav>

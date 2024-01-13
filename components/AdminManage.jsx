@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { therapists, patients, resources, adminTherapies } from "./TestingData"
 import TableList from "./TableList"
 import AdminFacilityCard from "./admin_utils/AdminFacilityCard"
 import AccountEditPopup from "./EditPopup"
@@ -18,6 +17,12 @@ export default function AdminManage(props) {
       therapies: ""
    })
 
+   const [therapistList, setTherapistList] = useState([])
+   const [patientList, setPatientList] = useState([])
+   const [resourceList, setResourceList] = useState([])
+   const [therapyList, setTherapyList] = useState([])
+   const [specializationList, setSpecializationList] = useState([])
+
    const [addPopup, setAddPopup] = useState(false)
    const [editPopup, setEditPopup] = useState(false)
    const [deactivatePopup, setDeactivatePopup] = useState(false)
@@ -28,10 +33,63 @@ export default function AdminManage(props) {
       else if (popupData.mbo != null) return "patient"
       else return "therapist"
    }
+   const selectData = () => {
+      if (popupFor() == "therapist" || popupFor() == "resource") return specializationList.map(specialization => ({
+         value: specialization,
+         label: specialization[0] + specialization.toLowerCase().split("_").join(" ").slice(1)
+      }))
+      else if (popupFor() == "therapy") return resourceList.map(resource => ({
+         value: resource.id,
+         label: resource.name
+      }))
+   }
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/equipment/facility",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => {
+         console.log(res.data.equipment[0])
+         let equipmentList = res.data.equipment.map(item => ({
+            id: item.id,
+            name: item.name,
+            location: item.roomName,
+            capacity: item.capacity,
+            specialization: {
+               id: item.specialization,
+               name: item.specialization[0] + item.specialization.toLowerCase().split("_").join(" ").slice(1)
+            },
+            description: item.description
+         }))
+         setResourceList(equipmentList)
+         let therapyTypeList = res.data.therapyTypes.map(item => ({
+            id: item.id,
+            name: item.name,
+            resource: {
+               id: item.requiredEquipment.id,
+               name: item.requiredEquipment.name
+            },
+            numberOfSessions: item.numOfSessions,
+            bodypart: item.bodyPart,
+            code: item.therapyCode,
+            description: item.description
+         }))
+         setTherapyList(therapyTypeList)
+         setSpecializationList(res.data.specializations)
+      })
+      .catch(error => console.log(error));
+   }, [])
 
-   const resourceElements = resources
+   const resourceElements = resourceList
       .filter(resource => { for (let term of searchInput.resources.trim().split(" ")) {
-         if (resource.name.toLowerCase().includes(term.toLowerCase())) return true}
+         for (let attr in resource) {
+            if (attr == "id") continue
+            else if (attr == "specialization") if (resource[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true
+            else if (resource[attr].toString().toLowerCase().includes(term.toLowerCase())) return true}
+         }
       }).map(resource => (
          <AdminFacilityCard
             cardType="resource"
@@ -48,10 +106,14 @@ export default function AdminManage(props) {
       </h3>
    )}
 
-   const therapyElements = adminTherapies
+   const therapyElements = therapyList
       .filter(therapy => { for (let term of searchInput.therapies.trim().split(" ")) {
-         if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
-      }).map(therapy => (
+         for (let attr in therapy) {
+            if (attr == "id") continue
+            else if (attr == "resource") if (therapy[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true
+            else if (therapy[attr].toString().toLowerCase().includes(term.toLowerCase())) return true
+         }
+      }}).map(therapy => (
          <AdminFacilityCard
             cardType="therapy"
             cardContent={therapy}
@@ -81,33 +143,164 @@ export default function AdminManage(props) {
             surname: "",
             "e-mail": "",
             specialization: "",
-            "employed since": ""
+            "employed since": ""       // NOTE ovdi stavit new Date() samo
          })
          else if (subject == "resource") setPopupData({
             name: "",
             capacity: "",
             specialization: "",
+            location: "",
             description: ""
          })
          else if (subject == "therapy") setPopupData({
             name: "",
-            code: "",
+            code: "#GH6J7",            // NOTE tu stavit generiranje koda
             numberOfSessions: "",
             resource: "",
             description: "",
             bodypart: ""
          })
-      } else {
-         // axios za dodat acc, resurs, terapiju
+      }
+      else {
+         console.log(subject)
+         let data, endpoint, handleSuccess
+         if (popupFor() == "therapist") {
+            endpoint = "employee"
+            data = {
+               email: subject["e-mail"],
+               firstName: subject.name,
+               lastName: subject.surname,
+               password: subject.password,
+               specialization: subject.specialization.id
+            }
+            handleSuccess = res => {
+               setTherapistList(prevList => ([...prevList, {
+                  // id: res.data.id,
+                  id: 0,
+                  name: subject.name,
+                  surname: subject.surname,
+                  "e-mail": subject["e-mail"],
+                  specialization: subject.specialization.name,
+                  "employed since": new Date(subject["employed since"]),
+                  show: true
+               }]))
+            }
+         }
+         else if (popupFor() == "resource") {
+            endpoint = "equipment"
+            data = {
+               name: subject.name,
+               roomName: subject.location,
+               capacity: subject.capacity,
+               description: subject.description,
+               specialization: subject.specialization.id
+            }
+            handleSuccess = res => {
+               setResourceList(prevList => ([...prevList, subject]))
+            }
+         }
+         else if (popupFor() == "therapy") {
+            endpoint = "therapyType"
+            data = {
+               name: subject.name,
+               bodyPart: subject.bodypart,
+               numberOfSessions: subject.numberOfSessions,
+               description: subject.description,
+               requiredEquipmentId: subject.resource.id
+            }
+            handleSuccess = res => {
+               setTherapyList(prevList => ([...prevList, subject]))
+            }
+         }
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
+            method: "POST",
+            headers: {
+               Authorization: `Bearer ${userToken}`
+            },
+            data: data
+         })
+         .then(res => handleSuccess(res))
+         .catch(error => console.log(error));
       }
       setAddPopup(prevState => !prevState)
    }
 
    function handleEdit(subject) {
       if (!editPopup) {
-         setPopupData(subject)
-      } else {
-         // axios za editat acc, resurs, terapiju
+         if (subject["employed since"] != null) setPopupData({
+            ...subject,
+            specialization: {
+               id: subject.specialization.toUpperCase().split(" ").join("_"),
+               name: subject.specialization
+            }
+         })
+         else setPopupData(subject)
+      }
+      else {
+         console.log(subject)
+         let data, endpoint, handleSuccess
+         if (popupFor() == "therapist") {
+            endpoint = "employee/" + subject.id
+            data = {
+               email: subject["e-mail"],
+               firstName: subject.name,
+               lastName: subject.surname,
+               password: subject.password,
+               specialization: subject.specialization.id
+            }
+            handleSuccess = res => {setTherapistList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id),
+               {
+                  // id: res.data.id,
+                  id: 0,
+                  name: subject.name,
+                  surname: subject.surname,
+                  "e-mail": subject["e-mail"],
+                  specialization: subject.specialization.name,
+                  "employed since": new Date(subject["employed since"]),
+                  show: true
+               }]))
+            }
+         }
+         else if (popupFor() == "resource") {
+            endpoint = "equipment/" + subject.id
+            data = {
+               name: subject.name,
+               roomName: "soba",          // NOTE triba ovo prominit
+               capacity: subject.capacity,
+               description: subject.description,
+               specialization: subject.specialization.id
+            }
+            handleSuccess = res => {setResourceList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id),
+               subject
+            ]))}
+         }
+         else if (popupFor() == "therapy") {
+            endpoint = "therapyType/" + subject.id
+            data = {
+               name: subject.name,
+               bodyPart: subject.bodypart,
+               numberOfSessions: subject.numberOfSessions,
+               description: subject.description,
+               requiredEquipmentId: subject.resource.id
+            }
+            handleSuccess = res => {setTherapyList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id),
+               subject
+            ]))}
+         }
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
+            method: "PUT",
+            headers: {
+               Authorization: `Bearer ${userToken}`
+            },
+            data: data
+         })
+         .then(res => handleSuccess(res))
+         .catch(error => console.log(error));
       }
       setEditPopup(prevState => !prevState)
    }
@@ -115,8 +308,10 @@ export default function AdminManage(props) {
    function handleDeactivate(subject) {
       if (!deactivatePopup) {
          setPopupData(subject)
-      } else {
-         // axios za deaktivirat acc, resurs, terapiju
+      }
+      else {
+         console.log(subject)
+         let data, endpoint, handleSuccess
       }
       setDeactivatePopup(prevState => !prevState)
    }
@@ -146,9 +341,11 @@ export default function AdminManage(props) {
                    placeholder="Search" name="search" value={searchInput.therapists} autoComplete="off" />
             
             <TableList
-               tableItems={therapists.concat(therapists.concat(therapists.concat(therapists)))}    // NOTE maknit ove concatove lol
+               userToken={userToken}
                tableOf="therapists"
                user={"admin"}
+               tableItems={therapistList}
+               setTableItems={setTherapistList}
                searchInput={searchInput.therapists}
                formatFullDate={formatFullDate}
                handleAdd={handleAdd}
@@ -162,9 +359,11 @@ export default function AdminManage(props) {
                    placeholder="Search" name="search" value={searchInput.patients} autoComplete="off" />
             
             <TableList
-               tableItems={patients.concat(patients.concat(patients.concat(patients)))}    // NOTE maknit ove concatove lol
+               userToken={userToken}
                tableOf="patients"
                user={"admin"}
+               tableItems={patientList}
+               setTableItems={setPatientList}
                searchInput={searchInput.patients}
                formatFullDate={formatFullDate}
                handleEdit={handleEdit}
@@ -209,6 +408,7 @@ export default function AdminManage(props) {
             popupType={addPopup ? "add" : "edit"}
             popupFor={popupFor()}
             popupData={popupData}
+            selectData={selectData()}
             handleAdd={handleAdd}
             handleEdit={handleEdit}
             popupExit={popupExit}

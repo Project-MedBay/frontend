@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { patients, therapists, testSessions } from "./TestingData"
+import { testSessions } from "./TestingData"
 import TableList from "./TableList"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import s from "../styles/therapistPatients.module.css"
 
 export default function TherapistPatients(props) {
-   const {userToken, userData, formatDate, formatFullDate} = props
+   const {userToken, formatDate, formatFullDate} = props
 
    const [searchInput, setSearchInput] = useState("")
+   const [patientList, setPatientList] = useState([])
    const [selectedPatient, setSelectedPatient] = useState("")
 
    function activatePopup(patient) {
@@ -28,9 +29,11 @@ export default function TherapistPatients(props) {
                 placeholder="Search" name="search" value={searchInput} autoComplete="off" />
 
          <TableList
-            tableItems={patients.concat(patients.concat(patients.concat(patients)))}    // NOTE maknit ove concatove lol
+            userToken={userToken}
             tableOf="patients"
-            user={userData.id}
+            user="therapist"
+            tableItems={patientList}
+            setTableItems={setPatientList}
             searchInput={searchInput}
             formatFullDate={formatFullDate}
             handleDetails={activatePopup}

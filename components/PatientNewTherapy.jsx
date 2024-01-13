@@ -6,7 +6,7 @@ import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, mySchedule, navigate} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, navigate} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
@@ -185,7 +185,7 @@ export default function PatientNewTherapy(props) {
                   3. Sessions cannot be scheduled more than <span>3 months</span> in advance.
                </p>
             </div>
-            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.<br className={s.mobile_only} />
+            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.&#160;<br className={s.mobile_only} />
                Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             </p>
             <div className={s.selection_wrapper}>
@@ -197,7 +197,6 @@ export default function PatientNewTherapy(props) {
                   selectedSessions = {selectedSessions}
                   setSelectedSessions = {setSelectedSessions}
                   currentSession = ""
-                  mySchedule = {mySchedule}
                   numOfSessions = {numOfSessions}
                   numberOfDays = {90}
                   therapyCode = {selectedTherapy.therapyCode}

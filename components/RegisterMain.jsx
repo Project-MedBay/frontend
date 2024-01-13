@@ -7,7 +7,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
-   const {navigate} = props
+   const {globalNavigate} = props
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       firstName: "",
@@ -233,7 +233,7 @@ export default function RegisterMain(props) {
             text1="You have filled in all the information and your account is now being processed by our administrator."
             text2="Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made."
             buttonText="OK"
-            clickFunction={() => navigate("login")}
+            clickFunction={() => globalNavigate("login")}
          />}
 
       </>

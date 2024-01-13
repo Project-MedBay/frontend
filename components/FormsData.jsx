@@ -163,6 +163,12 @@ export const resourceFields = [
       name:"name"
    },
    {
+      label:"Location",
+      placeholder:"Some room or zone",
+      id:"grid_full_row",
+      name:"location"
+   },
+   {
       label:"Specialization",
       placeholder:"Somekindof therapist",
       id:"grid_two_thirds_left",

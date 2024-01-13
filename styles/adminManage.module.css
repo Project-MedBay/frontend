@@ -73,8 +73,9 @@
 
 .manage_facility {
    display: flex;
-   justify-content: center;
-   gap: calc(300 * var(--scale-by-height));
+   justify-content: space-evenly;
+   gap: calc(50 * var(--scale-by-height));
+   width: 100%;
 }
 
 .facility_section {

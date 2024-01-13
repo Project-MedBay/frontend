@@ -1,14 +1,31 @@
 import { useState, useEffect } from 'react'
+import { jwtDecode } from 'jwt-decode'
+import { Routes, Route } from "react-router-dom"
 import axios from 'axios'
 import TherapistHeader from './TherapistHeader'
 import TherapistDash from './TherapistDash'
 import TherapistPatients from './TherapistPatients'
+import NoMatchRoute from './NoMatchRoute'
 
 export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {setPageName, userToken, userData} = props
-   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const {globalNavigate, userToken, handleLogout} = props
    const [mySchedule, setMySchedule] = useState("")
 
+   useEffect(() => {
+      if (userToken != "") {
+         let roleFromToken = jwtDecode(userToken).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(userToken).role.toLowerCase()
+         if (roleFromToken != "therapist") globalNavigate("/notFound")
+      }
+   }, [])
+
+   function navigate(toWhere) {
+      if (toWhere == "login") {
+          globalNavigate("/")
+      } else {
+          globalNavigate("/therapist/" + toWhere)
+      }
+   }
+   
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
    useEffect(() => {
@@ -23,14 +40,6 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       .catch(error => console.log(error));
    }, [])
 
-   function navigate(toWhere) {
-      if (toWhere == "login") {
-         setPageName("login")
-      } else {
-         setSubPageName(toWhere)
-      }
-   }
-   
    function formatWeek(datetime) {
       let tempDate = new Date(getWeekFirst(datetime))
       let date = tempDate.getDate()
@@ -101,31 +110,40 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       formattedDatetime += datetime.getMinutes()
       return formattedDatetime
    }
-
-   const subpages = {
-      dash: <>
-         <TherapistHeader navigate={navigate} />
-         <TherapistDash
-            userToken={userToken}
-            formatWeek={formatWeek}
-            getWeekFirst={getWeekFirst}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-            formatFullDateISO={formatFullDateISO}
-            mySchedule={mySchedule}
-            setMySchedule={setMySchedule}
-         />
-      </>,
-      patients: <>
-         <TherapistHeader navigate={navigate} />
-         <TherapistPatients
-            userToken={userToken}
-            userData={userData}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-         />
-      </>
-   }
   
-  return subpages[subPageName]
+   return (
+      <>
+         <TherapistHeader navigate={navigate} handleLogout={handleLogout} />
+         <Routes>
+            <Route index element={<TherapistDash
+               userToken={userToken}
+               formatWeek={formatWeek}
+               getWeekFirst={getWeekFirst}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               formatFullDateISO={formatFullDateISO}
+               mySchedule={mySchedule}
+               setMySchedule={setMySchedule}
+            />} />
+            <Route path="dash" element={<TherapistDash
+               userToken={userToken}
+               formatWeek={formatWeek}
+               getWeekFirst={getWeekFirst}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               formatFullDateISO={formatFullDateISO}
+               mySchedule={mySchedule}
+               setMySchedule={setMySchedule}
+            />} />
+
+            <Route path="patients" element={<TherapistPatients
+               userToken={userToken}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+            />} />
+
+            <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
+         </Routes>
+      </>
+  )
 }

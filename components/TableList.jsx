@@ -3,16 +3,49 @@ import axios, { formToJSON } from "axios"
 import s from "../styles/tableList.module.css"
 
 export default function TableList(props) {
-   const {tableItems, tableOf, user, searchInput, formatFullDate} = props
+   const {userToken, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
    if (user == "admin") {
       var {handleAdd, handleEdit, handleDeactivate} = props
    } else {
       var {handleDetails} = props
    }
-
-   // axios za dohvacanje podataka, kad dodamo spremit u tableItems, a maknit ga iz dekonstrukcije propsa i ne passat ga
-   // ako je user "admin" show ide na sve, inace ce user bit userId djelatnika
-
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" +
+               (tableOf == "patients" ? "patient/all" : "employee"),
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => {
+         let itemList
+         if (tableOf == "patients") itemList = res.data.map((item, index) => ({
+            id: item.id,
+            name: item.firstName,
+            surname: item.lastName,
+            "e-mail": item.email,
+            address: item.address,
+            dob: new Date(item.dateOfBirth),
+            phone: item.phoneNumber,
+            mbo: item.mbo,
+            show: true,                         // NOTE prominit kad promini ian
+            code: "#User" + item.id             // NOTE vidit za ovo
+         }))
+         else itemList = res.data.map((item, index) => ({
+            id: item.id,
+            name: item.firstName,
+            surname: item.lastName,
+            "e-mail": item.email,
+            specialization: item.specialization[0] + item.specialization.toLowerCase().split("_").join(" ").slice(1),
+            "employed since": new Date(item.createdAt),
+            show: true,
+         }))
+         setTableItems(itemList)
+      })
+      .catch(error => console.log(error));
+   }, [])
+   
    var tableHeader
    if (tableOf == "patients") {
       tableHeader = ["#", "name", "surname", "e-mail", "address", "dob", "phone", "mbo"]
