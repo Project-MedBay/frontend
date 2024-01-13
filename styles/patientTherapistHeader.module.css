@@ -1,9 +1,9 @@
-.header {
+.header, .headerDark {
    display: flex;
    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
    justify-content: center;
    align-items: center;
-   gap:  max(calc(850px * 0.6), calc(850vh * 59 / 725));
+   gap: max(calc(850px * 0.6), calc(850vh * 59 / 725));
    padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
 }
 
@@ -30,10 +30,11 @@
 
 .header_nav {
    display: grid;
-   grid-template-columns: repeat(5, max(calc(160px * 0.6), calc(160vh * 59 / 725)));
+   grid-template-columns: max(calc(160px * 0.6), calc(160vh * 59 / 725)) repeat(4, fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725))));
    justify-items: flex-end;
    align-items: center;
    direction: rtl;
+   column-gap: max(calc(80px * 0.6), calc(80vh * 59 / 725));
 }
 
 .nav_item, .nav_logout, .nav_check_logout {
@@ -61,27 +62,10 @@
    padding-right: 0;
 }
 
-@media only screen and ((max-aspect-ratio: 3 / 2) or (max-width: 1105px)) {
-   .nav_item {background-color: black;}
-   .header {
-      justify-content: space-between;
-      gap: 0;
-      padding: calc(5 * var(--scale-by-height)) calc(50 * (2 / 3) * var(--scale-by-width));
-   }
-}
-
 .headerDark {
-   display: flex;
-   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
-   justify-content: space-between; /* Changed to space-between for better alignment */
-   align-items: center;
-   padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
-   padding-left: 10%;
-   padding-right: 10%;
    background-color: #333; /* Dark background */
    color: #fff; /* Light text */
 }
-
 
 .toggleThemeButton {
    background: none;
@@ -107,14 +91,6 @@
    color: #fff; /* White text */
 }
 
-.headerDark_nav {
-   display: grid;
-   grid-template-columns: repeat(5, max(calc(160px * 0.6), calc(160vh * 59 / 725)));
-   justify-items: flex-end;
-   align-items: center;
-   direction: rtl;
-}
-
 .sunIcon{
    color: white;
    position: relative;
@@ -126,4 +102,13 @@
    position: relative;
    top: -2px;
    right: -2px;
+}
+
+@media only screen and ((max-aspect-ratio: 16 / 10) or (max-width: 1105px)) {
+   .nav_item {background-color: black;}
+   .header, .headerDark {
+      justify-content: space-between;
+      gap: 0;
+      padding: calc(5 * var(--scale-by-height)) calc(12 * (16 / 10) * var(--scale-by-width));
+   }
 }
