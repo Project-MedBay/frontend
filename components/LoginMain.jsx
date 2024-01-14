@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
+import LoginPasswordPopup from "./LoginPasswordPopup"
+import ResetPassword from "./ResetPassword"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/login.module.css"
@@ -10,6 +12,8 @@ export default function LoginMain(props) {
       email: "",
       password: ""
    })
+   const [forgotPassword, setForgotPassword] = useState(false)
+
    const [inputFailed, setInputFailed] = useState({         // state za gresku pri unosu forme (on submit)
       value: false,
       text: "Invalid email or password. Please try again."
@@ -46,9 +50,16 @@ export default function LoginMain(props) {
       setPasswordShown(prevState => !prevState)
    }
 
+   function popupExit() {
+      // if (rescheduledSession != "") setRescheduledSession("")
+      // else 
+      setForgotPassword(false);
+  }
+
 
    return (
-         <div className={s.login_main}>
+      <>
+         <div className={`${s.login_main} ${forgotPassword && s.covered_by_popup}`}>
 
             <form className={s.login_form} onSubmit={handleSubmit} autoComplete="off">
                <h1 className={s.form_title}>Welcome back!</h1>
@@ -62,7 +73,7 @@ export default function LoginMain(props) {
                      className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
                      type="text" onChange={handleChange} placeholder="john.doe@mail.com"
                      name="email" value={formData["email"]}
-                  />
+                     />
                </div>
 
                <div className={s.form_input}>
@@ -72,12 +83,16 @@ export default function LoginMain(props) {
                         className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
                         type={passwordShown ? "text" : "password"} onChange={handleChange}
                         placeholder="********" name="password" value={formData["password"]}
-                     />
+                        />
                      <img 
                         src={passwordShown ? eyeShown : eyeHidden}                  /* uvjetni izbor slike oka za toggle lozinke */
                         className={s.password_eye} onClick={togglePassword}
                      />
                   </div>
+               </div>
+
+               <div className={s.forgot_password_div} onClick={() => setForgotPassword(true)}>
+                  <h4 className={s.forgot_password_text}>Forgot password?</h4>
                </div>
 
                <button className={s.form_button}>Login</button>
@@ -93,7 +108,13 @@ export default function LoginMain(props) {
                   </button>
                </div>
             </div>
-
          </div>
+
+         {forgotPassword && <div className={s.popup_separate} onClick={popupExit}></div>}
+
+         {forgotPassword && <LoginPasswordPopup />}
+         {/* {forgotPassword && <ResetPassword />} */}
+
+      </>
     )
 }
