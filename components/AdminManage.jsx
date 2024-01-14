@@ -52,7 +52,6 @@ export default function AdminManage(props) {
          }
       })
       .then(res => {
-         console.log(res.data.equipment[0])
          let equipmentList = res.data.equipment.map(item => ({
             id: item.id,
             name: item.name,
@@ -143,7 +142,7 @@ export default function AdminManage(props) {
             surname: "",
             "e-mail": "",
             specialization: "",
-            "employed since": ""       // NOTE ovdi stavit new Date() samo
+            "employed since": ""
          })
          else if (subject == "resource") setPopupData({
             name: "",
@@ -154,7 +153,6 @@ export default function AdminManage(props) {
          })
          else if (subject == "therapy") setPopupData({
             name: "",
-            code: "#GH6J7",            // NOTE tu stavit generiranje koda
             numberOfSessions: "",
             resource: "",
             description: "",
@@ -171,12 +169,12 @@ export default function AdminManage(props) {
                firstName: subject.name,
                lastName: subject.surname,
                password: subject.password,
-               specialization: subject.specialization.id
+               specialization: subject.specialization.id,
+               createdAt: subject["employed since"]
             }
             handleSuccess = res => {
                setTherapistList(prevList => ([...prevList, {
-                  // id: res.data.id,
-                  id: 0,
+                  id: res.data,
                   name: subject.name,
                   surname: subject.surname,
                   "e-mail": subject["e-mail"],
@@ -196,11 +194,14 @@ export default function AdminManage(props) {
                specialization: subject.specialization.id
             }
             handleSuccess = res => {
-               setResourceList(prevList => ([...prevList, subject]))
+               setResourceList(prevList => ([...prevList, {
+                  ...subject,
+                  id: res.data
+               }]))
             }
          }
          else if (popupFor() == "therapy") {
-            endpoint = "therapyType"
+            endpoint = "therapyType/create"
             data = {
                name: subject.name,
                bodyPart: subject.bodypart,
@@ -209,9 +210,14 @@ export default function AdminManage(props) {
                requiredEquipmentId: subject.resource.id
             }
             handleSuccess = res => {
-               setTherapyList(prevList => ([...prevList, subject]))
+               setTherapyList(prevList => ([...prevList, {
+                  ...subject,
+                  id: res.data.id,
+                  code: res.data.therapyTypeCode
+               }]))
             }
          }
+         console.log(data)
          axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
             method: "POST",
@@ -252,8 +258,7 @@ export default function AdminManage(props) {
             handleSuccess = res => {setTherapistList(prevList => ([
                ...prevList.filter(item => item.id != subject.id),
                {
-                  // id: res.data.id,
-                  id: 0,
+                  id: subject.id,
                   name: subject.name,
                   surname: subject.surname,
                   "e-mail": subject["e-mail"],
@@ -267,7 +272,7 @@ export default function AdminManage(props) {
             endpoint = "equipment/" + subject.id
             data = {
                name: subject.name,
-               roomName: "soba",          // NOTE triba ovo prominit
+               roomName: subject.location,          // NOTE triba ovo prominit (odnosno vidit s ianom)
                capacity: subject.capacity,
                description: subject.description,
                specialization: subject.specialization.id
@@ -311,7 +316,40 @@ export default function AdminManage(props) {
       }
       else {
          console.log(subject)
-         let data, endpoint, handleSuccess
+         let endpoint, handleSuccess
+         if (popupFor() == "therapist") {
+            endpoint = "user/" + subject.id
+            handleSuccess = res => {setTherapistList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id)
+            ]))}
+         }
+         else if (popupFor() == "patient") {
+            endpoint = "user/" + subject.id
+            handleSuccess = res => {setPatientList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id)
+            ]))}
+         }
+         else if (popupFor() == "resource") {
+            endpoint = "equipment/" + subject.id
+            handleSuccess = res => {setResourceList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id)
+            ]))}
+         }
+         else if (popupFor() == "therapy") {
+            endpoint = "therapyType/" + subject.id
+            handleSuccess = res => {setTherapyList(prevList => ([
+               ...prevList.filter(item => item.id != subject.id)
+            ]))}
+         }
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
+            method: "DELETE",
+            headers: {
+               Authorization: `Bearer ${userToken}`
+            },
+         })
+         .then(res => handleSuccess(res))
+         .catch(error => console.log(error));
       }
       setDeactivatePopup(prevState => !prevState)
    }
@@ -405,6 +443,7 @@ export default function AdminManage(props) {
 
       {(addPopup || editPopup) &&
          <AccountEditPopup
+            userToken={userToken}
             popupType={addPopup ? "add" : "edit"}
             popupFor={popupFor()}
             popupData={popupData}
@@ -413,6 +452,7 @@ export default function AdminManage(props) {
             handleEdit={handleEdit}
             popupExit={popupExit}
             formatFullDate={formatFullDate}
+            theme="light"
          />
       }
 
@@ -422,6 +462,7 @@ export default function AdminManage(props) {
             popupFor={popupFor()}
             handleDeactivate={handleDeactivate}
             popupExit={popupExit}
+            theme="light"
          />
       }
    </>)

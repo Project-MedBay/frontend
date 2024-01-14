@@ -34,14 +34,11 @@ export default function SessionSelection(props) {
       .then(res => setAvailableSessions(res.data))
       .catch(error => console.log(error));
    }, [])
-   console.log(availableSessions)
 
-   var date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
-   date.setDate(date.getDate() + 2)
    var weekDates = []
-   while (date.getTime() < new Date().setDate(new Date().getDate() + numberOfDays)) {
-      weekDates.push(new Date(date))
-      date.setDate(date.getDate() + 1)
+   for (let dateKey in availableSessions) {
+      let date = new Date(dateKey.slice(6) + "-" + dateKey.slice(3,5) + "-" + dateKey.slice(0,2))
+      if (date.getTime() > new Date().getTime() + 29 * 60 * 60 * 1000) weekDates.push(date)
    }
 
    var weekElements = weekDates.map(weekDate => {               // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
@@ -54,8 +51,8 @@ export default function SessionSelection(props) {
                (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
                 blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
-         if (reschedule && Object.keys(patientSchedule).includes(formatWeek(weekDate))) {
-            for (let session of patientSchedule[formatWeek(weekDate)]) {
+         if (reschedule && Object.keys(patientSchedule).includes(weekDate)) {
+            for (let session of patientSchedule[weekDate]) {
                if (formatDate(weekDate) == formatDate(session.datetime)) {
                   h3Class += ` ${s.weekdate_in_sessions}`
                   break

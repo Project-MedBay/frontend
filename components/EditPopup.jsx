@@ -7,7 +7,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/editPopup.module.css"
 
 export default function AccountEditPopup(props) {
-   const {popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate} = props
+   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -44,7 +44,6 @@ export default function AccountEditPopup(props) {
 
    var nonEditableFields = ["dob", "mbo"]
    if (popupType == "edit") nonEditableFields.push("employed since")
-   if (popupFor == "therapy") nonEditableFields.push("code")
 
    const formFields = () => {
       if (popupFor == "patient") return patientFields
@@ -54,7 +53,7 @@ export default function AccountEditPopup(props) {
    }
 
    if (popupFor == "therapy") {
-      const bodypartList = ["head", "shoulder", "leg", "upper torso", "arm", "foot", "lower torso", "hand", "any"]
+      const bodypartList = ["head", "upper torso", "lower torso", "shoulder", "arm", "hand", "leg", "foot", "any"]
       var bodypartElements = bodypartList.map((bodypart, index) => (
             <div className={s.checkbox_wrapper} key={index} onClick={() => handleChange({target: {
                   name: "bodypart",
@@ -240,7 +239,8 @@ export default function AccountEditPopup(props) {
 
    function handlePassEdit(event) {
       event.preventDefault()
-      if (checkPasswordCorrect()) {
+      checkPasswordCorrect()
+      .then(res => {if (res) {
          setFormData(prevFormData => ({
             ...prevFormData,
             password: ""
@@ -250,7 +250,7 @@ export default function AccountEditPopup(props) {
             ...prevInputFailed,
             password: {failed: false, text: "Password must be 8+ characters."}
          }))
-      }
+      }})
    }
 
    function cancelPassEdit() {
@@ -267,11 +267,17 @@ export default function AccountEditPopup(props) {
    }
       
    function handleSave() {               // submit - axios poziv na odgovarajuci url za obradu na backendu
-      if (((popupFor == "therapist" || popupFor == "patient") &&     // blokiraj slanje ako triba unit sifru a nije tocna
-           !editingPassword && !checkPasswordCorrect())
-           || checkInputFailedAny()) return        // blokiraj slanje ako postoji greska
-      if (popupType == "add") handleAdd(formData)
-      else handleEdit(formData)
+      if (checkInputFailedAny()) return        // blokiraj slanje ako postoji greska
+      if ((popupFor == "therapist" || popupFor == "patient") && !editingPassword) {    // blokiraj slanje ako triba unit sifru a nije tocna
+         checkPasswordCorrect().then(res => {if (res) {
+            if (popupType == "add") handleAdd(formData)
+            else handleEdit(formData)
+         }})
+      }
+      else {
+         if (popupType == "add") handleAdd(formData)
+         else handleEdit(formData)
+      }
    }
 
    function checkInputFailedAny() {             // sluzi za blokiranje slanja upita bazi ako postoji greska pri unosu iz gornjih provjera
@@ -291,14 +297,23 @@ export default function AccountEditPopup(props) {
       return failedAny
    }
 
-   function checkPasswordCorrect() {
-      let returnValue = formData.password == "test1234"
-      // axios koji ce provirit jel dobra sifra
-      if (!returnValue) setInputFailed(prevInputFailed => ({
+   async function checkPasswordCorrect() {
+      console.log(popupData)
+      let correct = () => axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/check-password" +
+               (popupFor == "patient" ? "" : "/" + popupData.id) + "?password=" + formData.password,
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`
+         }
+      })
+      .then(res => res.data)
+      .catch(error => console.log(error))
+      if (correct().then(res => console.log(res))) setInputFailed(prevInputFailed => ({
          ...prevInputFailed,
          password: {failed: true, text: "Incorrect password."}
       }))
-      return returnValue
+      return correct().then(res => res)
    }
 
    return (

@@ -41,7 +41,7 @@ export default function DeactivatePopup(props) {
          <p className={s.deactivate_text}>{deactivateText}</p>
 
          <div className={s.deactivate_buttons}>
-            <button className={s.deactivate_yes} onClick={handleDeactivate}>YES, {action}</button>
+            <button className={s.deactivate_yes} onClick={() => handleDeactivate(popupData)}>YES, {action}</button>
             <button className={s.deactivate_no} onClick={popupExit}>NO, DON'T {action}</button>
          </div>
       </div>

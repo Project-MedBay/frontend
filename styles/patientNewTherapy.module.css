@@ -36,26 +36,21 @@
 
 .create_container {
    position: absolute;
-   left: calc(-230 * var(--scale-by-height));
-   top: calc((100vh - calc(850 * var(--scale-by-height))) / 2);
-   width: calc(850 * var(--scale-by-width));
-   height: calc(800 * var(--scale-by-height));
    /* background-color: #fff; */
    transform: skewX(-30deg);
-}
-
-.create_container {
    background: url("../assets/white_shape.png");
    background-size: cover;
    background-position: top right;
    background-attachment: fixed;
+   background-color: transparent;
+   top: calc((100vh - calc(850 * var(--scale-by-height))) / 2);
+   left: 0;
+   height: calc(800 * var(--scale-by-height));
+   width: calc(600 * var(--scale-by-width) + 420 * var(--scale-by-height));
+   padding-top: calc(30 * var(--scale-by-height));
    display: flex;
    justify-content: flex-end;
-   left: 0;
-   width: calc(600 * var(--scale-by-width) + 420 * var(--scale-by-height));
    transform: skewX(0deg);
-   background-color: transparent;
-   padding-top: calc(30 * var(--scale-by-height));
    /* border: red solid 2px; */
 }
 
@@ -254,7 +249,7 @@
    display: flex;
    flex-direction: column;
    align-items: flex-end;
-   gap: 20px;
+   gap: calc(20 * var(--scale-by-height));
    margin-bottom: calc(-76 * var(--scale-by-height));
 }
 
@@ -323,7 +318,7 @@
 
 .sessions_restrictions > span {
    color: #22006a;
-   font-size: 23px;
+   font-size: calc(23 * var(--scale-by-height));
    font-weight: 600;
 }
 
@@ -704,6 +699,57 @@
    color: #000;
 }
 
+.dark {
+   background: linear-gradient(180deg, rgba(25, 25, 25, 0.97) 10%, rgba(18, 15, 34, 0.8) 80%,
+   rgba(17, 11, 65, 0.863) 100%);
+}
+
+.dark .header_step, .dark .therapy_name, .dark .therapy_code, .dark .header_prompt, .dark .form_title,
+.dark .form_tip, 
+.dark .therapies_container > *,
+.dark .sessions_subtitle,
+.dark .sessions_info,
+.dark .sessions_restrictions > *,
+.dark .schedule_legend,
+.dark .final_review .section_title,
+.dark .final_verification,
+.dark .verification_form,
+.dark .verification_input > *,
+.dark .finish_note,
+.dark .finish_label,
+.dark .create_progress > *,
+.dark .progress_bg,
+.dark .progress_line
+{
+   color: #ccc; /* Adjust text color for dark mode */
+}
+
+.dark .final_sessions > *{
+   background-color: #fff;
+}
+
+.dark .tagline,
+.dark .form_title span,
+.dark .sessions_restrictions span{
+   color: var(--zelena)
+}
+
+.dark .tagline > *{
+   color: #fff;
+}
+
+.dark .green_shape{
+   background-image: url("../assets/notsogreen_shape.png");
+}
+
+.dark .create_container{
+   background-image: url("../assets/notsowhite_shape.png");
+}
+
+.dark .checkbox_fill{
+   background-color: var(--zelena);
+}
+
 @media only screen and ((max-aspect-ratio: 17 / 12) or (max-width: 1050px)) {
    
    .mobile_only {
@@ -716,6 +762,7 @@
       justify-content: center;
       align-items: center;
       padding: calc(50 * var(--scale-by-height)) 0;
+      padding-top: 0;
       gap: 1vh;
       height: fit-content;
       min-height: calc(100vh - calc(60 * var(--scale-by-height)));
@@ -730,8 +777,12 @@
       background-color: #fff;
       width: fit-content;
       height: fit-content;
-      padding: calc(30 * var(--scale-by-height)) calc(50 * var(--scale-by-height));
+      padding: calc(30 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
       border-radius: calc(15 * var(--scale-by-height));
+   }
+
+   .dark .create_container{
+      background-color: rgb(51, 51, 51);
    }
    
    .create_wrapper {
@@ -797,10 +848,6 @@
    .form_tip {
       width: 85%;
       text-align: center;
-   }
-   
-   .form_search {
-      width: 100%;
    }
    
    .therapies_container {
@@ -934,52 +981,343 @@
    }
 }
 
-.dark {
-   background: linear-gradient(180deg, rgba(25, 25, 25, 0.97) 10%, rgba(18, 15, 34, 0.8) 80%,
-   rgba(17, 11, 65, 0.863) 100%);
-}
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+   .patient_therapy_main {
+      width: 100%;
+      padding: calc(50 * var(--scale-by-width) * (8/5)) 0;
+      padding-top: 0;
+      min-height: calc(100vh - calc(60 * var(--scale-by-width) * (8/5)));
+   }
+   
+   .create_container {
+      padding: calc(30 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+      border-radius: calc(15 * var(--scale-by-width) * (8/5));
+   }
+   
+   .create_wrapper {
+      gap: calc(15 * var(--scale-by-width) * (8/5));
+      width: calc(650 * var(--scale-by-width) * (8/5));
+   }
+   
+   .create_title {
+      font-size: calc(56 * var(--scale-by-width) * (8/5));
+      text-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(4 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.25);
+   }
+   
+   .header_step {
+      font-size: calc(40 * var(--scale-by-width) * (8/5));
+   }
+   
+   /* PAGE 1 */
+   .therapy_header {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .header_prompt {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+   }
+   
+   .header_input {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .code_input {
+      width: calc(115 * var(--scale-by-width) * (8/5));
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5));
+      padding-left: calc(14 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .invalid_text {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_select {
+      height: fit-content;
+      padding: calc(38 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+      padding-left: calc(90 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_form {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(-10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .form_title {
+      font-size: calc(32 * var(--scale-by-width) * (8/5));
+   }
+   
+   .form_title > span {
+      font-size: calc(44 * var(--scale-by-width) * (8/5));
+   }
+   
+   .form_tip {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+   }
+   
+   .form_search {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5));
+      padding-left: calc(14 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapies_container {
+      gap: calc(15 * var(--scale-by-width) * (8/5));
+      height: calc(290 * var(--scale-by-width) * (8/5));                               /* NOTE 175 da se vide 3, 230 za 4, nezz koje je bolje */
+      padding: 0 calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_wrapper {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .custom_checkbox {
+      width: calc(22 * var(--scale-by-width) * (8/5));
+      height: calc(22 * var(--scale-by-width) * (8/5));
+      padding: calc(2 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid #636363;
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
 
-.dark .header_step, .dark .therapy_name, .dark .therapy_code, .dark .header_prompt, .dark .form_title,
-.dark .form_tip, 
-.dark .therapies_container > *,
-.dark .sessions_subtitle,
-.dark .sessions_info,
-.dark .sessions_restrictions > *,
-.dark .schedule_legend,
-.dark .final_review .section_title,
-.dark .final_verification,
-.dark .verification_form,
-.dark .verification_input > *,
-.dark .finish_note,
-.dark .finish_label,
-.dark .create_progress > *,
-.dark .progress_bg,
-.dark .progress_line
-{
-   color: #ccc; /* Adjust text color for dark mode */
-}
+   .checkbox_fill {
+      border-radius: calc(3 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_info {
+      gap: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_name, .therapy_code {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+   }
+   
+   .therapy_code {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+   }
+   
+   /* PAGE 2 */
+   .header_shapes {
+      gap: calc(20 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   .header_counter {
+      padding: calc(8 * var(--scale-by-width) * (8/5)) calc(20 * var(--scale-by-width) * (8/5));
+      margin-right: 0;
+      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(4 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.25);
+   }
+   
+   .counter_text {
+      font-size: calc(30 * var(--scale-by-width) * (8/5));
+   }
+   
+   .info_duration {
+      padding: calc(8 * var(--scale-by-width) * (8/5)) calc(20 * var(--scale-by-width) * (8/5));
+      margin-right: 0;
+      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(4 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.25);
+   }
+   
+   .duration_text {
+      font-size: calc(30 * var(--scale-by-width) * (8/5));
+   }
+   
+   .sessions_subtitle {
+      font-size: calc(24 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5)) 0;
+      margin-top: calc(-10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .sessions_info {
+      margin-top: calc(-24 * var(--scale-by-width) * (8/5));
+   }
+      
+   .sessions_restrictions {
+      font-size: calc(22 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   .sessions_restrictions > span {
+      font-size: calc(23 * var(--scale-by-width) * (8/5));
+   }
+   
+   .schedule_legend {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+      margin-top: calc(-14 * var(--scale-by-width) * (8/5));
+   }
+   
+   .legend_purple {
+      padding: calc(3 * var(--scale-by-width) * (8/5)) calc(5 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .selection_wrapper {
+      margin-top: calc(-10 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(-15 * var(--scale-by-width) * (8/5));
+   }
+   
+   /* PAGE 3 */
+   .final_main {
+      width: calc(650 * var(--scale-by-width) * (8/5));
+      height: calc(550 * var(--scale-by-width) * (8/5));
+      grid-template-columns: calc(275 * var(--scale-by-width) * (8/5)) calc(375 * var(--scale-by-width) * (8/5));
+      grid-template-rows: calc(300 * var(--scale-by-width) * (8/5)) calc(250 * var(--scale-by-width) * (8/5));
+      margin-top: calc(3 * var(--scale-by-width) * (8/5));
+   }
+   
+   .section_title {
+      font-size:  calc(32 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .card_title {
+      font-size: calc(24 * var(--scale-by-width) * (8/5));
+      max-height: calc(60 * var(--scale-by-width) * (8/5));
+   }
+   
+   .review_card {
+      box-shadow: calc(-4 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2),
+                  0 calc(-2 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2);
+      border-right: calc(2 * var(--scale-by-width) * (8/5)) solid #636363;
+      border-radius: calc(10 * var(--scale-by-width) * (8/5)) 0 0 calc(10 * var(--scale-by-width) * (8/5));
+      height: calc(220 * var(--scale-by-width) * (8/5));
+      padding: calc(12 * var(--scale-by-width) * (8/5));
+      margin: calc(15 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   .review_details > p {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+   }
+   
+   .sessions_expanded > div.sessions_card {
+      height: calc(470 * var(--scale-by-width) * (8/5));
+      border-radius: 0 calc(10 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5));
+      box-shadow: calc(-4 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2),
+                  calc(4 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2),
+                  0 calc(-2 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2)
+   }
+   
+   .sessions_card {
+      box-shadow: calc(4 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2),
+                  0 calc(-2 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.2);
+      border-radius: 0 calc(10 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) 0;
+      height: calc(220 * var(--scale-by-width) * (8/5));
+      padding: calc(12 * var(--scale-by-width) * (8/5)) calc(15 * var(--scale-by-width) * (8/5));
+      margin: calc(15 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   .sessions_container {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+      padding: 0 calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .session_card {
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(4 * var(--scale-by-width) * (8/5)) 0 rgba(0, 0, 0, 0.25);
+      margin-bottom: calc(5 * var(--scale-by-width) * (8/5));
+      padding: calc(8 * var(--scale-by-width) * (8/5));
+   }
+   
+   .session_card > p {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+   }
+   
+   .sessions_expand {
+      font-size: calc(14 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5));
+      margin-bottom: 0;
+   }
+   
+   .final_verification {
+      gap: calc(5 * var(--scale-by-width) * (8/5));
+      padding-right: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .verification_form {
+      padding: calc(10 * var(--scale-by-width) * (8/5));
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
 
-.dark .final_sessions > *{
-   background-color: #fff;
-}
-
-.dark .tagline,
-.dark .form_title span{
-   color: var(--zelena)
-}
-
-.dark .tagline > *{
-   color: #fff;
-}
-
-.dark .green_shape{
-   background-image: url("../assets/notsogreen_shape.png");
-}
-
-.dark .create_container{
-   background-image: url("../assets/notsowhite_shape.png");
-}
-
-.dark .checkbox_fill{
-   background-color: var(--zelena);
+   .input_wrapper {
+      gap: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .input_field {
+      width: calc(180 * var(--scale-by-width) * (8/5));
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5));
+      padding-left: calc(14 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .input_failed {
+      border: calc(1.5 * var(--scale-by-width) * (8/5)) solid #FF0000;
+   }
+   
+   .verification_tip {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+      height: calc(25 * var(--scale-by-width) * (8/5));
+      width: calc(25 * var(--scale-by-width) * (8/5));
+   }
+   
+   .verification_failed {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+   }
+   
+   .final_finish {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+      min-height: calc(35 * var(--scale-by-width) * (8/5));
+      margin-top: calc(6 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(2 * var(--scale-by-width) * (8/5));
+   }
+   
+   .finish_note, .finish_label {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+   }
+   
+   .checkbox_container {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .create_buttons {
+      gap: calc(450 * var(--scale-by-width) * (8/5));
+      margin: calc(10 * var(--scale-by-width) * (8/5)) 0;
+      margin-bottom: calc(15 * var(--scale-by-width) * (8/5));
+   }
+   
+   .button_back, .button_next {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5)) 0;
+      width: calc(100 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .create_progress {
+      margin-left: calc(145 * var(--scale-by-width) * (8/5));
+      gap: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .progress_bg {
+      width: calc(360 * var(--scale-by-width) * (8/5));
+      height: calc(8 * var(--scale-by-width) * (8/5));
+      padding: 0 calc(2 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .progress_line {
+      width: calc(125 * var(--scale-by-width) * (8/5));
+      height: calc(8 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(-2 * var(--scale-by-width) * (8/5));
+   }
+   
+   .progress_label {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+      margin-top: calc(5 * var(--scale-by-width) * (8/5));
+   }
 }

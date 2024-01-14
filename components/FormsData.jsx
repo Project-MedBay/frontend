@@ -198,14 +198,8 @@ export const therapyFields = [
    {
       label:"Resource",
       placeholder:"Somekindof resource",
-      id:"grid_full_row",
+      id:"grid_two_thirds_left",
       name:"resource"
-   },
-   {
-      label:"Relevant part of the body",
-      placeholder:"",
-      id:"grid_two_thirds_square",
-      name:"bodypart"
    },
    {
       label:"Sessions",
@@ -214,10 +208,10 @@ export const therapyFields = [
       name:"numberOfSessions"
    },
    {
-      label:"Code",
-      placeholder:"45G7E",
-      id:"grid_third_right",
-      name:"code"
+      label:"Relevant part of the body",
+      placeholder:"",
+      id:"grid_full_row_double",
+      name:"bodypart"
    },
    {
       label:"Description",

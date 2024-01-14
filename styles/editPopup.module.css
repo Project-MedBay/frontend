@@ -59,10 +59,10 @@
    grid-column: 1 / 5;
    width: max(calc(346px * 0.6), calc(346vh * 59 / 725));
 }
-#grid_two_thirds_square {
-   grid-column: 1 / 5;
+#grid_full_row_double {
+   grid-column: 1 / 7;
    grid-row: 3 / 5;
-   width: max(calc(346px * 0.6), calc(346vh * 59 / 725));
+   width: max(calc(560px * 0.6), calc(560vh * 59 / 725));
 }
 #grid_half_left_stub {
    grid-column: 1 / 4;
@@ -132,12 +132,12 @@
 
 .bodypart_box {
    display: grid;
-   grid-template-columns: calc(125 * var(--scale-by-height)) calc(100 * var(--scale-by-height)) calc(70 * var(--scale-by-height));
+   grid-template-columns: repeat(3, 1fr);
    border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
    border-radius: calc(10 * var(--scale-by-height));
    column-gap: calc(12 * var(--scale-by-height));
    row-gap: calc(18 * var(--scale-by-height));
-   padding: calc(20 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
+   padding: calc(20 * var(--scale-by-height)) calc(25 * var(--scale-by-height));
    height: calc(152 * var(--scale-by-height));
    margin: 0;
 }

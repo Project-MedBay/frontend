@@ -7,6 +7,7 @@ import PatientDash from './PatientDash'
 import PatientNewTherapy from './PatientNewTherapy'
 import PatientProfile from './PatientProfile'
 import NoMatchRoute from './NoMatchRoute'
+import AIChat from './AIChat'
 import { useTheme } from './ThemeContext';
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
@@ -19,7 +20,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       if (userToken != "") {
          let roleFromToken = jwtDecode(userToken).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(userToken).role.toLowerCase()
          if (roleFromToken != "patient") globalNavigate("/notFound")
-      }
+      } else globalNavigate("/login")
    }, [])
 
    function navigate(toWhere) {
@@ -41,6 +42,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          }
       })
       .then(res => {
+         console.log(res.data)
          let scheduleList = {}
          for (let date in res.data) {
             scheduleList[new Date(new Date(date).setHours(0))] = res.data[date].map((session, index) => ({
@@ -193,6 +195,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
          </Routes>
+         <AIChat />
       </>
   )
 }

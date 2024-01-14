@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
 import Patient from './Patient'
 import Therapist from './Therapist'
 import Admin from './Admin'
+import ForgotPassword from './ForgotPassword'
 import NoMatchRoute from './NoMatchRoute'
-import { ThemeProvider } from './ThemeContext'; 
+import { ThemeProvider } from './ThemeContext';
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
@@ -28,6 +29,9 @@ export default function App() {           // glavna komponenta, u njoj se render
    console.log(userToken)
    console.log(sessionStorage)
    const globalNavigate = useNavigate()
+   const location = useLocation()
+   const { hash, pathname, search } = location
+   console.log(pathname)
 
    function handleLogin(token) {
       setUserToken(token)
@@ -42,7 +46,7 @@ export default function App() {           // glavna komponenta, u njoj se render
    useEffect(() => {
       sessionStorage.setItem("medbay-token", JSON.stringify(userToken))
       
-      if (userToken == "") globalNavigate("/login")
+      if (userToken == "" && !["/register", "/forgotPassword"].includes(pathname)) globalNavigate("/login")
    }, [userToken])
 
 
@@ -69,17 +73,19 @@ export default function App() {           // glavna komponenta, u njoj se render
                handleLogout={handleLogout}
             />} />
 
-         <Route path="/therapist/*" element={<Therapist
-               globalNavigate={globalNavigate}
-               userToken={userToken}
-               handleLogout={handleLogout}
-         />} />
+            <Route path="/therapist/*" element={<Therapist
+                  globalNavigate={globalNavigate}
+                  userToken={userToken}
+                  handleLogout={handleLogout}
+            />} />
 
             <Route path="/admin/*" element={<Admin
                globalNavigate={globalNavigate}
                userToken={userToken}
                handleLogout={handleLogout}
             />} />
+
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
             
             <Route path="/notFound" element={<NoMatchRoute back={-2} handleLogout={handleLogout} />} />
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

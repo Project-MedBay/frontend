@@ -73,15 +73,32 @@ export default function PatientProfile(props) {
    }
 
    function handleEdit(data) {
+      console.log(data)
       if (editPopup) {
-         // axios za editat user acc
+         // axios({
+         //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
+         //    method: "PUT",
+         //    headers: {
+         //       Authorization: `Bearer ${userToken}`
+         //    },
+         //    data: data
+         // })
+         // .then(res => handleSuccess(res))
+         // .catch(error => console.log(error));
       }
       setEditPopup(prevState => !prevState)
    }
    
    function handleDeactivate() {
-      navigate("login")
-      // axios za deaktivaciju accounta
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
+         method: "DELETE",
+         headers: {
+            Authorization: `Bearer ${userToken}`
+         },
+      })
+      .then(res => res.status == 200 && navigate("login"))
+      .catch(error => console.log(error))
    }
 
    function popupExit() {

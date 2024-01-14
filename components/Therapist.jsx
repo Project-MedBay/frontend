@@ -15,7 +15,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       if (userToken != "") {
          let roleFromToken = jwtDecode(userToken).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(userToken).role.toLowerCase()
          if (roleFromToken != "therapist") globalNavigate("/notFound")
-      }
+      } else globalNavigate("/login")
    }, [])
 
    function navigate(toWhere) {

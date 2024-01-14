@@ -13,7 +13,7 @@
    box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
    border-radius: calc(10 * var(--scale-by-height));
    width: max-content;
-   max-width: calc(800 * var(--scale-by-height));
+   max-width: calc(700 * var(--scale-by-height));
 }
 
 .popup_wide {

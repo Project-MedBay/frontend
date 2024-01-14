@@ -11,7 +11,6 @@ export default function PatientDash(props) {
    const {userToken, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
-   console.log(theme);
 
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
    var nextSession = {
@@ -172,7 +171,7 @@ export default function PatientDash(props) {
                      </div>
                   </div>
 
-                  <img src={map} className={`${s.session_image} ${showMapMobile ? "" : s.mobile_hidden}`} />
+                  <img src={map} className={`${s.session_image} ${showMapMobile ? "" : s.tablet_hidden}`} />
                   <button className={s.view_map} onClick={() => setshowMapMobile(prevState => !prevState)}>
                      {showMapMobile ? "Close map" : "View location on map"}
                   </button>

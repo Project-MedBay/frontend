@@ -124,9 +124,12 @@ export default function RegisterMain(props) {
    }
    
    function checkPhoneNumberRules(value) {         // provjera za broj mobitela (trenutno: samo brojke, barem 9)
-      let failed = !/^\d+$/.test(value)
-      let text = "Must be digits only."
-      if (!failed && value.length < 9) {
+      let failed = !/^[\d\+]/.test(value)
+      let text = "Start with + or digit."
+      if (!failed && !/^\+?\d+$/.test(value)) {
+         failed = true
+         text = "Must be digits only."
+      } else if (!failed && value.length < 9) {
          failed = true
          text = "Must be 9+ digits."
       }
@@ -147,6 +150,13 @@ export default function RegisterMain(props) {
       let failed = !/^\d{4}-\d{2}-\d{2}$/.test(value)
       let text = "Must be YYYY-MM-DD."
       if (!failed && isNaN(new Date(value))) failed = true
+      else if (!failed && new Date(value) > new Date()) {
+         failed = true
+         text = "Date is in future."
+      } else if (!failed && new Date(value) < new Date().setFullYear(new Date().getFullYear() - 150)) {
+         failed = true
+         text = "Age is over 150."
+      }
       return {failed: failed, text: text}
    }
    

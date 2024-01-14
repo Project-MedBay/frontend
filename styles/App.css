@@ -27,5 +27,5 @@ button {
 html {
   --scale-by-height: max(0.6px, calc(1vh * 59 / 725));
   
-  --scale-by-width: max(0.6px, calc(1vw * 59 / 725));
+  --scale-by-width: max(0.3px, calc(1vw * 59 / 725));
 }

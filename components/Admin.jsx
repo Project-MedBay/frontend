@@ -16,7 +16,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
         if (userToken != "") {
             let roleFromToken = jwtDecode(userToken).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(userToken).role.toLowerCase()
             if (roleFromToken != "admin") globalNavigate("/notFound")
-        }
+        } else globalNavigate("/login")
     }, [])
 
      function navigate(toWhere) {
