@@ -5,10 +5,11 @@ import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode} = props     // i think ill need current for axios, will see
+   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
+   const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
-   const [availableSessions, setAvailableSessions] = useState(testAvailableSessions)   // NOTE maknit
+   const [availableSessions, setAvailableSessions] = useState("")
    const [viewingSession, setViewingSession] = useState(reschedule ? selectedSessions[0] : null)
    const [blockedSessions, setBlockedSessions] = useState({})
    const [therapyMaxDates, setTherapyMaxDates] = useState({
@@ -33,6 +34,7 @@ export default function SessionSelection(props) {
       .then(res => setAvailableSessions(res.data))
       .catch(error => console.log(error));
    }, [])
+   console.log(availableSessions)
 
    var date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
    date.setDate(date.getDate() + 2)
@@ -48,7 +50,7 @@ export default function SessionSelection(props) {
       if (Object.keys(formattedSessions).includes(formatDate(weekDate))) {
          h3Class += ` ${s.weekdate_selected}`
          h3OnClick = () => {setViewingSession(weekDate)}
-      } else if (Object.keys(availableSessions).includes(formatFullDate(weekDate)) == false ||
+      } else if (availableSessions == "" || availableSessions[formatFullDate(weekDate)]?.length == 0 ||
                (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
                 blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
@@ -163,7 +165,7 @@ export default function SessionSelection(props) {
 
 
    return (
-      <div className={s.selection_main}>
+      <div className={`${s.selection_main} ${darkModeClass}`}>
          <div className={s.scroll_container}>
             <div className={`${s.dates_container} ${!reschedule && s.container_small}`}>     {/* s ovim mozemo minjat visinu containera i velicinu fonta npr za new therapy */}
                {weekElements}

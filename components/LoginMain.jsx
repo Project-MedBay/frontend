@@ -104,7 +104,7 @@ export default function LoginMain(props) {
                <div className={s.register_container}>
                   <p className={s.register_q}>You're new here?</p>
                   <button className={s.register_button}
-                     onClick={() => props.navigate("register")}>Register now           {/* uporaba prop funkcije za navigaciju */}
+                     onClick={() => props.globalNavigate("register")}>Register now           {/* uporaba prop funkcije za navigaciju */}
                   </button>
                </div>
             </div>

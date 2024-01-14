@@ -1,17 +1,22 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios, { formToJSON } from "axios"
-import {adminSessions} from "../TestingData.jsx" 
 import x_icon from "../../assets/x_icon.svg"
 import s from "../../styles//admin_utils/adminCalendarPopup.module.css"
 
 export default function AdminCalendarPopup(props) {
-   const {selectedDate, selectedHour, setRescheduledSession, popupExit} = props;
+   const {selectedDate, selectedHour, dateSessions, setRescheduledSession, setCurrentSession, popupExit} = props;
    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
    const sessionDatetime = new Date(new Date(selectedDate).setHours(extractHours(selectedHour)))
+   const sessionsList = dateSessions.map(session => ({
+      // NOTE tu triba dodat id kad dobijem
+      name: session.therapyTypeName,
+      patient: session.patientFirstName + " " + session.patientLastName,
+      therapist: session.employeeFirstName + " " + session.employeeLastName,
+      therapyId: session.therapyId
+   }))
 
-
-   const adminSessionElements = adminSessions.map(session => (
+   const adminSessionElements = sessionsList.map(session => (
       <div className={s.container_card}>
          <div className={s.main_wrapper}>
             <h3 className={s.card_header_therapy}>{session.name.toUpperCase()}</h3>
@@ -34,12 +39,16 @@ export default function AdminCalendarPopup(props) {
                </p>
             </div>
          :
-            <button className={s.reschedule_button} onClick={() => setRescheduledSession({
-               therapy: session.name,
-               datetime: sessionDatetime,
-               therapist: session.therapist,
-               patient: session.patient
-            })}>RESCHEDULE THERAPY</button>
+            <button className={s.reschedule_button} onClick={() => {
+               let currentSession = {
+                  therapy: session.name,
+                  datetime: sessionDatetime,
+                  therapist: session.therapist,
+                  patient: session.patient
+               }
+               setCurrentSession(currentSession)
+               setRescheduledSession(currentSession)
+            }}>RESCHEDULE THERAPY</button>
          }
       </div>
    ))

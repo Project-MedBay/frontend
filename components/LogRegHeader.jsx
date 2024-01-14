@@ -5,7 +5,7 @@ import s from "../styles/logRegHeader.module.css"
 export default function LoginHeader(props) {
     return (
         <div className={s.header}>
-            <div className={s.header_logo} onClick={() => props.navigate("login")}>
+            <div className={s.header_logo} onClick={() => props.globalNavigate("login")}>
                 <img src={logo} className={s.logo_img} />
                 <h1 className={s.logo_title}>MedBay</h1>
             </div>

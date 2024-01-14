@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
+import axios from "axios"
 import { patientFields, therapistFields, resourceFields, therapyFields } from "./FormsData"
+import CustomSelectInput from "./CustomSelectInput"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/editPopup.module.css"
-import { all } from "axios"
 
-export default function AdminEditPopup(props) {
-   const {popupType, popupFor, popupData, handleAdd, handleEdit, popupExit, formatFullDate} = props
+export default function AccountEditPopup(props) {
+   const {popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [formData, setFormData] = useState(() => {
       if (popupFor == "therapist" || popupFor == "patient") return {
@@ -28,8 +31,9 @@ export default function AdminEditPopup(props) {
       "employed since": {failed: false, text: "Must be YYYY-MM-DD."},
       password: {failed: false, text: "Password must be 8+ characters."},
       passwordConfirm: {failed: false, text: "Passwords do not match."},
+      location: {failed: false, text: "Location is required."},
       capacity: {failed: false, text: "Must be digits only"},
-      code: {failed: false, text: "Must be #[5 characters]."},
+      code: {failed: false, text: ""},
       numberOfSessions: {failed: false, text: "Must be digits only"},
       resource: {failed: false, text: "Resource is required."},
       description: {failed: false, text: "Description is required."},
@@ -40,6 +44,7 @@ export default function AdminEditPopup(props) {
 
    var nonEditableFields = ["dob", "mbo"]
    if (popupType == "edit") nonEditableFields.push("employed since")
+   if (popupFor == "therapy") nonEditableFields.push("code")
 
    const formFields = () => {
       if (popupFor == "patient") return patientFields
@@ -97,6 +102,14 @@ export default function AdminEditPopup(props) {
                   <div className={`${s.bodypart_box} ${inputFailed[name].failed && s.failed_input}`}>
                      {bodypartElements}
                   </div>
+               : (name == "resource" || name == "specialization") ?
+                  <CustomSelectInput
+                     options={selectData}
+                     name={name}
+                     defaultValue={formData[name]}
+                     handleChange={handleChange}
+                     failed={inputFailed[name].failed}
+                  />
                :
                   <input
                      className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}
@@ -113,13 +126,8 @@ export default function AdminEditPopup(props) {
    })
 
    function handleChange(event) {
-      console.log(event.target)
       const {name, value} = event.target
-      if (name == "code") setFormData(prevFormData => ({
-         ...prevFormData,
-         [name]: value.toUpperCase()
-      }))
-      else setFormData(prevFormData => ({
+      setFormData(prevFormData => ({
          ...prevFormData,
          [name]: value
       }))
@@ -137,7 +145,7 @@ export default function AdminEditPopup(props) {
          }))
       }
       else if (name == "name" || name == "surname" || name == "address" || name == "specialization"
-              || name == "resource" || name == "description") {
+              || name == "location" || name == "resource" || name == "description" || name == "bodypart") {
          // ovi samo ne smiju bit prazni, nemaju pravila za provjeru formata
          setInputFailed(prevState => ({
             ...prevState,
@@ -164,9 +172,6 @@ export default function AdminEditPopup(props) {
             case "capacity":
             case "numberOfSessions":
                updateInputFailedTo = checkCapacitySessionsRules(value)
-               break
-            case "code":
-               updateInputFailedTo = checkCodeRules(value)
                break
          }
          setInputFailed(prevState => ({
@@ -209,12 +214,6 @@ export default function AdminEditPopup(props) {
    function checkCapacitySessionsRules(value) {
       let failed = !/^\d+$/.test(value)
       let text = "Must be digits only."
-      return {failed: failed, text: text}
-   }
-
-   function checkCodeRules(value) {
-      let failed = !/^#[A-Z0-9]{5}$/.test(value)
-      let text = "Must be #[5 characters]."
       return {failed: failed, text: text}
    }
 
@@ -303,7 +302,7 @@ export default function AdminEditPopup(props) {
    }
 
    return (
-      <div className={s.edit_popup}>
+      <div className={`${s.edit_popup} ${darkModeClass}`}>
          <h1 className={s.popup_title}>
             {popupType == "add" ? "ADD" : "EDIT"}&#160;
             {popupFor == "patient" ? "ACCOUNT DATA" : popupFor.toUpperCase()}

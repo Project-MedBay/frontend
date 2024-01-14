@@ -330,6 +330,97 @@
    font-size: calc(20 * var(--scale-by-height));
 }
 
+.dark  {
+   background: linear-gradient(180deg, rgba(25, 25, 25, 1) 10%, rgba(35, 35, 35, 0.8) 40%,
+               rgba(70, 70, 110, 0.8) 85%); /* Adjust the gradient for dark mode */
+   /* Other dark mode specific styles... */
+}
+
+.dark .container_title {
+   color: #e0e0e0; /* Lighter color for dark mode */
+   /* Other styles... */
+}
+
+.dark .scroll_container{
+   background-color: #2a2a2a; /* Darker background for these elements */
+   /* Other styles... */
+}
+
+.dark .session_info p, 
+.dark .session_date,
+.dark .container_date,
+.dark .date_wrapper > *,
+.dark .date_reset{
+   color: #e0e0e0; /* Lighter color for dark mode */
+   /* Other styles... */
+}
+
+.dark .session_card{
+   background: linear-gradient(180deg, rgba(25, 25, 25, 1) 10%, rgba(35, 35, 35, 0.8) 40%,
+   rgba(70, 70, 110, 0.8) 85%);; /* Darker background for these elements */
+   /* Other styles... */
+}
+
+.dark .session_card:hover{
+   background: linear-gradient(180deg, rgba(25, 25, 25, 1) 100%, rgba(35, 35, 35, 0.8) 40%,
+   rgba(70, 70, 110, 0.8) 85%);; /* Darker background for these elements */
+   /* Other styles... */
+}
+
+.dark .session_card > *{
+   color: #70D8AC; /* Lighter color for dark mode */
+   /* Other styles... */
+}
+
+.dark .session_card > * > *{
+   color: #e0e0e0; /* Lighter color for dark mode */
+   /* Other styles... */
+}
+
+
+.dark .session_card,
+.dark .reschedule_text{
+   color: #c9c9c9; /* Darker background for these elements */
+   /* Other styles... */
+}
+
+.dark .session_button{
+   background-color: var(--ljubicasta-nova); /* Darker background for these elements */
+   /* Other styles... */
+}
+
+.dark .button_disabled{
+   background-color: #4a4747; /* Darker background for these elements */
+   /* Other styles... */
+}
+
+
+.dark .selected_session, 
+.dark .session_popup{
+   background-color: #2a2a2a; /* Darker background for these elements */
+   color: #f0f0f0; /* Lighter text color for better readability */
+   /* Other styles... */
+}
+
+.dark .popup_title, 
+.dark .note_details{
+   color: #fff;
+}
+
+.dark .note_box,
+.dark .cardClass{
+   background-color: #757575;
+}
+.dark .pop{
+   background-color: #2a2a2a;
+   
+}
+
+.dark .session_passed > *{
+   color: #969696
+   
+}
+
 
 @media only screen and ((max-aspect-ratio: 11 / 10) or (max-width: 815px)) {
    /* .session_card {background-color: #000;} */
@@ -535,3 +626,4 @@
       font-size: calc(20 * var(--scale-by-height));
    }
 }
+

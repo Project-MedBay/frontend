@@ -1,25 +1,86 @@
 import { useState, useEffect } from 'react'
-import { mySchedule } from "./TestingData"
+import { jwtDecode } from 'jwt-decode'
+import { Routes, Route } from "react-router-dom"
+import axios from 'axios'
 import PatientHeader from './PatientHeader'
 import PatientDash from './PatientDash'
 import PatientNewTherapy from './PatientNewTherapy'
 import PatientProfile from './PatientProfile'
+import NoMatchRoute from './NoMatchRoute'
+import { useTheme } from './ThemeContext';
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {setPageName, userToken, userData, setUserData} = props
-   const [subPageName, setSubPageName] = useState("dash")           // sluzi za navigaciju
+   const {globalNavigate, userToken, handleLogout} = props
+   const [userData, setUserData] = useState({})
+   const [mySchedule, setMySchedule] = useState({})
+   const { theme } = useTheme();
 
-   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-   
+   useEffect(() => {
+      if (userToken != "") {
+         let roleFromToken = jwtDecode(userToken).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(userToken).role.toLowerCase()
+         if (roleFromToken != "patient") globalNavigate("/notFound")
+      }
+   }, [])
+
    function navigate(toWhere) {
       if (toWhere == "login") {
-         setPageName("login")
+          globalNavigate("/")
       } else {
-         setSubPageName(toWhere)
+          globalNavigate("/patient/" + toWhere)
       }
    }
    
+   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+   useEffect(() => {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/dashboard",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => {
+         let scheduleList = {}
+         for (let date in res.data) {
+            scheduleList[new Date(new Date(date).setHours(0))] = res.data[date].map((session, index) => ({
+               id: index,
+               appointmentId: session.appointmentId,
+               datetime: new Date(session.dateTime),
+               therapy: session.therapyTypeName,
+               location: session.equipmentRoomName,
+               completedSessions: session.numberOfSessionsCompleted,
+               totalSessions: session.numberOfSessions,
+               therapist: session.employeeFirstName + " " + session.employeeLastName,
+               notes: session.sessionNotes
+            }))
+         }
+         setMySchedule(scheduleList)
+      })
+      .catch(error => console.log(error));
+      
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/logged-in",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => setUserData({
+         firstName: res.data.patient.firstName,
+         lastName: res.data.patient.lastName,
+         id: res.data.patient.id,
+         email: res.data.patient.email,
+         address: res.data.patient.address,
+         dob: new Date(res.data.patient.dateOfBirth),
+         phone: res.data.patient.phoneNumber,
+         mbo: res.data.patient.mbo,
+         registeredSince: new Date(res.data.patient.createdAt),
+         userImage: res.data.patient.photo
+      }))
+      .catch(error => console.log(error));
+   }, [])
+
    function formatWeek(datetime) {
       let tempDate = getWeekFirst(new Date(datetime))
       let date = tempDate.getDate()
@@ -85,43 +146,53 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       return formattedDatetime
    }
 
-   const subpages = {
-      dash: <>
-         <PatientHeader navigate={navigate} />
-         <PatientDash
-            userToken={userToken}
-            getWeekFirst={getWeekFirst}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-            formatFullDatetime={formatFullDatetime}
-            formatWeek={formatWeek}
-            mySchedule={mySchedule}
-         />
-      </>,
-      newTherapy: <>
-         <PatientHeader navigate={navigate} />
-         <PatientNewTherapy
-            userToken={userToken}
-            formatWeek={formatWeek}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-            mySchedule={mySchedule}
-            navigate={navigate}
-         />
-      </>,
-      profile: <>
-         <PatientHeader navigate={navigate} />
-         <PatientProfile
-            userToken={userToken}
-            userData={userData}
-            setUserData={setUserData}
-            formatWeek={formatWeek}
-            formatDate={formatDate}
-            formatFullDate={formatFullDate}
-            navigate={navigate}
-         />
-      </>,
-   }
+   return (
+      <>
+         <PatientHeader navigate={navigate} handleLogout={handleLogout} />
+         <Routes>
+            <Route index element={<PatientDash
+               userToken={userToken}
+               getWeekFirst={getWeekFirst}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               formatFullDatetime={formatFullDatetime}
+               formatWeek={formatWeek}
+               mySchedule={mySchedule}
+               theme={theme}
+            />} />
+            <Route path="dash" element={<PatientDash
+               userToken={userToken}
+               getWeekFirst={getWeekFirst}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               formatFullDatetime={formatFullDatetime}
+               formatWeek={formatWeek}
+               mySchedule={mySchedule}
+               theme={theme}
+            />} />
 
-   return subpages[subPageName]
+            <Route path="newTherapy" element={<PatientNewTherapy
+               userToken={userToken}
+               formatWeek={formatWeek}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               navigate={navigate}
+               theme={theme}
+            />} />
+
+            <Route path="profile" element={<PatientProfile
+               userToken={userToken}
+               userData={userData}
+               setUserData={setUserData}
+               formatWeek={formatWeek}
+               formatDate={formatDate}
+               formatFullDate={formatFullDate}
+               navigate={navigate}
+               theme={theme}
+            />} />
+            
+            <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
+         </Routes>
+      </>
+  )
 }

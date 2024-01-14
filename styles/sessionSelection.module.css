@@ -66,3 +66,27 @@
    margin-left: calc(8 * var(--scale-by-height));
    cursor: pointer;
 }
+
+/* Dark mode styles */
+.dark {
+   background-color: #333; /* Darker background */
+   color: #fff; /* Lighter text color for better readability */
+   /* Add other dark mode specific styles... */
+}
+
+.dark .weekdate, .dark .datetime {
+   font-weight: 600; 
+   color: #70D8AC
+}
+
+.dark .weekdate_disabled, .dark .datetime_disabled {
+   color: #656565;
+   font-weight: 300;
+   cursor: not-allowed;
+}
+
+.dark .weekdate_selected, .dark .datetime_selected {
+   /* Adjust selected date/time styles for dark mode */
+   color: #70D8AC; /* Darker selection background */
+   background-color: var(--ljubicasta-nova); /* White text for selected elements */
+}

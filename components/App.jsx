@@ -1,65 +1,89 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
+import { Routes, Route, useNavigate } from "react-router-dom"
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
 import Patient from './Patient'
 import Therapist from './Therapist'
 import Admin from './Admin'
+import NoMatchRoute from './NoMatchRoute'
+import { ThemeProvider } from './ThemeContext'; 
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
 
-  const [pageName, setPageName] = useState("login")           // sluzi za navigaciju
-  const [userToken, setUserToken] = useState("")
-  const [userData, setUserData] = useState({         // state za cuvanje podataka o korisniku
-    id: "452",
-    firstName: "Petar",
-    lastName: "Petrović",
-    email: "petar.petrovic@gmail.com",
-    address: "Ulica Petra Snačića 5, Petrinja",     // NOTE triba trenutno za profil al posli ce bit init na {}
-    dob: new Date("1955-05-05"),
-    phone: "0955055555",
-    mbo: "15253545565",
-    password: "",
-    registeredSince: new Date("2023-12-15"),
-    active: "",
-    role: "",
-    userImage: null
-  })
+   const [userToken, setUserToken] = useState(() => {
+      if (sessionStorage.getItem("medbay-token") !== null) {
+         let token = JSON.parse(sessionStorage.getItem("medbay-token"))
+         try {
+            let roleFromToken = jwtDecode(token).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(token).role.toLowerCase()
+            if (["admin", "therapist", "patient"].includes(roleFromToken) === true) {
+               return token
+            }
+         } catch (exc) {}        // ovaj try catch i uvjeti sluze da se ne moze rucnim namjestanjem local storagea uc u aplikaciju
+      }
+      return ""            // basically, u svakoj situaciji u kojoj local storage medbay-token nije validni jwt token s ulogom admin, therapist ili patient, usertoken i local storage se stavlja na ""
+   })
+   console.log(userToken)
+   console.log(sessionStorage)
+   const globalNavigate = useNavigate()
 
    function handleLogin(token) {
       setUserToken(token)
       let navigateTo = jwtDecode(token).role.toLowerCase() == "staff" ? "therapist" : jwtDecode(token).role.toLowerCase()
-      setPageName(navigateTo)
+      globalNavigate("/" + navigateTo)
    }
-  
-  const pages = {
-    login: <>
-      <LogRegHeader navigate={setPageName} />
-      <LoginMain handleLogin={handleLogin} navigate={setPageName} />
-    </>,
-    register: <>
-      <LogRegHeader navigate={setPageName} />
-      <RegisterMain navigate={setPageName} />
-    </>,
-    patient: <Patient
-      setPageName={setPageName}
-      userToken={userToken}
-      userData={userData}
-      setUserData={setUserData}
-    />,
-    therapist: <Therapist
-      setPageName={setPageName}
-      userToken={userToken}
-      userData={userData}
-    />,
-    admin: <Admin
-      setPageName={setPageName}
-      userToken={userToken}
-      userData={userData}
-    />
-  }
 
-  return pages[pageName]
+   function handleLogout() {
+      setUserToken("")
+   }
+   
+   useEffect(() => {
+      sessionStorage.setItem("medbay-token", JSON.stringify(userToken))
+      
+      if (userToken == "") globalNavigate("/login")
+   }, [userToken])
+
+
+  return (
+      <ThemeProvider>
+         <Routes>
+            <Route index element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+            </>} />
+            <Route path="/login" element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+            </>} />
+
+            <Route path="/register" element={<>
+               <LogRegHeader globalNavigate={globalNavigate} />
+               <RegisterMain globalNavigate={globalNavigate} />
+            </>} />
+
+            <Route path="/patient/*" element={<Patient
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
+            />} />
+
+         <Route path="/therapist/*" element={<Therapist
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
+         />} />
+
+            <Route path="/admin/*" element={<Admin
+               globalNavigate={globalNavigate}
+               userToken={userToken}
+               handleLogout={handleLogout}
+            />} />
+            
+            <Route path="/notFound" element={<NoMatchRoute back={-2} handleLogout={handleLogout} />} />
+            <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
+         </Routes>
+      </ThemeProvider>
+   )
 }

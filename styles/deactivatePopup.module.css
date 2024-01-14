@@ -63,3 +63,8 @@
    background-color: #22006a;
    font-weight: 700;
 }
+
+.dark {
+   background-color: #252525;
+   color: #aaaaaa;
+}

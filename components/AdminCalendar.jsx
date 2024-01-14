@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import s from "../styles/adminCalendar.module.css";
+import axios from "axios";
 import initialCalendarData from "./admin_utils/adminCalendarData.js";
 import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
 import ReschedulePopup from "./ReschedulePopup.jsx";
+import s from "../styles/adminCalendar.module.css";
 
 export default function AdminCalendar(props) {
     const {userToken, formatDate, formatFullDate} = props
@@ -16,14 +17,23 @@ export default function AdminCalendar(props) {
     const [calendarPopup, setCalendarPopup] = useState(false)
 
     const [rescheduledSession, setRescheduledSession] = useState("")
+    const [currentSession, setCurrentSession] = useState("")
     
-
+    console.log(calendarData)
     useEffect(() => {
-        // Once connected to backend, fetch data here and update calendarData using setCalendarData
-    }, []);
+        axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/admin?date=" + weekDates[0],
+            method: "GET",
+            headers: {
+               Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+            }
+         })
+         .then(res => setCalendarData(res.data))
+         .catch(error => console.log(error));
+    }, [weekOffset]);
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-    const hours = ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+    const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
 
     const getDatesForWeek = (offset) => {
         return daysOfWeek.map((_, index) => {
@@ -51,28 +61,30 @@ export default function AdminCalendar(props) {
         const dateTime = `${date}T${hour}`;
         const appointments = calendarData[dateTime] || [];
 
+        let calculatedCount
         if (filterOption === 'All' && searchTerm === '') {
-            return appointments.length;
+            calculatedCount = appointments.length;
+        } else {
+            calculatedCount = appointments.filter(appointment => {
+                if (filterOption === 'Patient' || filterOption === 'All') {
+                    if (`${appointment.patientFirstName} ${appointment.patientLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        return true;
+                    }
+                }
+                if (filterOption === 'Therapist' || filterOption === 'All') {
+                    if (`${appointment.employeeFirstName} ${appointment.employeeLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        return true;
+                    }
+                }
+                if (filterOption === 'Therapy name' || filterOption === 'All') {
+                    if (appointment.therapyTypeName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        return true;
+                    }
+                }
+                return false;
+            }).length;
         }
-
-        return appointments.filter(appointment => {
-            if (filterOption === 'Patient' || filterOption === 'All') {
-                if (`${appointment.patientFirstName} ${appointment.patientLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return true;
-                }
-            }
-            if (filterOption === 'Therapist' || filterOption === 'All') {
-                if (`${appointment.employeeFirstName} ${appointment.employeeLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return true;
-                }
-            }
-            if (filterOption === 'Therapy name' || filterOption === 'All') {
-                if (appointment.therapyTypeName.toLowerCase().includes(searchTerm.toLowerCase())) {
-                    return true;
-                }
-            }
-            return false;
-        }).length;
+        return calculatedCount ? calculatedCount : ""
     };
     
     const weekDates = getDatesForWeek(weekOffset);
@@ -137,10 +149,12 @@ export default function AdminCalendar(props) {
         {calendarPopup && <div className={s.popup_separate} onClick={popupExit}></div>}
         
         {calendarPopup &&
-            <AdminCalendarPopup 
+            <AdminCalendarPopup
                 selectedDate={selectedDate.date}
                 selectedHour={selectedDate.hour}
+                dateSessions={calendarData[`${selectedDate.date}T${selectedDate.hour}`]}
                 setRescheduledSession={setRescheduledSession}
+                setCurrentSession={setCurrentSession}
                 popupExit={popupExit}
             />
         }
@@ -152,7 +166,7 @@ export default function AdminCalendar(props) {
                 formatDate = {formatDate}
                 formatFullDate = {formatFullDate}
                 formatWeek = {arg => arg}            // NOTE vidicu kad spojim u kojem mi je obliku kljuc u mySchedule
-                currentSession = {{...rescheduledSession, therapyCode: "#4C7X3"}}
+                currentSession = {{...currentSession, therapyCode: "#4C7X3"}}       // NOTE ovaj kod namistit
                 rescheduledSession = {rescheduledSession}
                 setRescheduledSession = {setRescheduledSession}
                 popupExit = {popupExit}

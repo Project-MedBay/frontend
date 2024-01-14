@@ -255,3 +255,12 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    background: #22006a;
    font-weight: 600;
 }
+
+.dark{
+   background-color: #333;
+   color: #cccccc;
+}
+
+.dark .form_input{
+   color: var(--zelena);
+}
