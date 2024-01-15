@@ -47,9 +47,9 @@
    cursor: pointer;
 }
 
-@media only screen and ((max-aspect-ratio: 7 / 10) or (max-width: 550px)) {
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
    
-   .register_success {
+   .success_popup {
       gap: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
       padding: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725)) max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
       max-width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));

@@ -213,7 +213,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
          </Routes>
-         <AIChat userToken={userToken} />
+         <AIChat userToken={userToken} theme={theme} />
       </>
   )
 }

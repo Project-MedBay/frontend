@@ -168,7 +168,7 @@ export default function PatientProfile(props) {
                   
                   <div className={s.info_item}>
                      <p>Date of Birth: </p>
-                     <span>{formatFullDate(userData.dob)}</span>
+                     <span>{userData.dob != null && formatFullDate(userData.dob)}</span>
                   </div>
                   
                   <div className={s.info_item}>

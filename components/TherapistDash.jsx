@@ -9,19 +9,26 @@ export default function TherapistDash(props) {
    const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, formatFullDateISO, mySchedule, setMySchedule} = props
    
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
-   var nextSession = {
+   const [nextSession, setNextSession] = useState({
       text: "No upcoming sessions.",
       dateTime: "--"
-   }
-   for (let week in mySchedule) {
-      for (let session of mySchedule[week]) {
-         if (new Date(session.dateTime) > new Date()) {
-            nextSession = session
-            break
+   })
+   useEffect(() => {
+      let tempSession = {dateTime: "--"}
+      for (let week in mySchedule) {
+         for (let session of mySchedule[week]) {
+            if (new Date(session.dateTime) > new Date()) {
+               tempSession = session
+               break
+            }
          }
+         if (tempSession.dateTime != "--") break
       }
-      if (nextSession.dateTime != "--") break
-   }
+      if (tempSession.dateTime != "") {
+         setNextSession(tempSession)
+         setSelectedSession(nextSession)
+      }
+   }, [mySchedule])
    const [selectedSession, setSelectedSession] = useState(nextSession)     // NOTE sinkronizirat ovo kako triba
    const [patientPopup, setPatientPopup] = useState(false)
 

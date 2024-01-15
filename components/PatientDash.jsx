@@ -137,7 +137,8 @@ export default function PatientDash(props) {
 
          <div className={s.container_right}>
             <h2 className={s.container_title}>
-               {selectedSession.datetime == nextSession.datetime ? "Next session:" : "Selected session:"}
+               {formatDate(new Date(selectedSession.datetime)) == formatDate(new Date(nextSession.datetime)) ?
+               "Next session:" : "Selected session:"}
             </h2>
 
             {selectedSession.datetime == "--" ? <>

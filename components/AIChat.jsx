@@ -3,9 +3,11 @@ import axios from "axios"
 import s from "../styles/aiChat.module.css"
 
 export default function AIChat(props) {
-   const {userToken} = props
-   
-   const [chatOpen, setChatOpen] = useState(false)
+   const {userToken, theme} = props
+
+   const darkModeClass = theme === 'dark' ? s.dark : '';
+
+   const [chatOpen, setChatOpen] = useState(true)
    const [currentBot, setCurrentBot] = useState("medbot")
    const [chatInput, setChatInput] = useState("")
    const [inputDisabled, setInputDisabled] = useState(false)
@@ -48,7 +50,8 @@ export default function AIChat(props) {
          ...prevState,
          [currentBot]: [
             ...prevState[currentBot],
-            {sender: "user", text: chatInput}
+            {sender: "user", text: chatInput},
+            {sender: "bot", text: "Processing..."}
          ]
       }))
       setInputDisabled(true)
@@ -68,7 +71,7 @@ export default function AIChat(props) {
          setMessages(prevState => ({
             ...prevState,
             [currentBot]: [
-               ...prevState[currentBot],
+               ...prevState[currentBot].filter(msg => (msg.sender != "bot" || msg.text != "Processing...")),
                {sender: "bot", text: res.data}
             ]
          }))
@@ -95,12 +98,12 @@ export default function AIChat(props) {
                  + (parseInt(computed.getPropertyValue('padding-bottom'), 10) / 4)
                  + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
          
-         textAreaRef.current.style.height = `${Math.min(height, 96)}px`
+         textAreaRef.current.style.height = height + "px"
       }
    }, [textAreaRef, chatInput])
 
    return (
-      <div className={s.chat_main}>
+      <div className={`${s.chat_main} ${darkModeClass}`}>
          <div className={`${s.chat_header} ${chatOpen ? s.expanded : ""}`} onClick={() => setChatOpen(prevState => !prevState)}>
             <h3 className={s.header_title}>
                {!chatOpen ? "AI Assistant" : currentBot == "medbot" ? "MedBot" : "BayBot"}

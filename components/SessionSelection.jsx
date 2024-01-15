@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
-import { testAvailableSessions } from "./TestingData"
 import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 

@@ -68,3 +68,42 @@
    background-color: #252525;
    color: #aaaaaa;
 }
+
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+
+   .deactivate_popup {
+      width: calc(650 * var(--scale-by-width) * (8/5));
+      padding: calc(30 * var(--scale-by-width) * (8/5)) calc(40 * var(--scale-by-width) * (8/5));
+      gap: calc(30 * var(--scale-by-width) * (8/5));
+      box-shadow: calc(5 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(6 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_title {
+      font-size: calc(48 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_subtitle {
+      font-size: calc(28 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_text {
+      font-size: calc(22 * var(--scale-by-width) * (8/5));
+      margin-top: calc(-20 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_text > span {
+      font-size: calc(24 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_buttons {
+      gap: calc(50 * var(--scale-by-width) * (8/5));
+   }
+   
+   .deactivate_yes, .deactivate_no {
+      width: calc(250 * var(--scale-by-width) * (8/5));
+      height: calc(100 * var(--scale-by-width) * (8/5));
+      font-size: calc(32 * var(--scale-by-width) * (8/5));
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+}

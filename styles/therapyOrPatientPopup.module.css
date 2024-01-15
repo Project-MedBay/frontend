@@ -226,3 +226,148 @@ textarea.note_box {
    background: #22006a;
    margin-right: calc(-250 * var(--scale-by-height));
 }
+
+.dark {
+   background-color: #252525;
+   color: #aaaaaa;
+}
+
+.dark .popup_title {
+   color: #fff;
+}
+
+.dark .popup_sessions, .dark .popup_row span {
+   color: #70D8AC;
+}
+
+.dark .session_card {
+   background-color: #636363;
+   color: #f0f0f0;
+}
+
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+
+   .popup {
+      gap: calc(20 * var(--scale-by-width) * (8/5));
+      box-shadow: calc(5 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(6 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+      max-width: calc(700 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_wide {
+      max-width: calc(1000 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_header {
+      gap: calc(50 * var(--scale-by-width) * (8/5));
+      padding: calc(20 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+      border-bottom: #656565 solid calc(1 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_title {
+      font-size: calc(32 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_title > span {
+      font-size: calc(28 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_exit {
+      margin-top: calc(4 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_main {
+      gap: calc(40 * var(--scale-by-width) * (8/5));
+      padding: 0 calc(35 * var(--scale-by-width) * (8/5));
+   }
+   
+   .main_image {
+      height: calc(125 * var(--scale-by-width) * (8/5));
+      width: calc(125 * var(--scale-by-width) * (8/5));
+   }
+   
+   .main_info {
+      gap: calc(20 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_row {
+      gap: calc(50 * var(--scale-by-width) * (8/5));
+      padding: 0 calc(30 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_info {
+      font-size: calc(24 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_sessions {
+      font-size: calc(30 * var(--scale-by-width) * (8/5));
+      margin: calc(10 * var(--scale-by-width) * (8/5));
+      margin-bottom: 0;
+   }
+   
+   .sessions_container {
+      padding: 0 calc(15 * var(--scale-by-width) * (8/5));
+      gap: calc(20 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(20 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(40 * var(--scale-by-width) * (8/5));
+      max-height: calc(420 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_tall {
+      max-height: calc(500 * var(--scale-by-width) * (8/5));
+   }
+   
+   .session_card {
+      gap: calc(5 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5)) calc(20 * var(--scale-by-width) * (8/5));
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(4 * var(--scale-by-width) * (8/5)) 0 rgba(0, 0, 0, 0.25);
+      margin-bottom: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .session_info, .info_section {
+      gap: calc(60 * var(--scale-by-width) * (8/5));
+   }
+
+   .session_therapy, .session_datetime, .session_notes {
+      font-size: calc(24 * var(--scale-by-width) * (8/5));
+   }
+   
+   .note_box {
+      background-color: hsl(0, 0%, 90%);
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+      max-height: calc(210 * var(--scale-by-width) * (8/5));
+      padding: calc(15 * var(--scale-by-width) * (8/5));
+      margin: calc(10 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   textarea.note_box {
+      height: calc(165 * var(--scale-by-width) * (8/5));
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid #22006a;
+   }
+
+   .box_bounds {
+      width: calc(1 * var(--scale-by-width) * (8/5));
+   }
+   
+   .note_contents {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+   }
+   
+   .buttons_container {
+      margin-top: calc(-5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .note_edit, .note_cancel {
+      font-size: calc(22 * var(--scale-by-width) * (8/5));
+      width: calc(120 * var(--scale-by-width) * (8/5));
+      padding: calc(5 * var(--scale-by-width) * (8/5));
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .note_cancel {
+      margin-right: calc(-250 * var(--scale-by-width) * (8/5));
+   }
+}

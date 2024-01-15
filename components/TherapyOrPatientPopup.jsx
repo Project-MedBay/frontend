@@ -139,7 +139,7 @@ export default function TherapyOrPatientPopup(props) {
    }
 
    return (
-      <div className={`${s.popup} ${popupType == "patient" && s.popup_wide}`}>
+      <div className={`${s.popup} ${popupType == "patient" && s.popup_wide} ${darkModeClass}`}>
          <div className={s.popup_header}>
             <h1 className={s.popup_title}>{title.toUpperCase()}
                <span>{` #(${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}

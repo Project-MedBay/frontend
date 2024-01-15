@@ -264,3 +264,151 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 .dark .form_input{
    color: var(--zelena);
 }
+
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+
+   .edit_popup {
+      gap: calc(30 * var(--scale-by-width) * (8/5));
+      padding: calc(40 * var(--scale-by-width) * (8/5)) calc(60 * var(--scale-by-width) * (8/5));
+      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(25 * var(--scale-by-width) * (8/5)) calc(12 * var(--scale-by-width) * (8/5)) #00000026;
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_title {
+      font-size: calc(42 * var(--scale-by-width) * (8/5));
+   }
+   
+   .grid_container {
+      column-gap: calc(20 * var(--scale-by-width) * (8/5));
+      row-gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   #grid_full_row {
+      width: calc(560 * var(--scale-by-width) * (8/5));
+   }
+   #grid_half_left {
+      width: calc(270 * var(--scale-by-width) * (8/5));
+   }
+   #grid_half_right {
+      width: calc(270 * var(--scale-by-width) * (8/5));
+   }
+   #grid_third_left {
+      width: calc(173 * var(--scale-by-width) * (8/5));
+   }
+   #grid_third_middle {
+      width: calc(173 * var(--scale-by-width) * (8/5));
+   }
+   #grid_third_right {
+      width: calc(173 * var(--scale-by-width) * (8/5));
+   }
+   #grid_two_thirds_left {
+      width: calc(346 * var(--scale-by-width) * (8/5));
+   }
+   #grid_full_row_double {
+      width: calc(560 * var(--scale-by-width) * (8/5));
+   }
+   #grid_half_left_stub {
+      width: calc(260 * var(--scale-by-width) * (8/5));
+   }
+   #grid_half_right_stub {
+      width: calc(260 * var(--scale-by-width) * (8/5));
+   }
+   
+   .input_label {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+      margin: calc(4 * var(--scale-by-width) * (8/5)) 0;
+   }
+   
+   .input_label > span {
+      margin-left: calc(50 * var(--scale-by-width) * (8/5));
+   }
+   
+   .input_box {
+      width: calc(540 * var(--scale-by-width) * (8/5));
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      padding: calc(10 * var(--scale-by-width) * (8/5));
+      padding-left: calc(14 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .input_disabled {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      padding-top: calc(11 * var(--scale-by-width) * (8/5));
+      padding-bottom: calc(12 * var(--scale-by-width) * (8/5));
+   }
+   
+   .desc_box {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+      height: calc(200 * var(--scale-by-width) * (8/5));
+      padding: calc(15 * var(--scale-by-width) * (8/5));
+   }
+   
+   .bodypart_box {
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+      column-gap: calc(12 * var(--scale-by-width) * (8/5));
+      row-gap: calc(18 * var(--scale-by-width) * (8/5));
+      padding: calc(20 * var(--scale-by-width) * (8/5)) calc(25 * var(--scale-by-width) * (8/5));
+      height: calc(152 * var(--scale-by-width) * (8/5));
+   }
+   
+   .checkbox_wrapper {
+      gap: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .custom_checkbox {
+      width: calc(20 * var(--scale-by-width) * (8/5));
+      height: calc(20 * var(--scale-by-width) * (8/5));
+      padding: calc(2 * var(--scale-by-width) * (8/5));
+      border: calc(2 * var(--scale-by-width) * (8/5)) solid #636363;
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .checkbox_fill {
+      border-radius: calc(3 * var(--scale-by-width) * (8/5));
+   }
+   
+   .checkbox_label {
+      font-size: calc(18 * var(--scale-by-width) * (8/5));
+   }
+   
+   .failed_input {
+      border: calc(1.5 * var(--scale-by-width) * (8/5)) solid #FF0000;
+   }
+   
+   .edit_failed {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+      margin-top: calc(2 * var(--scale-by-width) * (8/5));
+   }
+   
+   .password_eye {
+      bottom: calc(36 * var(--scale-by-width) * (8/5));
+      width: calc(25 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_buttons {
+      gap: calc(100 * var(--scale-by-width) * (8/5));
+   }
+   
+   .change_password, .button_save, .button_cancel {
+      font-size: calc(32 * var(--scale-by-width) * (8/5));
+      width: calc(150 * var(--scale-by-width) * (8/5));
+      padding: calc(5 * var(--scale-by-width) * (8/5));
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .change_password {
+      font-size: calc(22 * var(--scale-by-width) * (8/5));
+      width: fit-content;
+      padding: calc(5 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .change_password_note {
+      font-size: calc(14 * var(--scale-by-width) * (8/5));
+      margin-top: calc(15 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(-25 * var(--scale-by-width) * (8/5));
+   }
+}
