@@ -14,6 +14,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
    const {globalNavigate, userToken, handleLogout} = props
    const [userData, setUserData] = useState({})
    const [mySchedule, setMySchedule] = useState({})
+   const [userTherapies, setUserTherapies] = useState([])
    const { theme } = useTheme();
 
    useEffect(() => {
@@ -45,6 +46,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          console.log(res.data)
          let scheduleList = {}
          for (let date in res.data) {
+            console.log(res.data)
             scheduleList[new Date(new Date(date).setHours(0))] = res.data[date].map((session, index) => ({
                id: index,
                appointmentId: session.appointmentId,
@@ -68,18 +70,32 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
          }
       })
-      .then(res => setUserData({
-         firstName: res.data.patient.firstName,
-         lastName: res.data.patient.lastName,
-         id: res.data.patient.id,
-         email: res.data.patient.email,
-         address: res.data.patient.address,
-         dob: new Date(res.data.patient.dateOfBirth),
-         phone: res.data.patient.phoneNumber,
-         mbo: res.data.patient.mbo,
-         registeredSince: new Date(res.data.patient.createdAt),
-         userImage: res.data.patient.photo
-      }))
+      .then(res => {
+         setUserData({
+            firstName: res.data.patient.firstName,
+            lastName: res.data.patient.lastName,
+            id: res.data.patient.id,
+            email: res.data.patient.email,
+            address: res.data.patient.address,
+            dob: new Date(res.data.patient.dateOfBirth),
+            phone: res.data.patient.phoneNumber,
+            mbo: res.data.patient.mbo,
+            registeredSince: new Date(res.data.patient.createdAt),
+            userImage: res.data.patient.photo
+         })
+         setUserTherapies(res.data.therapies.map(therapy => ({
+            id: therapy.therapyTypeCode.slice(1),
+            name: therapy.therapyTypeName,
+            code: therapy.therapyTypeCode,
+            "date started": new Date(therapy.sessionDates[0]),
+            "date finished": new Date(therapy.sessionDates[therapy.sessionDates.length - 1]),
+            sessions: therapy.sessionDates.map((date, index) => ({
+               appointmentId: index,
+               appointmentDate: new Date(date),
+               sessionNotes: therapy.sessionNotes[index]
+            }))
+         })))
+      })
       .catch(error => console.log(error));
    }, [])
 
@@ -147,6 +163,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       formattedDatetime += datetime.getMinutes()
       return formattedDatetime
    }
+   console.log(userToken)
 
    return (
       <>
@@ -186,6 +203,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                userToken={userToken}
                userData={userData}
                setUserData={setUserData}
+               userTherapies={userTherapies}
                formatWeek={formatWeek}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
@@ -195,7 +213,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
          </Routes>
-         <AIChat />
+         <AIChat userToken={userToken} />
       </>
   )
 }

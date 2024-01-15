@@ -130,3 +130,104 @@
 .dark svg.part_selected{
    fill: #22006a;
 }
+
+
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+
+   .human_body {
+      width: calc(207 * var(--scale-by-width) * (8/5));
+      height: calc(260 * var(--scale-by-width) * (8/5));
+      margin-top: calc(15 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#head {
+      width: calc(56.5 * var(--scale-by-width) * (8/5));
+      height: calc(95 * var(--scale-by-width) * (8/5));
+      left: calc(-28.5 * var(--scale-by-width) * (8/5));
+      top: calc(-6 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#left_shoulder {
+      width: calc(109.5 * var(--scale-by-width) * (8/5));
+      height: calc(46.5 * var(--scale-by-width) * (8/5));
+      left: calc(-53.5 * var(--scale-by-width) * (8/5));
+      top: calc(69 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#right_shoulder {
+      width: calc(109.5 * var(--scale-by-width) * (8/5));
+      height: calc(46.5 * var(--scale-by-width) * (8/5));
+      left: calc(13.5 * var(--scale-by-width) * (8/5));
+      top: calc(69 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#left_arm {
+      width: calc(156.5 * var(--scale-by-width) * (8/5));
+      height: calc(119 * var(--scale-by-width) * (8/5));
+      left: calc(-78 * var(--scale-by-width) * (8/5));
+      top: calc(112 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#right_arm {
+      width: calc(156.5 * var(--scale-by-width) * (8/5));
+      height: calc(119 * var(--scale-by-width) * (8/5));
+      left: calc(38 * var(--scale-by-width) * (8/5));
+      top: calc(112 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#chest {
+      width: calc(86.5 * var(--scale-by-width) * (8/5));
+      height: calc(45 * var(--scale-by-width) * (8/5));
+      left: calc(-43.5 * var(--scale-by-width) * (8/5));
+      top: calc(88 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#stomach {
+      width: calc(75 * var(--scale-by-width) * (8/5));
+      height: calc(107.5 * var(--scale-by-width) * (8/5));
+      left: calc(-37.5 * var(--scale-by-width) * (8/5));
+      top: calc(130 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#left_leg {
+      width: calc(93.5 * var(--scale-by-width) * (8/5));
+      height: calc(250 * var(--scale-by-width) * (8/5));
+      left: calc(-49.5 * var(--scale-by-width) * (8/5));
+      top: calc(202 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#right_leg {
+      width: calc(93.5 * var(--scale-by-width) * (8/5));
+      height: calc(250 * var(--scale-by-width) * (8/5));
+      left: calc(-2 * var(--scale-by-width) * (8/5));
+      top: calc(202 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#left_hand {
+      width: calc(90 * var(--scale-by-width) * (8/5));
+      height: calc(39 * var(--scale-by-width) * (8/5));
+      left: calc(-102.5 * var(--scale-by-width) * (8/5));
+      top: calc(224 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#right_hand {
+      width: calc(90 * var(--scale-by-width) * (8/5));
+      height: calc(39 * var(--scale-by-width) * (8/5));
+      left: calc(66.5 * var(--scale-by-width) * (8/5));
+      top: calc(224 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#left_foot {
+      width: calc(30 * var(--scale-by-width) * (8/5));
+      height: calc(30 * var(--scale-by-width) * (8/5));
+      left: calc(-37.5 * var(--scale-by-width) * (8/5));
+      top: calc(450 * var(--scale-by-width) * (8/5));
+   }
+   
+   .human_body svg#right_foot {
+      width: calc(82 * var(--scale-by-width) * (8/5));
+      height: calc(85 * var(--scale-by-width) * (8/5));
+      left: calc(10.5 * var(--scale-by-width) * (8/5));
+      top: calc(426 * var(--scale-by-width) * (8/5));
+   }
+}

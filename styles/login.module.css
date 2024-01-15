@@ -121,16 +121,17 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 }
 
 .forgot_password_div {
-   width: 100%;
+   display: flex;
+   justify-content: center;
+   width: fit-content;
 }
 
 .forgot_password_text {
    color: #808080;
-   font-size: 12px;
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    text-align: center;
-   padding-right: 0px;
    margin: 0;
-   margin-top: -20px;
+   margin: min(calc(-20px * 0.6), calc(-20vh * 59 / 725)) 0;
    cursor: pointer;
 }
 

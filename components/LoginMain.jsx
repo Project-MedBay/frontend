@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
 import LoginPasswordPopup from "./LoginPasswordPopup"
-import ResetPassword from "./ResetPassword"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/login.module.css"
@@ -51,8 +50,6 @@ export default function LoginMain(props) {
    }
 
    function popupExit() {
-      // if (rescheduledSession != "") setRescheduledSession("")
-      // else 
       setForgotPassword(false);
   }
 
@@ -112,8 +109,7 @@ export default function LoginMain(props) {
 
          {forgotPassword && <div className={s.popup_separate} onClick={popupExit}></div>}
 
-         {forgotPassword && <LoginPasswordPopup />}
-         {/* {forgotPassword && <ResetPassword />} */}
+         {forgotPassword && <LoginPasswordPopup popupExit={popupExit} />}
 
       </>
     )

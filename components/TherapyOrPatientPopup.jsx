@@ -22,7 +22,7 @@ export default function TherapyOrPatientPopup(props) {
    var title, rows
    if (popupType == "therapy") {
       title = popupData.name
-      rows = [["date started", "therapist"], ["date finished", "location"]]
+      rows = [["date started", "date finished"]]
    } else if (popupType == "patient") {
       title = popupData.firstName + " " + popupData.lastName
       rows = [["email"], ["address"], ["dateOfBirth", "phoneNumber", "mbo"]]        // NOTE promini labele da ne koriste ovo
@@ -41,7 +41,6 @@ export default function TherapyOrPatientPopup(props) {
       })
       infoElements.push(<div className={rowClass} key={infoElements.length}>{rowElements}</div>)
    }
-   
    const sessionElements = popupSessions?.map(session => {
       let sessionPassed = new Date(session.appointmentDate) < new Date()
       let sessionInfo = <> 

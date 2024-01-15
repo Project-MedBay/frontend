@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
+import axios from "axios"
 import { mySchedule } from "./TestingData" // NOTE temp
 import SessionSelection from "./SessionSelection"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/reschedulePopup.module.css"
 
 export default function ReschedulePopup(props) {
-   const {userToken, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, popupExit, theme} = props
+   const {userToken, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, selectedWeek, popupExit, theme} = props
    const patientSchedule = () => {
       if (user == "patient") return props.patientSchedule
       else {
@@ -20,7 +21,20 @@ export default function ReschedulePopup(props) {
    const [rescheduleConfirmBox, setRescheduleConfirmBox] = useState(false)
    
    function rescheduleSession() {
-      // send new session data to db to reschedule session and update schedule
+      let formattedDatetime = rescheduledSession.datetime.getFullYear() + "-" +
+                             (rescheduledSession.datetime.getMonth() < 9 ? "0" : "") + (rescheduledSession.datetime.getMonth() + 1) + "-" +
+                             (rescheduledSession.datetime.getDate() < 10 ? "0" : "") + rescheduledSession.datetime.getDate() + "T" +
+                             (rescheduledSession.datetime.getHours() < 10 ? "0" : "") + rescheduledSession.datetime.getHours() + ":00:00"
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/reschedule/" +
+               currentSession.appointmentId + "?newDateTime=" + formattedDatetime,
+         method: "PUT",
+         headers: {
+            Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
       setRescheduleConfirmBox(false)
       popupExit()       // NOTE vidicemo jel pozivanje popupexita on success sjebe stvar
    }
@@ -32,7 +46,7 @@ export default function ReschedulePopup(props) {
             <img src={x_icon} className={s.popup_exit} onClick={popupExit}/>
          </div>
 
-         <p className={s.reschedule_info}>CURRENT SESSION:&#160;
+         <p className={s.reschedule_info}>SESSION:&#160;
             <span>{formatDate(currentSession.datetime)} {currentSession.datetime.getHours()}:00 - {currentSession.datetime.getHours()+1}:00</span>
          </p>
          <p className={s.reschedule_info}>NEW SESSION:&#160;
@@ -40,7 +54,7 @@ export default function ReschedulePopup(props) {
          </p>
 
          <p className={s.reschedule_legend}>
-            Grayed out dates/times are inelligible or full.
+            Grayed out dates/times are inelligible or full.<br />
             The selected date/time is highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
             Dates when {user == "patient" ? "you" : "they"} have other sessions scheduled are emphasized 
             with a <span className={s.legend_green}>green box.</span>
@@ -55,6 +69,7 @@ export default function ReschedulePopup(props) {
             setSelectedSessions = {setRescheduledSession}
             currentSession = {currentSession}
             patientSchedule = {patientSchedule()}
+            selectedWeek={selectedWeek}
             numOfSessions = {1}
             numberOfDays= {20} // NOTE namistit ovo
             therapyCode = {currentSession.therapyCode}

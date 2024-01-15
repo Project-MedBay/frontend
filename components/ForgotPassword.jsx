@@ -1,10 +1,11 @@
 import React from "react"
+import ResetPassword from "./ResetPassword"
 import s from "../styles/forgotPassword.module.css"
 
 export default function ForgotPassword(props) {
    return (
       <div className={s.main}>
-         <div className={s.test}></div>
+         <ResetPassword globalNavigate={props.globalNavigate} />
       </div>
    )
 }

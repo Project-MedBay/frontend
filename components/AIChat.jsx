@@ -3,10 +3,12 @@ import axios from "axios"
 import s from "../styles/aiChat.module.css"
 
 export default function AIChat(props) {
+   const {userToken} = props
    
    const [chatOpen, setChatOpen] = useState(false)
    const [currentBot, setCurrentBot] = useState("medbot")
    const [chatInput, setChatInput] = useState("")
+   const [inputDisabled, setInputDisabled] = useState(false)
    const textAreaRef = useRef();
 
    const [messages, setMessages] = useState(() =>{
@@ -41,6 +43,7 @@ export default function AIChat(props) {
 
    function handleSend(event) {
       event.preventDefault()
+      if (inputDisabled) return
       setMessages(prevState => ({
          ...prevState,
          [currentBot]: [
@@ -48,8 +51,31 @@ export default function AIChat(props) {
             {sender: "user", text: chatInput}
          ]
       }))
+      setInputDisabled(true)
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/chat",
+         method: "POST",
+         headers: {
+            Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
+         },
+         data: {
+            message: chatInput,
+            chatHistory: messages[currentBot].slice(1).map(message => message.text),
+            medBot: currentBot == "medbot"
+         }
+      })
+      .then(res => {
+         setMessages(prevState => ({
+            ...prevState,
+            [currentBot]: [
+               ...prevState[currentBot],
+               {sender: "bot", text: res.data}
+            ]
+         }))
+         setInputDisabled(false)
+      })
+      .catch(error => console.log(error));
       setChatInput("")
-      // axios poslat poruku
    }
 
    useEffect(() => {
@@ -91,9 +117,9 @@ export default function AIChat(props) {
                {messageElements}
             </div>
             <form className={s.chat_footer} onSubmit={handleSend}>
-               <textarea className={s.chat_input} type="text" onChange={event => setChatInput(event.target.value)}
-                        placeholder="Ask a question..." name="chat" value={chatInput} autoComplete="off" rows={1}
-                        ref={textAreaRef} onKeyDown={event => handleKeyDown(event)}
+               <textarea className={`${s.chat_input} ${inputDisabled ? s.input_disabled : ""}`} type="text"
+                        onChange={event => setChatInput(event.target.value)} placeholder="Ask a question..." name="chat" value={chatInput}
+                        autoComplete="off" rows={1} ref={textAreaRef} onKeyDown={event => handleKeyDown(event)}
                />
                <button className={`${s.chat_send} ${currentBot == "baybot" ? s.send_baybot : ""}`}>Send</button>
             </form>

@@ -52,8 +52,10 @@ export default function TherapistDash(props) {
             <div className={cardClass} key={id} onClick={() => {setSelectedSession(session)}}>
                <h3 className={s.session_date}>{formatDate(new Date(dateTime))}</h3>
                <h3 className={s.session_time}>{new Date(dateTime).getHours()}:00 - {new Date(dateTime).getHours()+1}:00</h3>
-               <p className={s.session_location}>{equipmentRoomName}</p>
-               <p className={s.session_more}>View more</p>
+               <div className={s.session_footer}>
+                  <p className={s.session_location}>{equipmentRoomName}</p>
+                  <p className={s.session_more}>View more</p>
+               </div>
             </div>
          )
       })

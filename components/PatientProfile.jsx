@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { myTherapies } from "./TestingData"
 import AccountEditPopup from "./EditPopup"
 import DeactivatePopup from "./DeactivatePopup"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
@@ -9,7 +8,7 @@ import input_image from "../assets/input_image.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, setUserData, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
+   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -19,9 +18,9 @@ export default function PatientProfile(props) {
    const [editPopup, setEditPopup] = useState(false)
    const [deactivatePopup, setDeactivatePopup] = useState(false)
 
-   const therapyElements = myTherapies.map(therapy => {
+   const therapyElements = userTherapies.map((therapy, index) => {
       return (
-         <div className={s.therapy_card} key={therapy.id}>
+         <div className={s.therapy_card} key={index}>
             <h3 className={s.therapy_name}>{therapy.name.toUpperCase()}</h3>
             <p className={s.therapy_code}>THERAPY CODE {therapy.code}</p>
             <p className={s.therapy_info}>DATE STARTED: <span>{formatFullDate(therapy["date started"])}</span></p>
@@ -69,22 +68,54 @@ export default function PatientProfile(props) {
          ...prevState,
          userImage: event.target.files[0]
       }))
+      const imageData = new FormData()
+      imageData.append("file", event.target.files[0])
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/profile-picture",
+         method: "PUT",
+         headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": 'multipart/form-data'
+         },
+         data: imageData
+      })
+      .then(res => console.log(res.status))
+      .catch(error => console.log(error));
       console.log(event.target.files[0])
    }
 
    function handleEdit(data) {
       console.log(data)
+      console.log(userData)
       if (editPopup) {
-         // axios({
-         //    url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" + endpoint,
-         //    method: "PUT",
-         //    headers: {
-         //       Authorization: `Bearer ${userToken}`
-         //    },
-         //    data: data
-         // })
-         // .then(res => handleSuccess(res))
-         // .catch(error => console.log(error));
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient",
+            method: "PUT",
+            headers: {
+               Authorization: `Bearer ${userToken}`
+            },
+            data: {
+               firstName: data.name,
+               lastName: data.surname,
+               email: data["e-mail"],
+               address: data.address,
+               dateOfBirth: data.dob,
+               phoneNumber: data.phone,
+               mbo: data.mbo,
+               password: data.password
+            }
+         })
+         .then(res => setUserData(prevState => ({
+            ...prevState,
+            firstName: data.name,
+            lastName: data.surname,
+            email: data["e-mail"],
+            address: data.address,
+            dateOfBirth: new Date(data.dob),
+            phone: data.phone,
+            mbo: data.mbo
+         })))
+         .catch(error => console.log(error));
       }
       setEditPopup(prevState => !prevState)
    }
@@ -169,7 +200,6 @@ export default function PatientProfile(props) {
             <h1 className={s.therapies_title}>My therapies:</h1>
             <div className={s.therapies_container}>
                {therapyElements}
-               {therapyElements}    {/* NOTE ovo uklonit, tu je samo za visual testing */}
             </div>
          </div>
       </div>
@@ -178,6 +208,7 @@ export default function PatientProfile(props) {
 
       {editPopup &&
          <AccountEditPopup
+            userToken={userToken}
             popupType={"edit"}
             popupFor={"patient"}
             popupData={{

@@ -44,9 +44,13 @@ export default function App() {           // glavna komponenta, u njoj se render
    }
    
    useEffect(() => {
+      if (pathname == "/" || pathname == "/login") setUserToken("")
+   }, [])
+   
+   useEffect(() => {
       sessionStorage.setItem("medbay-token", JSON.stringify(userToken))
       
-      if (userToken == "" && !["/register", "/forgotPassword"].includes(pathname)) globalNavigate("/login")
+      if (userToken == "" && !["/register", "/reset-password"].includes(pathname)) globalNavigate("/login")
    }, [userToken])
 
 
@@ -85,7 +89,7 @@ export default function App() {           // glavna komponenta, u njoj se render
                handleLogout={handleLogout}
             />} />
 
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ForgotPassword globalNavigate={globalNavigate} />} />
             
             <Route path="/notFound" element={<NoMatchRoute back={-2} handleLogout={handleLogout} />} />
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

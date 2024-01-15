@@ -300,8 +300,8 @@ export default function AccountEditPopup(props) {
    async function checkPasswordCorrect() {
       console.log(popupData)
       let correct = () => axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/check-password" +
-               (popupFor == "patient" ? "" : "/" + popupData.id) + "?password=" + formData.password,
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/check-password?id=" +
+               (popupFor == "patient" ? "0" : popupData.id) + "&password=" + formData.password,
          method: "GET",
          headers: {
             Authorization: `Bearer ${userToken}`

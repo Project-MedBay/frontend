@@ -125,6 +125,7 @@ export default function PatientNewTherapy(props) {
    }
    
    function handleError(error) {
+      console.log(error)
       // NOTE tu neka provjera je li zbog hlkid i to
       setVerificationFailed(true)
    }

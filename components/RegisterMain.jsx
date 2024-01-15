@@ -233,7 +233,7 @@ export default function RegisterMain(props) {
                <div className={s.login_container}>
                   <p className={s.login_q}>Already have an account?</p>
                   <button className={s.login_button}
-                     onClick={() => props.navigate("login")}>Login here
+                     onClick={() => globalNavigate("login")}>Login here
                   </button>
                </div>
 

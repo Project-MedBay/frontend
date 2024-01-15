@@ -20,6 +20,7 @@ export default function TableList(props) {
       })
       .then(res => {
          let itemList
+         console.log(res.data)
          if (tableOf == "patients") itemList = res.data.map((item, index) => ({
             id: item.id,
             name: item.firstName,
@@ -29,7 +30,7 @@ export default function TableList(props) {
             dob: new Date(item.dateOfBirth),
             phone: item.phoneNumber,
             mbo: item.mbo,
-            show: true,                         // NOTE prominit kad promini ian
+            show: item.show,
             code: "#User" + item.id             // NOTE vidit za ovo
          }))
          else itemList = res.data.map((item, index) => ({

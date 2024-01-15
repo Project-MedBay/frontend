@@ -5,7 +5,7 @@ import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession,  patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
+   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
    const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
@@ -23,16 +23,29 @@ export default function SessionSelection(props) {
    }
 
    useEffect(() => {
-      axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/availability?days=" + numberOfDays +
-               "&therapyCode=%23" + therapyCode.slice(1),
-         method: "GET",
-         headers: {
-            Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
-         }
-      })
-      .then(res => setAvailableSessions(res.data))
-      .catch(error => console.log(error));
+      if (reschedule) {
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/reschedule/" + currentSession.appointmentId,
+            method: "GET",
+            headers: {
+               Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
+            }
+         })
+         .then(res => {console.log(res.data)
+            setAvailableSessions(res.data)})
+         .catch(error => console.log(error));
+      } else {
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/availability?days=" + numberOfDays +
+                  "&therapyCode=%23" + therapyCode.slice(1),
+            method: "GET",
+            headers: {
+               Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
+            }
+         })
+         .then(res => setAvailableSessions(res.data))
+         .catch(error => console.log(error));
+      }
    }, [])
 
    var weekDates = []
@@ -51,11 +64,13 @@ export default function SessionSelection(props) {
                (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
                 blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
-         if (reschedule && Object.keys(patientSchedule).includes(weekDate)) {
-            for (let session of patientSchedule[weekDate]) {
-               if (formatDate(weekDate) == formatDate(session.datetime)) {
-                  h3Class += ` ${s.weekdate_in_sessions}`
-                  break
+         if (reschedule) {
+            for (let week in patientSchedule) {
+               for (let session of patientSchedule[week]) {
+                  if (formatDate(weekDate) == formatDate(session.datetime)) {
+                     h3Class += ` ${s.weekdate_in_sessions}`
+                     break
+                  }
                }
             }
          }

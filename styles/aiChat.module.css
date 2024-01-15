@@ -125,6 +125,10 @@
    resize: none;
 }
 
+.input_disabled {
+   background-color: hsl(0, 0%, 90%);
+}
+
 .chat_input:focus {
    outline: none;
 }

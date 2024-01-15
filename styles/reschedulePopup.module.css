@@ -12,7 +12,7 @@
    background: #FFFFFF;
    box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
    border-radius: calc(12 * var(--scale-by-height));
-   width: max-content;
+   width: calc(700 * var(--scale-by-height));
 }
 
 .popup_header {
@@ -39,20 +39,20 @@
 
 .reschedule_info {
    color: #000;
-   font-size: calc(24 * var(--scale-by-height));
+   font-size: calc(20 * var(--scale-by-height));
    font-weight: 400;
-   margin: 0 calc(40 * var(--scale-by-height));
+   margin: 0 calc(20 * var(--scale-by-height));
 }
 
 .reschedule_info > span {
-   font-size: calc(32 * var(--scale-by-height));
+   font-size: calc(28 * var(--scale-by-height));
 }
 
 .reschedule_legend {
    font-size: calc(16 * var(--scale-by-height));
    font-weight: 400;
    text-align: center;
-   margin: calc(10 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
+   margin: calc(0 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
    line-height: 150%;
 }
 
@@ -112,4 +112,76 @@
 
 .dark .popup_title, .dark .reschedule_info, .dark .confirm_text {
    color: #e0e0e0; 
+}
+
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+   
+   .reschedule_popup {
+      gap: calc(15 * var(--scale-by-width) * (8/5));
+      box-shadow: calc(5 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(6 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(12 * var(--scale-by-width) * (8/5));
+      width: calc(700 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_header {
+      padding: calc(20 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+      border-bottom: #656565 solid calc(1 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_title {
+      font-size:  calc(32 * var(--scale-by-width) * (8/5));
+   }
+   
+   .popup_exit {
+      margin-top: calc(3 * var(--scale-by-width) * (8/5));
+   }
+   
+   .reschedule_info {
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(20 * var(--scale-by-width) * (8/5));
+   }
+   
+   .reschedule_info > span {
+      font-size: calc(28 * var(--scale-by-width) * (8/5));
+   }
+   
+   .reschedule_legend {
+      font-size: calc(16 * var(--scale-by-width) * (8/5));
+      margin: calc(0 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+   }
+   
+   .legend_purple {
+      padding: calc(3 * var(--scale-by-width) * (8/5)) calc(5 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .legend_green {
+      padding: 0 calc(3 * var(--scale-by-width) * (8/5));
+      border: #70D8AC solid calc(2 * var(--scale-by-width) * (8/5));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+   }
+   
+   .reschedule_button, .confirm_yes, .confirm_no {
+      width: calc(250 * var(--scale-by-width) * (8/5));
+      height: calc(60 * var(--scale-by-width) * (8/5));
+      font-size:  calc(32 * var(--scale-by-width) * (8/5));
+      margin: calc(20 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(40 * var(--scale-by-width) * (8/5));
+      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .reschedule_confirm {
+      margin-bottom: calc(20 * var(--scale-by-width) * (8/5));
+   }
+   
+   .confirm_text {
+      font-size: calc(36 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(10 * var(--scale-by-width) * (8/5));
+   }
+   
+   .confirm_yes, .confirm_no {
+      width: calc(100 * var(--scale-by-width) * (8/5));
+      margin: calc(20 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5));
+   }
 }

@@ -36,7 +36,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
             Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
          }
       })
-      .then(res => setMySchedule(res.data))
+      .then(res => {console.log(res.data); setMySchedule(res.data)})
       .catch(error => console.log(error));
    }, [])
 

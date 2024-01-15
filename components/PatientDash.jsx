@@ -13,19 +13,26 @@ export default function PatientDash(props) {
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
-   var nextSession = {
+   const [nextSession, setNextSession] = useState({
       text: "No upcoming sessions.",
       datetime: "--"
-   }
-   for (let week in mySchedule) {
-      for (let session of mySchedule[week]) {
-         if (session.datetime > new Date()) {
-            nextSession = session
-            break
+   })
+   useEffect(() => {
+      let tempSession = {datetime: "--"}
+      for (let week in mySchedule) {
+         for (let session of mySchedule[week]) {
+            if (session.datetime > new Date()) {
+               tempSession = session
+               break
+            }
          }
+         if (tempSession.datetime != "--") break
       }
-      if (nextSession.datetime != "--") break
-   }
+      if (tempSession.datetime != "") {
+         setNextSession(tempSession)
+         setSelectedSession(nextSession)
+      }
+   }, [mySchedule])
    const [selectedSession, setSelectedSession] = useState(nextSession)
    const [showMapMobile, setshowMapMobile] = useState(false)
    
@@ -62,7 +69,7 @@ export default function PatientDash(props) {
             cardClass += ` ${s.session_passed}`
          }
          return (
-            <div className={cardClass} key={id} onClick={() => {setSelectedSession(mySchedule[selectedWeek][id])}}>
+            <div className={cardClass} key={id} onClick={() => {setSelectedSession(session)}}>
                <h3 className={s.session_date}>{formatDate(datetime)}</h3>
                <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
                <div className={s.session_footer}>
@@ -232,6 +239,7 @@ export default function PatientDash(props) {
             rescheduledSession = {rescheduledSession}
             setRescheduledSession = {setRescheduledSession}
             patientSchedule = {mySchedule}
+            selectedWeek={selectedWeek}
             popupExit = {popupExit}
             theme={theme}
          />
