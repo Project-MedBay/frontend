@@ -165,6 +165,7 @@
 
 .dark .chat_footer, .dark .chat_input {
    background-color: #252525;
+   color: #fff;
 }
 
 .dark .header_medbot, .dark .send_baybot {
