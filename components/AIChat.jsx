@@ -7,7 +7,7 @@ export default function AIChat(props) {
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
-   const [chatOpen, setChatOpen] = useState(true)
+   const [chatOpen, setChatOpen] = useState(false)
    const [currentBot, setCurrentBot] = useState("medbot")
    const [chatInput, setChatInput] = useState("")
    const [inputDisabled, setInputDisabled] = useState(false)
