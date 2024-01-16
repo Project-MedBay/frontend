@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-// TestingData
 import { adminSessions, adminStatsPatients, adminStatsResources } from "./TestingData"
 import AdminStatisticsCircle from "./admin_utils/AdminStatisticsCircle"
 import s from "../styles/adminStatistics.module.css"
@@ -8,45 +7,127 @@ import s from "../styles/adminStatistics.module.css"
 // NOTE: Posloziti postotke ili abecedno ili silazno
 
 export default function AdminStatistics(props) {
+    const {userToken} = props
 
     const [currentStatistic, setCurrentStatistic] = useState("therapists")
-    const [pageInfo, setPageInfo] = useState(adminStatsPatients);
+    const [therapistStats, setTherapistStats] = useState({hours: [], patients: []})
+    const [resourceStats, setResourceStats] = useState({hours: [], patients: []})
+    const [pageInfo, setPageInfo] = useState(therapistStats);
     const [searchInput, setSearchInput] = useState({
         therapists: "",
         resources: ""
-     })
+    })
 
-     let bestItem = pageInfo[0].noOfPatients;
+    useEffect(() => {
+        if (currentStatistic == "therapists") setPageInfo(therapistStats)
+        else setPageInfo(resourceStats)
+    }, [therapistStats, resourceStats])
 
-     const smallCircles = pageInfo.
-        filter(item => { for (let term of searchInput[currentStatistic].trim().split(" ")) {
-        if (item.name.toLowerCase().includes(term.toLowerCase())) return true}})
-        .map(item => (
-        <div className={s.one_circle_container}>
-            <AdminStatisticsCircle 
-                percentage={item.percentage}
-                size={80}
-                strokeWidth={10}
-                fontSize={18} />
-            <div className={s.circle_name}>
-                {item.name}
+    useEffect(() => {
+        axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/employee/statistics",
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+           }
+        })
+        .then(res => {
+            let workHoursList = [{average: 0}]
+            let percentAverage = 0
+            for (let therapist in res.data.percentageOfHoursWorkedLastMonth) {
+                workHoursList.push({
+                    name: therapist,
+                    percentage: res.data.percentageOfHoursWorkedLastMonth[therapist]
+                })
+                percentAverage += res.data.percentageOfHoursWorkedLastMonth[therapist]
+            }
+            percentAverage /= (workHoursList.length - 1)
+            workHoursList[0].average = percentAverage
+            console.log(workHoursList)
+            setTherapistStats(prevState => ({
+                ...prevState,
+                hours: [workHoursList[0], ...workHoursList.slice(1)]
+            }))
+            let patientsList = []
+            for (let therapist in res.data.numberOfSessions) patientsList.push({
+                name: therapist,
+                noOfPatients: res.data.numberOfSessions[therapist]
+            })
+            setTherapistStats(prevState => ({
+                ...prevState,
+                patients: patientsList
+            }))
+        })
+        .catch(error => console.log(error));
+
+        axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/equipment/statistics",
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+           }
+        })
+        .then(res => {
+            let workHoursList = [{average: 0}]
+            let percentAverage = 0
+            for (let therapist in res.data.percentageOfHoursWorkedLastMonth) {
+                workHoursList.push({
+                    name: therapist,
+                    percentage: res.data.percentageOfHoursWorkedLastMonth[therapist]
+                })
+                percentAverage += res.data.percentageOfHoursWorkedLastMonth[therapist]
+            }
+            percentAverage /= (workHoursList.length - 1)
+            workHoursList[0].average = percentAverage
+            console.log(workHoursList)
+            setResourceStats(prevState => ({
+                ...prevState,
+                hours: [workHoursList[0], ...workHoursList.slice(1)]
+            }))
+            let patientsList = []
+            for (let therapist in res.data.numberOfSessions) patientsList.push({
+                name: therapist,
+                noOfPatients: res.data.numberOfSessions[therapist]
+            })
+            setResourceStats(prevState => ({
+                ...prevState,
+                patients: patientsList
+            }))
+        })
+        .catch(error => console.log(error));
+    }, [])
+
+    var bestItem = pageInfo.patients[0]?.noOfPatients
+
+     const smallCircles = pageInfo.hours.slice(1)
+        .sort((i1, i2) => i2.percentage - i1.percentage)
+        .filter(item => { for (let term of searchInput[currentStatistic].trim().split(" ")) {
+            if (item.name.toLowerCase().includes(term.toLowerCase())) return true
+        }}).map(item => (
+            <div className={s.one_circle_container}>
+                <AdminStatisticsCircle 
+                    percentage={item.percentage}
+                    size="small" />
+                <div className={s.circle_name}>
+                    {item.name}
+                </div>
             </div>
-        </div>
-     ))
+        ))
         
 
-     const noOfPatients = pageInfo.filter(item => {
-        for (let term of searchInput[currentStatistic].trim().split(" ")) {
-            if (item.name.toLowerCase().includes(term.toLowerCase())) return true}
-     }).map(item => (
-        <div className={s.bar_item}>
-            <h3 className={s.item_name}>{item.name}</h3>
-            <div className={s.coloured_bar_wrapper}>
-                <div className={s.coloured_bar} style={{width:`${100 * (item.noOfPatients / bestItem)}%`}}>­</div>
+    const noOfPatients = pageInfo.patients
+        .sort((i1, i2) => i2.noOfPatients - i1.noOfPatients)
+        .filter(item => { for (let term of searchInput[currentStatistic].trim().split(" ")) {
+            if (item.name.toLowerCase().includes(term.toLowerCase())) return true
+        }}).map(item => (
+            <div className={s.bar_item}>
+                <h3 className={s.item_name}>{item.name}</h3>
+                <div className={s.coloured_bar_wrapper}>
+                    <div className={s.coloured_bar} style={{width:`${100 * (item.noOfPatients / bestItem)}%`}}>­</div>
+                </div>
+                <h3 className={s.item_patient_number}>{item.noOfPatients}</h3>
             </div>
-            <h3 className={s.item_patient_number}>{item.noOfPatients}</h3>
-        </div>
-     ))
+        ))
 
      function handleSearch(input) {
         setSearchInput(prevState => ({
@@ -61,13 +142,13 @@ export default function AdminStatistics(props) {
                 <h2 className={`${s.options_item} ${currentStatistic == "therapists" ? s.current_option : ''}`}
                     onClick={() => {
                         setCurrentStatistic("therapists")
-                        setPageInfo(adminStatsPatients)}
+                        setPageInfo(therapistStats)}
                     }>Therapists
                 </h2>
                 <h2 className={`${s.options_item} ${currentStatistic == "resources" ? s.current_option : ''}`}
                     onClick={() => {
                         setCurrentStatistic("resources")
-                        setPageInfo(adminStatsResources)}
+                        setPageInfo(resourceStats)}
                     }>Resources
                 </h2>
             </div>
@@ -78,20 +159,20 @@ export default function AdminStatistics(props) {
                 <div className={s.stats_container}>
                     <div className={s.container_left}>
                         <h2 className={s.container_main_text}>WORK HOURS AT APPOINTMENTS</h2>
-                        <h4 className={s.container_secondary_text}>(PAST MONTH)</h4>
+                        <h4 className={s.container_secondary_text}>(PAST 30 DAYS)</h4>
                         <div className={s.left_big_circle}>
                             <AdminStatisticsCircle 
-                                percentage={72}
-                                size={175}
-                                strokeWidth={20}
-                                fontSize={28} />
+                                percentage={pageInfo.hours[0]?.average}
+                                size="big" />
                         </div>
                         <div className={s.left_small_circles}>
                             {smallCircles}
                         </div>
                     </div>
                     <div className={s.container_right}>
-                        <h2 className={s.container_main_text}>PATIENTS TREATED</h2>
+                        <h2 className={s.container_main_text}>
+                            PATIENTS TREATED {currentStatistic == "therapists" ? "BY" : "WITH"}
+                        </h2>
                         <h4 className={s.container_secondary_text}>(LIFETIME)</h4>
                         <div className={s.right_bar_container}>
                             {noOfPatients}

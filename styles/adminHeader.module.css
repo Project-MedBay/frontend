@@ -3,7 +3,7 @@
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.1);
     justify-content: space-between; /* Changed to space-between for better alignment */
     align-items: center;
-    padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
+    padding: 0 max(calc(5px * 0.6), calc(5vh * 59 / 725));
 }
 
 .header_logo {
@@ -47,7 +47,7 @@
 
 .nav_item, .nav_logout {
     font-family: "Barlow", sans-serif;
-    font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+    font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
     font-weight: 400;
     color: rgb(34, 0, 106);
     transition: color 0.3s ease; /* Smooth transition for color change */

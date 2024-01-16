@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import logo from "../assets/plus_icon.png"
 import { useTheme } from './ThemeContext';
 import Toggle from 'react-toggle'
@@ -11,10 +11,17 @@ import s from "../styles/patientTherapistHeader.module.css"
 export default function PatientHeader(props) {
    const [logOut, setLogOut] = useState(false)
    const [mobileNav, setMobileNav] = useState(false)
+   const [mobileOptions, setMobileOptions] = useState(false)
    const { theme, toggleTheme } = useTheme();
 
    function toggleMobileNav() {
       setMobileNav(prevState => !prevState)
+      setMobileOptions(false)
+   }
+
+   function toggleMobileOptions() {
+      setMobileOptions(prevState => !prevState)
+      setMobileNav(false)
    }
 
    function handleNavigate(navigateTo) {
@@ -30,29 +37,36 @@ export default function PatientHeader(props) {
          </div>
 
          <p className={`${s.nav_dropdown} ${s.mobile_only}`} onClick={toggleMobileNav}>NAV</p>     {/* NOTE temp */}
+         <p className={`${s.options_dropdown} ${s.mobile_only}`} onClick={toggleMobileOptions}>OPTIONS</p>     {/* NOTE temp */}
          
          <nav className={s.header_nav}>
-            {logOut ? 
-               <h2 className={s.nav_check_logout}>LOG OUT?&#160;
-                  <span id={s.yes} onClick={() => props.handleLogout()}>YES</span> /&#160;
-                  <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
-               </h2>
-               :
-               <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
-            }
-            <Toggle
-               defaultChecked={theme === 'dark' ? true : false}
-               icons={{
-                  checked: <FontAwesomeIcon icon={faMoon} className={s.moonIcon}/>,
-                  unchecked: <FontAwesomeIcon icon={faSun} className={s.sunIcon}/>,
-               }}
-               onClick={toggleTheme}
-               className={s.toggle}
-            />
             <div className={`${s.nav_container} ${mobileNav && s.mobile_visible}`}>
                <h2 className={s.nav_item} onClick={() => handleNavigate("dash")}>DASHBOARD</h2>
                <h2 className={s.nav_item} onClick={() => handleNavigate("newTherapy")}>NEW THERAPY</h2>
                <h2 className={s.nav_item} onClick={() => handleNavigate("profile")}>MY PROFILE</h2>
+            </div>
+
+            <div className={`${s.options_container} ${mobileOptions && s.mobile_visible}`}>
+               <div className={s.option_row}>
+                  <h2 className={`${s.options_item} ${s.mobile_only}`}>THEME&#160;</h2>
+                  <Toggle
+                     defaultChecked={theme === 'dark' ? true : false}
+                     icons={{
+                        checked: <FontAwesomeIcon icon={faMoon} className={s.moonIcon}/>,
+                        unchecked: <FontAwesomeIcon icon={faSun} className={s.sunIcon}/>,
+                     }}
+                     onClick={toggleTheme}
+                     className={s.toggle}
+                  />
+               </div>
+               {logOut ? 
+                  <h2 className={s.nav_check_logout}>LOG OUT?&#160;
+                     <span id={s.yes} onClick={() => props.handleLogout()}>YES</span> /&#160;
+                     <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
+                  </h2>
+                  :
+                  <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
+               }
             </div>
          </nav>
       </div>

@@ -274,7 +274,7 @@ p.therapy_more {
    rgba(17, 11, 65, 0.863) 100%);
 }
 
-.dark .therapy_card, .dark .info_item, .dark .thanks_message {
+.dark .therapy_card, .dark .info_item, .dark .thanks_message, .dark .no_therapies {
    color: #ccc; /* Adjust text color for dark mode */
 }
 
@@ -285,12 +285,13 @@ p.therapy_more {
    background-position: center;
 }
 
-.dark .header_user{
+.dark .header_user, .dark .no_therapies {
    background-color: #181818;
 }
 
 .dark .info_item > span,
-.dark .thanks_age{
+.dark .thanks_age,
+.dark .no_therapies > span {
    color: var(--zelena)
 }
 
@@ -429,7 +430,6 @@ p.therapy_more {
 
    .patient_profile_main {
       padding: calc(50 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
-      min-height: calc(100vh - calc(60 * var(--scale-by-width) * (8/5)));
    }
    
    .popup_separate {

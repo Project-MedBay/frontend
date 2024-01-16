@@ -1,6 +1,7 @@
 import React from "react"
+import s from "../../styles/adminStatistics.module.css"
 
-export default function AdminStatisticsCircle ({ percentage, size, strokeWidth, fontSize }) {
+export default function AdminStatisticsCircle ({ percentage, size }) {
 
   const cleanPercentage = (percentage) => {
     const isNegativeOrNaN = !Number.isFinite(+percentage) || percentage < 0; // we can set non-numbers to 0 here
@@ -10,33 +11,30 @@ export default function AdminStatisticsCircle ({ percentage, size, strokeWidth, 
 
   const pct = cleanPercentage(percentage);
 
-  const Circle = ({ percentage, size, colour, strokeWidth }) => {
-    const r = (size - 25) / 2;
-    const circ = 2 * Math.PI * r;
-    const strokePct = ((100 - percentage + 1) * circ) / 100; // where stroke will start, e.g. from 15% to 100%.
+  const Circle = ({ percentage, colour }) => {
     return (
       <circle
-        r={r}
-        cx={size / 2}
-        cy={size / 2}
+        r="44%"
+        cx="50%"
+        cy="50%"
         fill="transparent"
-        stroke={strokePct !== circ ? colour : ""} // remove colour as 0% sets full circumference
-        strokeWidth={`${strokeWidth}px`}
-        strokeDasharray={circ}
-        strokeDashoffset={percentage ? strokePct : 0}
+        stroke={colour} // remove colour as 0% sets full circumference
+        strokeWidth={`${12}%`}
+        strokeDasharray={percentage ? `${percentage * 0.88 * Math.PI}% ${(100 - percentage * 0.88) * Math.PI}%` : 0}
+        strokeDashoffset={0}
         strokeLinecap="round"
       ></circle>
     );
   };
 
-  const Text = ({ percentage, fontSize }) => {
+  const Text = ({ percentage }) => {
     return (
       <text
         x="50%"
         y="50%"
         dominantBaseline="central"
         textAnchor="middle"
-        fontSize={`${fontSize}px`}
+        className={size == "big" ? s.circle_text_big : s.circle_text_small}
       >
         {percentage.toFixed(0)}%
       </text>
@@ -44,12 +42,12 @@ export default function AdminStatisticsCircle ({ percentage, size, strokeWidth, 
   };
   
   return (
-    <svg width={size} height={size}>
-      <g transform={`rotate(-90 ${`${size/2}, ${size/2}`})`}>
-        <Circle size={size} colour={"#22006A40"} strokeWidth={strokeWidth} />
-        <Circle percentage={pct} size={size} colour={"#22006A"} strokeWidth={strokeWidth} />
+    <svg>
+      <g>
+        <Circle colour={"#22006A40"} />
+        <Circle percentage={pct} colour={"#22006A"} />
       </g>
-      <Text percentage={pct} fontSize={fontSize} />
+      <Text percentage={pct} />
     </svg>
   );
 };

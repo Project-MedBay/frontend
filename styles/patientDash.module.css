@@ -542,7 +542,6 @@
       padding: calc(50 * var(--scale-by-width) * (8/5));
       gap: 3vh;
       height: fit-content;
-      min-height: calc(100vh - calc(60 * var(--scale-by-width) * (8/5)));
    }
    
    .popup_separate {

@@ -986,7 +986,6 @@
       width: 100%;
       padding: calc(50 * var(--scale-by-width) * (8/5)) 0;
       padding-top: 0;
-      min-height: calc(100vh - calc(60 * var(--scale-by-width) * (8/5)));
    }
    
    .create_container {

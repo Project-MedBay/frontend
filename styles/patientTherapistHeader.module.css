@@ -4,7 +4,8 @@
    justify-content: center;
    align-items: center;
    gap: max(calc(850px * 0.6), calc(850vh * 59 / 725));
-   padding: max(calc(5px * 0.6), calc(5vh * 59 / 725));
+   padding: 0 max(calc(5px * 0.6), calc(5vh * 59 / 725));
+   height: calc(60 * var(--scale-by-height));
 }
 
 .mobile_only {
@@ -33,24 +34,53 @@
 }
 
 .header_nav {
-   display: grid;
-   grid-template-columns: max(calc(170px * 0.6), calc(170vh * 59 / 725)) repeat(4, fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725))));
-   justify-items: flex-end;
-   align-items: center;
-   direction: rtl;
-   column-gap: max(calc(60px * 0.6), calc(60vh * 59 / 725));
+   display: flex;
+   justify-content: space-between;
+   gap: max(calc(80px * 0.6), calc(80vh * 59 / 725));
+   height: 100%;
 }
 
 .nav_container {
-   grid-column: 3 / 6;
-   display: flex;
-   direction: ltr;
-   gap: max(calc(80px * 0.6), calc(80vh * 59 / 725));
+   display: grid;
+   grid-template-columns: repeat(3, auto);
+   justify-items: center;
+   align-items: flex-start;
+}
+
+.options_container {
+   display: grid;
+   grid-template-columns: fit-content(max(calc(120px * 0.6), calc(120vh * 59 / 725))) max(calc(190px * 0.6), calc(190vh * 59 / 725));
+   justify-items: flex-start;
+   align-items: center;
+   column-gap: max(calc(60px * 0.6), calc(60vh * 59 / 725));
+}
+
+.nav_item {
+   height: 100%;
+   width: calc(180 * var(--scale-by-height));
+   text-align: center;
+   padding: calc(19 * var(--scale-by-height)) 0;
+   background-color: #fff;
+   /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25); */
+   border-right: 1px solid hsl(0, 0%, 70%);
+   &:first-child {
+      border-left: 1px solid hsl(0, 0%, 70%);
+      border-radius: 0 0 0 5px;
+   }
+   &:last-child {
+      border-radius: 0 0 5px 0;
+   }
+}
+
+.nav_item:hover {
+   padding-top: calc(17 * var(--scale-by-height));
+   height: 96%;
+   background-color: hsl(0, 0%, 95%);
 }
 
 .nav_item, .nav_logout, .nav_check_logout {
    color: rgb(34, 0, 106);
-   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
+   font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
    font-weight: 400;
    margin: 0;
    cursor: pointer;
@@ -80,63 +110,51 @@
 }
 
 .toggle {
-   width: calc(50 * var(--scale-by-height));
-   height: calc(25 * var(--scale-by-height));
    margin: 0 calc(-10 * var(--scale-by-height));
+   margin-top: calc(2 * var(--scale-by-height));
 }
 
-.react-toggle-thumb {
-   width: calc(20 * var(--scale-by-height));
+.sunIcon, .moonIcon {
+   color: white;
+   margin-top: calc(-2 * var(--scale-by-height));
    height: calc(20 * var(--scale-by-height));
 }
 
-.toggleThemeButton {
-   background: none;
-   border: none;
-   color: inherit; /* Use the current text color */
-   font: inherit; /* Inherit font from the parent */
-   cursor: pointer;
-   outline: inherit; /* Use the parent's outline */
-   padding: calc(10 * var(--scale-by-height)); /* Add some padding for clickability */
-   transition: color 0.3s ease; /* Smooth transition for color changes */
-}
-
-.toggleThemeButton:hover {
-   color: #FF5733; /* Change color on hover */
-}
-
-.toggleThemeButton:active {
-   color: #C70039; /* Change color on click */
-}
-
 /* Dark mode button styles, if needed */
+.headerDark .nav_item, .headerDark .options_item {
+   color: #70d8ac; /* green text */
+}
+
 .headerDark .nav_item {
-   color: #fff; /* White text */
+   background-color: #333;
 }
 
-.sunIcon{
-   color: white;
-   position: relative;
-   top: (-2 * var(--scale-by-height));
-   right: (-2 * var(--scale-by-height));
-}
-.moonIcon{
-   color: white;
-   position: relative;
-   top: (-2 * var(--scale-by-height));
-   right: (-2 * var(--scale-by-height));
+.headerDark .nav_item:hover {
+   background-color: hsl(0, 0%, 25%);
 }
 
-@media only screen and ((max-aspect-ratio: 16 / 10) or (max-width: 1195px)) {
+.headerDark .nav_logout, .headerDark .nav_check_logout {
+   color: #ccc;
+   font-weight: 600;
+}
+
+.headerDark .nav_check_logout > span#yes {
+   color: hsl(0, 100%, 60%);
+}
+
+.headerDark .nav_check_logout > span#no {
+   color: #70d8ac;
+}
+
+@media only screen and ((max-aspect-ratio: 8 / 5) or (max-width: 1195px)) {
    /* .nav_item {background-color: black;} */
    .header, .headerDark {
       justify-content: space-between;
       gap: 0;
-      padding: calc(5 * var(--scale-by-height)) calc(20 * (16 / 10) * var(--scale-by-width));
    }
 }
 
-@media only screen and ((max-aspect-ratio: 23 / 24) or (max-width: 700px)) {
+@media only screen and ((max-aspect-ratio: 1 / 1) or (max-width: 750px)) {
    .nav_item {background-color: transparent;}
    .mobile_only {
       display: initial;
@@ -159,6 +177,13 @@
       cursor: pointer;
    }
 
+   .options_dropdown {
+      position: fixed;
+      right: calc(20 * var(--scale-by-width) * (8/5) + 5 * var(--scale-by-height));
+      margin: 0;
+      cursor: pointer;
+   }
+
    .nav_container {
       position: absolute;
       top: calc(60 * var(--scale-by-height));
@@ -175,95 +200,86 @@
       z-index: 1001;
    }
 
-   .headerDark .nav_container {
+   .options_container {
+      position: absolute;
+      top: calc(60 * var(--scale-by-height));
+      right: 0;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 0;
+      background-color: #fff;
+      box-shadow: 0 calc(4 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.25);
+      border-radius: 0 0 calc(10 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+      display: none;
+      z-index: 1001;
+   }
+
+   .option_row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: calc(15 * var(--scale-by-height));
+      border-top: 1px solid #22006a;
+   }
+   
+   .toggle {
+      margin: 0;
+      margin-top: calc(2 * var(--scale-by-height));
+   }
+
+   .headerDark .nav_container, .headerDark .options_container {
       background-color: #333;
+   }
+
+   .nav_item, .nav_item:hover, .nav_logout, .nav_check_logout {
+      font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: calc(2 * var(--scale-by-height));
+      padding: calc(20 * var(--scale-by-height)) 0;
+      width: calc(300 * var(--scale-by-height));
+      border: none;
+      border-top: 1px solid #22006a;
+   }
+
+   .nav_item {
+      &:first-child {
+         border: none;
+         border-top: 1px solid #22006a;
+         border-radius: 0;
+      }
+      &:last-child {
+         border-radius: 0 0 calc(10 * var(--scale-by-height)) calc(10 * var(--scale-by-height));
+      }
+   }
+
+   .options_item {
+      color: #22006a;
+      font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
+      font-weight: 500;
+      text-align: center;
+   }
+   
+   .nav_check_logout > span {
+      padding: 0 max(calc(10px * 0.6), calc(10vh * 59 / 725));
+   }
+
+   .headerDark .nav_item, .headerDark .nav_logout, .headerDark .nav_check_logout, .headerDark .option_row {
+      border-top: 1px solid #70d8ac;
    }
 
    .mobile_visible {
       display: initial;
    }
-
-   .nav_item, .nav_logout, .nav_check_logout {
-      font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
-      font-weight: 500;
-   }
-
-   .nav_item {
-      text-align: center;
-      letter-spacing: calc(2 * var(--scale-by-height));
-      padding: calc(20 * var(--scale-by-height)) 0;
-      width: calc(300 * var(--scale-by-height));
-      border-top: 1px solid #22006a;
-   }
-
-   .headerDark .nav_item {
-      border-top: 1px solid #70d8ac;
-   }
 }
 
-@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 50px)) {
+@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
    .header, .headerDark {
-      padding: calc(4 * var(--scale-by-width) * (8/5));
+      justify-content: space-between;
    }
    
    .header_logo {
-      margin: 0 calc(20 * var(--scale-by-width) * (8/5));
-   }
-   
-   .logo_img {
-      height: calc(50 * var(--scale-by-width) * (8/5));
-   }
-   
-   .logo_title {
-      font-size: calc(35 * var(--scale-by-width) * (8/5));
-   }
-   
-   .header_nav {
-      grid-template-columns: calc(160 * var(--scale-by-width) * (8/5)) fit-content(calc(160 * var(--scale-by-width) * (8/5)));
-      column-gap: calc(30 * var(--scale-by-width) * (8/5));
-   }
-   
-   .nav_container {
-      top: calc(60 * var(--scale-by-width) * (8/5));
-      box-shadow: 0 calc(4 * var(--scale-by-width) * (8/5)) calc(6 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.25);
-      border-radius: 0 0 calc(10 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5));
-   }
-   
-   .nav_item, .nav_logout, .nav_check_logout {
-      font-size: calc(28 * var(--scale-by-width) * (8/5));
-   }
-
-   .nav_item {
-      letter-spacing: calc(2 * var(--scale-by-width) * (8/5));
-      padding: calc(20 * var(--scale-by-width) * (8/5)) 0;
-      width: calc(300 * var(--scale-by-width) * (8/5));
-   }
-   
-   .nav_check_logout > span {
-      padding: 0 calc(5 * var(--scale-by-width) * (8/5));
-   }
-   
-   .toggle {
-      width: calc(50 * var(--scale-by-width) * (8/5));
-      height: calc(25 * var(--scale-by-width) * (8/5));
-      margin: 0 calc(-10 * var(--scale-by-width) * (8/5));
-   }
-   
-   .react-toggle-thumb {
-      width: calc(20 * var(--scale-by-width) * (8/5));
-      height: calc(20 * var(--scale-by-width) * (8/5));
-   }
-   
-   .toggleThemeButton {
-      padding: calc(10 * var(--scale-by-width) * (8/5)); /* Add some padding for clickability */
-   }
-   
-   .sunIcon{
-      top: (-2 * var(--scale-by-width) * (8/5));
-      right: (-2 * var(--scale-by-width) * (8/5));
-   }
-   .moonIcon{
-      top: (-2 * var(--scale-by-width) * (8/5));
-      right: (-2 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(15 * var(--scale-by-width) * (8/5));
    }
 }

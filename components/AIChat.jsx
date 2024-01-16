@@ -39,19 +39,19 @@ export default function AIChat(props) {
    }
 
    function handleKeyDown(event) {
-      if(event.keyCode == 13 && event.shiftKey == false && chatInput != "" && !/^\s+$/.test(chatInput)) {
+      if(event.keyCode == 13 && event.shiftKey == false) {
          handleSend(event)
       }
    }
 
    function handleSend(event) {
       event.preventDefault()
-      if (inputDisabled) return
+      if (inputDisabled || chatInput == "" || /^\s+$/.test(chatInput)) return
       setMessages(prevState => ({
          ...prevState,
          [currentBot]: [
             ...prevState[currentBot],
-            {sender: "user", text: chatInput},
+            {sender: "user", text: chatInput.trim()},
             {sender: "bot", text: "Processing..."}
          ]
       }))
@@ -78,7 +78,17 @@ export default function AIChat(props) {
          }))
          setInputDisabled(false)
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+         console.log(error)
+         setMessages(prevState => ({
+            ...prevState,
+            [currentBot]: [
+               ...prevState[currentBot].filter(msg => (msg.sender != "bot" || msg.text != "Processing...")),
+               {sender: "bot", text: `I encountered an error while trying to reach the server. I am very sorry for the inconvenience, please try again in a few moments!`}
+            ]
+         }))
+         setInputDisabled(false)
+      });
       setChatInput("")
    }
 

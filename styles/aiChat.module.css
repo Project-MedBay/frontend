@@ -79,12 +79,13 @@
    display: flex;
    max-width: 75%;
    color: #000;
-   font-size: calc(16 * var(--scale-by-height-reduced));
+   font-size: calc(18 * var(--scale-by-height-reduced));
    font-weight: 700;
    padding: calc(8 * var(--scale-by-height-reduced)) calc(12 * var(--scale-by-height-reduced));
    background-color: hsl(155, 57%, 85%);
    border-radius: calc(10 * var(--scale-by-height-reduced));
    align-self: flex-start;
+   white-space: pre-line;
 }
 
 .message_baybot {
@@ -117,7 +118,7 @@
 .chat_input {
    width: 88%;
    font-family: "Barlow", sans-serif;
-   font-size: calc(16 * var(--scale-by-height-reduced));
+   font-size: calc(18 * var(--scale-by-height-reduced));
    font-weight: 500;
    padding: calc(8 * var(--scale-by-height-reduced));
    padding-left: calc(12 * var(--scale-by-height-reduced));
