@@ -5,10 +5,10 @@
    transform: translateX(-50%);
    display: flex;
    flex-direction: column;
-   width: calc(450 * var(--scale-by-height));
+   width: calc(450 * var(--scale-by-height-reduced));
    background-color: #fff;
-   border-radius: calc(10 * var(--scale-by-height)) calc(10 * var(--scale-by-height)) 0 0;
-   box-shadow: 0 calc(-2 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(2 * var(--scale-by-height)) rgba(0, 0, 0, 0.25);
+   border-radius: calc(10 * var(--scale-by-height-reduced)) calc(10 * var(--scale-by-height-reduced)) 0 0;
+   box-shadow: 0 calc(-2 * var(--scale-by-height-reduced)) calc(8 * var(--scale-by-height-reduced)) calc(2 * var(--scale-by-height-reduced)) rgba(0, 0, 0, 0.25);
 }
 
 .chat_header {
@@ -16,27 +16,27 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: calc(12 * var(--scale-by-height)) calc(20 * var(--scale-by-height));
-   border-bottom: calc(1.5 * var(--scale-by-height)) solid #636363;
+   padding: calc(12 * var(--scale-by-height-reduced)) calc(20 * var(--scale-by-height-reduced));
+   border-bottom: calc(1.5 * var(--scale-by-height-reduced)) solid #636363;
    cursor: pointer;
 }
 
 .header_title {
    color: #000;
-   font-size: calc(22 * var(--scale-by-height));
+   font-size: calc(22 * var(--scale-by-height-reduced));
    font-weight: 500;
    margin: 0;
 }
 
 .header_medbot, .header_baybot {
    color: #fff;
-   font-size: calc(16 * var(--scale-by-height));
+   font-size: calc(16 * var(--scale-by-height-reduced));
    font-weight: 600;
-   width: calc(110 * var(--scale-by-height));
-   padding: calc(6 * var(--scale-by-height));
+   width: calc(110 * var(--scale-by-height-reduced));
+   padding: calc(6 * var(--scale-by-height-reduced));
    background-color: #22006a;
    border: none;
-   border-radius: calc(5 * var(--scale-by-height));
+   border-radius: calc(5 * var(--scale-by-height-reduced));
    margin: 0;
    cursor: pointer;
 }
@@ -60,17 +60,17 @@
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   height: calc(450 * var(--scale-by-height));
-   padding-right: calc(3 * var(--scale-by-height));
+   height: calc(450 * var(--scale-by-height-reduced));
+   padding-right: calc(3 * var(--scale-by-height-reduced));
 }
 
 .messages_container {
    display: flex;
    flex-direction: column;
-   gap: calc(5 * var(--scale-by-height));
-   padding: calc(10 * var(--scale-by-height));
+   gap: calc(5 * var(--scale-by-height-reduced));
+   padding: calc(10 * var(--scale-by-height-reduced));
    width: 100%;
-   max-height: calc(400 * var(--scale-by-height));
+   max-height: calc(395 * var(--scale-by-height-reduced));
    overflow: auto;
    /* background-color: #22006a; */
 }
@@ -79,11 +79,11 @@
    display: flex;
    max-width: 75%;
    color: #000;
-   font-size: calc(16 * var(--scale-by-height));
+   font-size: calc(16 * var(--scale-by-height-reduced));
    font-weight: 700;
-   padding: calc(8 * var(--scale-by-height)) calc(12 * var(--scale-by-height));
+   padding: calc(8 * var(--scale-by-height-reduced)) calc(12 * var(--scale-by-height-reduced));
    background-color: hsl(155, 57%, 85%);
-   border-radius: calc(10 * var(--scale-by-height));
+   border-radius: calc(10 * var(--scale-by-height-reduced));
    align-self: flex-start;
 }
 
@@ -103,27 +103,27 @@
 
 .chat_footer {
    position: absolute;
-   bottom: calc(5 * var(--scale-by-height));
-   padding-top: calc(5 * var(--scale-by-height));
-   padding-left: calc(8 * var(--scale-by-height));
+   bottom: calc(10 * var(--scale-by-height-reduced));
+   padding-top: calc(5 * var(--scale-by-height-reduced));
+   padding-left: calc(8 * var(--scale-by-height-reduced));
    display: flex;
    justify-content: space-between;
    align-items: flex-end;
-   gap: calc(5 * var(--scale-by-height));
+   gap: calc(5 * var(--scale-by-height-reduced));
    width:97.5%;
    background-color: #fff;
 }
 
 .chat_input {
-   width: 85%;
+   width: 88%;
    font-family: "Barlow", sans-serif;
-   font-size: calc(16 * var(--scale-by-height));
+   font-size: calc(16 * var(--scale-by-height-reduced));
    font-weight: 500;
-   padding: calc(8 * var(--scale-by-height));
-   padding-left: calc(12 * var(--scale-by-height));
-   border: calc(2 * var(--scale-by-height)) solid hsl(0, 0%, 90%);
-   border-radius: calc(10 * var(--scale-by-height));
-   max-height: calc(97 * var(--scale-by-height));
+   padding: calc(8 * var(--scale-by-height-reduced));
+   padding-left: calc(12 * var(--scale-by-height-reduced));
+   border: calc(2 * var(--scale-by-height-reduced)) solid hsl(0, 0%, 90%);
+   border-radius: calc(10 * var(--scale-by-height-reduced));
+   max-height: calc(97 * var(--scale-by-height-reduced));
    resize: none;
 }
 
@@ -137,14 +137,14 @@
 
 .chat_send {
    color: #000;
-   font-size: calc(16 * var(--scale-by-height));
+   font-size: calc(16 * var(--scale-by-height-reduced));
    font-weight: 700;
    height: fit-content;
-   padding: calc(8 * var(--scale-by-height)) calc(5 * var(--scale-by-height));
-   margin-bottom: calc(3 * var(--scale-by-height));
+   padding: calc(8 * var(--scale-by-height-reduced)) calc(5 * var(--scale-by-height-reduced));
+   margin-bottom: calc(3 * var(--scale-by-height-reduced));
    border: none;
    background-color: #70d8ac;
-   border-radius: calc(10 * var(--scale-by-height));
+   border-radius: calc(10 * var(--scale-by-height-reduced));
    cursor: pointer;
 }
 
@@ -172,67 +172,9 @@
    background-color: hsl(259, 80%, 35%);
 }
 
-@media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {
+@media only screen and ((max-aspect-ratio: 3 / 8) or (max-width: 380px)) {
 
    .chat_main {
-      width: calc(450 * var(--scale-by-width) * (8/5));
-      border-radius: calc(10 * var(--scale-by-width) * (8/5)) calc(10 * var(--scale-by-width) * (8/5)) 0 0;
-      box-shadow: 0 calc(-2 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(2 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.25);
-   }
-   
-   .chat_header {
-      padding: calc(12 * var(--scale-by-width) * (8/5)) calc(20 * var(--scale-by-width) * (8/5));
-      border-bottom: calc(1.5 * var(--scale-by-width) * (8/5)) solid #636363;
-   }
-   
-   .header_title {
-      font-size: calc(22 * var(--scale-by-width) * (8/5));
-   }
-   
-   .header_medbot, .header_baybot {
-      font-size: calc(16 * var(--scale-by-width) * (8/5));
-      width: calc(110 * var(--scale-by-width) * (8/5));
-      padding: calc(6 * var(--scale-by-width) * (8/5));
-      border-radius: calc(5 * var(--scale-by-width) * (8/5));
-   }
-
-   .chat_contents {
-      height: calc(450 * var(--scale-by-width) * (8/5));
-      padding-right: calc(3 * var(--scale-by-width) * (8/5));
-   }
-   
-   .messages_container {
-      gap: calc(5 * var(--scale-by-width) * (8/5));
-      padding: calc(10 * var(--scale-by-width) * (8/5));
-      max-height: calc(400 * var(--scale-by-width) * (8/5));
-   }
-   
-   .message_medbot, .message_baybot, .message_user {
-      font-size: calc(16 * var(--scale-by-width) * (8/5));
-      padding: calc(8 * var(--scale-by-width) * (8/5)) calc(12 * var(--scale-by-width) * (8/5));
-      border-radius: calc(10 * var(--scale-by-width) * (8/5));
-   }
-   
-   .chat_footer {
-      bottom: calc(5 * var(--scale-by-width) * (8/5));
-      padding-top: calc(5 * var(--scale-by-width) * (8/5));
-      padding-left: calc(8 * var(--scale-by-width) * (8/5));
-      gap: calc(5 * var(--scale-by-width) * (8/5));
-   }
-   
-   .chat_input {
-      font-size: calc(16 * var(--scale-by-width) * (8/5));
-      padding: calc(8 * var(--scale-by-width) * (8/5));
-      padding-left: calc(12 * var(--scale-by-width) * (8/5));
-      border: calc(2 * var(--scale-by-width) * (8/5)) solid hsl(0, 0%, 90%);
-      border-radius: calc(10 * var(--scale-by-width) * (8/5));
-      max-height: calc(97 * var(--scale-by-width) * (8/5));
-   }
-   
-   .chat_send {
-      font-size: calc(16 * var(--scale-by-width) * (8/5));
-      padding: calc(8 * var(--scale-by-width) * (8/5)) calc(5 * var(--scale-by-width) * (8/5));
-      margin-bottom: calc(3 * var(--scale-by-width) * (8/5));
-      border-radius: calc(10 * var(--scale-by-width) * (8/5));
+      width: 95vw;
    }
 }

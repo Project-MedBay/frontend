@@ -13,6 +13,10 @@
    min-height: 620px;
 }
 
+.mobile_only {
+   display: none;
+}
+
 .covered_by_popup {
    opacity: 50%;
    filter: blur(4px);
@@ -312,6 +316,10 @@ p.therapy_more {
 }
 
 @media only screen and ((max-aspect-ratio: 3 / 2) or (max-width: 1105px)) {
+   
+   .mobile_only {
+      display: initial;
+   }
 
    .patient_profile_main {
       justify-content: flex-start;
@@ -403,6 +411,8 @@ p.therapy_more {
    
    .no_therapies {
       font-size: calc(22 * var(--scale-by-height));
+      text-align: center;
+      width: 80%;
    }
    
    .therapy_card {

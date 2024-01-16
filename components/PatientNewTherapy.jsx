@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import axios from "axios"
 import BodypartSelection from "./BodypartSelection"
 import SessionSelection from "./SessionSelection"
@@ -20,6 +20,7 @@ export default function PatientNewTherapy(props) {
    const [searchInput, setSearchInput] = useState("")
    const [selectedBodypart, setSelectedBodypart] = useState("any")
    const [selectedTherapy, setSelectedTherapy] = useState("")
+   const selectedTherapyRef = useRef(null)
    useEffect(() => {
       axios({
          url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapyType",
@@ -65,7 +66,8 @@ export default function PatientNewTherapy(props) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
       <div className={s.therapy_wrapper} key={therapy.therapyCode}
-           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.therapyCode)}}>
+           onClick={() => {setSelectedTherapy(therapy); setCodeInput(therapy.therapyCode)}}
+           ref={therapy.therapyCode == selectedTherapy.therapyCode ? selectedTherapyRef : null}>
          <div className={s.custom_checkbox}>
             <div className={`${s.checkbox_fill} ${selectedTherapy?.therapyCode == therapy.therapyCode && s.checkbox_selected}`}></div>
          </div>
@@ -76,9 +78,19 @@ export default function PatientNewTherapy(props) {
       </div>
    ))
 
+   useEffect(() => {
+      selectedTherapyRef.current?.scrollIntoView({ behavior: "smooth" })    // scroll smoothly to new therapy
+   }, [selectedTherapy])
+   
+   useEffect(() => {
+      selectedTherapyRef.current?.scrollIntoView({ behavior: "instant" })   // scroll instantly on page open
+   }, [progress])
+
    function handleCodeInput(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       setCodeInput(event.target.value.toUpperCase())
-      setSelectedTherapy(therapies[codeList.indexOf(event.target.value.toUpperCase())])
+      if (codeList.includes(event.target.value.toUpperCase())) {
+         setSelectedTherapy(therapies[codeList.indexOf(event.target.value.toUpperCase())])
+      } else setSelectedTherapy("")
    }
 
    function formatString(string) {

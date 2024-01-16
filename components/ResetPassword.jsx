@@ -12,6 +12,7 @@ export default function ResetPassword(props) {
       text: "Passwords do not match."
    })
    const [passwordShown, setPasswordShown] = useState(false)
+   const [success, setSuccess] = useState(false)
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       password: "",
@@ -20,10 +21,9 @@ export default function ResetPassword(props) {
    
    const location = useLocation()
    const { hash, pathname, search } = location
-   var userToken = ""
-   if (search != "" && search.slice(0, 7) == "?token=") userToken = search.slice(7)
-   console.log(userToken)
-   if (userToken == "") globalNavigate("/login")
+   var resetToken = ""
+   if (search != "" && search.slice(0, 7) == "?token=") resetToken = search.slice(7)
+   if (resetToken == "") globalNavigate("/login")
 
    function handleChange(event) {                  // funkcija za updateanje sadrzaja input polja, osigurava konzistentnost
       const {name, value} = event.target
@@ -56,10 +56,10 @@ export default function ResetPassword(props) {
       else {
          axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/security/change-password?token=" +
-                  userToken + "&password=" + formData.password,
+                  resetToken + "&password=" + formData.password,
             method: "PUT"
          })
-         .then(res => console.log(res))
+         .then(res => res.status == 200 && setSuccess(true))
          .catch(error => console.log(error));
       }
     }
@@ -102,7 +102,14 @@ export default function ResetPassword(props) {
                   </div>
                </div>
 
-               <button className={s.form_button}>Reset password</button>
+               {!success ?
+                  <button className={s.form_button}>Reset password</button>
+               : <>
+                  <h3 className={s.success_text}>
+                     <span>Success!</span><br />Your password has been reset and you may now use it to log in.
+                  </h3>
+                  <h3 className={s.login} onClick={() => props.globalNavigate("/login")}>Take me to login</h3>
+               </>}
 
             </form>
         </>

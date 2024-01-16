@@ -34,7 +34,7 @@
 
 .header_nav {
    display: grid;
-   grid-template-columns: max(calc(160px * 0.6), calc(160vh * 59 / 725)) repeat(4, fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725))));
+   grid-template-columns: max(calc(170px * 0.6), calc(170vh * 59 / 725)) repeat(4, fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725))));
    justify-items: flex-end;
    align-items: center;
    direction: rtl;
@@ -50,7 +50,7 @@
 
 .nav_item, .nav_logout, .nav_check_logout {
    color: rgb(34, 0, 106);
-   font-size: max(calc(16px * 0.6), calc(16vh * 59 / 725));
+   font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    font-weight: 400;
    margin: 0;
    cursor: pointer;
@@ -82,6 +82,7 @@
 .toggle {
    width: calc(50 * var(--scale-by-height));
    height: calc(25 * var(--scale-by-height));
+   margin: 0 calc(-10 * var(--scale-by-height));
 }
 
 .react-toggle-thumb {
@@ -142,15 +143,18 @@
    }
 
    .header_nav {
-      grid-template-columns: max(calc(200px * 0.6), calc(200vh * 59 / 725)) fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725)));
+      grid-template-columns: max(calc(220px * 0.6), calc(220vh * 59 / 725)) fit-content(max(calc(160px * 0.6), calc(160vh * 59 / 725)));
       column-gap: calc(30 * var(--scale-by-height));
    }
 
    .header_logo {
-      margin-right: max(calc(50px * 0.6), calc(50vh * 59 / 725));
+      margin: 0 calc(20 * var(--scale-by-width) * (8/5));
    }
    
    .nav_dropdown {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
       margin: 0;
       cursor: pointer;
    }
@@ -180,7 +184,7 @@
    }
 
    .nav_item, .nav_logout, .nav_check_logout {
-      font-size: max(calc(20px * 0.6), calc(20vh * 59 / 725));
+      font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
       font-weight: 500;
    }
 
@@ -203,8 +207,7 @@
    }
    
    .header_logo {
-      margin-left: calc(90 * var(--scale-by-width) * (8/5));
-      margin-right: calc(50 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(20 * var(--scale-by-width) * (8/5));
    }
    
    .logo_img {
@@ -216,7 +219,7 @@
    }
    
    .header_nav {
-      grid-template-columns: calc(200 * var(--scale-by-width) * (8/5)) fit-content(calc(160 * var(--scale-by-width) * (8/5)));
+      grid-template-columns: calc(160 * var(--scale-by-width) * (8/5)) fit-content(calc(160 * var(--scale-by-width) * (8/5)));
       column-gap: calc(30 * var(--scale-by-width) * (8/5));
    }
    
@@ -227,7 +230,7 @@
    }
    
    .nav_item, .nav_logout, .nav_check_logout {
-      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      font-size: calc(28 * var(--scale-by-width) * (8/5));
    }
 
    .nav_item {
@@ -243,6 +246,7 @@
    .toggle {
       width: calc(50 * var(--scale-by-width) * (8/5));
       height: calc(25 * var(--scale-by-width) * (8/5));
+      margin: 0 calc(-10 * var(--scale-by-width) * (8/5));
    }
    
    .react-toggle-thumb {

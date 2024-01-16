@@ -11,7 +11,8 @@ export default function AIChat(props) {
    const [currentBot, setCurrentBot] = useState("medbot")
    const [chatInput, setChatInput] = useState("")
    const [inputDisabled, setInputDisabled] = useState(false)
-   const textAreaRef = useRef();
+   const textAreaRef = useRef()
+   const messagesEndRef = useRef(null)
 
    const [messages, setMessages] = useState(() =>{
       return sessionStorage.getItem("medbay-ai-chat") != null ? JSON.parse(sessionStorage.getItem("medbay-ai-chat")) : {
@@ -38,7 +39,7 @@ export default function AIChat(props) {
    }
 
    function handleKeyDown(event) {
-      if(event.keyCode == 13 && event.shiftKey == false) {
+      if(event.keyCode == 13 && event.shiftKey == false && chatInput != "" && !/^\s+$/.test(chatInput)) {
          handleSend(event)
       }
    }
@@ -86,6 +87,14 @@ export default function AIChat(props) {
    }, [messages])
 
    useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })    // scroll smoothly on new message
+   }, [messages])
+
+   useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "instant" })   // scroll instantly on chat open/bot switch
+   }, [chatOpen, currentBot])
+
+   useEffect(() => {
       if (textAreaRef.current != null) {
          textAreaRef.current.style.height = "0px"
 
@@ -118,6 +127,7 @@ export default function AIChat(props) {
          {chatOpen && <div className={s.chat_contents}>
             <div className={s.messages_container}>
                {messageElements}
+               <div ref={messagesEndRef}></div>    {/* dummy div to scroll new messages */}
             </div>
             <form className={s.chat_footer} onSubmit={handleSend}>
                <textarea className={`${s.chat_input} ${inputDisabled ? s.input_disabled : ""}`} type="text"

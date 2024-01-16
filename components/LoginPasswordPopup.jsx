@@ -29,11 +29,14 @@ export default function LoginPasswordPopup(props) {
                 type="text" onChange={handleChange} placeholder="john.doe@mail.com"
                 name="email" value={emailInput["email"]}
             />
-            <button className={`${s.submit_button} ${!success ? s.visible : ""}`} onClick={handleSubmit}>Submit</button>
-            <h3 className={`${s.success_text} ${success ? s.visible : ""}`}>
-                <span>Success!</span><br />The link to reset your password will arrive to the supplied e-mail shortly.
-            </h3>
-            <h3 className={`${s.close} ${success ? s.visible : ""}`} onClick={props.popupExit}>Close</h3>
+            {!success ?
+                <button className={s.submit_button} onClick={handleSubmit}>Submit</button>
+            : <>
+                <h3 className={s.success_text}>
+                    <span>Success!</span><br />The link to reset your password will arrive to the supplied e-mail shortly.
+                </h3>
+                <h3 className={s.close} onClick={props.popupExit}>Close</h3>
+            </>}
          </div>
     )
 }

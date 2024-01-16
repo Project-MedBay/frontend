@@ -85,11 +85,11 @@ export default function AdminManage(props) {
    const resourceElements = resourceList
       .filter(resource => { for (let term of searchInput.resources.trim().split(" ")) {
          for (let attr in resource) {
-            if (attr == "id") continue
-            else if (attr == "specialization") if (resource[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true
-            else if (resource[attr].toString().toLowerCase().includes(term.toLowerCase())) return true}
+            if (attr == "id" || attr == "description") continue
+            else if (attr == "specialization") {if (resource[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true}
+            else if (resource[attr].toString().toLowerCase().includes(term.toLowerCase())) return true
          }
-      }).map(resource => (
+      }}).map(resource => (
          <AdminFacilityCard
             cardType="resource"
             cardContent={resource}
@@ -108,8 +108,8 @@ export default function AdminManage(props) {
    const therapyElements = therapyList
       .filter(therapy => { for (let term of searchInput.therapies.trim().split(" ")) {
          for (let attr in therapy) {
-            if (attr == "id") continue
-            else if (attr == "resource") if (therapy[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true
+            if (attr == "id" || attr == "description") continue
+            else if (attr == "resource") {if (therapy[attr].name.toString().toLowerCase().includes(term.toLowerCase())) return true}
             else if (therapy[attr].toString().toLowerCase().includes(term.toLowerCase())) return true
          }
       }}).map(therapy => (

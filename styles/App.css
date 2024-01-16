@@ -28,6 +28,8 @@ html {
   --scale-by-height: max(0.6px, calc(1vh * 59 / 725));
   
   --scale-by-width: max(0.3px, calc(1vw * 59 / 725));
+  
+  --scale-by-height-reduced: max(0.8px, calc(1vh * 59 / 725));
 }
 
 @media only screen and ((max-aspect-ratio: 5 / 8) or (max-width: 450px)) {

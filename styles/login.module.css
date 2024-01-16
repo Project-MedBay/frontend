@@ -37,7 +37,8 @@
    min-width: 550px;
    min-height: 450px; */
    background-color: white;
-   padding: max(calc(50px * 0.6), calc(50vh * 59 / 725)) max(calc(75px * 0.6), calc(75vh * 59 / 725));
+   padding: max(calc(40px * 0.6), calc(40vh * 59 / 725)) max(calc(75px * 0.6), calc(75vh * 59 / 725));
+   padding-top: max(calc(30px * 0.6), calc(30vh * 59 / 725));
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -50,9 +51,10 @@
 
 .form_title {
    color: #636363;
-   font-size: max(calc(72px * 0.6), calc(72vh * 59 / 725));
+   font-size: max(calc(64px * 0.6), calc(64vh * 59 / 725));
    font-weight: 600;
    margin: 0;
+   margin-bottom: min(calc(-10px * 0.6), calc(-10vh * 59 / 725));
    text-wrap: nowrap;
 }
 
@@ -130,7 +132,6 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    color: #808080;
    font-size: max(calc(18px * 0.6), calc(18vh * 59 / 725));
    text-align: center;
-   margin: 0;
    margin: min(calc(-20px * 0.6), calc(-20vh * 59 / 725)) 0;
    cursor: pointer;
 }
@@ -142,7 +143,9 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 .form_button {
    background: #70D8AC;
    box-shadow: 0px 4px 50px 8px #00000026;
-   padding: max(calc(20px * 0.6), calc(20vh * 59 / 725)) max(calc(50px * 0.6), calc(50vh * 59 / 725));
+   width: max(calc(230px * 0.6), calc(230vh * 59 / 725));
+   height: max(calc(80px * 0.6), calc(80vh * 59 / 725));
+   margin-top: min(calc(-10px * 0.6), calc(-10vh * 59 / 725));
    font-family: "Barlow", sans-serif;
    font-weight: 700;
    font-size: max(calc(40px * 0.6), calc(40vh * 59 / 725));
@@ -186,7 +189,8 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    font-family: "Barlow", sans-serif;
    font-size: max(calc(24px * 0.6), calc(24vh * 59 / 725));
    font-weight: 500;
-   padding: max(calc(15px * 0.6), calc(15vh * 59 / 725)) max(calc(25px * 0.6), calc(25vh * 59 / 725));
+   padding: max(calc(10px * 0.6), calc(10vh * 59 / 725)) max(calc(25px * 0.6), calc(25vh * 59 / 725));
+   width: fit-content;
    border-radius: 12px;
    background: rgb(34, 0, 106);
    box-shadow: 0px 4px 50px 8px #00000026;
@@ -222,7 +226,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 
    .login_main {
       flex-direction: column;
-      gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
+      gap: max(calc(30px * 0.6), calc(30vh * 59 / 725));
       min-height: 500px;
    }
    .tagline {
@@ -233,7 +237,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    }
 }
 
-@media only screen and ((max-aspect-ratio: 7 / 10) or (max-width: 550px)) {
+@media only screen and ((max-aspect-ratio: 5/8) or (max-width: 450px)) {
    /* za testiranje
       .form_button {
       background-color: blue;
@@ -243,53 +247,62 @@ input[type=password]::placeholder, input[type=text]::placeholder {
       background-image: linear-gradient(0deg, rgba(255,255,255,0.5) 0%,
                         rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.5) 100%), 
                         url("../assets/logreg_bg_mobile.jpg");
-      gap: max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
+      gap: max(calc(50px * 0.3), calc(50vw * (8/5) * 59 / 725));
       min-height: 100vw;
    }
 
    .login_form {
-      padding: max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725)) max(calc(75px * 0.3), calc(75vw * (10 / 7) * 59 / 725));
-      gap: max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
+      padding: max(calc(40px * 0.3), calc(40vw * (8/5) * 59 / 725)) max(calc(75px * 0.3), calc(75vw * (8/5) * 59 / 725));
+      padding-top: max(calc(30px * 0.3), calc(30vw * (8/5) * 59 / 725));
+      gap: max(calc(50px * 0.3), calc(50vw * (8/5) * 59 / 725));
    }
 
    .form_title {
-      font-size: max(calc(72px * 0.3), calc(72vw * (10 / 7) * 59 / 725));
+      font-size: max(calc(64px * 0.3), calc(64vw * (8/5) * 59 / 725));
+      margin-bottom: min(calc(-10px * 0.3), calc(-10vw * (8/5) * 59 / 725));
    }
 
    .login_failed {
-      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
-      margin-top: min(calc(-25px * 0.3), calc(-25vw * (10 / 7) * 59 / 725));
-      margin-bottom: min(calc(-45px * 0.3), calc(-45vw * (10 / 7) * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * (8/5) * 59 / 725));
+      margin-top: min(calc(-25px * 0.3), calc(-25vw * (8/5) * 59 / 725));
+      margin-bottom: min(calc(-45px * 0.3), calc(-45vw * (8/5) * 59 / 725));
    }
 
    .input_text {
-      margin: max(calc(8px * 0.3), calc(8vw * (10 / 7) * 59 / 725)) 0;
-      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
+      margin: max(calc(8px * 0.3), calc(8vw * (8/5) * 59 / 725)) 0;
+      font-size: max(calc(18px * 0.3), calc(18vw * (8/5) * 59 / 725));
    }
 
    .input_box {
-      width: max(calc(560px * 0.3), calc(560vw * (10 / 7) * 59 / 725));
-      font-size: max(calc(22px * 0.3), calc(22vw * (10 / 7) * 59 / 725));
-      padding: max(calc(10px * 0.3), calc(10vw * (10 / 7) * 59 / 725));
-      padding-left: max(calc(14px * 0.3), calc(14vw * (10 / 7) * 59 / 725));
+      width: max(calc(560px * 0.3), calc(560vw * (8/5) * 59 / 725));
+      font-size: max(calc(22px * 0.3), calc(22vw * (8/5) * 59 / 725));
+      padding: max(calc(10px * 0.3), calc(10vw * (8/5) * 59 / 725));
+      padding-left: max(calc(14px * 0.3), calc(14vw * (8/5) * 59 / 725));
    }
 
    .password_eye {
-      width: max(calc(30px * 0.3), calc(30vw * (10 / 7) * 59 / 725));
+      width: max(calc(30px * 0.3), calc(30vw * (8/5) * 59 / 725));
+   }
+   
+   .forgot_password_text {
+      font-size: max(calc(18px * 0.3), calc(18vw * (8/5) * 59 / 725));
+      margin: min(calc(-20px * 0.3), calc(-20vw * (8/5) * 59 / 725)) 0;
    }
 
    .form_button {
-      padding: max(calc(20px * 0.3), calc(20vw * (10 / 7) * 59 / 725)) max(calc(50px * 0.3), calc(50vw * (10 / 7) * 59 / 725));
-      font-size: max(calc(40px * 0.3), calc(40vw * (10 / 7) * 59 / 725));
+      width: max(calc(230px * 0.3), calc(230vw * (8/5) * 59 / 725));
+      height: max(calc(80px * 0.3), calc(80vw * (8/5) * 59 / 725));
+      font-size: max(calc(40px * 0.3), calc(40vw * (8/5) * 59 / 725));
+      margin-top: min(calc(-10px * 0.3), calc(-10vw * (8/5) * 59 / 725));
    }
 
    .register_q {
-      margin: max(calc(8px * 0.3), calc(8vw * (10 / 7) * 59 / 725));
-      font-size: max(calc(18px * 0.3), calc(18vw * (10 / 7) * 59 / 725));
+      margin: max(calc(8px * 0.3), calc(8vw * (8/5) * 59 / 725));
+      font-size: max(calc(18px * 0.3), calc(18vw * (8/5) * 59 / 725));
    }
 
    .register_button {
-      font-size: max(calc(24px * 0.3), calc(24vw * (10 / 7) * 59 / 725));
-      padding: max(calc(15px * 0.3), calc(15vw * (10 / 7) * 59 / 725)) max(calc(25px * 0.3), calc(25vw * (10 / 7) * 59 / 725));
+      font-size: max(calc(24px * 0.3), calc(24vw * (8/5) * 59 / 725));
+      padding: max(calc(10px * 0.3), calc(10vw * (8/5) * 59 / 725)) max(calc(25px * 0.3), calc(25vw * (8/5) * 59 / 725));
    }
 }

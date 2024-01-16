@@ -32,7 +32,7 @@ export default function PatientProfile(props) {
    })
    if (therapyElements.length == 0) {therapyElements.push(
       <h3 className={s.no_therapies}>
-         You have no therapies yet. Sign up through the <span>NEW THERAPY</span> tab!
+         You have no therapies yet.<br className={s.mobile_only} /> Sign up through the <span>NEW THERAPY</span> tab!
       </h3>
    )}
 

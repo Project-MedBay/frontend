@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import logo from "../assets/plus_icon.png"
 import { useTheme } from './ThemeContext';
 import Toggle from 'react-toggle'
-import "react-toggle/style.css" 
+import "../styles/toggleCustomStyle.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
@@ -43,10 +43,10 @@ export default function PatientHeader(props) {
             <Toggle
                defaultChecked={theme === 'dark' ? true : false}
                icons={{
-               checked: <FontAwesomeIcon icon={faMoon} className={s.moonIcon}/>,
-               unchecked: <FontAwesomeIcon icon={faSun} className={s.sunIcon}/>,
+                  checked: <FontAwesomeIcon icon={faMoon} className={s.moonIcon}/>,
+                  unchecked: <FontAwesomeIcon icon={faSun} className={s.sunIcon}/>,
                }}
-               onClick={toggleTheme} 
+               onClick={toggleTheme}
                className={s.toggle}
             />
             <div className={`${s.nav_container} ${mobileNav && s.mobile_visible}`}>

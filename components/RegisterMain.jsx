@@ -2,10 +2,10 @@ import React, { useState } from "react"
 import axios from "axios"
 import { registerFields } from "./FormsData"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
+import ReCAPTCHA from "react-google-recaptcha";
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
-import ReCAPTCHA from "react-google-recaptcha";
 
 export default function RegisterMain(props) {
    const {globalNavigate} = props
@@ -254,6 +254,7 @@ export default function RegisterMain(props) {
                </div>
 
                <ReCAPTCHA
+                  className={s.recaptcha}
                   sitekey="6LehQE8pAAAAACkeL6kBATsk3sgGJ7h4NYxqZmnv"
                   onChange={onRecaptchaChange}
                />
