@@ -81,12 +81,20 @@ export default function PatientProfile(props) {
       })
       .then(res => console.log(res.status))
       .catch(error => console.log(error));
-      console.log(event.target.files[0])
+   }
+
+   function getBase64(file) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
    }
 
    function handleEdit(data) {
-      console.log(data)
-      console.log(userData)
       if (editPopup) {
          axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient",
@@ -151,7 +159,6 @@ export default function PatientProfile(props) {
         document.removeEventListener("keydown", escFunction, false)
       }
    }, [escFunction])
-   console.log(userData)
 
    return (<>
       <div className={`${darkModeClass} ${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>
@@ -161,7 +168,7 @@ export default function PatientProfile(props) {
                      onMouseEnter={toggleInputImage} onMouseLeave={toggleInputImage}>
                   <input id={s.image_input} type="file" onChange={handleImageInput} name="userImage" />
                   <img className={s.user_image} src={
-                     userData.userImage == null ? profile_image : URL.createObjectURL(userData.userImage)
+                     userData.userImage ? `data:image/jpeg;base64,${userData.userImage}` : profile_image
                   }/>
                   {inputImage && <img className={s.user_image} src={input_image} />}
                </label>
