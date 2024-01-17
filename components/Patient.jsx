@@ -35,33 +35,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
    useEffect(() => {
-      axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/dashboard",
-         method: "GET",
-         headers: {
-            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
-         }
-      })
-      .then(res => {
-         console.log(res.data)
-         let scheduleList = {}
-         for (let date in res.data) {
-            console.log(res.data)
-            scheduleList[new Date(new Date(date).setHours(0))] = res.data[date].map((session, index) => ({
-               id: index,
-               appointmentId: session.appointmentId,
-               datetime: new Date(session.dateTime),
-               therapy: session.therapyTypeName,
-               location: session.equipmentRoomName,
-               completedSessions: session.numberOfSessionsCompleted,
-               totalSessions: session.numberOfSessions,
-               therapist: session.employeeFirstName + " " + session.employeeLastName,
-               notes: session.sessionNotes
-            }))
-         }
-         setMySchedule(scheduleList)
-      })
-      .catch(error => console.log(error));
+      getAndSetSchedule()
       
       axios({
          url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/logged-in",
@@ -71,6 +45,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          }
       })
       .then(res => {
+         console.log(res.data)
          setUserData({
             firstName: res.data.patient.firstName,
             lastName: res.data.patient.lastName,
@@ -98,6 +73,34 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       })
       .catch(error => console.log(error));
    }, [])
+
+   function getAndSetSchedule() {
+      axios({
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/dashboard",
+         method: "GET",
+         headers: {
+            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
+         }
+      })
+      .then(res => {
+         let scheduleList = {}
+         for (let date in res.data) {
+            scheduleList[new Date(new Date(date).setHours(0))] = res.data[date].map((session, index) => ({
+               id: index,
+               appointmentId: session.appointmentId,
+               datetime: new Date(session.dateTime),
+               therapy: session.therapyTypeName,
+               location: session.equipmentRoomName,
+               completedSessions: session.numberOfSessionsCompleted,
+               totalSessions: session.numberOfSessions,
+               therapist: session.employeeFirstName + " " + session.employeeLastName,
+               notes: session.sessionNotes
+            }))
+         }
+         setMySchedule(scheduleList)
+      })
+      .catch(error => console.log(error));
+   }
 
    function formatWeek(datetime) {
       let tempDate = getWeekFirst(new Date(datetime))
@@ -171,16 +174,19 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <Routes>
             <Route index element={<PatientDash
                userToken={userToken}
+               renewSchedule={getAndSetSchedule}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
                formatFullDatetime={formatFullDatetime}
                formatWeek={formatWeek}
                mySchedule={mySchedule}
+               setMySchedule={setMySchedule}
                theme={theme}
             />} />
             <Route path="dash" element={<PatientDash
                userToken={userToken}
+               renewSchedule={getAndSetSchedule}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
                formatFullDate={formatFullDate}

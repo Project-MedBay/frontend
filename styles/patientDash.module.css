@@ -120,6 +120,10 @@
    opacity: 0.75;
 }
 
+.session_selected {
+   border: 3px solid #22006a;
+}
+
 .session_date {
    color: #22006a;
    font-size: calc(24 * var(--scale-by-height));

@@ -9,11 +9,12 @@ export default function AdminCalendarPopup(props) {
 
    const sessionDatetime = new Date(new Date(selectedDate).setHours(extractHours(selectedHour)))
    const sessionsList = dateSessions.map(session => ({
-      // NOTE tu triba dodat id kad dobijem
+      appointmentId: session.appointmentId,
       name: session.therapyTypeName,
       patient: session.patientFirstName + " " + session.patientLastName,
       therapist: session.employeeFirstName + " " + session.employeeLastName,
-      therapyId: session.therapyId
+      therapyId: session.therapyId,
+      schedule: session.appointmentDates
    }))
 
    const adminSessionElements = sessionsList.map(session => (
@@ -41,10 +42,12 @@ export default function AdminCalendarPopup(props) {
          :
             <button className={s.reschedule_button} onClick={() => {
                let currentSession = {
+                  appointmentId: session.appointmentId,
                   therapy: session.name,
                   datetime: sessionDatetime,
                   therapist: session.therapist,
-                  patient: session.patient
+                  patient: session.patient,
+                  schedule: session.schedule
                }
                setCurrentSession(currentSession)
                setRescheduledSession(currentSession)

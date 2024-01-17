@@ -19,8 +19,11 @@ export default function AdminCalendar(props) {
     const [rescheduledSession, setRescheduledSession] = useState("")
     const [currentSession, setCurrentSession] = useState("")
     
-    console.log(calendarData)
     useEffect(() => {
+        getAndSetCalendarData()
+    }, [weekOffset]);
+
+    function getAndSetCalendarData () {
         axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/admin?date=" + weekDates[0],
             method: "GET",
@@ -30,7 +33,7 @@ export default function AdminCalendar(props) {
          })
          .then(res => setCalendarData(res.data))
          .catch(error => console.log(error));
-    }, [weekOffset]);
+    }
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
@@ -93,6 +96,22 @@ export default function AdminCalendar(props) {
         if (rescheduledSession != "") setRescheduledSession("")
         else setCalendarPopup(false)
     }
+    
+    const escFunction = (event) => {
+        console.log("setting")
+        setWeekOffset(prevState => prevState)
+        if (event.key === "Escape") {
+            popupExit()
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", escFunction, false)
+
+        return () => {
+        document.removeEventListener("keydown", escFunction, false)
+        }
+    }, [escFunction])
 
     return ( <>
         <div className={`${s.calendarContainer} ${calendarPopup && s.covered_by_popup}`}>
@@ -132,14 +151,17 @@ export default function AdminCalendar(props) {
                     {hours.map(hour => (
                         <tr key={hour}>
                             <th className={s.tableHour}>{hour}</th>
-                            {weekDates.map(date => (
-                                <td key={date + hour}  onClick={() => {
-                                        setSelectedDate({date: date, hour: hour})
-                                        setCalendarPopup(true);
-                                    }}>
-                                    <div className={s.tableSquare}>{getAppointmentCount(hour, date)}</div>
+                            {weekDates.map(date => {
+                                let count = getAppointmentCount(hour, date)
+                                let clickFunction = count == 0 ? () => {return} : () => {
+                                    setSelectedDate({date: date, hour: hour})
+                                    setCalendarPopup(true);
+                                }
+                                return (
+                                <td key={date + hour}  onClick={clickFunction}>
+                                    <div className={`${s.tableSquare} ${count ? s.squareHover : ""}`}>{count}</div>
                                 </td>
-                            ))}
+                            )})}
                         </tr>
                     ))}
                 </tbody>
@@ -152,7 +174,24 @@ export default function AdminCalendar(props) {
             <AdminCalendarPopup
                 selectedDate={selectedDate.date}
                 selectedHour={selectedDate.hour}
-                dateSessions={calendarData[`${selectedDate.date}T${selectedDate.hour}`]}
+                dateSessions={calendarData[`${selectedDate.date}T${selectedDate.hour}`].filter(appointment => {
+                    if (filterOption === 'Patient' || filterOption === 'All') {
+                        if (`${appointment.patientFirstName} ${appointment.patientLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return true;
+                        }
+                    }
+                    if (filterOption === 'Therapist' || filterOption === 'All') {
+                        if (`${appointment.employeeFirstName} ${appointment.employeeLastName}`.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return true;
+                        }
+                    }
+                    if (filterOption === 'Therapy name' || filterOption === 'All') {
+                        if (appointment.therapyTypeName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })}
                 setRescheduledSession={setRescheduledSession}
                 setCurrentSession={setCurrentSession}
                 popupExit={popupExit}
@@ -162,13 +201,16 @@ export default function AdminCalendar(props) {
         {rescheduledSession != "" &&
             <ReschedulePopup
                 userToken = {userToken}
+                renewSchedule={getAndSetCalendarData}
                 user = "admin"
                 formatDate = {formatDate}
                 formatFullDate = {formatFullDate}
-                formatWeek = {arg => arg}            // NOTE vidicu kad spojim u kojem mi je obliku kljuc u mySchedule
-                currentSession = {{...currentSession, therapyCode: "#4C7X3"}}       // NOTE ovaj kod namistit
+                currentSession = {currentSession}
                 rescheduledSession = {rescheduledSession}
                 setRescheduledSession = {setRescheduledSession}
+                patientSchedule={{week: currentSession.schedule.map(session => ({
+                    datetime: new Date(session)
+                }))}}
                 popupExit = {popupExit}
             />
         }

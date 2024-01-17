@@ -18,14 +18,15 @@ export default function TherapyOrPatientPopup(props) {
          setNotesInput(viewingNotesOf.sessionNotes)
       } else {setNotesInput("")}
    }, [viewingNotesOf])
+   console.log(popupSessions)
 
    var title, rows
    if (popupType == "therapy") {
       title = popupData.name
       rows = [["date started", "date finished"]]
    } else if (popupType == "patient") {
-      title = popupData.firstName + " " + popupData.lastName
-      rows = [["email"], ["address"], ["dateOfBirth", "phoneNumber", "mbo"]]        // NOTE promini labele da ne koriste ovo
+      title = popupData.name + " " + popupData.surname
+      rows = [["e-mail"], ["address"], ["dob", "phone", "mbo"]]        // NOTE promini labele da ne koriste ovo
    }
    var infoElements = []
    for (let row of rows) {
@@ -137,12 +138,13 @@ export default function TherapyOrPatientPopup(props) {
       setViewingNotesOf("")
       popupExit()
    }
+   console.log(popupData)
 
    return (
       <div className={`${s.popup} ${popupType == "patient" && s.popup_wide} ${darkModeClass}`}>
          <div className={s.popup_header}>
             <h1 className={s.popup_title}>{title.toUpperCase()}
-               <span>{` #(${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}
+               <span>{` (#User${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}
             </h1>
             <img src={x_icon} className={s.popup_exit} onClick={handleExit} />
          </div>
@@ -157,7 +159,9 @@ export default function TherapyOrPatientPopup(props) {
          : infoElements
          }
 
-         <h2 className={s.popup_sessions}>{popupSessions.length} SESSIONS:</h2>
+         <h2 className={s.popup_sessions}>
+            {popupSessions.length ? `${popupSessions.length} SESSIONS:` : "NO SESSIONS YET"}
+         </h2>
          <div className={`${s.sessions_container} ${popupType == "patient" && s.popup_tall}`}>
             {sessionElements}
          </div>

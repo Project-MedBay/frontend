@@ -8,7 +8,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
+   const {userToken, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, setMySchedule, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -69,7 +69,8 @@ export default function PatientDash(props) {
             cardClass += ` ${s.session_passed}`
          }
          return (
-            <div className={cardClass} key={id} onClick={() => {setSelectedSession(session)}}>
+            <div className={`${cardClass} ${(id == selectedSession.id && datetime == selectedSession.datetime) ?
+                 s.session_selected : ""}`} key={id} onClick={() => {setSelectedSession(session)}}>
                <h3 className={s.session_date}>{formatDate(datetime)}</h3>
                <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
                <div className={s.session_footer}>
@@ -101,12 +102,6 @@ export default function PatientDash(props) {
       })
    }
    
-   function rescheduleSession() {
-      // send new session data to db to reschedule session and update schedule
-      setReschedulePopup(false)
-      setRescheduleConfirmBox(false)
-   }
-   
    function popupExit() {
       if (notesPopup) setNotesPopup(false)
       else {
@@ -114,6 +109,20 @@ export default function PatientDash(props) {
          setRescheduledSession(selectedSession)
       }
    }
+   
+   const escFunction = (event) => {
+      if (event.key === "Escape") {
+        popupExit()
+      }
+   }
+  
+   useEffect(() => {
+      document.addEventListener("keydown", escFunction, false)
+  
+      return () => {
+        document.removeEventListener("keydown", escFunction, false)
+      }
+   }, [escFunction])
 
    return (<div className={darkModeClass}>
       <div className={`${s.patient_dash_main} ${darkModeClass} ${((reschedulePopup || notesPopup) ? s.covered_by_popup : '')}`}>
@@ -232,6 +241,7 @@ export default function PatientDash(props) {
       {reschedulePopup &&                                /* uvjetni render popupa za reschedule */
          <ReschedulePopup
             userToken = {userToken}
+            renewSchedule={renewSchedule}
             user = "patient"
             formatDate = {formatDate}
             formatFullDate = {formatFullDate}

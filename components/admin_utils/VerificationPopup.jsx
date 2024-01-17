@@ -3,11 +3,23 @@ import axios from 'axios'
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
-    const {userToken, popupData, setPopup, type, handleProcess} = props;
+    const {userToken, popupData, setPopup, type, handleProcess, formatFullDateAndTime, formatFullTime} = props;
 
     const [action, setAction] = React.useState(null); // 'reject', 'approve', or null
     const [rejectionReason, setRejectionReason] = React.useState("");
     const [isExpanded, setIsExpanded] = React.useState(false);
+
+    const sessionElements = popupData.sessions.map((session, index) => {
+        let datetime = new Date(session)
+        let tempDate = new Date(datetime)
+        tempDate.setHours(datetime.getHours() + 1)
+        return (
+            <div key={index} className={s.session}>
+                <p>{formatFullDateAndTime(datetime).slice(0, 10)}</p>
+                <p>{formatFullTime(datetime)} - {formatFullTime(tempDate)}</p>    {/* NOTE prominit ovo */}
+            </div>  
+        )
+    })
 
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -115,13 +127,7 @@ export default function VerificationCard(props){
                             <div className={s.sessionTab}  style={{ height: isExpanded ? 'auto' : '30vh' }}>
                                 <h3 className={s.userDataTitle}>SESSIONS:</h3>
                                 <div className={s.sessionList}>
-                                    {popupData.sessions.map((session, index) => (
-                                        <div key={index} className={s.session}>
-                                            <p>{session.slice(0, 10)}</p>
-                                            <p>{session.slice(11, 13)} - {session.slice(11, 13)}</p>    {/* NOTE prominit ovo */}
-                                        </div>
-                                        
-                                    ))}
+                                    {sessionElements}
                                 </div>
                                 <button className={s.expandBtn} onClick={toggleExpand}>
                                         {isExpanded ? 'Collapse' : 'Expand'}

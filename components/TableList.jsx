@@ -31,7 +31,8 @@ export default function TableList(props) {
             phone: item.phoneNumber,
             mbo: item.mbo,
             show: item.show,
-            code: "#User" + item.id             // NOTE vidit za ovo
+            code: "#User" + item.id,             // NOTE vidit za ovo
+            sessions: item.appointments
          }))
          else itemList = res.data.map((item, index) => ({
             id: item.id,

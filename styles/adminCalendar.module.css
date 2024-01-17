@@ -197,6 +197,7 @@
     text-align: center;
     justify-content: center;
     padding: 10px;
+    cursor: not-allowed;
 }
 
 .tableHour{
@@ -208,7 +209,11 @@
     padding: 6px;
 }
 
-.tableSquare:hover {
+.squareHover {
+    cursor: pointer;
+}
+
+.squareHover:hover {
     background-color: green;
     color: white;
     transform: translateY(-3px); /* Lift effect */

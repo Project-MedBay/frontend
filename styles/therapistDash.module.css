@@ -116,10 +116,14 @@
    opacity: 0.75;
 }
 
+.session_selected {
+   border: 3px solid #22006a;
+}
+
 .session_date {
    color: #22006a;
    font-size: calc(24 * var(--scale-by-height));
-   font-weight: 300;
+   font-weight: 500;
    margin: 0;
 }
 
@@ -140,10 +144,6 @@
    font-size: calc(20 * var(--scale-by-height));
    font-weight: 400;
    margin: 0;
-}
-
-.session_more {
-   display: none;
 }
 
 .right_cards {

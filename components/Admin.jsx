@@ -66,12 +66,18 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
         return formattedDate
     }
 
+    function formatFullTime(datetime) {
+        let formattedTime = ""
+        datetime.getHours() < 10 ? formattedTime += "0" : "";
+        formattedTime += datetime.getHours() + ":";
+        datetime.getMinutes() < 10 ? formattedTime += "0" : "";
+        formattedTime += datetime.getMinutes()
+        return formattedTime
+    }
+
     function formatFullDateAndTime(datetime) {
         let formattedDate = formatFullDate(datetime) + " "
-        datetime.getHours() < 10 ? formattedDate += "0" : "";
-        formattedDate += datetime.getHours() + ":";
-        datetime.getMinutes() < 10 ? formattedDate += "0" : "";
-        formattedDate += datetime.getMinutes()
+        formattedDate += formatFullTime(datetime)
         return formattedDate;
     }
 
@@ -97,6 +103,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
                 <Route path="verifications" element={<AdminVerifications
                     userToken={userToken}
                     formatFullDateAndTime={formatFullDateAndTime}
+                    formatFullTime={formatFullTime}
                 />} />
 
                 <Route path="manage" element={<AdminManage

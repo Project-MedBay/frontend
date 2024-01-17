@@ -4,7 +4,7 @@ import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, formatWeek, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
+   const {userToken, formatDate, formatFullDate, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
    const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
@@ -30,8 +30,7 @@ export default function SessionSelection(props) {
                Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
             }
          })
-         .then(res => {console.log(res.data)
-            setAvailableSessions(res.data)})
+         .then(res => setAvailableSessions(res.data))
          .catch(error => console.log(error));
       } else {
          axios({

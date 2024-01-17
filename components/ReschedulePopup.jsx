@@ -6,15 +6,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/reschedulePopup.module.css"
 
 export default function ReschedulePopup(props) {
-   const {userToken, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, selectedWeek, popupExit, theme} = props
-   const patientSchedule = () => {
-      if (user == "patient") return props.patientSchedule
-      else {
-         var patientInfo = props.patientInfo
-         // axios koji ce dohvatit pacijentov raspored
-         return mySchedule
-      }
-   }
+   const {userToken, renewSchedule, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, patientSchedule, selectedWeek, popupExit, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : ''; // define dark mode class
 
@@ -33,7 +25,7 @@ export default function ReschedulePopup(props) {
             Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
          }
       })
-      .then(res => console.log(res))
+      .then(res => res.status == 200 && renewSchedule())
       .catch(error => console.log(error));
       setRescheduleConfirmBox(false)
       popupExit()       // NOTE vidicemo jel pozivanje popupexita on success sjebe stvar
@@ -68,10 +60,9 @@ export default function ReschedulePopup(props) {
             selectedSessions = {[rescheduledSession.datetime]}
             setSelectedSessions = {setRescheduledSession}
             currentSession = {currentSession}
-            patientSchedule = {patientSchedule()}
+            patientSchedule = {patientSchedule}
             selectedWeek={selectedWeek}
             numOfSessions = {1}
-            numberOfDays= {20} // NOTE namistit ovo
             therapyCode = {currentSession.therapyCode}
             theme={theme}
          />

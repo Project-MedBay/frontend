@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { testSessions } from "./TestingData"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import refresh from "../assets/refresh.png"
 import s from "../styles/therapistDash.module.css"
@@ -56,12 +55,12 @@ export default function TherapistDash(props) {
             cardClass += ` ${s.session_passed}`
          }
          return (
-            <div className={cardClass} key={id} onClick={() => {setSelectedSession(session)}}>
+            <div className={`${cardClass} ${id == selectedSession.id ? s.session_selected : ""}`}
+                 key={id} onClick={() => {setSelectedSession(session)}}>
                <h3 className={s.session_date}>{formatDate(new Date(dateTime))}</h3>
                <h3 className={s.session_time}>{new Date(dateTime).getHours()}:00 - {new Date(dateTime).getHours()+1}:00</h3>
                <div className={s.session_footer}>
                   <p className={s.session_location}>{equipmentRoomName}</p>
-                  <p className={s.session_more}>View more</p>
                </div>
             </div>
          )
@@ -71,7 +70,6 @@ export default function TherapistDash(props) {
    }
 
    function goBackWeek() {
-      // ako je selected week (format week) == week earliest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(newDate.getDate() - 7)
@@ -80,7 +78,6 @@ export default function TherapistDash(props) {
    }
 
    function goForwardWeek() {
-      // ako je selected week (format week) == week latest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(newDate.getDate() + 7)
@@ -124,6 +121,20 @@ export default function TherapistDash(props) {
    function popupExit() {
       setPatientPopup(false)
    }
+
+   const escFunction = (event) => {
+      if (event.key === "Escape") {
+        popupExit()
+      }
+   }
+  
+   useEffect(() => {
+      document.addEventListener("keydown", escFunction, false)
+  
+      return () => {
+        document.removeEventListener("keydown", escFunction, false)
+      }
+    }, [escFunction])
 
    return (<>
       <div className={`${s.therapist_dash_main} ${patientPopup && s.covered_by_popup}`}>
@@ -228,9 +239,18 @@ export default function TherapistDash(props) {
       {patientPopup &&
          <TherapyOrPatientPopup
             popupType="patient"
-            popupData={selectedSession.patient}
+            popupData={{
+               id: selectedSession.patient.id,
+               name: selectedSession.patient.firstName,
+               surname: selectedSession.patient.lastName,
+               "e-mail": selectedSession.patient.email,
+               address: selectedSession.patient.address,
+               dob: new Date(selectedSession.patient.dateOfBirth),
+               phone: selectedSession.patient.phoneNumber,
+               mbo: selectedSession.patient.mbo
+            }}
             // setPopupData={newNotes => setSelectedSession(prevSession => )}
-            popupSessions={selectedSession.patient.appointments}     // NOTE zamijeniti s dohvacenim sessionima
+            popupSessions={selectedSession.patient.appointments}
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}

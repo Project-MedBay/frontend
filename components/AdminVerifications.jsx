@@ -6,7 +6,7 @@ import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
-    const {userToken, formatFullDateAndTime} = props
+    const {userToken, formatFullDateAndTime, formatFullTime} = props
 
     const [popup, setPopup] = useState({
         set: false, 
@@ -94,6 +94,21 @@ export default function AdminVerifications(props) {
             ...prevData.filter(request => request.therapyId != id)
         ]))
     }
+    
+    const escFunction = (event) => {
+        if (event.key === "Escape") {
+            setPopup({set: false, popupType: null})
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", escFunction, false)
+
+        return () => {
+        document.removeEventListener("keydown", escFunction, false)
+        }
+    }, [escFunction])
+
 
     return (
         <>
@@ -120,12 +135,14 @@ export default function AdminVerifications(props) {
                         handleProcess={handleProcess}
                     />
                 :
-                    <VerificationPopup 
+                    <VerificationPopup
                         userToken={userToken}
                         popupData={therapyPopupData} 
                         setPopup={setPopup} 
                         type="therapy"
                         handleProcess={handleProcess}
+                        formatFullDateAndTime={formatFullDateAndTime}
+                        formatFullTime={formatFullTime}
                     />
                 )
             }

@@ -45,7 +45,7 @@ export default function App() {           // glavna komponenta, u njoj se render
    
    useEffect(() => {
       if (pathname == "/" || pathname == "/login") setUserToken("")
-   }, [])
+   }, [location])
    
    useEffect(() => {
       sessionStorage.setItem("medbay-token", JSON.stringify(userToken))

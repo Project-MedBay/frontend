@@ -17,6 +17,7 @@
 }
 
 .popup_wide {
+   width: max-content;
    max-width: calc(1000 * var(--scale-by-height));
 }
 
@@ -111,6 +112,7 @@
    margin-bottom: calc(40 * var(--scale-by-height));
    overflow: auto;
    max-height: calc(420 * var(--scale-by-height));
+   width: 95%;
 }
 
 .popup_tall {
@@ -118,6 +120,7 @@
 }
 
 .session_card {
+   width: 100%;
    display: flex;
    flex-direction: column;
    gap: calc(5 * var(--scale-by-height));

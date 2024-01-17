@@ -359,6 +359,21 @@ export default function AdminManage(props) {
       else if (editPopup) setEditPopup(false)
       else setDeactivatePopup(false)
    }
+  
+   const escFunction = (event) => {
+      if (event.key === "Escape") {
+         popupExit()
+      }
+   }
+
+   useEffect(() => {
+      document.addEventListener("keydown", escFunction, false)
+
+      return () => {
+         document.removeEventListener("keydown", escFunction, false)
+      }
+   }, [escFunction])
+
 
    return (<>
       <div className={`${s.admin_manage_main} ${(addPopup || editPopup || deactivatePopup) && s.covered_by_popup}`}>

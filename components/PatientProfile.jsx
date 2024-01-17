@@ -122,7 +122,7 @@ export default function PatientProfile(props) {
    
    function handleDeactivate() {
       axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user",
+         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/user/",
          method: "DELETE",
          headers: {
             Authorization: `Bearer ${userToken}`
@@ -137,6 +137,21 @@ export default function PatientProfile(props) {
       else if (editPopup) setEditPopup(false)
       else setSelectedTherapy("")
    }
+   
+   const escFunction = (event) => {
+      if (event.key === "Escape") {
+        popupExit()
+      }
+   }
+  
+   useEffect(() => {
+      document.addEventListener("keydown", escFunction, false)
+  
+      return () => {
+        document.removeEventListener("keydown", escFunction, false)
+      }
+   }, [escFunction])
+   console.log(userData)
 
    return (<>
       <div className={`${darkModeClass} ${s.patient_profile_main} ${(selectedTherapy != "" || editPopup || deactivatePopup) && s.covered_by_popup}`}>

@@ -11,15 +11,30 @@ export default function TherapistPatients(props) {
    const [searchInput, setSearchInput] = useState("")
    const [patientList, setPatientList] = useState([])
    const [selectedPatient, setSelectedPatient] = useState("")
+   const [popupSessions, setPopupSessions] = useState([])
 
    function activatePopup(patient) {
       setSelectedPatient(patient)
-      // axios koji ce dohvatit sesije s tim pacijentom
+      setPopupSessions(patient.sessions)
    }
 
    function popupExit() {
       setSelectedPatient("")
    }
+   
+   const escFunction = (event) => {
+      if (event.key === "Escape") {
+        popupExit()
+      }
+   }
+  
+   useEffect(() => {
+      document.addEventListener("keydown", escFunction, false)
+  
+      return () => {
+        document.removeEventListener("keydown", escFunction, false)
+      }
+   }, [escFunction])
 
    return (<>
       <div className={`${s.therapist_patients_main} ${selectedPatient != "" && s.covered_by_popup}`}>
@@ -46,7 +61,7 @@ export default function TherapistPatients(props) {
          <TherapyOrPatientPopup
             popupType="patient"
             popupData={selectedPatient}
-            popupSessions={testSessions}     // NOTE zamijeniti s dohvacenim sessionima
+            popupSessions={popupSessions}
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}
