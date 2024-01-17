@@ -13,7 +13,7 @@ export default function TherapistDash(props) {
       dateTime: "--"
    })
    useEffect(() => {
-      let tempSession = {dateTime: "--"}
+      let tempSession = {text: "No upcoming sessions.", dateTime: "--"}
       for (let week in mySchedule) {
          for (let session of mySchedule[week]) {
             if (new Date(session.dateTime) > new Date()) {
@@ -23,12 +23,12 @@ export default function TherapistDash(props) {
          }
          if (tempSession.dateTime != "--") break
       }
-      if (tempSession.dateTime != "") {
-         setNextSession(tempSession)
-         setSelectedSession(nextSession)
-      }
+      setNextSession(tempSession)
+      if (!editingNotes) setSelectedSession(tempSession)
+      else setEditingNotes(false)
    }, [mySchedule])
-   const [selectedSession, setSelectedSession] = useState(nextSession)     // NOTE sinkronizirat ovo kako triba
+
+   const [selectedSession, setSelectedSession] = useState(nextSession)
    const [patientPopup, setPatientPopup] = useState(false)
 
    const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
@@ -48,23 +48,26 @@ export default function TherapistDash(props) {
       
    var scheduleElements
    if (mySchedule[selectedWeek] != null) {                                 // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
-      scheduleElements = mySchedule[selectedWeek].map(session => {               // kartice sesija u rasporedu
-         const { id, dateTime, equipmentRoomName } = session
-         let cardClass = s.session_card
-         if (new Date(dateTime) < new Date()) {
-            cardClass += ` ${s.session_passed}`
-         }
-         return (
-            <div className={`${cardClass} ${id == selectedSession.id ? s.session_selected : ""}`}
-                 key={id} onClick={() => {setSelectedSession(session)}}>
-               <h3 className={s.session_date}>{formatDate(new Date(dateTime))}</h3>
-               <h3 className={s.session_time}>{new Date(dateTime).getHours()}:00 - {new Date(dateTime).getHours()+1}:00</h3>
-               <div className={s.session_footer}>
-                  <p className={s.session_location}>{equipmentRoomName}</p>
+      scheduleElements = mySchedule[selectedWeek]
+      .sort((s1, s2) => new Date(s1.dateTime).getTime() - new Date(s2.dateTime).getTime())
+      .map(session => {               // kartice sesija u rasporedu
+            const { id, dateTime, equipmentRoomName } = session
+            let cardClass = s.session_card
+            if (new Date(dateTime) < new Date()) {
+               cardClass += ` ${s.session_passed}`
+            }
+            return (
+               <div className={`${cardClass} ${id == selectedSession.id ? s.session_selected : ""}`}
+                  key={id} onClick={() => {setSelectedSession(session)}}>
+                  <h3 className={s.session_date}>{formatDate(new Date(dateTime))}</h3>
+                  <h3 className={s.session_time}>{new Date(dateTime).getHours()}:00 - {new Date(dateTime).getHours()+1}:00</h3>
+                  <div className={s.session_footer}>
+                     <p className={s.session_location}>{equipmentRoomName}</p>
+                  </div>
                </div>
-            </div>
-         )
-      })
+            )
+         }
+      )
    } else {
       scheduleElements = <p className={s.no_sessions}>No sessions this week.</p>
    }
@@ -88,6 +91,7 @@ export default function TherapistDash(props) {
    function handleNotesEdit(action) {
       if (action == "cancel") {
          setNotesInput(selectedSession.sessionNotes)
+         setEditingNotes(false)
       } else if (editingNotes) {
          setSelectedSession(prevSession => ({
             ...prevSession,
@@ -114,8 +118,7 @@ export default function TherapistDash(props) {
          })
          .then(res => console.log(res.status))
          .catch(error => console.log(error));
-      }
-      setEditingNotes(prevState => !prevState)
+      } else setEditingNotes(true)
    }
    
    function popupExit() {

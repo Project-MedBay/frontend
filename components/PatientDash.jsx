@@ -30,9 +30,10 @@ export default function PatientDash(props) {
       }
       if (tempSession.datetime != "") {
          setNextSession(tempSession)
-         setSelectedSession(nextSession)
+         setSelectedSession(tempSession)
       }
    }, [mySchedule])
+   console.log(nextSession)
    const [selectedSession, setSelectedSession] = useState(nextSession)
    const [showMapMobile, setshowMapMobile] = useState(false)
    

@@ -9,17 +9,19 @@ export default function VerificationCard(props){
     const [rejectionReason, setRejectionReason] = React.useState("");
     const [isExpanded, setIsExpanded] = React.useState(false);
 
-    const sessionElements = popupData.sessions.map((session, index) => {
-        let datetime = new Date(session)
-        let tempDate = new Date(datetime)
-        tempDate.setHours(datetime.getHours() + 1)
-        return (
-            <div key={index} className={s.session}>
-                <p>{formatFullDateAndTime(datetime).slice(0, 10)}</p>
-                <p>{formatFullTime(datetime)} - {formatFullTime(tempDate)}</p>    {/* NOTE prominit ovo */}
-            </div>  
-        )
-    })
+    if (type == "therapy") {
+        var sessionElements = popupData.sessions.map((session, index) => {
+            let datetime = new Date(session)
+            let tempDate = new Date(datetime)
+            tempDate.setHours(datetime.getHours() + 1)
+            return (
+                <div key={index} className={s.session}>
+                    <p>{formatFullDateAndTime(datetime).slice(0, 10)}</p>
+                    <p>{formatFullTime(datetime)} - {formatFullTime(tempDate)}</p>
+                </div>  
+            )
+        })
+    }
 
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);

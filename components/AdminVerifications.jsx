@@ -109,10 +109,9 @@ export default function AdminVerifications(props) {
         }
     }, [escFunction])
 
-
     return (
         <>
-            <div className={`${s.main_container} ${popup === true ? s.blurContainer : ''}`}>
+            <div className={`${s.main_container} ${popup.set === true ? s.blurContainer : ''}`}>
                 <h2 className={s.regTherapyTitle}>Verifications</h2>
                 <div className={s.cards}>
                     <div className={s.therapyCards}> 
@@ -125,6 +124,8 @@ export default function AdminVerifications(props) {
                     </div>
                 </div>
             </div>
+            
+            {popup.set && <div className={s.popup_separate} onClick={() => setPopup({set: false, popupType: null})}></div>}
             {
                 popup.set && (popup.type === "registration" ? 
                     <VerificationPopup 

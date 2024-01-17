@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import initialCalendarData from "./admin_utils/adminCalendarData.js";
 import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
 import ReschedulePopup from "./ReschedulePopup.jsx";
 import s from "../styles/adminCalendar.module.css";
@@ -9,7 +8,7 @@ export default function AdminCalendar(props) {
     const {userToken, formatDate, formatFullDate} = props
 
     const [weekOffset, setWeekOffset] = useState(0);
-    const [calendarData, setCalendarData] = useState(initialCalendarData);
+    const [calendarData, setCalendarData] = useState({});
     const [filterOption, setFilterOption] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDate, setSelectedDate] = useState({date: "", hour: ""});
