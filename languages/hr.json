@@ -1,0 +1,631 @@
+{
+  "admin": {
+    "weekdays": ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+    "months": ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"]
+  },
+  "adminHeader": {
+    "calendar": "KALENDAR",
+    "verifications": "VERIFIKACIJE",
+    "manage": "UPRAVLJANJE",
+    "statistics": "STATISTIKA",
+    "logOut": "ODJAVA",
+    "logoAltText": "Logo"
+  },
+  "adminCalendar": {
+    "appointmentCalendarTitle": "Kalendar termina",
+    "filtersDescription": "Koristite filtre za pretragu termina po pacijentu, djelatniku ili nazivu terapije.",
+    "previousWeek": "Prethodni tjedan",
+    "nextWeek": "Sljedeći tjedan",
+    "filterAll": "Svi",
+    "filterPatient": "Pacijent",
+    "filterTherapist": "Djelatnik",
+    "filterTherapyName": "Naziv terapije",
+    "searchPlaceholder": "Pretraži...",
+    "timeDateHeader": "Vrijeme / Datum",
+    "weekdays": ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"],
+    "popupTherapist": "DJELATNIK:",
+    "popupPatient": "PACIJENT:",
+    "popupCannotReschedule": "Nije moguća odgoda",
+    "reasonOne": "Termin je prošao.",
+    "reasonTwo": "Termin je u sljedećih 48 sati.",
+    "rescheduleCalendar": "ODGODI TERMIN"
+  },
+  "adminFacilityCard": {
+    "editFacility": "UREDI",
+    "deleteFacility": "UKLONI",
+    "specialization": "SPECIJALIZACIJA:",
+    "capacity": "KAPACITET:",
+    "location": "LOKACIJA:",
+    "description": "OPIS:",
+    "resource": "RESURS:",
+    "sessions": "TERMINI:",
+    "relevantBody": "DIO TIJELA:",
+    "code": "KOD:",
+    "description2": "OPIS:"
+  },
+  "adminManage": {
+    "therapistsTab": "Djelatnici",
+    "patientsTab": "Pacijenti",
+    "facilityTab": "Ustanova",
+    "searchPlaceholder": "Pretraži",
+    "resourcesSectionTitle": "RESURSI",
+    "therapiesSectionTitle": "TERAPIJE",
+    "addNewButton": "DODAJ",
+    "noItemsMatchQuery": "Nema stavki koje odgovaraju upitu."
+  },
+  "adminStatistics": {
+    "therapists": "Djelatnici",
+    "resources": "Resursi",
+    "placeholder": "Pretraži",
+    "workHours": "SATI RADA NA TERMINIMA",
+    "pastMonth": "(PRETHODNI MJESEC)",
+    "patientsTreated": "NJEGOVANIH PACIJENATA",
+    "lifetime": "(ODUVIJEK)"
+  },
+  "adminVerifications": {
+    "verificationsTitle": "Verifikacije",
+    "therapiesSectionTitle": "TERAPIJE",
+    "registrationsSectionTitle": "REGISTRACIJE"
+  },
+  "adminVerificationCard": {
+    "request": "Zahtjev #",
+    "review": "Pregled"
+  },
+  "adminVerificationPopup": {
+    "registration": "Registracija",
+    "therapy": "Terapija",
+    "requestNo": "Zahtjev #",
+    "userData": "KORISNIČKI PODATCI:",
+    "name": "Puno ime:",
+    "email": "Email:",
+    "address": "Adresa:",
+    "dob": "Datum rođenja:",
+    "phoneNumber": "Telefonski broj:",
+    "mbo": "MBO:",
+    "therapyID": "ID terapije:",
+    "duration": "Trajanje:",
+    "noOfSessions": "Broj termina:",
+    "sessions": "TERMINI:",
+    "collapse": "Sažmi",
+    "expand": "Proširi",
+    "requestWasMade": "Zahtjev je zaprimljen ",
+    "requestWillBe": "Zahtjev će zaprimiti identifikator User#",
+    "reasonRejection": "Razlog odbijanja",
+    "requestAccept": "Jeste li sigurni da želite odobriti ovaj zahtjev?",
+    "buttonApprove": "Odobri",
+    "buttonReject": "Odbij"
+  },
+  "adminWelcome": {
+    "welcomeMessage": "Dobrodošli, admine!",
+    "calendarButton": "Kalendar",
+    "verificationsButton": "Verifikacije",
+    "manageButton": "Upravljanje"
+  },
+  "AIChat": {
+    "firstTextMedBot": "Pozdrav! Ja sam MedBot i ovdje sam da Vam pomognem odgovoriti na bilo koje pitanje o našim terapijama!",
+    "firstTextBayBot": "Pozdrav! Ja sam BayBot i ovdje sam da Vam pomognem odgovoriti na bilo koje pitanje o korištenju naše stranice!",
+    "processing": "Obrađujem...",
+    "errorMessage": "Naišao sam na pogrešku pri spajanju na poslužitelj. Molim Vas da pokušate ponovno za par trenutaka!",
+    "assistant": "AI Asistent",
+    "open": "Otvori ",
+    "question": "Postavite pitanje...",
+    "send": "Pošalji"
+  },
+  "bodypartSelection": {
+    "head": "Glava",
+    "shoulder": "Rame",
+    "arm": "Ruka",
+    "upperTorso": "Gornji dio trupa",
+    "lowerTorso": "Donji dio trupa",
+    "leg": "Noga",
+    "hand": "Šaka",
+    "foot": "Stopalo"
+  },
+  "customSelectInput": {
+    "select": "Pretraži..."
+  },
+  "deactivatePopup": {
+    "title": "Jeste li sigurni?",
+    "subtitle": "Ova radnja je nepovratna.",
+    "deactivateTextSelf": "Ako deaktivirate svoj račun, izgubit ćete pristup svom računu i svim svojim podacima i morat ćete se ponovno registrirati da biste zatražili nove terapije u budućnosti.",
+    "deactivateTextPatient": "Ako deaktivirate ovaj račun ({{name}} {{surname}} Korisnik#{{id}}), korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+    "deactivateTextTherapist": "Ako deaktivirate ovaj račun ({{specialization}} {{name}} {{surname}}), korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+    "deactivateTextResource": "Izbrišite ovaj resurs ({{name}}) samo ako nema zakazanih termina s ovim resursom i sigurni ste da ga želite trajno ukloniti.",
+    "deactivateTextTherapy": "Izbrišite ovu terapiju ({{name}} {{code}}) samo ako nema zakazanih sesija za ovu terapiju i sigurni ste da je želite trajno ukloniti.",
+    "actionDelete": "UKLONI",
+    "actionDeactivate": "DEAKTIVIRAJ",
+    "actionDeleteCroatian": "UKLONITI",
+    "actionDeactivateCroatian": "DEAKTIVIRATI",
+    "buttonYes": "DA, ",
+    "buttonNo": "NE, NEMOJ "
+  },
+  "adminEditPopup": {
+    "titleAdd": "DODAJ",
+    "titleEdit": "UREDI",
+    "titleAccountData": "PODACI O RAČUNU",
+    "titlePatient": "PACIJENT",
+    "titleTherapist": "DJELATNIK",
+    "titleResource": "RESURS",
+    "titleTherapy": "TERAPIJA",
+    "buttonCancel": "ODUSTANI",
+    "buttonSave": "SPREMI",
+    "validation": {
+      "nameRequired": "Ime je obavezno.",
+      "surnameRequired": "Prezime je obavezno.",
+      "emailFormat": "Email mora biti u formatu 'nesto@nesto.domena'.",
+      "addressRequired": "Adresa je obavezna.",
+      "phoneDigits": "Mora sadržavati 9+ znamenki.",
+      "specializationRequired": "Specijalizacija je obavezna.",
+      "employedSinceFormat": "Mora biti u formatu YYYY-MM-DD.",
+      "passwordLength": "Lozinka mora imati 8+ znakova.",
+      "passwordMatch": "Lozinke se ne podudaraju.",
+      "locationRequired": "Lokacija je obavezna",
+      "digitsOnly": "Mora sadržavati samo znamenke",
+      "resourceRequired": "Resurs je obavezan.",
+      "descriptionRequired": "Opis je obavezan.",
+      "bodypartRequired": "Dio tijela je obavezan."
+    },
+    "incorrectPassword": "Netočna lozinka.",
+    "changePassword": "Promijeni lozinku",
+    "cancelEdit": "Odustani od uređivanja",
+    "fieldRequired": "Polje je obavezno.",
+    "bodyPartList": ["glava", "rame", "noga", "gornji dio trupa", "ruka", "noga", "donji dio trupa", "šaka", "bilo što"],
+    "changePasswordNote": "Prvo unijeti trenutnu lozinku"
+  },
+  "formFields": {
+    "register": {
+      "name": "Ime",
+      "surname": "Prezime",
+      "email": "E-mail",
+      "address": "Adresa",
+      "dateOfBirth": "Datum rođenja",
+      "phoneNumber": "Telefonski broj",
+      "mbo": "MBO",
+      "password": "Lozinka",
+      "confirmPassword": "Potvrdi lozinku",
+      "namePlaceholder": "Ivan",
+      "surnamePlaceholder": "Horvat",
+      "emailPlaceholder": "ivan.horvat@mail.com",
+      "addressPlaceholder": "Ime ulice 1",
+      "dobPlaceholder": "YYYY-MM-DD",
+      "phonePlaceholder": "0912345678",
+      "mboPlaceholder": "123456789",
+      "passwordPlaceholder": "********"
+    },
+    "patient": {
+      "name": "Ime",
+      "surname": "Prezime",
+      "email": "E-mail",
+      "address": "Adresa",
+      "dateOfBirth": "Datum rođenja",
+      "phoneNumber": "Telefonski broj",
+      "mbo": "MBO",
+      "password": "Lozinka",
+      "confirmPassword": "Potvrdi lozinku",
+      "namePlaceholder": "Ivan",
+      "surnamePlaceholder": "Horvat",
+      "emailPlaceholder": "ivan.horvat@mail.com",
+      "addressPlaceholder": "Ime ulice 1",
+      "dobPlaceholder": "YYYY-MM-DD",
+      "phonePlaceholder": "0912345678",
+      "mboPlaceholder": "123456789",
+      "passwordPlaceholder": "********"
+    },
+    "therapist": {
+      "name": "Ime",
+      "surname": "Prezime",
+      "email": "E-mail",
+      "specialization": "Specijalizacija",
+      "employedSince": "Zaposlen od",
+      "password": "Lozinka",
+      "confirmPassword": "Potvrdi lozinku",
+      "namePlaceholder": "Ivan",
+      "surnamePlaceholder": "Horvat",
+      "emailPlaceholder": "ivan.horvat@mail.com",
+      "specializationPlaceholder": "Neki terapeut",
+      "employedSincePlaceholder": "YYYY-MM-DD",
+      "passwordPlaceholder": "********"
+    },
+    "resource": {
+      "name": "Ime",
+      "location": "Lokacija",
+      "specialization": "Specijalizacija",
+      "capacity": "Kapacitet",
+      "description": "Opis",
+      "namePlaceholder": "Neki resurs",
+      "locationPlaceholder": "Neka prostorija ili prostor",
+      "specializationPlaceholder": "Neki terapeut",
+      "capacityPlaceholder": "#",
+      "descriptionPlaceholder": "Ovaj resurs se koristi za neku vrstu terapije."
+    },
+    "therapy": {
+      "name": "Ime",
+      "resource": "Resurs",
+      "bodyPart": "Dio tijela",
+      "sessions": "Termini",
+      "code": "Kod",
+      "description": "Opis",
+      "namePlaceholder": "Neka vrsta terapije",
+      "resourcePlaceholder": "Neki resurs",
+      "bodyPartPlaceholder": "",
+      "sessionsPlaceholder": "#",
+      "codePlaceholder": "45G7E",
+      "descriptionPlaceholder": "Ova terapija koristi ovaj resurs i koristi se za liječenje ovakvih vrsta ozljeda."
+    }
+  },
+  "login": {
+    "formTitle": "Dobrodošli natrag!",
+    "invalidCredentials": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
+    "emailLabel": "E-mail:",
+    "passwordLabel": "Lozinka:",
+    "forgotPassword": "Zaboravljena lozinka?",
+    "loginButton": "Prijava",
+    "tagline": "Rehabilitation Redefined",
+    "newHere": "Novi ste ovdje?",
+    "registerButton": "Registrirajte se",
+    "emailPlaceholder": "ivan.horvat@mail.com",
+    "passwordPlaceholder": "********"
+  },
+  "loginPasswordPopup": {
+    "popupTitle": "Napišite svoju e-mail adresu kako bismo Vam poslali obrazac za promjenu lozinke",
+    "emailPlaceholder": "ivan.horvat@mail.com",
+    "submitButton": "Podnesi"
+  },
+  "loginHeader": {
+    "brandName": "MedBay"
+  },
+  "noMatchRoute": {
+    "error": "Error 404",
+    "notFound": "Stranica nije pronađena.",
+    "goBack": "Natrag",
+    "toLogin": "Vrati me na prijavu"
+  },
+  "patient": {
+    "weekdays": ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+    "months": ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"]
+  },
+  "patientDash": {
+    "mySchedule": "Moji termini:",
+    "noSessionsThisWeek": "Nema termina ovaj tjedan.",
+    "nextSession": "Sljedeći termin:",
+    "selectedSession": "Odabrani termin:",
+    "noUpcomingSessions": "Nema nadolazećih termina.",
+    "noSessions": "Nema termina.",
+    "viewMore": "Prikaži više",
+    "therapist": "Terapeut:",
+    "therapy": "Terapija:",
+    "time": "Vrijeme:",
+    "location": "Lokacija:",
+    "sessionNumber": "Broj termina:",
+    "viewLocationOnMap": "Prikaži lokaciju na karti",
+    "closeMap": "Zatvori kartu",
+    "viewNotes": "Pogledaj bilješke",
+    "noNotesSoFar": "Zasad nema bilješki.",
+    "reschedule": "Odgodi termin",
+    "cannotReschedule": "Nemoguće odgoditi termin.",
+    "appointmentInLess48Hours": "Termin je u sljedećih 48 sati.",
+    "appointmentPassed": "Termin je prošao.",
+    "sessionNotesTitle": "BILJEŠKE O TERMINU:",
+    "session": "Termin"
+  },
+  "patientHeader": {
+    "brandName": "MedBay",
+    "logOut": "ODJAVA",
+    "logOutConfirmation": "ODJAVA?",
+    "yes": "DA",
+    "no": "NE",
+    "myProfile": "MOJ PROFIL",
+    "newTherapy": "NOVA TERAPIJA",
+    "dashboard": "POČETNA STRANICA"
+  },
+  "patientNewTherapy": {
+    "title": "ZAHTJEV ZA NOVU TERAPIJU",
+    "step1Title": "KORAK 1: IZBOR TERAPIJE",
+    "step1Subtitle": "ili unesite kod terapije koji vam je dao Vaš liječnik:",
+    "invalidCode": "Nevažeći kod.",
+    "codePlaceholderr": "#4JGSE",
+    "filterBy": "FILTRIRAJ PO:",
+    "searchPlaceholder": "Pretraži",
+    "searchText": "Filtrirajte preko dijela tijela ili upotrijebite tražilicu kako biste pronašli svoju terapiju.",
+    "step2Title": "KORAK 2: IZBOR TERMINA",
+    "pickedSessions": "ODABRANI TERMINI:",
+    "duration": "trajanje:",
+    "restrictions": "Ograničenja:",
+    "sessionRestrictions": {
+      "firstRestriction": "1. Odabrani termini moraju biti udaljeni barem 24 sata.",
+      "secondRestriction1": "2. Ukupno trajanje terapije ne smije prelaziti ",
+      "secondRestriction2": " dana.", 
+      "_comment_za_Lovru1": "napraviti funkciju koja određuje treba li pisati dan ili dana za hrvatski prijevod",
+      "thirdRestriction": "3. Termini se ne mogu zakazati više od 3 mjeseca unaprijed."
+    },
+    "scheduleLegend": "Sivo obojani datumi/vremena su nedostupni ili popunjeni. Odabrani datumi/vremena označeni su ljubičastom bojom i podebljani.",
+    "step3Title": "KORAK 3: ZAVRŠNI KORAK",
+    "reviewSectionTitle": "pregled:",
+    "durationDays1": "trajanje: ",
+    "durationDays2": " dana",
+    "_comment_za_Lovru2": "dodati funkciju",
+    "noOfSessions": "Broj termina: ",
+    "mySessions": "MOJI TERMINI",
+    "collapse": "Sažmi",
+    "expand": "Proširi",
+    "verificationSectionTitle": "verifikacija:",
+    "referralNumber": "Broj uputnice:",
+    "referralPlaceholder": "123456789",
+    "referralDescription1": "Jedinstveni slijed slova i znamenaka koji se nalaze na",
+    "referralDescription2": "uputnici koju Vam je izdao liječnik.",
+    "referralDescription3": "Ako ga ne možete naći, kontaktirajte svog liječnika.",    
+    "doctorId": "ID liječnika (hlkid):",
+    "doctorIdDescription1": "Jedinstveni slijed znamenaka koji identificira Vašeg liječnika ",
+    "doctorIdDescription2": "u bazi zavoda za zdravstveno osiguranje.",
+    "doctorIdDescription3": "Ako ga ne možete naći, kontaktirajte svog liječnika.",
+    "verificationFailed": "Nevažeći broj uputnice ili hlkid.",
+    "finishNote": "Kada vašu terapiju odobri administrator, obavijestit ćemo vas putem e-pošte.",
+    "iUnderstand": "Razumijem",
+    "cancelButton": "Odustani",
+    "backButton": "Natrag",
+    "nextButton": "Dalje",
+    "finishButton": "Završi",
+    "tagline": "RECOVERY BEGINS HERE.",
+    "successPopup": {
+      "text1": "Unijeli ste sve podatke i vaš zahtjev za terapijom sada obrađuje naš administrator.",
+      "text2": "Kada vaš zahtjev bude odobren, obavijestit ćemo vas putem e-pošte i termini će se pojaviti na vašoj početnoj stranici.",
+      "buttonText": "Na početnu"
+    }
+  },
+  "patientProfile": {
+    "userID": "(#User",
+    "editAccountData": "Uredi podatke o računu",
+    "deactivateAccount": "Deaktiviraj račun",
+    "myTherapiesTitle": "Moje terapije:",
+    "noTherapiesMessage": "Još nemate terapije. Prijavite se pritiskom na NOVA TERAPIJA!",
+    "emailLabel": "E-mail:",
+    "addressLabel": "Adresa:",
+    "dateOfBirthLabel": "Datum rođenja:",
+    "phoneNumberLabel": "Telefonski broj:",
+    "mboLabel": "MBO:",
+    "therapyCard": {
+      "therapyCode": "KOD TERAPIJE",
+      "dateStarted": "DATUM POČETKA:",
+      "dateFinished": "DATUM ZAVRŠETKA:",
+      "totalSessions": "UKUPNO TERMINA:",
+      "viewMore": "Prikaži više"
+    },
+    "thankYouMessage": {
+      "title": "HVALA",
+      "subtitle": "ŠTO STE S NAMA VEĆ",
+      "oneDay": "DAN",
+      "moreDays": "DANA",
+      "oneMonth": "MJESEC",
+      "moreMonths": "MJESECA/MJESECI",
+      "oneYear": "GODINA",
+      "moreYears": "GODINE/GODINA",
+      "alotOfTime": "VIŠE OD ",
+      "_comment_za_Lovru3": "funkcija za rješavanje problema mjeseca/mjeseci i godine/godina"
+    },
+    "uploadImageTooltip": {
+      "add": "Dodaj sliku profila",
+      "change": "Promijeni sliku profila"
+    }
+  },
+  "registerMain": {
+    "alreadyHaveAccount": "Već imate korisnički račun?",
+    "loginHere": "Prijava",
+    "formTitle": "Registracija",
+    "unexpectedError": "Greška",
+    "emptyField": "Polje je obavezno.",
+    "digitsChecker": "Mora sadržavati samo znamenke.",
+    "recaptchaChecker": "Potvrdite da niste robot.",
+    "tryAgain": "Pokušajte ponovno",
+    "fields": {
+      "firstName": {
+        "label": "Ime",
+        "placeholder": "Ivan",
+        "errorMessage": "Ime je obavezno."
+      },
+      "lastName": {
+        "label": "Prezime",
+        "placeholder": "Horvat",
+        "errorMessage": "Prezime je obavezno."
+      },
+      "email": {
+        "label": "E-mail",
+        "placeholder": "ivan.horvat@mail.com",
+        "errorMessage": "E-mail mora biti u formatu 'ime@domena.com'."
+      },
+      "address": {
+        "label": "Adresa",
+        "placeholder": "Ulica 1",
+        "errorMessage": "Adresa je obavezna."
+      },
+      "dateOfBirth": {
+        "label": "Datum rođenja",
+        "placeholder": "YYYY-MM-DD",
+        "errorMessage": "Mora biti u formatu YYYY-MM-DD."
+      },
+      "phoneNumber": {
+        "label": "Telefonski broj",
+        "placeholder": "0912345678",
+        "errorMessage": "Mora sadržavati najmanje 9 znamenki."
+      },
+      "MBO": {
+        "label": "MBO",
+        "placeholder": "123456789",
+        "errorMessage": "Mora sadržavati 9 znamenki."
+      },
+      "password": {
+        "label": "Lozinka",
+        "placeholder": "********",
+        "errorMessage": "Lozinka mora sadržavati najmanje 8 znakova."
+      },
+      "passwordConfirm": {
+        "label": "Potvrda lozinke",
+        "placeholder": "********",
+        "errorMessage": "Lozinke se ne podudaraju."
+      }
+    },
+    "togglePasswordText": "Prikaži/Sakrij lozinku",
+    "registerButtonText": "Registracija",
+    "successPopup": {
+      "text1": "Unijeli ste sve podatke i vaš račun sada obrađuje naš administrator.",
+      "text2": "Molimo provjeravajte svoj e-mail kako biste vidjeli je li vaš račun potvrđen ili postoje promjene koje trebate napraviti.",
+      "buttonText": "OK"
+    },
+    "greeting": "Where Healing Begins With Care."
+  },
+  "reschedulePopup": {
+    "popupTitle": "ODGODI TERMIN:",
+    "currentSession": "TRENUTNI TERMIN:",
+    "newSession": "NOVI TERMIN:",
+    "rescheduleButton": "Odgodi termin",
+    "rescheduleLegend1": "Sivo obojani datumi/vremena su nedostupni ili popunjeni.",
+    "rescheduleLegend2": "Odabrani datum i vrijeme su podebljani ",
+    "rescheduleLegend3": "i naglašeni ljubičastom bojom.",
+    "rescheduleLegend4": "Datumi u kojima već ",
+    "rescheduleLegendTernary_za_Lovru": "imaju / imate",
+    "rescheduleLegend5": " zakazani drugi termin naglašeni su ",
+    "rescheduleLegend6": "zelenim okvirom",
+    "confirmation": {
+      "text": "Jeste li sigurni?",
+      "yes": "Da",
+      "no": "Ne"
+    }
+  },
+  "resetPassword": {
+    "resetTitle": "Promjena lozinke",
+    "newPassword": "Nova lozinka:",
+    "confirmNew": "Potvrda nove lozinke:",
+    "resetButton": "Promijeni lozinku",
+    "failedText": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno."
+  },
+  "sessionSelection": {
+    "selectDateMessage": "Odaberite datum za pregled termina"
+  },
+  "tableList": {
+    "headers": {
+      "patients": ["#", "Ime", "Prezime", "E-mail", "Adresa", "Datum rođenja", "Telefonski broj", "MBO"],
+      "therapists": ["#", "Ime", "Prezime", "E-mail", "Specijalizacija", "Zaposlen od"]
+    },
+    "buttons": {
+      "edit": "UREDI",
+      "deactivate": "DEAKTIVIRAJ",
+      "details": "DETALJI",
+      "addNew": "DODAJ"
+    },
+    "messages": {
+      "noResults": "Nema stavki koje odgovaraju upitu."
+    }
+  },
+  "therapist": {
+    "weekdays": ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+    "months": ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"]
+  },
+  "therapistDash": {
+    "schedule": {
+      "title": "Moj raspored:",
+      "noUpcomingSessions": "Nema nadolazećih termina.",
+      "noSessionsThisWeek": "Nema termina ovaj tjedan.",
+      "nextSession": "Sljedeći termin:",
+      "selectedSession": "Odabrani termin:"
+    },
+    "sessionCard": {
+      "viewMore": "Prikaži više",
+      "therapy": "Terapija:",
+      "time": "Vrijeme:",
+      "location": "Lokacija:",
+      "sessionNumber": "Broj termina:",
+      "patient": "Pacijent:"
+    },
+    "notes": {
+      "title": "Vaša bilješka:",
+      "cancel": "Odustani",
+      "edit": "Uredi bilješku",
+      "save": "Spremi bilješku",
+      "add": "Dodaj bilješku",
+      "placeholder": "Trenutno nema bilješki.",
+      "disabledText": "Bilješku nije moguće dodati prije početka termina."
+    },
+    "popup": {
+      "close": "Zatvori",
+      "patientDetails": "Detalji o pacijentu",
+      "therapyDetails": "Detalji o terapiji"
+    },
+    "buttons": {
+      "goBackWeek": "Prošli tjedan",
+      "goForwardWeek": "Sljedeći tjedan",
+      "resetWeek": "Postavi na trenutni tjedan"
+    },
+    "messages": {
+      "noSessions": "Nema termina ovaj tjedan.",
+      "noNotes": "Trenutno nema bliješki."
+    },
+    "collapse": "Sažmi",
+    "viewNotes": "Pregledaj bilješke",
+    "rows1": {
+      "dateStarted": "datum početka",
+      "rows1Therapist": "terapeut",
+      "rows1DateFinished": "datum završetka",
+      "rows1location": "lokacija"
+    },
+    "rows2": {
+      "rows2Email": "email",
+      "rows2Address": "adresa",
+      "rows2DOB": "datum rođenja",
+      "rows2PhoneNumber": "telefonski broj",
+      "rows2MBO": "mbo"
+    },
+    "atSessionInfo": "u",
+    "noNotes": "Nema bilješki"
+  },
+  "therapistHeader": {
+    "logoTitle": "MedBay",
+    "navigation": {
+      "logOutConfirmation": "ODJAVA?",
+      "logOutYes": "DA",
+      "logOutNo": "NE",
+      "logOut": "ODJAVA",
+      "patients": "PACIJENTI",
+      "dashboard": "POČETNA STRANICA"
+    }
+  },
+  "therapistPatients": {
+    "title": {
+      "showing": "PRIKAZUJE SE:",
+      "allPatients": "REZULTATI PRETRAGE (svi pacijenti)",
+      "yourPatients": "VAŠI PACIJENTI"
+    },
+    "searchPlaceholder": "Pretraži",
+    "popup": {
+      "patientType": "pacijent"
+    }
+  },
+  "therapyOrPatientPopup": {
+    "popup": {
+      "therapy": "terapija",
+      "patient": "pacijent",
+      "sessionCount": "TERMINI:"
+    },
+    "infoLabels": {
+      "dateStarted": "Datum početka",
+      "therapist": "Terapeut",
+      "dateFinished": "Datum završetka",
+      "location": "Lokacija",
+      "email": "E-mail",
+      "address": "Adresa",
+      "dob": "Datum rođenja",
+      "phoneNumber": "Telefonski broj",
+      "mbo": "MBO"
+    },
+    "session": {
+      "noNotes": "Nema bilješki",
+      "viewNotes": "Pregledaj bilješke",
+      "collapse": "Sažmi",
+      "addNote": "Dodaj bilješku",
+      "editNote": "Uredi bilješku",
+      "saveNote": "Spremi bilješku",
+      "cancel": "Odustani",
+      "placeholder": "Trenutno nema bilješki."
+    },
+    "exitButton": "Izlaz",
+    "noSessionsYet": "Trenutno nema termina"
+  }
+}
