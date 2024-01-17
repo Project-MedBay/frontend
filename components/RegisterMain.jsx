@@ -124,12 +124,9 @@ export default function RegisterMain(props) {
    }
    
    function checkPhoneNumberRules(value) {         // provjera za broj mobitela (trenutno: samo brojke, barem 9)
-      let failed = !/^[\d\+]/.test(value)
-      let text = "Start with + or digit."
-      if (!failed && !/^\+?\d+$/.test(value)) {
-         failed = true
-         text = "Must be digits only."
-      } else if (!failed && value.length < 9) {
+      let failed = !/^\d+$/.test(value)
+      let text = "Must be digits only."
+      if (!failed && value.length < 9) {
          failed = true
          text = "Must be 9+ digits."
       }

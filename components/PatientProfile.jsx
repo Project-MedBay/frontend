@@ -63,11 +63,15 @@ export default function PatientProfile(props) {
       }
    }
 
-   function handleImageInput(event) {
-      if (event.target.files[0] != null) setUserData(prevState => ({
-         ...prevState,
-         userImage: event.target.files[0]
-      }))
+   async function handleImageInput(event) {
+      if (event.target.files[0] != null) {
+         let base64img = await toBase64(event.target.files[0])
+         let startIndex = base64img.indexOf("base64,") + 7
+         setUserData(prevState => ({
+            ...prevState,
+            userImage: base64img.slice(startIndex)
+         }))
+      }
       const imageData = new FormData()
       imageData.append("file", event.target.files[0])
       axios({
@@ -83,16 +87,12 @@ export default function PatientProfile(props) {
       .catch(error => console.log(error));
    }
 
-   function getBase64(file) {
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        console.log(reader.result);
-      };
-      reader.onerror = function (error) {
-        console.log('Error: ', error);
-      };
-   }
+   const toBase64 = file => new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = reject
+   })
 
    function handleEdit(data) {
       if (editPopup) {

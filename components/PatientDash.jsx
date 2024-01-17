@@ -33,7 +33,6 @@ export default function PatientDash(props) {
          setSelectedSession(tempSession)
       }
    }, [mySchedule])
-   console.log(nextSession)
    const [selectedSession, setSelectedSession] = useState(nextSession)
    const [showMapMobile, setshowMapMobile] = useState(false)
    
@@ -55,7 +54,7 @@ export default function PatientDash(props) {
          } else {setRescheduleText("Appointment is in less than 48 hours.")}
          setRescheduledSession(selectedSession)
 
-         if (selectedSession.notes == "") {
+         if (!selectedSession.notes) {
             setNotesDisabled(true)
          } else {setNotesDisabled(false)}
       }

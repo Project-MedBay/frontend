@@ -5,20 +5,19 @@ import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
-   const {popupType, popupData, popupSessions, formatDate, formatFullDate, popupExit, theme} = props
+   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
    const [viewingNotesOf, setViewingNotesOf] = useState("")
    const [editingNotes, setEditingNotes] = useState(false)
    const [notesInput, setNotesInput] = useState("")
-
+console.log(popupSessions)
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (viewingNotesOf != "") {
          setNotesInput(viewingNotesOf.sessionNotes)
       } else {setNotesInput("")}
    }, [viewingNotesOf])
-   console.log(popupSessions)
 
    var title, rows
    if (popupType == "therapy") {
@@ -42,7 +41,9 @@ export default function TherapyOrPatientPopup(props) {
       })
       infoElements.push(<div className={rowClass} key={infoElements.length}>{rowElements}</div>)
    }
-   const sessionElements = popupSessions?.map(session => {
+   const sessionElements = popupSessions
+      ?.sort((s1, s2) => new Date(s1.appointmentDate).getTime() - new Date(s2.appointmentDate).getTime())
+      .map(session => {
       let sessionPassed = new Date(session.appointmentDate) < new Date()
       let sessionInfo = <> 
          <p className={s.session_datetime}>{formatDate(new Date(session.appointmentDate))} at {new Date(session.appointmentDate).getHours()}:00</p>
@@ -50,7 +51,7 @@ export default function TherapyOrPatientPopup(props) {
             <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session)}>
                {viewingNotesOf.appointmentId === session.appointmentId ? "Collapse" : "View notes"}
             </p> :
-            popupType == "therapy" || !session.show || !sessionPassed || viewingNotesOf.appointmentId == session.appointmentId ?
+            (popupType == "therapy" || !session.show || !sessionPassed) ?
             <p className={s.session_notes}>No notes</p> :
             <button className={s.note_edit} onClick={() => handleNotesEdit("add", session)}>Add note</button>
          }
@@ -128,7 +129,13 @@ export default function TherapyOrPatientPopup(props) {
                Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
             }
          })
-         .then(res => console.log(res.status))
+         .then(res => setPopupSessions(popupSessions.map(session => {
+            if (session.appointmentId == viewingNotesOf.appointmentId) return {
+               ...session,
+               sessionNotes: notesInput
+            }
+            else return {...session}
+         })))
          .catch(error => console.log(error));
       }
       setEditingNotes(prevState => !prevState)
@@ -138,7 +145,6 @@ export default function TherapyOrPatientPopup(props) {
       setViewingNotesOf("")
       popupExit()
    }
-   console.log(popupData)
 
    return (
       <div className={`${s.popup} ${popupType == "patient" && s.popup_wide} ${darkModeClass}`}>

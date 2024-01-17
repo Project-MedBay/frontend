@@ -241,6 +241,7 @@ export default function TherapistDash(props) {
 
       {patientPopup &&
          <TherapyOrPatientPopup
+            userToken={userToken}
             popupType="patient"
             popupData={{
                id: selectedSession.patient.id,
@@ -254,6 +255,13 @@ export default function TherapistDash(props) {
             }}
             // setPopupData={newNotes => setSelectedSession(prevSession => )}
             popupSessions={selectedSession.patient.appointments}
+            setPopupSessions={sessions => setSelectedSession(prevState => ({
+               ...prevState,
+               patient: {
+                  ...prevState.patient,
+                  appointments: sessions
+               }
+            }))}
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}
