@@ -3,7 +3,7 @@ import axios from "axios"
 import s from "../styles/loginPasswordPopup.module.css"
 
 export default function LoginPasswordPopup(props) {
-    const {popupExit, language} = props
+    const {popupExit} = props
     const [emailInput, setEmailInput] = useState("")
     const [success, setSuccess] = useState(false)
 

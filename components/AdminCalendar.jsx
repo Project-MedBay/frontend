@@ -5,7 +5,7 @@ import ReschedulePopup from "./ReschedulePopup.jsx";
 import s from "../styles/adminCalendar.module.css";
 
 export default function AdminCalendar(props) {
-    const {userToken, formatDate, formatFullDate, language} = props
+    const {userToken, formatDate, formatFullDate} = props
 
     const [weekOffset, setWeekOffset] = useState(0);
     const [calendarData, setCalendarData] = useState({});
@@ -194,7 +194,6 @@ export default function AdminCalendar(props) {
                 setRescheduledSession={setRescheduledSession}
                 setCurrentSession={setCurrentSession}
                 popupExit={popupExit}
-                language={language}
             />
         }
 
@@ -212,7 +211,6 @@ export default function AdminCalendar(props) {
                     datetime: new Date(session)
                 }))}}
                 popupExit = {popupExit}
-                language={language}
             />
         }
     </>

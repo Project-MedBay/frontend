@@ -182,7 +182,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatWeek={formatWeek}
                mySchedule={mySchedule}
                theme={theme}
-               language={language.id}
             />} />
             <Route path="dash" element={<PatientDash
                userToken={userToken}
@@ -194,7 +193,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatWeek={formatWeek}
                mySchedule={mySchedule}
                theme={theme}
-               language={language.id}
             />} />
 
             <Route path="newTherapy" element={<PatientNewTherapy
@@ -204,7 +202,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDate={formatFullDate}
                navigate={navigate}
                theme={theme}
-               language={language.id}
             />} />
 
             <Route path="profile" element={<PatientProfile
@@ -217,7 +214,6 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDate={formatFullDate}
                navigate={navigate}
                theme={theme}
-               language={language.id}
             />} />
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

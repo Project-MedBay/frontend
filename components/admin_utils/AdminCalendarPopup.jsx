@@ -4,7 +4,7 @@ import x_icon from "../../assets/x_icon.svg"
 import s from "../../styles//admin_utils/adminCalendarPopup.module.css"
 
 export default function AdminCalendarPopup(props) {
-   const {selectedDate, selectedHour, dateSessions, setRescheduledSession, setCurrentSession, popupExit, language} = props;
+   const {selectedDate, selectedHour, dateSessions, setRescheduledSession, setCurrentSession, popupExit} = props;
    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
    const sessionDatetime = new Date(new Date(selectedDate).setHours(extractHours(selectedHour)))

@@ -7,7 +7,7 @@ import s from "../styles/adminStatistics.module.css"
 // NOTE: Posloziti postotke ili abecedno ili silazno
 
 export default function AdminStatistics(props) {
-    const {userToken, language} = props
+    const {userToken} = props
 
     const [currentStatistic, setCurrentStatistic] = useState("therapists")
     const [therapistStats, setTherapistStats] = useState({hours: [], patients: []})

@@ -8,7 +8,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {userToken, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme, language} = props
+   const {userToken, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -253,7 +253,6 @@ export default function PatientDash(props) {
             selectedWeek={selectedWeek}
             popupExit = {popupExit}
             theme={theme}
-            language={language}
          />
       }
    </div>)

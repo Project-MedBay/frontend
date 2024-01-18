@@ -124,7 +124,6 @@ export default function Therapist(props) {           // glavna komponenta uloge,
                formatFullDateISO={formatFullDateISO}
                mySchedule={mySchedule}
                setMySchedule={setMySchedule}
-               language={language.id}
             />} />
             <Route path="dash" element={<TherapistDash
                userToken={userToken}
@@ -135,14 +134,12 @@ export default function Therapist(props) {           // glavna komponenta uloge,
                formatFullDateISO={formatFullDateISO}
                mySchedule={mySchedule}
                setMySchedule={setMySchedule}
-               language={language.id}
             />} />
 
             <Route path="patients" element={<TherapistPatients
                userToken={userToken}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
-               language={language.id}
             />} />
 
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

@@ -5,7 +5,7 @@ import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
-   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme, language} = props
+   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
    

@@ -7,7 +7,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/editPopup.module.css"
 
 export default function AccountEditPopup(props) {
-   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme, language} = props
+   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 

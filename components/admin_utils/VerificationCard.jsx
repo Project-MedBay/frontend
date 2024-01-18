@@ -2,7 +2,7 @@ import React from 'react';
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
-    const {info, formatFullDateAndTime, formatDummyDateString, popup, cardType, setPopup, setPopupData, language} = props;
+    const {info, formatFullDateAndTime, formatDummyDateString, popup, cardType, setPopup, setPopupData} = props;
     const {popupType, set} = popup;
     //const {id, date_time, user_data} = info;
     //const {user_id, full_name, email, address, date_of_birth, phone_number, insurance_policy_number} = user_data;

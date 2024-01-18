@@ -2,7 +2,7 @@ import React from "react"
 import s from "../styles/deactivatePopup.module.css"
 
 export default function DeactivatePopup(props) {
-   const {popupData, popupFor, handleDeactivate, popupExit, theme, language} = props
+   const {popupData, popupFor, handleDeactivate, popupExit, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
