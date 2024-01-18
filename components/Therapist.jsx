@@ -8,7 +8,7 @@ import TherapistPatients from './TherapistPatients'
 import NoMatchRoute from './NoMatchRoute'
 
 export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {globalNavigate, userToken, handleLogout} = props
+   const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
    const [mySchedule, setMySchedule] = useState("")
 
    useEffect(() => {
@@ -113,7 +113,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
   
    return (
       <>
-         <TherapistHeader navigate={navigate} handleLogout={handleLogout} />
+         <TherapistHeader navigate={navigate} handleLogout={handleLogout} language={language} setLanguage={setLanguage} />
          <Routes>
             <Route index element={<TherapistDash
                userToken={userToken}
@@ -124,6 +124,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
                formatFullDateISO={formatFullDateISO}
                mySchedule={mySchedule}
                setMySchedule={setMySchedule}
+               language={language.id}
             />} />
             <Route path="dash" element={<TherapistDash
                userToken={userToken}
@@ -134,12 +135,14 @@ export default function Therapist(props) {           // glavna komponenta uloge,
                formatFullDateISO={formatFullDateISO}
                mySchedule={mySchedule}
                setMySchedule={setMySchedule}
+               language={language.id}
             />} />
 
             <Route path="patients" element={<TherapistPatients
                userToken={userToken}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
+               language={language.id}
             />} />
 
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

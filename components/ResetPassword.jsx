@@ -6,6 +6,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/resetPassword.module.css"
 
 export default function ResetPassword(props) {
+   const {globalNavigate} = props
 
    const [inputFailed, setInputFailed] = useState({         
       value: false,
@@ -108,7 +109,7 @@ export default function ResetPassword(props) {
                   <h3 className={s.success_text}>
                      <span>Success!</span><br />Your password has been reset and you may now use it to log in.
                   </h3>
-                  <h3 className={s.login} onClick={() => props.globalNavigate("/login")}>Take me to login</h3>
+                  <h3 className={s.login} onClick={() => globalNavigate("/login")}>Take me to login</h3>
                </>}
 
             </form>

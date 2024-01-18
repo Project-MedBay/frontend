@@ -3,6 +3,7 @@ import axios from "axios"
 import s from "../styles/loginPasswordPopup.module.css"
 
 export default function LoginPasswordPopup(props) {
+    const {popupExit, language} = props
     const [emailInput, setEmailInput] = useState("")
     const [success, setSuccess] = useState(false)
 
@@ -35,7 +36,7 @@ export default function LoginPasswordPopup(props) {
                 <h3 className={s.success_text}>
                     <span>Success!</span><br />The link to reset your password will arrive to the supplied e-mail shortly.
                 </h3>
-                <h3 className={s.close} onClick={props.popupExit}>Close</h3>
+                <h3 className={s.close} onClick={popupExit}>Close</h3>
             </>}
          </div>
     )

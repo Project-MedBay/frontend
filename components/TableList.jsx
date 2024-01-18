@@ -3,7 +3,7 @@ import axios, { formToJSON } from "axios"
 import s from "../styles/tableList.module.css"
 
 export default function TableList(props) {
-   const {userToken, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
+   const {userToken, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate, language} = props
    if (user == "admin") {
       var {handleAdd, handleEdit, handleDeactivate} = props
    } else {

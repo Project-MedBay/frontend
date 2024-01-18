@@ -5,7 +5,7 @@ import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
-   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
+   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme, language} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
@@ -150,7 +150,7 @@ console.log(popupSessions)
       <div className={`${s.popup} ${popupType == "patient" && s.popup_wide} ${darkModeClass}`}>
          <div className={s.popup_header}>
             <h1 className={s.popup_title}>{title.toUpperCase()}
-               <span>{` (#User${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}
+               <span>{` (#${popupType == "patient" ? "User" : ""}${popupData.id})`}</span>                  {/* NOTE vidit jel ovo triba minjat za therapy */}
             </h1>
             <img src={x_icon} className={s.popup_exit} onClick={handleExit} />
          </div>

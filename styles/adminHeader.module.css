@@ -34,15 +34,20 @@
     display: flex;
     justify-content: center; /* Align items to the start */
     align-items: center;
-    gap: max(calc(20px * 0.6), calc(80vh * 59 / 725)); /* Adjusted gap */
+    gap: max(calc(80px * 0.6), calc(80vh * 59 / 725)); /* Adjusted gap */
 }
 
 .header_nav:first-child {
-    padding-left: max(calc(10px * 0.6), calc(30vh * 59 / 725)); /* More padding on the left of the first nav */
+    padding-left: max(calc(30px * 0.6), calc(30vh * 59 / 725)); /* More padding on the left of the first nav */
 }
 
 .header_nav:last-child {
-    padding-right: max(calc(10px * 0.6), calc(30vh * 59 / 725)); /* More padding on the right of the last nav */
+    padding-right: max(calc(30px * 0.6), calc(30vh * 59 / 725)); /* More padding on the right of the last nav */
+}
+
+.language {
+    margin: 0 min(calc(-20px * 0.6), calc(-20vh * 59 / 725));
+    width: max(calc(110px * 0.6), calc(110vh * 59 / 725));
 }
 
 .nav_item, .nav_logout {

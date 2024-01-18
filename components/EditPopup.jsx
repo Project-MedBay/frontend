@@ -7,7 +7,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/editPopup.module.css"
 
 export default function AccountEditPopup(props) {
-   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
+   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme, language} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -108,6 +108,7 @@ export default function AccountEditPopup(props) {
                      defaultValue={formData[name]}
                      handleChange={handleChange}
                      failed={inputFailed[name].failed}
+                     theme="light"
                   />
                :
                   <input

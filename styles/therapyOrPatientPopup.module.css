@@ -239,8 +239,17 @@ textarea.note_box {
    color: #fff;
 }
 
-.dark .popup_sessions, .dark .popup_row span {
+.dark .session_notes {
+   color: #aaaaaa;
+}
+
+.dark .popup_sessions, .dark .popup_row span, .dark .notes_link {
    color: #70D8AC;
+}
+
+.dark .note_box {
+   background-color: #757575;
+   color: #f0f0f0;
 }
 
 .dark .session_card {

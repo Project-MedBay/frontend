@@ -3,7 +3,7 @@ import axios from "axios"
 import s from "../styles/aiChat.module.css"
 
 export default function AIChat(props) {
-   const {userToken, theme} = props
+   const {userToken, theme, language} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -63,6 +63,7 @@ export default function AIChat(props) {
             Authorization: "Bearer " + userToken         // korisnikov access token potreban za dohvacanje podataka iz baze
          },
          data: {
+            language: language,
             message: chatInput,
             chatHistory: messages[currentBot].slice(1).map(message => message.text),
             medBot: currentBot == "medbot"

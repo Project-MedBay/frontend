@@ -3,7 +3,7 @@ import axios from 'axios'
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
-    const {userToken, popupData, setPopup, type, handleProcess, formatFullDateAndTime, formatFullTime} = props;
+    const {userToken, popupData, setPopup, type, handleProcess, formatFullDateAndTime, formatFullTime, language} = props;
 
     const [action, setAction] = React.useState(null); // 'reject', 'approve', or null
     const [rejectionReason, setRejectionReason] = React.useState("");

@@ -2,7 +2,7 @@ import React from "react"
 import s from "../../styles/admin_utils/adminFacilityCard.module.css";
 
 export default function AdminFacilityCard(props) {
-    const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate} = props;
+    const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate, language} = props;
     if (cardType == "resource") {
         var {name, capacity, specialization, location, description} = cardContent
     } else if (cardType == "therapy") {

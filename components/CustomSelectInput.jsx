@@ -3,7 +3,13 @@ import Select from 'react-select'
 import s from "../styles/editPopup.module.css"
 
 export default function CustomSelectInput(props) {
-   const {options, name, defaultValue, handleChange, failed} = props
+   const {options, name, defaultValue, handleChange, failed, theme} = props
+
+   const fontDefault = theme == "light" ? "#000" : "#fff"
+   const fontFocus = theme == "light" ? "#fff" : "#000"
+   const focusWeight = theme == "light" ? 600 : 700
+   const backgroundDefault = theme == "light" ? "#fff" : "#555"
+   const backgroundFocused = theme == "light" ? "#22006a" : "#70d8ac"
 
    return <Select
       onChange={e => handleChange({target: {
@@ -35,11 +41,13 @@ export default function CustomSelectInput(props) {
             fontFamily: "Barlow",
          }),
          option: (baseStyles, state) => ({
-            color: state.isFocused ? "#fff" : "#000",
+            color: state.isFocused ? fontFocus : fontDefault,
             fontFamily: "Barlow",
-            fontWeight: state.isFocused ? 600 : 500,
-            padding: "5px 15px",
-            backgroundColor: state.isFocused ? "#22006a" : "#fff",
+            fontWeight: state.isFocused ? focusWeight : 500,
+            padding: "max(calc(5px * 0.6), calc(5vh * 59 / 725)) max(calc(15px * 0.6), calc(15vh * 59 / 725))",
+            backgroundColor: state.isFocused ? backgroundFocused : backgroundDefault,
+            borderRadius: "max(calc(5px * 0.6), calc(5vh * 59 / 725))",
+            cursor: "pointer"
          }),
          valueContainer: baseStyles => ({
             ...baseStyles,
@@ -47,7 +55,15 @@ export default function CustomSelectInput(props) {
          }),
          indicatorsContainer: baseStyles => ({
             ...baseStyles,
-            padding: 0
+            padding: 0,
+            width: "max(calc(35px * 0.6), calc(35vh * 59 / 725))",
+         }),
+         dropdownIndicator: baseStyles => ({
+            ...baseStyles,
+            minWidth: "30px",
+            minHeight: "30px",
+            width: "max(calc(20px * 0.6), calc0vh * 59 / 725))",
+            height: "max(calc(20px * 0.6), cal20vh * 59 / 725))",    // pojma nemam zs ovo mora bit ovako slomljeno da radi al radi
          }),
          input: baseStyles => ({
             ...baseStyles,
@@ -58,12 +74,14 @@ export default function CustomSelectInput(props) {
             ...baseStyles,
             marginLeft: "min(calc(-14px * 0.6), calc(-14vh * 59 / 725))",
             marginTop: "max(calc(4px * 0.6), calc(4vh * 59 / 725))",
-            borderRadius: "max(calc(10px * 0.6), calc(10vh * 59 / 725))"
+            borderRadius: "max(calc(10px * 0.6), calc(10vh * 59 / 725))",
+            backgroundColor: backgroundDefault,
          }),
          singleValue: baseStyles => ({
             ...baseStyles,
             fontFamily: "Barlow",
-            fontSize: "max(calc(20px * 0.6), calc(20vh * 59 / 725))"
+            fontSize: "max(calc(20px * 0.6), calc(20vh * 59 / 725))",
+            color: fontDefault
          })
       }}
    />

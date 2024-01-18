@@ -6,7 +6,7 @@ import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme, language} = props         // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
@@ -215,6 +215,7 @@ export default function PatientNewTherapy(props) {
                   numberOfDays = {90}
                   therapyCode = {selectedTherapy.therapyCode}
                   theme = {theme}
+                  language={language}
                />
             </div>
             </>}
