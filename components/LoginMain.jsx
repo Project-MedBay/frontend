@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import LoginPasswordPopup from "./LoginPasswordPopup"
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
@@ -7,6 +8,8 @@ import s from "../styles/login.module.css"
 
 export default function LoginMain(props) {
    const {handleLogin, globalNavigate} = props
+
+   const { t, i18n } = useTranslation();
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       email: "",
@@ -16,7 +19,7 @@ export default function LoginMain(props) {
 
    const [inputFailed, setInputFailed] = useState({         // state za gresku pri unosu forme (on submit)
       value: false,
-      text: "Invalid email or password. Please try again."
+      text: t('login.invalidCredentials')
    })
    const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
 
@@ -43,13 +46,13 @@ export default function LoginMain(props) {
       console.log(error)                  // i ispisuje se poruka o pogresnom unosu, inace ako je doslo do neke druge greske se ispisuje error message
       if (error.response.status == 403) setInputFailed({
          value: true,
-         text: "Invalid email or password. Please try again."
+         text: t('login.invalidCredentials')
       })
       else if (error.response.status == 401) setInputFailed({
          value: true,
-         text: "Account not yet authorized. Please try again later."
+         text: t('login.notAuthorized')
       })
-      else setInputFailed({value: true, text: `${error.message}. Please try again.`})
+      else setInputFailed({value: true, text: `${error.message}` + t('login.tryAgain')})
    }
 
    function togglePassword() {
@@ -66,22 +69,22 @@ export default function LoginMain(props) {
          <div className={`${s.login_main} ${forgotPassword && s.covered_by_popup}`}>
 
             <form className={s.login_form} onSubmit={handleSubmit} autoComplete="off">
-               <h1 className={s.form_title}>Welcome back!</h1>
+               <h1 className={s.form_title}>{t('login.formTitle')}</h1>
                <p className={`${s.login_failed} ${inputFailed.value && s.failed_text}`}>        {/* uvjetno dodajemo klasu koja cini poruku o gresci vidljivom */}
                   {inputFailed.text}
                </p>
 
                <div className={s.form_input}>         {/* prvo od dva input polja, takoder imaju uvjetnu klasu za gresku, tekst polja odgovara sadrzaju statea formData */}
-                  <p className={s.input_text}>E-mail:</p>
+                  <p className={s.input_text}>{t('login.emailLabel')}</p>
                   <input
                      className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
-                     type="text" onChange={handleChange} placeholder="john.doe@mail.com"
+                     type="text" onChange={handleChange} placeholder={t('login.emailPlaceholder')}
                      name="email" value={formData["email"]}
                      />
                </div>
 
                <div className={s.form_input}>
-                  <p className={s.input_text}>Password:</p>
+                  <p className={s.input_text}>{t('login.passwordLabel')}</p>
                   <div className={s.password_container}>
                      <input
                         className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
@@ -96,19 +99,19 @@ export default function LoginMain(props) {
                </div>
 
                <div className={s.forgot_password_div} onClick={() => setForgotPassword(true)}>
-                  <h4 className={s.forgot_password_text}>Forgot password?</h4>
+                  <h4 className={s.forgot_password_text}>{t('login.forgotPassword')}</h4>
                </div>
 
-               <button className={s.form_button}>Login</button>
+               <button className={s.form_button}>{t('login.loginButton')}</button>
             </form>
 
             <div className={s.extras}>
                <h1 className={s.tagline}>Rehabilitation<br />Redefined</h1>
                
                <div className={s.register_container}>
-                  <p className={s.register_q}>You're new here?</p>
+                  <p className={s.register_q}>{t('login.newHere')}</p>
                   <button className={s.register_button}
-                     onClick={() => globalNavigate("register")}>Register now           {/* uporaba prop funkcije za navigaciju */}
+                     onClick={() => globalNavigate("register")}>{t('login.registerButton')}           {/* uporaba prop funkcije za navigaciju */}
                   </button>
                </div>
             </div>

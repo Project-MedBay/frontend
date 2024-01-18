@@ -148,14 +148,22 @@
     "title": "Are you sure?",
     "subtitle": "This action is irreversible.",
     "deactivateTextSelf": "If you deactivate your account, you will lose access to your account and all your data permanently, and will need to register again to request new therapies in the future.",
-    "deactivateTextPatient": "If you deactivate this account ({{name}} {{surname}} User#{{id}}), the user will lose access to their account and data, and will be removed from the list.",
-    "deactivateTextTherapist": "If you deactivate this account ({{specialization}} {{name}} {{surname}}), the user will lose access to their account and data, and will be removed from the list.",
-    "deactivateTextResource": "Only delete this resource ({{name}}) if there are no scheduled sessions with this resource and you are sure you want to remove it permanently.",
-    "deactivateTextTherapy": "Only delete this therapy ({{name}} {{code}}) if there are no scheduled sessions for this therapy and you are sure you want to remove it permanently.",
+    "deactivateTextPatient1": "If you deactivate this account ",
+    "deactivateTextPatient2": ", the user will lose access to their account and data, and will be removed from the list.",
+    "deactivateTextTherapist1": "If you deactivate this account ",
+    "deactivateTextTherapist2": ", the user will lose access to their account and data, and will be removed from the list.",
+    "deactivateTextResource1": "Only delete this resource ",
+    "deactivateTextResource2": "if there are no scheduled sessions with this resource and you are sure you want to remove it permanently.",
+    "deactivateTextTherapy1": "Only delete this therapy ",
+    "deactivateTextTherapy2": "if there are no scheduled sessions for this therapy and you are sure you want to remove it permanently.",
     "actionDelete": "DELETE",
     "actionDeactivate": "DEACTIVATE",
+    "actionDeleteCroatian": "DELETE",
+    "actionDeactivateCroatian": "DEACTIVATE",
     "buttonYes": "YES, ",
-    "buttonNo": "NO, DON'T "
+    "buttonNo": "NO, DON'T ",
+
+    "DONE": "DONE"
   },
   "adminEditPopup": {
     "titleAdd": "ADD",
@@ -282,12 +290,16 @@
     "newHere": "You're new here?",
     "registerButton": "Register now",
     "emailPlaceholder": "john.doe@mail.com",
-    "passwordPlaceholder": "********"
+    "passwordPlaceholder": "********",
+
+    "DONE": "DONE"
   },
   "loginPasswordPopup": {
     "popupTitle": "Write your e-mail here and we will send you a form to reset your password:",
     "emailPlaceholder": "john.doe@mail.com",
-    "submitButton": "Submit"
+    "submitButton": "Submit",
+
+    "DONE": "DONE"
   },
   "loginHeader": {
     "brandName": "MedBay"

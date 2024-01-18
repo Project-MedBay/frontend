@@ -131,10 +131,14 @@
     "title": "Jeste li sigurni?",
     "subtitle": "Ova radnja je nepovratna.",
     "deactivateTextSelf": "Ako deaktivirate svoj račun, izgubit ćete pristup svom računu i svim svojim podacima i morat ćete se ponovno registrirati da biste zatražili nove terapije u budućnosti.",
-    "deactivateTextPatient": "Ako deaktivirate ovaj račun ({{name}} {{surname}} Korisnik#{{id}}), korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
-    "deactivateTextTherapist": "Ako deaktivirate ovaj račun ({{specialization}} {{name}} {{surname}}), korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
-    "deactivateTextResource": "Izbrišite ovaj resurs ({{name}}) samo ako nema zakazanih termina s ovim resursom i sigurni ste da ga želite trajno ukloniti.",
-    "deactivateTextTherapy": "Izbrišite ovu terapiju ({{name}} {{code}}) samo ako nema zakazanih sesija za ovu terapiju i sigurni ste da je želite trajno ukloniti.",
+    "deactivateTextPatient1": "Ako deaktivirate ovaj račun ",
+    "deactivateTextPatient2": ", korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+    "deactivateTextTherapist1": "Ako deaktivirate ovaj račun ",
+    "deactivateTextTherapist2": ", korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+    "deactivateTextResource1": "Izbrišite ovaj resurs ",
+    "deactivateTextResource2": "samo ako nema zakazanih termina s ovim resursom i sigurni ste da ga želite trajno ukloniti.",
+    "deactivateTextTherapy1": "Izbrišite ovu terapiju ",
+    "deactivateTextTherapy2": "samo ako nema zakazanih sesija za ovu terapiju i sigurni ste da je želite trajno ukloniti.",
     "actionDelete": "UKLONI",
     "actionDeactivate": "DEAKTIVIRAJ",
     "actionDeleteCroatian": "UKLONITI",
@@ -504,6 +508,9 @@
   },
   "sessionSelection": {
     "selectDateMessage": "Odaberite datum za pregled termina"
+  },
+  "successPopup": {
+    "success": "Uspješno!"
   },
   "tableList": {
     "headers": {

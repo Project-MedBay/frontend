@@ -131,8 +131,50 @@ i18n
               },
             customSelectInput: {
                 select: "Select "
+              },
+            deactivatePopup: {
+                title: "Are you sure?",
+                subtitle: "This action is irreversible.",
+                deactivateTextSelf: "If you deactivate your account, you will lose access to your account and all your data permanently, and will need to register again to request new therapies in the future.",
+                deactivateTextPatient1: "If you deactivate this account ",
+                deactivateTextPatient2: ", the user will lose access to their account and data, and will be removed from the list.",
+                deactivateTextTherapist1: "If you deactivate this account ",
+                deactivateTextTherapist2: ", the user will lose access to their account and data, and will be removed from the list.",
+                deactivateTextResource1: "Only delete this resource ",
+                deactivateTextResource2: "if there are no scheduled sessions with this resource and you are sure you want to remove it permanently.",
+                deactivateTextTherapy1: "Only delete this therapy ",
+                deactivateTextTherapy2: "if there are no scheduled sessions for this therapy and you are sure you want to remove it permanently.",
+                actionDelete: "DELETE",
+                actionDeactivate: "DEACTIVATE",
+                actionDeleteCroatian: "DELETE",
+                actionDeactivateCroatian: "DEACTIVATE",
+                buttonYes: "YES, ",
+                buttonNo: "NO, DON'T "
+              },
+            "login": {
+                "formTitle": "Welcome back!",
+                "invalidCredentials": "Invalid email or password. Please try again.",
+                "notAuthorized": "Account not yet authorized. Please try again later.",
+                "tryAgain": ". Please try again.",
+                "emailLabel": "E-mail:",
+                "passwordLabel": "Password:",
+                "forgotPassword": "Forgot password?",
+                "loginButton": "Login",
+                "tagline": "Rehabilitation Redefined",
+                "newHere": "You're new here?",
+                "registerButton": "Register now",
+                "emailPlaceholder": "john.doe@mail.com",
+                "passwordPlaceholder": "********"
+              },
+            "loginPasswordPopup": {
+                "popupTitle": "Write your e-mail here and we will send you a form to reset your password:",
+                "emailPlaceholder": "john.doe@mail.com",
+                "submitButton": "Submit",
+                "success": "Success!",
+                "resetLink": "The link to reset your password will arrive to the supplied e-mail shortly.",
+                "close": "Close"
               }
-
+            
         }
       },
       hr: {
@@ -244,6 +286,48 @@ i18n
               },
             customSelectInput: {
                 select: "Odaberi "
+              },
+            deactivatePopup: {
+                title: "Jeste li sigurni?",
+                subtitle: "Ova radnja je nepovratna.",
+                deactivateTextSelf: "Ako deaktivirate svoj račun, izgubit ćete pristup svom računu i svim svojim podacima i morat ćete se ponovno registrirati da biste zatražili nove terapije u budućnosti.",
+                deactivateTextPatient1: "Ako deaktivirate ovaj račun ",
+                deactivateTextPatient2: ", korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+                deactivateTextTherapist1: "Ako deaktivirate ovaj račun ",
+                deactivateTextTherapist2: ", korisnik će izgubiti pristup svom računu i podacima i bit će uklonjen s liste.",
+                deactivateTextResource1: "Izbrišite ovaj resurs ",
+                deactivateTextResource2: "samo ako nema zakazanih termina s ovim resursom i sigurni ste da ga želite trajno ukloniti.",
+                deactivateTextTherapy1: "Izbrišite ovu terapiju ",
+                deactivateTextTherapy2: "samo ako nema zakazanih termina za ovu terapiju i sigurni ste da je želite trajno ukloniti.",
+                actionDelete: "UKLONI",
+                actionDeactivate: "DEAKTIVIRAJ",
+                actionDeleteCroatian: "UKLONITI",
+                actionDeactivateCroatian: "DEAKTIVIRATI",
+                buttonYes: "DA, ",
+                buttonNo: "NE, NEMOJ "
+              },
+            "login": {
+                "formTitle": "Dobrodošli natrag!",
+                "invalidCredentials": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
+                "notAuthorized": "Vaš račun još nije odobren. Molimo pokušajte ponovno kasnije.",
+                "tryAgain": ". Molimo pokušajte ponovno.",
+                "emailLabel": "E-mail:",
+                "passwordLabel": "Lozinka:",
+                "forgotPassword": "Zaboravljena lozinka?",
+                "loginButton": "Prijava",
+                "tagline": "Rehabilitation Redefined",
+                "newHere": "Novi ste ovdje?",
+                "registerButton": "Registrirajte se",
+                "emailPlaceholder": "ivan.horvat@mail.com",
+                "passwordPlaceholder": "********"
+              },
+            "loginPasswordPopup": {
+                "popupTitle": "Napišite svoju e-mail adresu kako bismo Vam poslali obrazac za promjenu lozinke:",
+                "emailPlaceholder": "ivan.horvat@mail.com",
+                "submitButton": "Podnesi",
+                "success": "Uspješno!",
+                "resetLink": "Na vašu e-mail adresu uskoro će dospjeti obrazac za promjenu lozinke.",
+                "close": "Zatvori"
               }
         }
       }
