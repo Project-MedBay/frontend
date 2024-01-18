@@ -24,10 +24,6 @@ i18n
     resources: {
       en: {
         translation: {
-            description: {
-                part1: "Nesto",
-                part2: "Nesto"
-            },
             adminHeader: {
                 calendar: "CALENDAR",
                 verifications: "VERIFICATIONS",
@@ -35,16 +31,38 @@ i18n
                 statistics: "STATISTICS",
                 logOut: "LOG OUT",
                 logoAltText: "Logo"
-          }
+          }, 
+            adminCalendar: {
+                weekdays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+          },
+            adminFacilityCard: {
+                editFacility: "EDIT",
+                deleteFacility: "DELETE",
+                specialization: "SPECIALIZATION:",
+                capacity: "CAPACITY:",
+                location: "LOCATION:",
+                description: "DESCRIPTION:",
+                resource: "RESOURCE:",
+                sessions: "SESSIONS:",
+                relevantBody: "RELEVANT PART OF THE BODY:",
+                code: "CODE:",
+                description2: "DESCRIPTION:"
+            },
+            adminManage: {
+                therapistsTab: "Therapists",
+                patientsTab: "Patients",
+                facilityTab: "Facility",
+                searchPlaceholder: "Search",
+                resourcesSectionTitle: "RESOURCES",
+                therapiesSectionTitle: "THERAPIES",
+                addNewButton: "ADD NEW",
+                noItemsMatchQuery: "There are no items that match this query."
+            }
 
         }
       },
       hr: {
         translation: {
-            description: {
-                part1: "Nesto drugo",
-                part2: "Nesto treće"
-            },
             adminHeader: {
                 calendar: "KALENDAR",
                 verifications: "VERIFIKACIJE",
@@ -52,6 +70,32 @@ i18n
                 statistics: "STATISTIKA",
                 logOut: "ODJAVA",
                 logoAltText: "Logo"
+              },
+              adminCalendar: {
+                weekdays: ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"]
+              },
+              adminFacilityCard: {
+                editFacility: "UREDI",
+                deleteFacility: "UKLONI",
+                specialization: "SPECIJALIZACIJA:",
+                capacity: "KAPACITET:",
+                location: "LOKACIJA:",
+                description: "OPIS:",
+                resource: "RESURS:",
+                sessions: "TERMINI:",
+                relevantBody: "DIO TIJELA:",
+                code: "KOD:",
+                description2: "OPIS:"
+              },
+              adminManage: {
+                therapistsTab: "Djelatnici",
+                patientsTab: "Pacijenti",
+                facilityTab: "Ustanova",
+                searchPlaceholder: "Pretraži",
+                resourcesSectionTitle: "RESURSI",
+                therapiesSectionTitle: "TERAPIJE",
+                addNewButton: "DODAJ",
+                noItemsMatchQuery: "Nema stavki koje odgovaraju upitu."
               }
         }
       }

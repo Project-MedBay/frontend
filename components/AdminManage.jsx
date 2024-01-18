@@ -6,8 +6,12 @@ import AccountEditPopup from "./EditPopup"
 import DeactivatePopup from "./DeactivatePopup"
 import s from "../styles/adminManage.module.css"
 
+import { useTranslation, Trans } from 'react-i18next';
+
 export default function AdminManage(props) {
    const {userToken, formatFullDate} = props;
+
+   const { t, i18n } = useTranslation();
 
    const [currentManage, setCurrentManage] = useState("therapists")       // global const
    const [searchInput, setSearchInput] = useState({
@@ -101,7 +105,7 @@ export default function AdminManage(props) {
    )
    if (resourceElements.length == 0) {resourceElements.push(
       <h3 className={s.no_results}>
-         There are no items that match this query.
+         {t('adminManage.noItemsMatchQuery')}
       </h3>
    )}
 
@@ -124,7 +128,7 @@ export default function AdminManage(props) {
    )
    if (therapyElements.length == 0) {therapyElements.push(
       <h3 className={s.no_results}>
-         There are no items that match this query.
+         {t('adminManage.noItemsMatchQuery')}
       </h3>
    )}
 
@@ -379,19 +383,19 @@ export default function AdminManage(props) {
       <div className={`${s.admin_manage_main} ${(addPopup || editPopup || deactivatePopup) && s.covered_by_popup}`}>
          <div className={s.three_options}>
             <h2 className={`${s.options_item} ${currentManage == "therapists" ? s.current_option : ''}`}
-               id={s.left} onClick={() => setCurrentManage("therapists")}>Therapists
+               id={s.left} onClick={() => setCurrentManage("therapists")}>{t('adminManage.therapistsTab')}
             </h2>
             <h2 className={`${s.options_item} ${currentManage == "patients" ? s.current_option : ''}`}
-               id={s.middle} onClick={() => setCurrentManage("patients")}>Patients
+               id={s.middle} onClick={() => setCurrentManage("patients")}>{t('adminManage.patientsTab')}
             </h2>
             <h2 className={`${s.options_item} ${currentManage == "facility" ? s.current_option : ''}`}
-               id={s.right} onClick={() => setCurrentManage("facility")}>Facility
+               id={s.right} onClick={() => setCurrentManage("facility")}>{t('adminManage.facilityTab')}
             </h2>
          </div>
 
          {currentManage == "therapists" && <>
             <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "therapists")}
-                   placeholder="Search" name="search" value={searchInput.therapists} autoComplete="off" />
+                   placeholder={t('adminManage.searchPlaceholder')} name="search" value={searchInput.therapists} autoComplete="off" />
             
             <TableList
                userToken={userToken}
@@ -409,7 +413,7 @@ export default function AdminManage(props) {
 
          {currentManage == "patients" && <>
             <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "patients")}
-                   placeholder="Search" name="search" value={searchInput.patients} autoComplete="off" />
+                   placeholder={t('adminManage.searchPlaceholder')} name="search" value={searchInput.patients} autoComplete="off" />
             
             <TableList
                userToken={userToken}
@@ -429,11 +433,11 @@ export default function AdminManage(props) {
                <div className={s.facility_section}>
                   <div className={s.scroll_fade} id={s.top}>­</div>
                   <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "resources")}
-                        placeholder="Search" name="search" value={searchInput.resources} autoComplete="off" />
-                  <h1 className={s.section_title}>RESOURCES</h1>
+                        placeholder={t('adminManage.searchPlaceholder')} name="search" value={searchInput.resources} autoComplete="off" />
+                  <h1 className={s.section_title}>{t('adminManage.resourcesSectionTitle')}</h1>
                   <div className={s.card_container}>
                      {resourceElements}
-                     <button className={s.section_button} onClick={() => handleAdd("resource")}>ADD NEW</button>
+                     <button className={s.section_button} onClick={() => handleAdd("resource")}>{t('adminManage.addNewButton')}</button>
                   </div>
                   <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>
@@ -441,11 +445,11 @@ export default function AdminManage(props) {
                <div className={s.facility_section}>
                   <div className={s.scroll_fade} id={s.top}>­</div>
                   <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "therapies")}
-                        placeholder="Search" name="search" value={searchInput.therapies} autoComplete="off" />
-                  <h1 className={s.section_title}>THERAPIES</h1>
+                        placeholder={t('adminManage.searchPlaceholder')} name="search" value={searchInput.therapies} autoComplete="off" />
+                  <h1 className={s.section_title}>{t('adminManage.therapiesSectionTitle')}</h1>
                   <div className={s.card_container}>
                      {therapyElements}
-                     <button className={s.section_button} onClick={() => handleAdd("therapy")}>ADD NEW</button>
+                     <button className={s.section_button} onClick={() => handleAdd("therapy")}>{t('adminManage.addNewButton')}</button>
                   </div>
                   <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>

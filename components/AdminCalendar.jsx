@@ -4,8 +4,12 @@ import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
 import ReschedulePopup from "./ReschedulePopup.jsx";
 import s from "../styles/adminCalendar.module.css";
 
+// import { useTranslation, Trans } from 'react-i18next';
+
 export default function AdminCalendar(props) {
     const {userToken, formatDate, formatFullDate} = props
+
+    // const { t, i18n } = useTranslation();
 
     const [weekOffset, setWeekOffset] = useState(0);
     const [calendarData, setCalendarData] = useState({});
@@ -35,6 +39,7 @@ export default function AdminCalendar(props) {
     }
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    // const daysOfWeek = [t('adminCalendar.weekdays[0]'), t('adminCalendar.weekdays[1]'), t('adminCalendar.weekdays[2]', t('adminCalendar.weekdays[3]'), t('adminCalendar.weekdays[4]')];
     const hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
 
     const getDatesForWeek = (offset) => {

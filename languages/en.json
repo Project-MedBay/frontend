@@ -9,7 +9,9 @@
     "manage": "MANAGE",
     "statistics": "STATISTICS",
     "logOut": "LOG OUT",
-    "logoAltText": "Logo"
+    "logoAltText": "Logo",
+    
+    "DONE": "DONE"
   },
   "adminCalendar": {
     "appointmentCalendarTitle": "Appointment Calendar",
@@ -41,7 +43,9 @@
     "sessions": "SESSIONS:",
     "relevantBody": "RELEVANT PART OF THE BODY:",
     "code": "CODE:",
-    "description2": "DESCRIPTION:"
+    "description2": "DESCRIPTION:",
+
+    "DONE": "DONE"
   },
   "adminManage": {
     "therapistsTab": "Therapists",
