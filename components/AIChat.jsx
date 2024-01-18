@@ -30,6 +30,19 @@ export default function AIChat(props) {
       }
    })
 
+   // useEffect(() => {
+   //    setMessages(prevState => ({
+   //       medbot: [
+   //          { sender: "bot", text: t("initial text medbot") },
+   //          ...prevState.medbot.slice(1)
+   //       ],
+   //       baybot: [
+   //          { sender: "bot", text: t("initial text baybot") },
+   //          ...prevState.baybot.slice(1)
+   //       ]
+   //    }))
+   // }, [language])
+
    const messageElements = messages[currentBot].map(message => (
       <div className={message.sender == "bot" ? s["message_" + currentBot] : s.message_user}>
          <p className={s.message_text}>{message.text}</p>
