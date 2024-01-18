@@ -82,7 +82,7 @@
    overflow: auto;
    align-items: center;
    width: max-content;
-   gap: calc(20 * var(--scale-by-height));
+   gap: calc(25 * var(--scale-by-height));
    height: calc(750 * var(--scale-by-height));
 }
 

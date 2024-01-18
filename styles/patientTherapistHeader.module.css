@@ -124,7 +124,7 @@
 
 .sunIcon, .moonIcon {
    color: white;
-   margin-top: calc(-2 * var(--scale-by-height));
+   margin-top: calc(-3 * var(--scale-by-height));
    height: calc(20 * var(--scale-by-height));
 }
 
@@ -185,6 +185,7 @@
       position: fixed;
       left: 50%;
       transform: translateX(-50%);
+      width: calc(35 * var(--scale-by-height));
       margin: 0;
       cursor: pointer;
    }
@@ -192,6 +193,7 @@
    .options_dropdown {
       position: fixed;
       right: calc(20 * var(--scale-by-width) * (8/5) + 5 * var(--scale-by-height));
+      width: calc(32 * var(--scale-by-height));
       margin: 0;
       cursor: pointer;
    }

@@ -41,9 +41,15 @@ export default function LoginMain(props) {
 
    function handleError(error) {          // ispisuje error u konzoli, ako je error code 403 (bad request - forbidden) znaci da baza nije dopustila unos
       console.log(error)                  // i ispisuje se poruka o pogresnom unosu, inace ako je doslo do neke druge greske se ispisuje error message
-      error.response.status == 403 ?
-      setInputFailed({value: true, text: "Invalid email or password. Please try again."})
-      : setInputFailed({value: true, text: `${error.message}. Please try again.`})
+      if (error.response.status == 403) setInputFailed({
+         value: true,
+         text: "Invalid email or password. Please try again."
+      })
+      else if (error.response.status == 401) setInputFailed({
+         value: true,
+         text: "Account not yet authorized. Please try again later."
+      })
+      else setInputFailed({value: true, text: `${error.message}. Please try again.`})
    }
 
    function togglePassword() {

@@ -9,6 +9,10 @@ import { faSun } from '@fortawesome/free-solid-svg-icons'
 import CustomSelectInput from "./CustomSelectInput"
 import i18n from "../i18n.js"
 import { useTranslation, Trans } from 'react-i18next'
+import menu_purple from "../assets/menu_purple.png"
+import menu_green from "../assets/menu_green.png"
+import cog_purple from "../assets/cog_purple.png"
+import cog_green from "../assets/cog_green.png"
 import s from "../styles/patientTherapistHeader.module.css"
 
 export default function PatientHeader(props) {
@@ -45,8 +49,10 @@ export default function PatientHeader(props) {
             <h1 className={s.logo_title}>MedBay</h1>
          </div>
 
-         <p className={`${s.nav_dropdown} ${s.mobile_only}`} onClick={toggleMobileNav}>NAV</p>     {/* NOTE temp */}
-         <p className={`${s.options_dropdown} ${s.mobile_only}`} onClick={toggleMobileOptions}>OPTIONS</p>     {/* NOTE temp */}
+         <img src={theme == "light" ? menu_purple : menu_green}
+              className={`${s.nav_dropdown} ${s.mobile_only}`} onClick={toggleMobileNav} />
+         <img src={theme == "light" ? cog_purple : cog_green}
+              className={`${s.options_dropdown} ${s.mobile_only}`} onClick={toggleMobileOptions} />
          
          <nav className={s.header_nav}>
             <div className={`${s.nav_container} ${mobileNav && s.mobile_visible}`}>

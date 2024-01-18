@@ -44,6 +44,7 @@ export default function App() {           // glavna komponenta, u njoj se render
 
    function handleLogout() {
       setUserToken("")
+      sessionStorage.removeItem("medbay-ai-chat")
    }
    
    useEffect(() => {
