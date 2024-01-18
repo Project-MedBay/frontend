@@ -57,7 +57,7 @@
     "therapists": "Djelatnici",
     "resources": "Resursi",
     "placeholder": "Pretraži",
-    "workHours": "SATI RADA NA TERMINIMA",
+    "workHours": "RADNO VRIJEME NA TERMINIMA",
     "pastMonth": "(PRETHODNIH 30 DANA)",
     "patientsTreated": "NJEGOVANIH PACIJENATA",
     "by": "",
@@ -113,18 +113,19 @@
     "question": "Postavite pitanje...",
     "send": "Pošalji"
   },
-  "bodypartSelection": {
+  "bodyPartSelection": {
     "head": "Glava",
     "shoulder": "Rame",
     "arm": "Ruka",
-    "upperTorso": "Gornji dio trupa",
-    "lowerTorso": "Donji dio trupa",
+    "upperTorso": "Gornji trup",
+    "lowerTorso": "Donji trup",
     "leg": "Noga",
     "hand": "Šaka",
-    "foot": "Stopalo"
+    "foot": "Stopalo",
+    "any": "Bilo koji"
   },
   "customSelectInput": {
-    "select": "Pretraži..."
+    "select": "Odaberi "
   },
   "deactivatePopup": {
     "title": "Jeste li sigurni?",

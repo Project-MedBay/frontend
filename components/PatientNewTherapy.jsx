@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import BodypartSelection from "./BodypartSelection"
 import SessionSelection from "./SessionSelection"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
@@ -14,6 +15,8 @@ export default function PatientNewTherapy(props) {
       doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
    }
    const darkModeClass = theme === 'dark' ? s.dark : '';
+
+   const { t, i18n } = useTranslation();
    
    const [therapies, setTherapies] = useState([])
    const [codeInput, setCodeInput] = useState("")                       // page 1 const
@@ -59,9 +62,12 @@ export default function PatientNewTherapy(props) {
       case 3:
          return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
+
+   console.log(selectedBodypart);
    
    const therapyElements = therapies
-      .filter(therapy => (selectedBodypart == "any" ? true : therapy.bodyPart == selectedBodypart))
+      .filter(therapy => (t("bodyPartSelection." + selectedBodypart) == t("bodyPartSelection.any") ?
+         true : t("bodyPartSelection." + therapy.bodyPart) == t("bodyPartSelection." + selectedBodypart))) 
       .filter(therapy => { for (let term of searchInput.trim().split(" ")) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
@@ -166,7 +172,7 @@ export default function PatientNewTherapy(props) {
                <BodypartSelection selectedBodypart={selectedBodypart} setSelectedBodypart={setSelectedBodypart} theme={theme}/>
 
                <form className={s.therapy_form} autoComplete="off" onSubmit={event => event.preventDefault()}>
-                  <h2 className={s.form_title}>FILTER BY: <span>{selectedBodypart.toUpperCase()}</span></h2>
+                  <h2 className={s.form_title}>FILTER BY: <span>{t("bodyPartSelection." + selectedBodypart).toUpperCase()}</span></h2>
                   <p className={s.form_tip}>Select a body part to filter or use the search bar below to find your therapy</p>
                   <input className={s.form_search} type="text" onChange={event => setSearchInput(event.target.value)}
                      placeholder="Search" name="search" value={searchInput} />

@@ -18,7 +18,7 @@ export default function AdminStatisticsCircle ({ percentage, size }) {
         cx="50%"
         cy="50%"
         fill="transparent"
-        stroke={colour} // remove colour as 0% sets full circumference
+        stroke={percentage!=0 ? colour : ""} // remove colour as 0% sets full circumference
         strokeWidth={`${12}%`}
         strokeDasharray={percentage ? `${percentage * 0.88 * Math.PI}% ${(100 - percentage * 0.88) * Math.PI}%` : 0}
         strokeDashoffset={0}

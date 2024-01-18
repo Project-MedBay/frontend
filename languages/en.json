@@ -68,21 +68,27 @@
     "patientsTreated": "PATIENTS TREATED",
     "by": "BY",
     "with": "WITH",
-    "lifetime": "(LIFETIME)"
+    "lifetime": "(LIFETIME)",
+
+    "DODATI_TEKST": "DODATI_TEKST"
   },
   "adminVerifications": {
     "verificationsTitle": "Verifications",
     "therapiesSectionTitle": "THERAPIES",
-    "registrationsSectionTitle": "REGISTRATIONS"
+    "registrationsSectionTitle": "REGISTRATIONS",
+
+    "DONE": "DONE"
   },
   "adminVerificationCard": {
     "request": "Request #",
-    "review": "Review"
+    "review": "Review",
+
+    "DONE": "DONE"
   },
   "adminVerificationPopup": {
     "registration": "Registration",
     "therapy": "Therapy",
-    "requestNo": "Request #",
+    "requestNo": "Request #", "PITATI_LOVRU":  "PITATI_LOVRU", "IDEJA": "crtica ili mijenjati kod",
     "userData": "USER DATA:",
     "name": "Full name:",
     "email": "Email:",
@@ -97,8 +103,8 @@
     "collapse": "Collapse",
     "expand": "Expand",
     "requestWasMade": "Request was made on ",
-    "requestWillBe": "Request will be assigned identifier User#",
-    "reasonRejection": "Reason for ejection",
+    "requestWillBe": "Request will be assigned identifier User#", "PITATI_LOVRU2": "PITATI_LOVRU", "IDEJA2": "promijeniti ovaj dio",
+    "reasonRejection": "Reason for rejection",
     "requestAccept": "Are you sure that you want to approve this request?",
     "buttonApprove": "Approve",
     "buttonReject": "Reject"
@@ -107,7 +113,9 @@
     "welcomeMessage": "Welcome, Admin!",
     "calendarButton": "Calendar",
     "verificationsButton": "Verifications",
-    "manageButton": "Manage"
+    "manageButton": "Manage",
+
+    "DONE": "DONE"
   },
   "AIChat": {
     "firstTextMedBot": "Hello! I am MedBot and I am here to help answer any of your questions regarding the therapies we offer!",
@@ -117,9 +125,11 @@
     "assistant": "AI Assistant",
     "open": "Open ",
     "question": "Ask a question...",
-    "send": "Send"
+    "send": "Send",
+
+    "DONE": "DONE"
   },
-  "bodypartSelection": {
+  "bodyPartSelection": {
     "head": "Head",
     "shoulder": "Shoulder",
     "arm": "Arm",
@@ -127,10 +137,12 @@
     "lowerTorso": "Lower Torso",
     "leg": "Leg",
     "hand": "Hand",
-    "foot": "Foot"
+    "foot": "Foot",
+
+    "DONE": "DONE"
   },
   "customSelectInput": {
-    "select": "Select..."
+    "select": "Select ",        "PITATI_LOVRU": "PITATI_LOVRU"
   },
   "deactivatePopup": {
     "title": "Are you sure?",

@@ -31,10 +31,10 @@ i18n
                 statistics: "STATISTICS",
                 logOut: "LOG OUT",
                 logoAltText: "Logo"
-          }, 
+              }, 
             adminCalendar: {
                 weekdays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-          },
+              },
             adminFacilityCard: {
                 editFacility: "EDIT",
                 deleteFacility: "DELETE",
@@ -47,7 +47,7 @@ i18n
                 relevantBody: "RELEVANT PART OF THE BODY:",
                 code: "CODE:",
                 description2: "DESCRIPTION:"
-            },
+               },
             adminManage: {
                 therapistsTab: "Therapists",
                 patientsTab: "Patients",
@@ -57,7 +57,7 @@ i18n
                 therapiesSectionTitle: "THERAPIES",
                 addNewButton: "ADD NEW",
                 noItemsMatchQuery: "There are no items that match this query."
-            },
+              },
             adminStatistics: {
                 therapists: "Therapists",
                 resources: "Resources",
@@ -68,6 +68,69 @@ i18n
                 by: "BY",
                 with: "WITH",
                 lifetime: "(LIFETIME)"
+              },
+            adminVerifications: {
+                verificationsTitle: "Verifications",
+                therapiesSectionTitle: "THERAPIES",
+                registrationsSectionTitle: "REGISTRATIONS"
+              },
+            adminVerificationCard: {
+                request: "Request #",
+                review: "Review"
+              },
+            adminVerificationPopup: {
+                registration: "Registration",
+                therapy: "Therapy",
+                requestNo: "Request #",
+                userData: "USER DATA:",
+                name: "Full name:",
+                email: "Email:",
+                address: "Address:",
+                dob: "Date of birth:",
+                phoneNumber: "Phone number:",
+                mbo: "MBO:",
+                therapyID: "Therapy ID:",
+                duration: "Duration:",
+                noOfSessions: "Number of Sessions:",
+                sessions: "SESSIONS:",
+                collapse: "Collapse",
+                expand: "Expand",
+                requestWasMade: "Request was made on ",
+                requestWillBe: "Request will be assigned identifier User#",
+                reasonRejection: "Reason for rejection",
+                requestAccept: "Are you sure that you want to approve this request?",
+                buttonApprove: "Approve",
+                buttonReject: "Reject"
+              },
+            adminWelcome: {
+                welcomeMessage: "Welcome, Admin!",
+                calendarButton: "Calendar",
+                verificationsButton: "Verifications",
+                manageButton: "Manage"
+              },
+            AIChat: {
+                firstTextMedBot: "Hello! I am MedBot and I am here to help answer any of your questions regarding the therapies we offer!",
+                firstTextBayBot: "Hello! I am BayBot and I am here to help answer any of your questions regarding the use of this site!",
+                processing: "Processing...",
+                errorMessage: "I encountered an error while trying to reach the server. I am very sorry for the inconvenience, please try again in a few moments!",
+                assistant: "AI Assistant",
+                open: "Open ",
+                question: "Ask a question...",
+                send: "Send"
+              },
+            bodyPartSelection: {
+                head: "head",
+                shoulder: "shoulder",
+                arm: "arm",
+                "upper torso": "upper torso",
+                "lower torso": "lower torso",
+                leg: "leg",
+                hand: "hand",
+                foot: "foot",
+                any: "any"
+              },
+            customSelectInput: {
+                select: "Select "
               }
 
         }
@@ -112,12 +175,75 @@ i18n
                 therapists: "Djelatnici",
                 resources: "Resursi",
                 placeholder: "Pretraži",
-                workHours: "SATI RADA NA TERMINIMA",
+                workHours: "RADNO VRIJEME NA TERMINIMA",
                 pastMonth: "(PRETHODNIH 30 DANA)",
                 patientsTreated: "NJEGOVANIH PACIJENATA",
                 by: "",
                 with: "",
                 lifetime: "(ODUVIJEK)"
+              },
+              adminVerifications: {
+                verificationsTitle: "Verifikacije",
+                therapiesSectionTitle: "TERAPIJE",
+                registrationsSectionTitle: "REGISTRACIJE"
+              },
+              adminVerificationCard: {
+                request: "Zahtjev #",
+                review: "Pregled"
+              },
+            adminVerificationPopup: {
+                registration: "Registracija",
+                therapy: "Terapija",
+                requestNo: "Zahtjev #",
+                userData: "KORISNIČKI PODATCI:",
+                name: "Puno ime:",
+                email: "Email:",
+                address: "Adresa:",
+                dob: "Datum rođenja:",
+                phoneNumber: "Telefonski broj:",
+                mbo: "MBO:",
+                therapyID: "ID terapije:",
+                duration: "Trajanje:",
+                noOfSessions: "Broj termina:",
+                sessions: "TERMINI:",
+                collapse: "Sažmi",
+                expand: "Proširi",
+                requestWasMade: "Zahtjev je zaprimljen ",
+                requestWillBe: "Zahtjev će zaprimiti identifikator User#",
+                reasonRejection: "Razlog odbijanja",
+                requestAccept: "Jeste li sigurni da želite odobriti ovaj zahtjev?",
+                buttonApprove: "Odobri",
+                buttonReject: "Odbij"
+              },
+            adminWelcome: {
+                welcomeMessage: "Dobrodošli, admine!",
+                calendarButton: "Kalendar",
+                verificationsButton: "Verifikacije",
+                manageButton: "Upravljanje"
+              },
+            AIChat: {
+                firstTextMedBot: "Pozdrav! Ja sam MedBot i ovdje sam da Vam pomognem odgovoriti na bilo koje pitanje o našim terapijama!",
+                firstTextBayBot: "Pozdrav! Ja sam BayBot i ovdje sam da Vam pomognem odgovoriti na bilo koje pitanje o korištenju naše stranice!",
+                processing: "Obrađujem...",
+                errorMessage: "Naišao sam na pogrešku pri spajanju na poslužitelj. Molim Vas da pokušate ponovno za par trenutaka!",
+                assistant: "AI Asistent",
+                open: "Otvori ",
+                question: "Postavite pitanje...",
+                send: "Pošalji"
+              },
+            bodyPartSelection: {
+                head: "glava",
+                shoulder: "rame",
+                arm: "ruka",
+                "upper torso": "gornji trup",
+                "lower torso": "donji trup",
+                leg: "noga",
+                hand: "šaka",
+                foot: "stopalo",
+                any: "bilo što"
+              },
+            customSelectInput: {
+                select: "Odaberi "
               }
         }
       }

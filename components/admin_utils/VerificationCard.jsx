@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
@@ -6,6 +7,8 @@ export default function VerificationCard(props){
     const {popupType, set} = popup;
     //const {id, date_time, user_data} = info;
     //const {user_id, full_name, email, address, date_of_birth, phone_number, insurance_policy_number} = user_data;
+
+    const { t, i18n } = useTranslation();
 
     function handleClick(){
         setPopup({
@@ -42,7 +45,7 @@ export default function VerificationCard(props){
 
     return(
         <div className={s.card}>
-                <h3 className={s.requestNumerator}>Request #{cardType == "registration" ? info.id : info.therapyId}</h3>
+                <h3 className={s.requestNumerator}>{t('adminVerificationCard.request')}{cardType == "registration" ? info.id : info.therapyId}</h3>
                 <h4 className={s.requestDate}>
                     {formatFullDateAndTime(new Date(cardType == "registration" ? info.createdAt : info.requestDate))}
                 </h4>
@@ -50,7 +53,7 @@ export default function VerificationCard(props){
                     className={s.reviewBtn} 
                     disabled={popup === true ? true : false}
                     onClick={handleClick}
-                    >Review</button>
+                    >{t('adminVerificationCard.review')}</button>
         </div>
     )
 

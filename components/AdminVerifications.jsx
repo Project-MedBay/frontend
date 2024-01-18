@@ -1,12 +1,14 @@
-
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/adminVerifications.module.css"
 import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
     const {userToken, formatFullDateAndTime, formatFullTime} = props
+
+    const { t, i18n } = useTranslation();
 
     const [popup, setPopup] = useState({
         set: false, 
@@ -112,14 +114,14 @@ export default function AdminVerifications(props) {
     return (
         <>
             <div className={`${s.main_container} ${popup.set === true ? s.blurContainer : ''}`}>
-                <h2 className={s.regTherapyTitle}>Verifications</h2>
+                <h2 className={s.regTherapyTitle}>{t('adminVerifications.verificationsTitle')}</h2>
                 <div className={s.cards}>
                     <div className={s.therapyCards}> 
-                        <h2 className={s.regTherapyTitle}>THERAPIES</h2>
+                        <h2 className={s.regTherapyTitle}>{t('adminVerifications.therapiesSectionTitle')}</h2>
                         {therapies}
                     </div>
                     <div className={s.registrationCards}>
-                        <h2 className={s.regTherapyTitle}>REGISTRATIONS</h2>
+                        <h2 className={s.regTherapyTitle}>{t('adminVerifications.registrationsSectionTitle')}</h2>
                         {registrations}
                     </div>
                 </div>
