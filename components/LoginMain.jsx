@@ -6,6 +6,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/login.module.css"
 
 export default function LoginMain(props) {
+   const {handleLogin, globalNavigate, language} = props
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       email: "",
@@ -34,7 +35,7 @@ export default function LoginMain(props) {
          method: "POST",
          data: formData
       })
-      .then(res => res.status == 200 && props.handleLogin(res.data.accessToken))       // uspjeh - handleLogin
+      .then(res => res.status == 200 && handleLogin(res.data.accessToken))       // uspjeh - handleLogin
       .catch(error => handleError(error));                                       // greska (na backu) - handleError
    }
 
@@ -101,7 +102,7 @@ export default function LoginMain(props) {
                <div className={s.register_container}>
                   <p className={s.register_q}>You're new here?</p>
                   <button className={s.register_button}
-                     onClick={() => props.globalNavigate("register")}>Register now           {/* uporaba prop funkcije za navigaciju */}
+                     onClick={() => globalNavigate("register")}>Register now           {/* uporaba prop funkcije za navigaciju */}
                   </button>
                </div>
             </div>
@@ -109,7 +110,7 @@ export default function LoginMain(props) {
 
          {forgotPassword && <div className={s.popup_separate} onClick={popupExit}></div>}
 
-         {forgotPassword && <LoginPasswordPopup popupExit={popupExit} />}
+         {forgotPassword && <LoginPasswordPopup popupExit={popupExit} language={language} />}
 
       </>
     )

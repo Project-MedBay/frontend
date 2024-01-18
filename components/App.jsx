@@ -13,7 +13,10 @@ import { ThemeProvider } from './ThemeContext';
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
-
+   const [language, setLanguage] = useState(() => {
+      if (sessionStorage.getItem("medbay-lang") !== null) return JSON.parse(sessionStorage.getItem("medbay-lang"))
+      else return {id: "hr", name: "HRV"}
+   })
    const [userToken, setUserToken] = useState(() => {
       if (sessionStorage.getItem("medbay-token") !== null) {
          let token = JSON.parse(sessionStorage.getItem("medbay-token"))
@@ -53,40 +56,50 @@ export default function App() {           // glavna komponenta, u njoj se render
       if (userToken == "" && !["/register", "/reset-password"].includes(pathname)) globalNavigate("/login")
    }, [userToken])
 
+   useEffect(() => {
+      sessionStorage.setItem("medbay-lang", JSON.stringify(language))
+   }, [language])
+
 
   return (
       <ThemeProvider>
          <Routes>
             <Route index element={<>
-               <LogRegHeader globalNavigate={globalNavigate} />
-               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+               <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} language={language.id} />
             </>} />
             <Route path="/login" element={<>
-               <LogRegHeader globalNavigate={globalNavigate} />
-               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
+               <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} language={language.id} />
             </>} />
 
             <Route path="/register" element={<>
-               <LogRegHeader globalNavigate={globalNavigate} />
-               <RegisterMain globalNavigate={globalNavigate} />
+               <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
+               <RegisterMain globalNavigate={globalNavigate} language={language.id} />
             </>} />
 
             <Route path="/patient/*" element={<Patient
                globalNavigate={globalNavigate}
                userToken={userToken}
                handleLogout={handleLogout}
+               language={language}
+               setLanguage={setLanguage}
             />} />
 
             <Route path="/therapist/*" element={<Therapist
                   globalNavigate={globalNavigate}
                   userToken={userToken}
                   handleLogout={handleLogout}
+                  language={language}
+                  setLanguage={setLanguage}
             />} />
 
             <Route path="/admin/*" element={<Admin
                globalNavigate={globalNavigate}
                userToken={userToken}
                handleLogout={handleLogout}
+               language={language}
+               setLanguage={setLanguage}
             />} />
 
             <Route path="/reset-password" element={<ForgotPassword globalNavigate={globalNavigate} />} />

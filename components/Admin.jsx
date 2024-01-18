@@ -12,8 +12,7 @@ import NoMatchRoute from './NoMatchRoute'
 // import { useTranslation, Trans } from 'react-i18next';
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-    const {globalNavigate, userToken, handleLogout} = props
-
+    const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
     // const { t, i18n } = useTranslation();
     
     useEffect(() => {
@@ -88,36 +87,42 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
 
     return (
         <>
-            <AdminHeader navigate={navigate} handleLogout={handleLogout} />
+            <AdminHeader navigate={navigate} handleLogout={handleLogout} language={language} setLanguage={setLanguage} />
             <Routes>
                 <Route index element={<AdminWelcome
                     userToken={userToken}
                     navigate={navigate}
+                    language={language.id}
                 />} />
                 <Route path="welcome" element={<AdminWelcome
                     userToken={userToken}
                     navigate={navigate}
+                    language={language.id}
                 />} />
 
                 <Route path="calendar" element={<AdminCalendar
                     userToken={userToken}
                     formatDate={formatDate}
                     formatFullDate={formatFullDate}
+                    language={language.id}
                 />} />
                 
                 <Route path="verifications" element={<AdminVerifications
                     userToken={userToken}
                     formatFullDateAndTime={formatFullDateAndTime}
                     formatFullTime={formatFullTime}
+                    language={language.id}
                 />} />
 
                 <Route path="manage" element={<AdminManage
                     userToken={userToken}
                     formatFullDate={formatFullDate}
+                    language={language.id}
                 />} />
 
                 <Route path="statistics" element={<AdminStatistics
                     userToken={userToken}
+                    language={language.id}
                 />} />
                 
                 <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

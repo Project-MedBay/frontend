@@ -26,3 +26,9 @@
    margin: 0;
    margin-bottom: 0.15em;
 }
+
+.language {
+   position: absolute;
+   right: max(calc(60px * 0.6), calc(60vh * 59 / 725));
+   width: max(calc(110px * 0.6), calc(110vh * 59 / 725));
+}

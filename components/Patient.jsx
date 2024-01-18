@@ -11,7 +11,7 @@ import AIChat from './AIChat'
 import { useTheme } from './ThemeContext';
 
 export default function Patient(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
-   const {globalNavigate, userToken, handleLogout} = props
+   const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
    const [userData, setUserData] = useState({})
    const [mySchedule, setMySchedule] = useState({})
    const [userTherapies, setUserTherapies] = useState([])
@@ -170,7 +170,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
 
    return (
       <>
-         <PatientHeader navigate={navigate} handleLogout={handleLogout} />
+         <PatientHeader navigate={navigate} handleLogout={handleLogout} language={language} setLanguage={setLanguage} />
          <Routes>
             <Route index element={<PatientDash
                userToken={userToken}
@@ -181,8 +181,8 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDatetime={formatFullDatetime}
                formatWeek={formatWeek}
                mySchedule={mySchedule}
-               setMySchedule={setMySchedule}
                theme={theme}
+               language={language.id}
             />} />
             <Route path="dash" element={<PatientDash
                userToken={userToken}
@@ -194,6 +194,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatWeek={formatWeek}
                mySchedule={mySchedule}
                theme={theme}
+               language={language.id}
             />} />
 
             <Route path="newTherapy" element={<PatientNewTherapy
@@ -203,6 +204,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDate={formatFullDate}
                navigate={navigate}
                theme={theme}
+               language={language.id}
             />} />
 
             <Route path="profile" element={<PatientProfile
@@ -215,11 +217,12 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDate={formatFullDate}
                navigate={navigate}
                theme={theme}
+               language={language.id}
             />} />
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
          </Routes>
-         <AIChat userToken={userToken} theme={theme} />
+         <AIChat userToken={userToken} theme={theme} language={language.id} />
       </>
   )
 }

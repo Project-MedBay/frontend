@@ -6,7 +6,7 @@ import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
-    const {userToken, formatFullDateAndTime, formatFullTime} = props
+    const {userToken, formatFullDateAndTime, formatFullTime, language} = props
 
     const [popup, setPopup] = useState({
         set: false, 
@@ -74,6 +74,7 @@ export default function AdminVerifications(props) {
         cardType="therapy"
         setPopup={setPopup}
         setPopupData={setTherapyPopupData}
+        language={language}
         />))
     const registrations = registrationsData.map(x => (<VerificationCard
         key={x.id}
@@ -84,6 +85,7 @@ export default function AdminVerifications(props) {
         cardType="registration"
         setPopup={setPopup}
         setPopupData={setRegistrationPopupData}
+        language={language}
         />))
 
     function handleProcess(requestFor, id) {
@@ -134,6 +136,7 @@ export default function AdminVerifications(props) {
                         setPopup={setPopup} 
                         type="registration"
                         handleProcess={handleProcess}
+                        language={language}
                     />
                 :
                     <VerificationPopup
@@ -144,6 +147,7 @@ export default function AdminVerifications(props) {
                         handleProcess={handleProcess}
                         formatFullDateAndTime={formatFullDateAndTime}
                         formatFullTime={formatFullTime}
+                        language={language}
                     />
                 )
             }

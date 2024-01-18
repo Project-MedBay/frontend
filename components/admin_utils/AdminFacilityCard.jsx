@@ -4,7 +4,7 @@ import s from "../../styles/admin_utils/adminFacilityCard.module.css";
 import { useTranslation, Trans } from 'react-i18next';
 
 export default function AdminFacilityCard(props) {
-    const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate} = props;
+    const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate, language} = props;
     if (cardType == "resource") {
         var {name, capacity, specialization, location, description} = cardContent
     } else if (cardType == "therapy") {

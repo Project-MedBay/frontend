@@ -1,36 +1,30 @@
 import React from "react";
 import logo from "../assets/plus_icon.png";
-import s from "../styles/adminHeader.module.css";
-
+import CustomSelectInput from "./CustomSelectInput"
 import i18n from "../i18n.js"
 import { useTranslation, Trans } from 'react-i18next';
-
-const lngs = {
-    en: { nativeName: 'English' },
-    hr: { nativeName: 'Croatian' }
-  };
+import s from "../styles/adminHeader.module.css";
 
 export default function AdminHeader(props) {
-    const { subPageName, navigate, handleLogout } = props;
+    const {navigate, handleLogout, language, setLanguage} = props
 
     const { t, i18n } = useTranslation();
+
+    function handleLangInput(event) {
+        setLanguage(event.target.value)
+        i18n.changeLanguage(event.target.value.id)
+    }
 
     return (
         <div className={s.header}>
             <nav className={s.header_nav}>
-                <h2 
-                    className={`${s.nav_item} ${subPageName === "calendar" ? s.active : ''}`} 
-                    onClick={() => navigate("calendar")}>
+                <h2 className={s.nav_item} onClick={() => navigate("calendar")}>
                     {t('adminHeader.calendar')}
                 </h2>
-                <h2 
-                    className={`${s.nav_item} ${subPageName === "verifications" ? s.active : ''}`} 
-                    onClick={() => navigate("verifications")}>
+                <h2 className={s.nav_item} onClick={() => navigate("verifications")}>
                     {t('adminHeader.verifications')}
                 </h2>
-                <h2 
-                    className={`${s.nav_item} ${subPageName === "manage" ? s.active : ''}`} 
-                    onClick={() => navigate("manage")}>
+                <h2 className={s.nav_item} onClick={() => navigate("manage")}>
                     {t('adminHeader.manage')}
                 </h2>
             </nav>
@@ -40,23 +34,25 @@ export default function AdminHeader(props) {
             </div>
             <nav className={s.header_nav}>
                 <h2 
-                    className={`${s.nav_item} ${subPageName === "statistics" ? s.active : ''}`} 
+                    className={s.nav_item}
                     onClick={() => navigate("statistics")}>
                     {t('adminHeader.statistics')}
                 </h2>
-                <h2 
-                    className={s.nav_logout} 
-                    onClick={handleLogout}>
+
+                <div className={s.language}>
+                    <CustomSelectInput
+                        options={[{value: "en", label: "ENG"}, {value: "hr", label: "HRV"}]}
+                        name={"language"}
+                        defaultValue={language}
+                        handleChange={handleLangInput}
+                        failed={false}
+                        theme="light"
+                    />
+                </div>
+
+                <h2 className={s.nav_logout} onClick={handleLogout}>
                     {t('adminHeader.logOut')}
                 </h2>
-
-                <div>
-                    {Object.keys(lngs).map((lng) => (
-                        <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-                            {lngs[lng].nativeName}
-                        </button>
-                    ))}
-                </div>
 
             </nav>
         </div>

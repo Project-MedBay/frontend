@@ -8,7 +8,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
-   const {globalNavigate} = props
+   const {globalNavigate, language} = props
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       firstName: "",
