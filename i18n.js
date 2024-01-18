@@ -57,7 +57,18 @@ i18n
                 therapiesSectionTitle: "THERAPIES",
                 addNewButton: "ADD NEW",
                 noItemsMatchQuery: "There are no items that match this query."
-            }
+            },
+            adminStatistics: {
+                therapists: "Therapists",
+                resources: "Resources",
+                placeholder: "Search",
+                workHours: "WORK HOURS AT APPOINTMENTS",
+                pastMonth: "(PAST 30 DAYS)",
+                patientsTreated: "PATIENTS TREATED",
+                by: "BY",
+                with: "WITH",
+                lifetime: "(LIFETIME)"
+              }
 
         }
       },
@@ -96,6 +107,17 @@ i18n
                 therapiesSectionTitle: "TERAPIJE",
                 addNewButton: "DODAJ",
                 noItemsMatchQuery: "Nema stavki koje odgovaraju upitu."
+              },
+              adminStatistics: {
+                therapists: "Djelatnici",
+                resources: "Resursi",
+                placeholder: "Pretraži",
+                workHours: "SATI RADA NA TERMINIMA",
+                pastMonth: "(PRETHODNIH 30 DANA)",
+                patientsTreated: "NJEGOVANIH PACIJENATA",
+                by: "",
+                with: "",
+                lifetime: "(ODUVIJEK)"
               }
         }
       }

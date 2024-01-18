@@ -58,8 +58,10 @@
     "resources": "Resursi",
     "placeholder": "Pretraži",
     "workHours": "SATI RADA NA TERMINIMA",
-    "pastMonth": "(PRETHODNI MJESEC)",
+    "pastMonth": "(PRETHODNIH 30 DANA)",
     "patientsTreated": "NJEGOVANIH PACIJENATA",
+    "by": "",
+    "with": "",
     "lifetime": "(ODUVIJEK)"
   },
   "adminVerifications": {
@@ -314,6 +316,8 @@
     "logOutConfirmation": "ODJAVA?",
     "yes": "DA",
     "no": "NE",
+    "theme": "TEMA",
+    "language": "JEZIK",
     "myProfile": "MOJ PROFIL",
     "newTherapy": "NOVA TERAPIJA",
     "dashboard": "POČETNA STRANICA"

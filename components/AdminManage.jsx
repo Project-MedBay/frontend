@@ -4,9 +4,8 @@ import TableList from "./TableList"
 import AdminFacilityCard from "./admin_utils/AdminFacilityCard"
 import AccountEditPopup from "./EditPopup"
 import DeactivatePopup from "./DeactivatePopup"
-import s from "../styles/adminManage.module.css"
-
 import { useTranslation, Trans } from 'react-i18next';
+import s from "../styles/adminManage.module.css"
 
 export default function AdminManage(props) {
    const {userToken, formatFullDate, language} = props;

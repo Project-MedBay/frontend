@@ -10,7 +10,7 @@
     "statistics": "STATISTICS",
     "logOut": "LOG OUT",
     "logoAltText": "Logo",
-    
+
     "DONE": "DONE"
   },
   "adminCalendar": {
@@ -55,15 +55,19 @@
     "resourcesSectionTitle": "RESOURCES",
     "therapiesSectionTitle": "THERAPIES",
     "addNewButton": "ADD NEW",
-    "noItemsMatchQuery": "There are no items that match this query."
+    "noItemsMatchQuery": "There are no items that match this query.",
+
+    "DONE": "DONE"
   },
   "adminStatistics": {
     "therapists": "Therapists",
     "resources": "Resources",
     "placeholder": "Search",
     "workHours": "WORK HOURS AT APPOINTMENTS",
-    "pastMonth": "(PAST MONTH)",
+    "pastMonth": "(PAST 30 DAYS)",
     "patientsTreated": "PATIENTS TREATED",
+    "by": "BY",
+    "with": "WITH",
     "lifetime": "(LIFETIME)"
   },
   "adminVerifications": {
@@ -316,6 +320,8 @@
     "logOutConfirmation": "LOG OUT?",
     "yes": "YES",
     "no": "NO",
+    "theme": "THEME",
+    "language": "LANGUAGE",
     "myProfile": "MY PROFILE",
     "newTherapy": "NEW THERAPY",
     "dashboard": "DASHBOARD"

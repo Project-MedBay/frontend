@@ -1,7 +1,6 @@
 import React from "react"
-import s from "../../styles/admin_utils/adminFacilityCard.module.css";
-
 import { useTranslation, Trans } from 'react-i18next';
+import s from "../../styles/admin_utils/adminFacilityCard.module.css";
 
 export default function AdminFacilityCard(props) {
     const {cardType, cardContent , handleAdd, handleEdit, handleDeactivate, language} = props;
@@ -58,7 +57,7 @@ export default function AdminFacilityCard(props) {
                     </div>
                     <div className={s.card_info_row}>
                         <h3 className={s.row_info_value}>
-                            {t('adminFacilityCard.relevantBody')}:&#160;
+                            {t('adminFacilityCard.relevantBody')}&#160;
                             <div className={s.value_wrapper}>{bodypart[0].toUpperCase() + bodypart.slice(1)}</div>
                         </h3>
                         <h3 className={s.row_info_value}>
