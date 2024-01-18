@@ -66,16 +66,16 @@ export default function App() {           // glavna komponenta, u njoj se render
          <Routes>
             <Route index element={<>
                <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
-               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} language={language.id} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
             </>} />
             <Route path="/login" element={<>
                <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
-               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} language={language.id} />
+               <LoginMain handleLogin={handleLogin} globalNavigate={globalNavigate} />
             </>} />
 
             <Route path="/register" element={<>
                <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
-               <RegisterMain globalNavigate={globalNavigate} language={language.id} />
+               <RegisterMain globalNavigate={globalNavigate} />
             </>} />
 
             <Route path="/patient/*" element={<Patient

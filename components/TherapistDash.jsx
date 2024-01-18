@@ -5,7 +5,7 @@ import refresh from "../assets/refresh.png"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
-   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, formatFullDateISO, mySchedule, setMySchedule, language} = props
+   const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, formatFullDateISO, mySchedule, setMySchedule} = props
    
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
    const [nextSession, setNextSession] = useState({
@@ -265,7 +265,6 @@ export default function TherapistDash(props) {
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}
-            language={language}
          />
       }
    </>)

@@ -92,37 +92,31 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
                 <Route index element={<AdminWelcome
                     userToken={userToken}
                     navigate={navigate}
-                    language={language.id}
                 />} />
                 <Route path="welcome" element={<AdminWelcome
                     userToken={userToken}
                     navigate={navigate}
-                    language={language.id}
                 />} />
 
                 <Route path="calendar" element={<AdminCalendar
                     userToken={userToken}
                     formatDate={formatDate}
                     formatFullDate={formatFullDate}
-                    language={language.id}
                 />} />
                 
                 <Route path="verifications" element={<AdminVerifications
                     userToken={userToken}
                     formatFullDateAndTime={formatFullDateAndTime}
                     formatFullTime={formatFullTime}
-                    language={language.id}
                 />} />
 
                 <Route path="manage" element={<AdminManage
                     userToken={userToken}
                     formatFullDate={formatFullDate}
-                    language={language.id}
                 />} />
 
                 <Route path="statistics" element={<AdminStatistics
                     userToken={userToken}
-                    language={language.id}
                 />} />
                 
                 <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />

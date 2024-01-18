@@ -6,7 +6,7 @@ import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import s from "../styles/therapistPatients.module.css"
 
 export default function TherapistPatients(props) {
-   const {userToken, formatDate, formatFullDate, language} = props
+   const {userToken, formatDate, formatFullDate} = props
 
    const [searchInput, setSearchInput] = useState("")
    const [patientList, setPatientList] = useState([])
@@ -52,7 +52,6 @@ export default function TherapistPatients(props) {
             searchInput={searchInput}
             formatFullDate={formatFullDate}
             handleDetails={activatePopup}
-            language={language}
          />
       </div>
 
@@ -66,7 +65,6 @@ export default function TherapistPatients(props) {
             formatDate={formatDate}
             formatFullDate={formatFullDate}
             popupExit={popupExit}
-            language={language}
          />
       }
    </>)

@@ -6,7 +6,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/login.module.css"
 
 export default function LoginMain(props) {
-   const {handleLogin, globalNavigate, language} = props
+   const {handleLogin, globalNavigate} = props
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       email: "",
@@ -110,7 +110,7 @@ export default function LoginMain(props) {
 
          {forgotPassword && <div className={s.popup_separate} onClick={popupExit}></div>}
 
-         {forgotPassword && <LoginPasswordPopup popupExit={popupExit} language={language} />}
+         {forgotPassword && <LoginPasswordPopup popupExit={popupExit} />}
 
       </>
     )

@@ -8,7 +8,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/adminManage.module.css"
 
 export default function AdminManage(props) {
-   const {userToken, formatFullDate, language} = props;
+   const {userToken, formatFullDate} = props;
 
    const { t, i18n } = useTranslation();
 
@@ -99,7 +99,6 @@ export default function AdminManage(props) {
             handleAdd={handleAdd}
             handleEdit={handleEdit}
             handleDeactivate={handleDeactivate}
-            language={language}
          />
       )
    )
@@ -123,7 +122,6 @@ export default function AdminManage(props) {
             handleAdd={handleAdd}
             handleEdit={handleEdit}
             handleDeactivate={handleDeactivate}
-            language={language}
          />
       )
    )
@@ -409,7 +407,6 @@ export default function AdminManage(props) {
                handleAdd={handleAdd}
                handleEdit={handleEdit}
                handleDeactivate={handleDeactivate}
-               language={language}
             />
          </>}
 
@@ -427,7 +424,6 @@ export default function AdminManage(props) {
                formatFullDate={formatFullDate}
                handleEdit={handleEdit}
                handleDeactivate={handleDeactivate}
-               language={language}
             />
          </>}
 
@@ -475,7 +471,6 @@ export default function AdminManage(props) {
             popupExit={popupExit}
             formatFullDate={formatFullDate}
             theme="light"
-            language={language}
          />
       }
 
@@ -486,7 +481,6 @@ export default function AdminManage(props) {
             handleDeactivate={handleDeactivate}
             popupExit={popupExit}
             theme="light"
-            language={language}
          />
       }
    </>)

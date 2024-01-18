@@ -7,7 +7,7 @@ import s from "../styles/adminCalendar.module.css";
 // import { useTranslation, Trans } from 'react-i18next';
 
 export default function AdminCalendar(props) {
-    const {userToken, formatDate, formatFullDate, language} = props
+    const {userToken, formatDate, formatFullDate} = props
 
     // const { t, i18n } = useTranslation();
 
@@ -199,7 +199,6 @@ export default function AdminCalendar(props) {
                 setRescheduledSession={setRescheduledSession}
                 setCurrentSession={setCurrentSession}
                 popupExit={popupExit}
-                language={language}
             />
         }
 
@@ -217,7 +216,6 @@ export default function AdminCalendar(props) {
                     datetime: new Date(session)
                 }))}}
                 popupExit = {popupExit}
-                language={language}
             />
         }
     </>

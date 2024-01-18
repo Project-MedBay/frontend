@@ -8,7 +8,7 @@ import input_image from "../assets/input_image.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme, language} = props
+   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -246,7 +246,6 @@ export default function PatientProfile(props) {
             popupExit={popupExit}
             formatFullDate={formatFullDate}
             theme={theme}
-            language={language}
          />
       }
 
@@ -257,7 +256,6 @@ export default function PatientProfile(props) {
             handleDeactivate={handleDeactivate}
             popupExit={popupExit}
             theme={theme}
-            language={language}
          />
       }
 
@@ -270,7 +268,6 @@ export default function PatientProfile(props) {
             formatFullDate={formatFullDate}
             popupExit={popupExit}
             theme={theme}
-            language={language}
          />
       }
    </>)
