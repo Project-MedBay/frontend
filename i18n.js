@@ -77,6 +77,20 @@ i18n
                 "filterTherapyName": "Therapy Name",
                 "searchPlaceholder": "Search...",
                 "timeDateHeader": "Time / Date",
+                "shortMonths": {
+                  "Jan": "Jan",
+                  "Feb": "Feb",
+                  "Mar": "Mar",
+                  "Apr": "Apr",
+                  "May": "May",
+                  "Jun": "Jun",
+                  "Jul": "Jul",
+                  "Aug": "Aug",
+                  "Sep": "Sep",
+                  "Oct": "Oct",
+                  "Nov": "Nov",
+                  "Dec": "Dec"
+                },
                 "weekdays": {
                     "Monday": "Monday", 
                     "Tuesday": "Tuesday", 
@@ -118,7 +132,9 @@ i18n
                 therapists: "Therapists",
                 resources: "Resources",
                 placeholder: "Search",
-                workHours: "WORK HOURS AT APPOINTMENTS",
+                workHours: "WORK HOURS ",
+                appointments: "AT APPOINTMENTS",
+                use: "IN USE",
                 pastMonth: "(PAST 30 DAYS)",
                 patientsTreated: "PATIENTS TREATED",
                 by: "BY",
@@ -152,7 +168,8 @@ i18n
                 collapse: "Collapse",
                 expand: "Expand",
                 requestWasMade: "Request was made on ",
-                requestWillBe: "Request will be assigned identifier User#",
+                userWillBe: "User will be assigned identifier User#",
+                byUserWith: "by user with identifier User#",
                 reasonRejection: "Reason for rejection",
                 requestAccept: "Are you sure that you want to approve this request?",
                 buttonApprove: "Approve",
@@ -186,7 +203,9 @@ i18n
                 any: "any"
               },
             customSelectInput: {
-                select: "Select "
+                select: "Select ",
+                specialization: "specialization",
+                resource: "resource"
               },
             deactivatePopup: {
                 title: "Are you sure?",
@@ -211,10 +230,9 @@ i18n
                 "titleAdd": "ADD",
                 "titleEdit": "EDIT",
                 "titleAccountData": "ACCOUNT DATA",
-                "titlePatient": "PATIENT",
-                "titleTherapist": "THERAPIST",
-                "titleResource": "RESOURCE",
-                "titleTherapy": "THERAPY",
+                "title therapist": "THERAPIST",
+                "title resource": "RESOURCE",
+                "title therapy": "THERAPY",
                 "buttonCancel": "CANCEL",
                 "buttonSave": "SAVE",
                 "validation": {
@@ -280,65 +298,116 @@ i18n
                   }
                 },
                 "patient": {
-                    "name": "Name",
-                    "surname": "Surname",
-                    "email": "E-mail",
-                    "address": "Address",
-                    "dateOfBirth": "Date Of Birth",
-                    "phoneNumber": "Phone Number",
-                    "mbo": "MBO",
-                    "password": "Password",
-                    "confirmPassword": "Confirm Password",
-                    "namePlaceholder": "John",
-                    "surnamePlaceholder": "Doe",
-                    "emailPlaceholder": "john.doe@mail.com",
-                    "addressPlaceholder": "Street Name 1",
-                    "dobPlaceholder": "YYYY-MM-DD",
-                    "phonePlaceholder": "0912345678",
-                    "mboPlaceholder": "123456789",
-                    "passwordPlaceholder": "********"
+                  "name": {
+                    "label": "Name",
+                    "placeholder": "John"
                   },
-                  "therapist": {
-                    "name": "Name",
-                    "surname": "Surname",
-                    "email": "E-mail",
-                    "specialization": "Specialization",
-                    "employedSince": "Employed since",
-                    "password": "Password",
-                    "confirmPassword": "Confirm Password",
-                    "namePlaceholder": "John",
-                    "surnamePlaceholder": "Doe",
-                    "emailPlaceholder": "john.doe@mail.com",
-                    "specializationPlaceholder": "Somekindof therapist",
-                    "employedSincePlaceholder": "YYYY-MM-DD",
-                    "passwordPlaceholder": "********"
+                  "surname": {
+                    "label": "Surname",
+                    "placeholder": "Doe"
+                  },
+                  "e-mail": {
+                    "label": "E-mail",
+                    "placeholder": "john.doe@mail.com"
+                  },
+                  "address": {
+                    "label": "Address",
+                    "placeholder": "Street Name 1"
+                  },
+                  "dob": {
+                    "label": "Date Of Birth",
+                    "placeholder": "YYYY-MM-DD"
+                  },
+                  "phone": {
+                    "label": "Phone Number",
+                    "placeholder": "0912345678"
+                  },
+                  "mbo": {
+                    "label": "MBO",
+                    "placeholder": "123456789"
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "********"
+                  },
+                  "passwordConfirm": {
+                    "label": "Confirm Password",
+                    "placeholder": "********"
+                  }
+                },
+                "therapist": {
+                  "name": {
+                    "label": "Name",
+                    "placeholder": "John"
+                  },
+                  "surname": {
+                    "label": "Surname",
+                    "placeholder": "Doe"
+                  },
+                  "e-mail": {
+                    "label": "E-mail",
+                    "placeholder": "john.doe@mail.com"
+                  },
+                  "specialization": {
+                    "label": "Specialization",
+                    "placeholder": "Some kind of therapist"
+                  },
+                  "employed since": {
+                    "label": "Employed since",
+                    "placeholder": "YYYY-MM-DD"
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "********"
+                  },
+                  "passwordConfirm": {
+                    "label": "Confirm Password",
+                    "placeholder": "********"
+                  }
+                },
+                "resource": {
+                  "name": {
+                    "label": "Name",
+                    "placeholder": "Some kind of resource"
+                  },
+                  "location": {
+                    "label": "Location",
+                    "placeholder": "Some room or zone"
+                  },
+                  "specialization": {
+                    "label": "Specialization",
+                    "placeholder": "Some kind of therapist"
+                  },
+                  "capacity": {
+                    "label": "Capacity",
+                    "placeholder": "#"
+                  },
+                  "description": {
+                    "label": "Description",
+                    "placeholder": "This resource is used for some kind of therapy."
+                  }
+                },
+                "therapy": {
+                  "name": {
+                    "label": "Name",
+                    "placeholder": "Some kind of therapy"
                   },
                   "resource": {
-                    "name": "Name",
-                    "location": "Location",
-                    "specialization": "Specialization",
-                    "capacity": "Capacity",
-                    "description": "Description",
-                    "namePlaceholder": "Somekindof resource",
-                    "locationPlaceholder": "Some room or zone",
-                    "specializationPlaceholder": "Somekindof therapist",
-                    "capacityPlaceholder": "#",
-                    "descriptionPlaceholder": "This resource is used for some kind of therapy."
+                    "label": "Resource",
+                    "placeholder": "Some kind of resource"
                   },
-                  "therapy": {
-                    "name": "Name",
-                    "resource": "Resource",
-                    "bodyPart": "Relevant part of the body",
-                    "sessions": "Sessions",
-                    "code": "Code",
-                    "description": "Description",
-                    "namePlaceholder": "Somekindof therapy",
-                    "resourcePlaceholder": "Somekindof resource",
-                    "bodyPartPlaceholder": "",
-                    "sessionsPlaceholder": "#",
-                    "codePlaceholder": "45G7E",
-                    "descriptionPlaceholder": "This therapy uses this resource and is used to treat this kind of injury."
+                  "numberOfSessions": {
+                    "label": "Sessions",
+                    "placeholder": "#"
+                  },
+                  "bodypart": {
+                    "label": "Relevant part of the body",
+                    "placeholder": ""},
+                  "description": {
+                    "label": "Description",
+                    "placeholder": "This therapy uses some resource and is used to treat some kind of injury."
                   }
+                }
             },
             login: {
                 "formTitle": "Welcome back!",
@@ -349,7 +418,8 @@ i18n
                 "passwordLabel": "Password:",
                 "forgotPassword": "Forgot password?",
                 "loginButton": "Login",
-                "tagline": "Rehabilitation Redefined",
+                "tagline1": "Rehabilitation",
+                "tagline2": "Redefined",
                 "newHere": "You're new here?",
                 "registerButton": "Register now",
                 "emailPlaceholder": "john.doe@mail.com",
@@ -487,7 +557,8 @@ i18n
                 "backButton": "Back",
                 "nextButton": "Next",
                 "finishButton": "Finish",
-                "tagline": "RECOVERY BEGINS HERE.",
+                "tagline1": "RECOVERY",
+                "tagline2": "BEGINS HERE.",
                 "successPopup": {
                   "text1": "You have filled in all the information and your therapy request is now being processed by our administrator.",
                   "text2": "Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard.",
@@ -596,7 +667,8 @@ i18n
                   "text2": "Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made.",
                   "buttonText": "OK"
                 },
-                "greeting": "Where Healing Begins With Care."
+                "greeting1": "Where Healing",
+                "greeting2": "Begins With Care."
               },
             reschedulePopup: {
                 "popupTitle": "RESCHEDULE SESSION:",
@@ -863,12 +935,26 @@ i18n
                 "filterTherapyName": "Naziv terapije",
                 "searchPlaceholder": "Pretraži...",
                 "timeDateHeader": "Vrijeme / Datum",
+                "shortMonths": {
+                  "Jan": "Sij",
+                  "Feb": "Velj",
+                  "Mar": "Ožu",
+                  "Apr": "Tra",
+                  "May": "Svi",
+                  "Jun": "Lip",
+                  "Jul": "Srp",
+                  "Aug": "Kol",
+                  "Sep": "Ruj",
+                  "Oct": "Lis",
+                  "Nov": "Stu",
+                  "Dec": "Pro"
+                },
                 "weekdays": {
-                    "Monday": "Ponedjeljak", 
-                    "Tuesday": "Utorak", 
-                    "Wednesday": "Srijeda", 
-                    "Thursday": "Četvrtak", 
-                    "Friday": "Petak"
+                  "Monday": "Ponedjeljak", 
+                  "Tuesday": "Utorak", 
+                  "Wednesday": "Srijeda", 
+                  "Thursday": "Četvrtak", 
+                  "Friday": "Petak"
                 },
                 "popupTherapist": "DJELATNIK:",
                 "popupPatient": "PACIJENT:",
@@ -904,7 +990,9 @@ i18n
                 therapists: "Djelatnici",
                 resources: "Resursi",
                 placeholder: "Pretraži",
-                workHours: "RADNO VRIJEME NA TERMINIMA",
+                workHours: "RADNO VRIJEME ",
+                appointments: "NA TERMINIMA",
+                use: "U UPORABI",
                 pastMonth: "(PRETHODNIH 30 DANA)",
                 patientsTreated: "NJEGOVANIH PACIJENATA",
                 by: "",
@@ -921,8 +1009,8 @@ i18n
                 review: "Pregled"
               },
             adminVerificationPopup: {
-                registration: "Registracija",
-                therapy: "Terapija",
+                registration: "Registracijski",
+                therapy: "Terapijski",
                 requestNo: "Zahtjev #",
                 userData: "KORISNIČKI PODATCI:",
                 name: "Puno ime:",
@@ -938,7 +1026,8 @@ i18n
                 collapse: "Sažmi",
                 expand: "Proširi",
                 requestWasMade: "Zahtjev je zaprimljen ",
-                requestWillBe: "Zahtjev će zaprimiti identifikator User#",
+                userWillBe: "Korisniku će biti dodijeljen identifikator User#",
+                byUserWith: "od korisnika s identifikatorom User#",
                 reasonRejection: "Razlog odbijanja",
                 requestAccept: "Jeste li sigurni da želite odobriti ovaj zahtjev?",
                 buttonApprove: "Odobri",
@@ -972,7 +1061,9 @@ i18n
                 any: "bilo što"
               },
             customSelectInput: {
-                select: "Odaberi "
+                select: "Odaberi ",
+                specialization: "specijalizaciju",
+                resource: "resurs"
               },
             deactivatePopup: {
                 title: "Jeste li sigurni?",
@@ -997,10 +1088,9 @@ i18n
                 "titleAdd": "DODAJ",
                 "titleEdit": "UREDI",
                 "titleAccountData": "PODATKE O RAČUNU",
-                "titlePatient": "PACIJENT",
-                "titleTherapist": "DJELATNIK",
-                "titleResource": "RESURS",
-                "titleTherapy": "TERAPIJA",
+                "title therapist": "DJELATNIKA",
+                "title resource": "RESURS",
+                "title therapy": "TERAPIJU",
                 "buttonCancel": "ODUSTANI",
                 "buttonSave": "SPREMI",
                 "validation": {
@@ -1021,7 +1111,7 @@ i18n
                 },
                 "incorrectPassword": "Netočna lozinka.",
                 "changePassword": "Promijeni lozinku",
-                "cancelEdit": "Odustani od uređivanja",
+                "cancelEdit": "Odustani",
                 "fieldRequired": "Polje je obavezno.",
                 "bodyPartList": ["glava", "rame", "noga", "gornji dio trupa", "ruka", "noga", "donji dio trupa", "šaka", "bilo što"],
                 "changePasswordNote": "Prvo unijeti trenutnu lozinku"
@@ -1037,7 +1127,7 @@ i18n
                     "placeholder": "Horvat"
                   }, 
                   "email": {
-                    "label": "E-mail",
+                    "label": "E-pošta",
                     "placeholder": "ivan.horvat@mail.com"
                   },
                   "address": {
@@ -1045,11 +1135,11 @@ i18n
                     "placeholder": "Ime ulice 1"
                   },
                   "dateOfBirth": {
-                    "label": "Datum rođenja",
+                    "label": "Datum Rođenja",
                     "placeholder": "YYYY-MM-DD"
                   },
                   "phoneNumber": {
-                    "label": "Telefonski broj",
+                    "label": "Telefon",
                     "placeholder": "0912345678"
                   },
                   "MBO": {
@@ -1061,69 +1151,121 @@ i18n
                     "placeholder": "********"
                   },
                   "passwordConfirm": {
-                    "label": "Potvrdite lozinku",
+                    "label": "Potvrdite Lozinku",
                     "placeholder": "********"
                   }
                 },
                 "patient": {
-                    "name": "Ime",
-                    "surname": "Prezime",
-                    "email": "E-mail",
-                    "address": "Adresa",
-                    "dateOfBirth": "Datum rođenja",
-                    "phoneNumber": "Telefonski broj",
-                    "mbo": "MBO",
-                    "password": "Lozinka",
-                    "confirmPassword": "Potvrdi lozinku",
-                    "namePlaceholder": "Ivan",
-                    "surnamePlaceholder": "Horvat",
-                    "emailPlaceholder": "ivan.horvat@mail.com",
-                    "addressPlaceholder": "Ime ulice 1",
-                    "dobPlaceholder": "YYYY-MM-DD",
-                    "phonePlaceholder": "0912345678",
-                    "mboPlaceholder": "123456789",
-                    "passwordPlaceholder": "********"
+                    "name": {
+                      "label": "Ime",
+                      "placeholder": "Ivan"
+                    },
+                    "surname": {
+                      "label": "Prezime",
+                      "placeholder": "Horvat"
+                    },
+                    "e-mail": {
+                      "label": "E-mail",
+                      "placeholder": "ivan.horvat@mail.com"
+                    },
+                    "address": {
+                      "label": "Adresa",
+                      "placeholder": "Ime ulice 1"
+                    },
+                    "dob": {
+                      "label": "Datum Rođenja",
+                      "placeholder": "YYYY-MM-DD"
+                    },
+                    "phone": {
+                      "label": "Telefon",
+                      "placeholder": "0912345678"
+                    },
+                    "mbo": {
+                      "label": "MBO",
+                      "placeholder": "123456789"
+                    },
+                    "password": {
+                      "label": "Lozinka",
+                      "placeholder": "********"
+                    },
+                    "confirmPassword": {
+                      "label": "Potvrdite Lozinku",
+                      "placeholder": "********"
+                    }
                   },
                   "therapist": {
-                    "name": "Ime",
-                    "surname": "Prezime",
-                    "email": "E-mail",
-                    "specialization": "Specijalizacija",
-                    "employedSince": "Zaposlen od",
-                    "password": "Lozinka",
-                    "confirmPassword": "Potvrdi lozinku",
-                    "namePlaceholder": "Ivan",
-                    "surnamePlaceholder": "Horvat",
-                    "emailPlaceholder": "ivan.horvat@mail.com",
-                    "specializationPlaceholder": "Neki terapeut",
-                    "employedSincePlaceholder": "YYYY-MM-DD",
-                    "passwordPlaceholder": "********"
+                    "name": {
+                      "label": "Ime",
+                      "placeholder": "Ivan"
+                    },
+                    "surname": {
+                      "label": "Prezime",
+                      "placeholder": "Horvat"
+                    },
+                    "e-mail": {
+                      "label": "E-mail",
+                      "placeholder": "ivan.horvat@mail.com"
+                    },
+                    "specialization": {
+                      "label": "Specijalizacija",
+                      "placeholder": "Neka vrsta terapeuta"
+                    },
+                    "employed since": {
+                      "label": "Zaposlen Od",
+                      "placeholder": "YYYY-MM-DD"
+                    },
+                    "password": {
+                      "label": "Lozinka",
+                      "placeholder": "********"
+                    },
+                    "passwordConfirm": {
+                      "label": "Potvrdite Lozinku",
+                      "placeholder": "********"
+                    }
                   },
                   "resource": {
-                    "name": "Ime",
-                    "location": "Lokacija",
-                    "specialization": "Specijalizacija",
-                    "capacity": "Kapacitet",
-                    "description": "Opis",
-                    "namePlaceholder": "Neki resurs",
-                    "locationPlaceholder": "Neka prostorija ili prostor",
-                    "specializationPlaceholder": "Neki terapeut",
-                    "capacityPlaceholder": "#",
-                    "descriptionPlaceholder": "Ovaj resurs se koristi za neku vrstu terapije."
+                    "name": {
+                      "label": "Naziv",
+                      "placeholder": "Neka vrsta resursa"
+                    },
+                    "location": {
+                      "label": "Lokacija",
+                      "placeholder": "Neka soba ili zona"
+                    },
+                    "specialization": {
+                      "label": "Specijalizacija",
+                      "placeholder": "Neka vrsta terapeuta"
+                    },
+                    "capacity": {
+                      "label": "Kapacitet",
+                      "placeholder": "#"
+                    },
+                    "description": {
+                      "label": "Opis",
+                      "placeholder": "Ovaj se resurs koristi za neku vrstu terapije."
+                    }
                   },
                   "therapy": {
-                    "name": "Ime",
-                    "resource": "Resurs",
-                    "bodyPart": "Dio tijela",
-                    "sessions": "Termini",
-                    "code": "Kod",
-                    "description": "Opis",
-                    "namePlaceholder": "Neka vrsta terapije",
-                    "resourcePlaceholder": "Neki resurs",
-                    "bodyPartPlaceholder": "",
-                    "sessionsPlaceholder": "#",
-                    "codePlaceholder": "45G7E",
-                    "descriptionPlaceholder": "Ova terapija koristi ovaj resurs i koristi se za liječenje ovakvih vrsta ozljeda."
+                    "name": {
+                      "label": "Naziv",
+                      "placeholder": "Neka vrsta terapije"
+                    },
+                    "resource": {
+                      "label": "Resurs",
+                      "placeholder": "Neka vrsta resursa"
+                    },
+                    "numberOfSessions": {
+                      "label": "Broj Sesija",
+                      "placeholder": "#"
+                    },
+                    "bodypart": {
+                      "label": "Relevantni dio tijela",
+                      "placeholder": ""
+                    },
+                    "description": {
+                      "label": "Opis",
+                      "placeholder": "Ova terapija koristi neki resurs i koristi se za liječenje neke vrste ozljeda."
+                    }
                   }
             },
             login: {
@@ -1135,7 +1277,8 @@ i18n
                 "passwordLabel": "Lozinka:",
                 "forgotPassword": "Zaboravljena lozinka?",
                 "loginButton": "Prijava",
-                "tagline": "Rehabilitation Redefined",
+                "tagline1": "Rehabilitacija",
+                "tagline2": "Redefinirana",
                 "newHere": "Novi ste ovdje?",
                 "registerButton": "Registrirajte se",
                 "emailPlaceholder": "ivan.horvat@mail.com",
@@ -1273,7 +1416,8 @@ i18n
                 "backButton": "Natrag",
                 "nextButton": "Dalje",
                 "finishButton": "Završi",
-                "tagline": "RECOVERY BEGINS HERE.",
+                "tagline1": "OPORAVAK",
+                "tagline2": "POČINJE OVDJE.",
                 "successPopup": {
                   "text1": "Unijeli ste sve podatke i vaš zahtjev za terapijom sada obrađuje naš administrator.",
                   "text2": "Kada vaš zahtjev bude odobren, obavijestit ćemo vas putem e-pošte i termini će se pojaviti na vašoj početnoj stranici.",
@@ -1383,7 +1527,8 @@ i18n
                   "text2": "Molimo provjeravajte svoj e-mail kako biste vidjeli je li vaš račun potvrđen ili postoje promjene koje trebate napraviti.",
                   "buttonText": "OK"
                 },
-                "greeting": "Where Healing Begins With Care."
+                "greeting1": "Gdje Zdravlje",
+                "greeting2": "Počinje Uz Njegu."
               },
             reschedulePopup: {
                 "popupTitle": "ODGODI TERMIN:",

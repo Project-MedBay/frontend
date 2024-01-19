@@ -56,7 +56,9 @@ export default function AccountEditPopup(props) {
    }
 
    if (popupFor == "therapy") {
-      const bodypartList = ["head", "upper torso", "lower torso", "shoulder", "arm", "hand", "leg", "foot", "any"]
+      const bodypartList = [t("bodyPartSelection.head"), t("bodyPartSelection.upper torso"), t("bodyPartSelection.lower torso"),
+                           t("bodyPartSelection.shoulder"), t("bodyPartSelection.arm"), t("bodyPartSelection.hand"),
+                           t("bodyPartSelection.leg"), t("bodyPartSelection.foot"), t("bodyPartSelection.any")]
       var bodypartElements = bodypartList.map((bodypart, index) => (
             <div className={s.checkbox_wrapper} key={index} onClick={() => handleChange({target: {
                   name: "bodypart",
@@ -86,7 +88,7 @@ export default function AccountEditPopup(props) {
                </> : <>
 
                <p className={s.input_label}>
-                  {label} {(popupType == "edit" && name == "passwordConfirm" && editingPassword) &&
+                  {t("formFields." + popupFor + "." + name + ".label")} {(popupType == "edit" && name == "passwordConfirm" && editingPassword) &&
                      <span onClick={cancelPassEdit}>{t("adminEditPopup.cancelEdit")}</span>
                   }
                </p>
@@ -98,7 +100,7 @@ export default function AccountEditPopup(props) {
                : name == "description" ?
                   <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                      className={`${s.desc_box} ${inputFailed[name].failed && s.failed_input}`} type="text"
-                     onChange={handleChange} placeholder={placeholder} name={name} value={formData[name]}
+                     onChange={handleChange} placeholder={t("formFields." + popupFor + "." + name + ".placeholder")} name={name} value={formData[name]}
                   />
                : name == "bodypart" ?
                   <div className={`${s.bodypart_box} ${inputFailed[name].failed && s.failed_input}`}>
@@ -116,7 +118,7 @@ export default function AccountEditPopup(props) {
                :
                   <input
                      className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}
-                     type={type} onChange={handleChange} placeholder={placeholder}
+                     type={type} onChange={handleChange} placeholder={t("formFields." + popupFor + "." + name + ".placeholder")}
                      name={name} value={formData[name]} id={s[id]}
                   />
                }
@@ -329,7 +331,7 @@ export default function AccountEditPopup(props) {
       <div className={`${s.edit_popup} ${darkModeClass}`}>
          <h1 className={s.popup_title}>
             {popupType == "add" ? t("adminEditPopup.titleAdd") : t("adminEditPopup.titleEdit")}&#160;
-            {popupFor == "patient" ? t("adminEditPopup.titleAccountData") : popupFor.toUpperCase()}
+            {popupFor == "patient" ? t("adminEditPopup.titleAccountData") : t("adminEditPopup.title " + popupFor).toUpperCase()}
          </h1>
          <form className={s.grid_container} autoComplete="off">
             {formElements}

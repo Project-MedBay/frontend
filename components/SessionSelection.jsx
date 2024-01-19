@@ -68,7 +68,7 @@ export default function SessionSelection(props) {
          h3OnClick = () => {setViewingSession(weekDate)}
       } else if (availableSessions == "" || availableSessions[formatFullDate(weekDate)]?.length == 0 ||
                (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
-                blockedSessions[formatDate(weekDate)]?.length == availableSessions[formatFullDate(weekDate)]?.length) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
+                availableSessions[formatFullDate(weekDate)]?.every(time => blockedSessions[formatDate(weekDate)]?.includes(time))) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
          if (reschedule) {
             for (let week in patientSchedule) {

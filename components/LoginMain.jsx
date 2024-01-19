@@ -106,7 +106,7 @@ export default function LoginMain(props) {
             </form>
 
             <div className={s.extras}>
-               <h1 className={s.tagline}>Rehabilitation<br />Redefined</h1>
+               <h1 className={s.tagline}>{t("login.tagline1")}<br />{t("login.tagline2")}</h1>
                
                <div className={s.register_container}>
                   <p className={s.register_q}>{t('login.newHere')}</p>

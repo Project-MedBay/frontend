@@ -227,7 +227,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    color: #FFF;
    font-size: calc(32 * var(--scale-by-height));
    font-weight: 700;
-   width: calc(150 * var(--scale-by-height));
+   width: calc(170 * var(--scale-by-height));
    padding: calc(5 * var(--scale-by-height));
    border: 0;
    border-radius: calc(10 * var(--scale-by-height));
@@ -236,6 +236,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 }
 
 .change_password {
+   width: calc(150 * var(--scale-by-height));
    font-size: calc(22 * var(--scale-by-height));
    width: fit-content;
    padding: calc(5 * var(--scale-by-height)) calc(10 * var(--scale-by-height));

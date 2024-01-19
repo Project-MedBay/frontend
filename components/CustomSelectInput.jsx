@@ -23,7 +23,7 @@ export default function CustomSelectInput(props) {
       options={options}
       className={`${s.input_box} ${failed && s.failed_input}`}
       maxMenuHeight="max(calc(180px * 0.6), calc(180vh * 59 / 725))"
-      placeholder={t("CustomSelectInput.select") + name + "..."}
+      placeholder={t("customSelectInput.select") + t("customSelectInput." + name) + "..."}
       styles={{
          container: baseStyles => ({
             ...baseStyles,

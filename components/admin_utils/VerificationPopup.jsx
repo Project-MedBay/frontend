@@ -159,7 +159,8 @@ export default function VerificationCard(props){
                     )}
                 <div className={s.requestInfo}>
                     <p>{t('adminVerificationPopup.requestWasMade')}{popupData.date_time}</p>
-                    <p>{t('adminVerificationPopup.requestWillBe')}{popupData.user_id}</p>
+                    <p>{type == "registration" ?
+                        t('adminVerificationPopup.userWillBe') : t('adminVerificationPopup.byUserWith')}{popupData.user_id}</p>
                 </div>
                 {action ? (
                     <div>

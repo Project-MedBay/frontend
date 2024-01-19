@@ -341,7 +341,7 @@ export default function PatientNewTherapy(props) {
          </div>
 
          <div className={s.tagline_container}>
-            <h1 className={s.tagline}>RECOVERY<br /><span>BEGINS HERE.</span></h1>
+            <h1 className={s.tagline}>{t("patientNewTherapy.tagline1")}<br /><span>{t("patientNewTherapy.tagline2")}</span></h1>
          </div>
       </div>
 

@@ -165,7 +165,9 @@ export default function AdminStatistics(props) {
                     placeholder={t('adminStatistics.placeholder')} name="search" value={searchInput[currentStatistic]} autoComplete="off" />
                 <div className={s.stats_container}>
                     <div className={s.container_left}>
-                        <h2 className={s.container_main_text}>{t('adminStatistics.workHours')}</h2>
+                        <h2 className={s.container_main_text}>
+                            {t('adminStatistics.workHours')} {currentStatistic == "therapists" ?
+                                                              t('adminStatistics.appointments') : t('adminStatistics.use')}</h2>
                         <h4 className={s.container_secondary_text}>{t('adminStatistics.pastMonth')}</h4>
                         <div className={s.left_big_circle}>
                             <AdminStatisticsCircle 
@@ -178,8 +180,8 @@ export default function AdminStatistics(props) {
                     </div>
                     <div className={s.container_right}>
                         <h2 className={s.container_main_text}>
-                            {t('adminStatistics.patientsTreated')} {currentStatistic == "therapists" ? t('adminStatistics.by') 
-                                                                                               : t('adminStatistics.with')}
+                            {t('adminStatistics.patientsTreated')} {currentStatistic == "therapists" ?
+                                                                  t('adminStatistics.by') : t('adminStatistics.with')}
                         </h2>
                         <h4 className={s.container_secondary_text}>{t('adminStatistics.lifetime')}</h4>
                         <div className={s.right_bar_container}>

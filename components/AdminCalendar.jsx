@@ -64,8 +64,10 @@ export default function AdminCalendar(props) {
         const optionsDay = { weekday: 'long' };
         const formattedDate = new Intl.DateTimeFormat('en-US', optionsDate).format(date);
         const formattedDay = new Intl.DateTimeFormat('en-US', optionsDay).format(date);
+        const month = formattedDate.split(" ")[0]
+        const dateNum = formattedDate.split(" ")[1]
     
-        return `${formattedDate}, ${formattedDay}`;
+        return <>{t("adminCalendar.shortMonths." + month)} {dateNum},<br />{t("adminCalendar.weekdays." + formattedDay)}</>;
     }
     
 

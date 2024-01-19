@@ -34,7 +34,7 @@
     "reasonTwo": "Appointment is in less than 48 hours.",
     "rescheduleCalendar": "RESCHEDULE THERAPY",
 
-    "JOŠ NEŠTO": "JOŠ SAMO DATUME U KALENDARU"
+    "DONE": "DONE"
   },
   "adminFacilityCard": {
     "editFacility": "EDIT",
@@ -74,7 +74,7 @@
     "with": "WITH",
     "lifetime": "(LIFETIME)",
 
-    "DODATI_TEKST": "DODATI_TEKST"
+    "DONE": "DONE"
   },
   "adminVerifications": {
     "verificationsTitle": "Verifications",
@@ -92,7 +92,7 @@
   "adminVerificationPopup": {
     "registration": "Registration",
     "therapy": "Therapy",
-    "requestNo": "Request #", "PITATI_LOVRU":  "PITATI_LOVRU", "IDEJA": "crtica ili mijenjati kod",
+    "requestNo": "Request #",
     "userData": "USER DATA:",
     "name": "Full name:",
     "email": "Email:",
@@ -107,11 +107,13 @@
     "collapse": "Collapse",
     "expand": "Expand",
     "requestWasMade": "Request was made on ",
-    "requestWillBe": "Request will be assigned identifier User#", "PITATI_LOVRU2": "PITATI_LOVRU", "IDEJA2": "promijeniti ovaj dio",
+    "requestWillBe": "Request will be assigned identifier User#",
     "reasonRejection": "Reason for rejection",
     "requestAccept": "Are you sure that you want to approve this request?",
     "buttonApprove": "Approve",
-    "buttonReject": "Reject"
+    "buttonReject": "Reject",
+
+    "DONE": "DONE"
   },
   "adminWelcome": {
     "welcomeMessage": "Welcome, Admin!",
@@ -146,7 +148,9 @@
     "DONE": "DONE"
   },
   "customSelectInput": {
-    "select": "Select ",        "PITATI_LOVRU": "PITATI_LOVRU"
+    "select": "Select ",
+
+    "DONE": "DONE"
   },
   "deactivatePopup": {
     "title": "Are you sure?",
@@ -200,7 +204,9 @@
     "cancelEdit": "Cancel edit",
     "fieldRequired": "Field is required.",
     "bodyPartList": ["head", "shoulder", "leg", "upper torso", "arm", "foot", "lower torso", "hand", "any"],
-    "changePasswordNote": "Input current password first"
+    "changePasswordNote": "Input current password first",
+
+    "DONE": "DONE"
   },
   "formFields": {
     "register": {
@@ -300,7 +306,9 @@
       "sessionsPlaceholder": "#",
       "codePlaceholder": "45G7E",
       "descriptionPlaceholder": "This therapy uses this resource and is used to treat this kind of injury."
-    }
+    },
+
+    "DONE": "DONE"
   },
   "login": {
     "formTitle": "Welcome back!",
@@ -467,13 +475,8 @@
       "alotOfTime": "OVER",
                                                     "funkcija za hrvatske dane mjesece i godine (padezi)": "bit cemo lijeni"
     },
-                                                    "gdje je upload image??": "Nista",
-    "uploadImageTooltip": {
-      "add": "Add a profile image",
-      "change": "Change profile image"
-    },
 
-    "DONE": "DONE? - DODATI JOŠ HRVATSKU SLIKU"
+    "DONE": "DONE"
   },
   "registerMain": {
     "alreadyHaveAccount": "Already have an account?",
@@ -540,7 +543,7 @@
     },
     "greeting": "Where Healing Begins With Care.",
 
-    "DONE": "DONE - VALJDA"
+    "DONE": "DONE"
   },
   "reschedulePopup": {
     "popupTitle": "RESCHEDULE SESSION:",

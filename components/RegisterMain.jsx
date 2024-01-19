@@ -229,7 +229,7 @@ export default function RegisterMain(props) {
          <div className={`${s.register_main} ${successPopup && s.covered_by_popup}`}>        {/* uvjetna klasa za fade effect */}
 
             <div className={s.greeting_container}>
-               <h1 className={s.greeting}>Where Healing<br />Begins With Care.</h1>
+               <h1 className={s.greeting}>{t("registerMain.greeting1")}<br />{t("registerMain.greeting2")}</h1>
                <div className={s.login_container}>
                   <p className={s.login_q}>{t('registerMain.alreadyHaveAccount')}</p>
                   <button className={s.login_button}
