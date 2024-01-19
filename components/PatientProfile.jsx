@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import AccountEditPopup from "./EditPopup"
 import DeactivatePopup from "./DeactivatePopup"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
@@ -9,6 +10,8 @@ import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
    const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
+
+   const { t, i18n } = useTranslation();
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -22,17 +25,18 @@ export default function PatientProfile(props) {
       return (
          <div className={s.therapy_card} key={index}>
             <h3 className={s.therapy_name}>{therapy.name.toUpperCase()}</h3>
-            <p className={s.therapy_code}>THERAPY CODE {therapy.code}</p>
-            <p className={s.therapy_info}>DATE STARTED: <span>{formatFullDate(therapy["date started"])}</span></p>
-            <p className={s.therapy_info}>DATE FINISHED: <span>{formatFullDate(therapy["date finished"])}</span></p>
-            <p className={s.therapy_info}>TOTAL SESSIONS: <span>{therapy.sessions.length}</span></p>
-            <p className={s.therapy_more} onClick={() => setSelectedTherapy(therapy)}>View more</p>
+            <p className={s.therapy_code}>{t('patientProfile.therapyCard.therapyCode')} {therapy.code}</p>
+            <p className={s.therapy_info}>{t('patientProfile.therapyCard.dateStarted')} <span>{formatFullDate(therapy["date started"])}</span></p>
+            <p className={s.therapy_info}>{t('patientProfile.therapyCard.dateFinished')} <span>{formatFullDate(therapy["date finished"])}</span></p>
+            <p className={s.therapy_info}>{t('patientProfile.therapyCard.totalSessions')} <span>{therapy.sessions.length}</span></p>
+            <p className={s.therapy_more} onClick={() => setSelectedTherapy(therapy)}>{t('patientProfile.therapyCard.viewMore')}</p>
          </div>
       )
    })
    if (therapyElements.length == 0) {therapyElements.push(
       <h3 className={s.no_therapies}>
-         You have no therapies yet.<br className={s.mobile_only} /> Sign up through the <span>NEW THERAPY</span> tab!
+         {t("patientProfile.noTherapiesMessage1")}<br className={s.mobile_only} /> {t("patientProfile.noTherapiesMessage2")}
+                  <span>{t("patientProfile.noTherapiesMessage3")}</span> {t("patientProfile.noTherapiesMessage4")}
       </h3>
    )}
 
@@ -41,17 +45,17 @@ export default function PatientProfile(props) {
       let age
       let days = new Date() - userData.registeredSince
       days = Math.ceil(days / (1000 * 60 * 60 * 24))    // DAYS
-      if (days == 1) age = <><span>1</span> DAY</>
-      else if (days < 31) age = <><span>{days}</span> DAYS</>
-      else if (days < 61) age = <><span>1</span> MONTH</>
-      else if (days < 365) age = <><span>{Math.floor(days / 30.4167)}</span> MONTHS</>
-      else if (days < 396) age = <><span>1</span> YEAR</>
-      else if (days < 425) age = <><span>1</span> YEAR <span>1</span> MONTH</>
-      else if (days < 730) age = <><span>1</span> YEAR <span>{Math.floor((days % 365.25) / 30.4167)}</span> MONTHS</>
-      else if (days % 365.25 < 31) age = <><span>{Math.floor(days / 365.25)}</span> YEARS</>
-      else if (days % 365.25 < 61) age = <><span>{Math.floor(days / 365.25)}</span> YEARS <span>1</span> MONTH</>
-      else if (days < 1825) age = <><span>{Math.floor(days / 365.25)}</span> YEARS <span>{Math.floor((days % 365.25) / 30.4167)}</span> MONTHS</>
-      else { age = <>OVER <span>{Math.floor(days / 365.25)}</span> YEARS</> }
+      if (days == 1) age = <><span>1</span> {t("patientProfile.thankYouMessage.oneDay")}</>
+      else if (days < 31) age = <><span>{days}</span> {t("patientProfile.thankYouMessage.moreDays")}</>
+      else if (days < 61) age = <><span>1</span> {t("patientProfile.thankYouMessage.oneMonth")}</>
+      else if (days < 365) age = <><span>{Math.floor(days / 30.4167)}</span> {t("patientProfile.thankYouMessage.moreMonths")}</>
+      else if (days < 396) age = <><span>1</span> {t("patientProfile.thankYouMessage.oneYear")}</>
+      else if (days < 425) age = <><span>1</span> {t("patientProfile.thankYouMessage.oneYear")} <span>1</span> {t("patientProfile.thankYouMessage.oneMonth")}</>
+      else if (days < 730) age = <><span>1</span> {t("patientProfile.thankYouMessage.oneYear")} <span>{Math.floor((days % 365.25) / 30.4167)}</span> {t("patientProfile.thankYouMessage.moreMonths")}</>
+      else if (days % 365.25 < 31) age = <><span>{Math.floor(days / 365.25)}</span> {t("patientProfile.thankYouMessage.moreYears")}</>
+      else if (days % 365.25 < 61) age = <><span>{Math.floor(days / 365.25)}</span> {t("patientProfile.thankYouMessage.moreYears")} <span>1</span> {t("patientProfile.thankYouMessage.oneMonth")}</>
+      else if (days < 1825) age = <><span>{Math.floor(days / 365.25)}</span> {t("patientProfile.thankYouMessage.moreYears")} <span>{Math.floor((days % 365.25) / 30.4167)}</span> {t("patientProfile.thankYouMessage.moreMonths")}</>
+      else { age = <>{t("patientProfile.thankYouMessage.alotOfTime")} <span>{Math.floor(days / 365.25)}</span> {t("patientProfile.thankYouMessage.moreYears")}</> }
       return age
    }
 
@@ -179,27 +183,27 @@ export default function PatientProfile(props) {
                   </div>
 
                   <div className={s.info_item}>
-                     <p>E-mail: </p>
+                     <p>{t('patientProfile.emailLabel')} </p>
                      <span>{userData.email}</span>
                   </div>
                   
                   <div className={s.info_item}>
-                     <p>Address: </p>
+                     <p>{t('patientProfile.addressLabel')} </p>
                      <span>{userData.address}</span>
                   </div>
                   
                   <div className={s.info_item}>
-                     <p>Date of Birth: </p>
+                     <p>{t('patientProfile.dateOfBirthLabel')} </p>
                      <span>{userData.dob != null && formatFullDate(userData.dob)}</span>
                   </div>
                   
                   <div className={s.info_item}>
-                     <p>Phone Number: </p>
+                     <p>{t('patientProfile.phoneNumberLabel')} </p>
                      <span>{userData.phone}</span>
                   </div>
                   
                   <div className={s.info_item}>
-                     <p>MBO: </p>
+                     <p>{t('patientProfile.mboLabel')} </p>
                      <span>{userData.mbo}</span>
                   </div>
                </div>
@@ -207,19 +211,19 @@ export default function PatientProfile(props) {
 
             <div className={s.header_thanks}>   {/* NOTE dodati neku drugu sliku za bg */}
                <div className={s.thanks_message}>
-                  <h1 className={s.message_title}>THANK YOU</h1>
-                  <h2 className={s.message_subtitle}>FOR BEING WITH US FOR</h2>
+                  <h1 className={s.message_title}>{t("patientProfile.thankYouMessage.title")}</h1>
+                  <h2 className={s.message_subtitle}>{t("patientProfile.thankYouMessage.subtitle")}</h2>
                </div>
                <h2 className={s.thanks_age}>{accountAge}</h2>
                <div className={s.thanks_buttons}>
-                  <h3 className={s.thanks_edit} onClick={() => setEditPopup(true)}>Edit account data</h3>
-                  <h3 className={s.thanks_deactivate} onClick={() => setDeactivatePopup(true)}>Deactivate account</h3>
+                  <h3 className={s.thanks_edit} onClick={() => setEditPopup(true)}>{t('patientProfile.editAccountData')}</h3>
+                  <h3 className={s.thanks_deactivate} onClick={() => setDeactivatePopup(true)}>{t('patientProfile.deactivateAccount')}</h3>
                </div>
             </div>
          </div>
 
          <div className={s.profile_therapies}>
-            <h1 className={s.therapies_title}>My therapies:</h1>
+            <h1 className={s.therapies_title}>{t('patientProfile.myTherapiesTitle')}</h1>
             <div className={s.therapies_container}>
                {therapyElements}
             </div>

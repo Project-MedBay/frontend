@@ -151,7 +151,7 @@ i18n
                 buttonYes: "YES, ",
                 buttonNo: "NO, DON'T "
               },
-            "login": {
+            login: {
                 "formTitle": "Welcome back!",
                 "invalidCredentials": "Invalid email or password. Please try again.",
                 "notAuthorized": "Account not yet authorized. Please try again later.",
@@ -166,13 +166,151 @@ i18n
                 "emailPlaceholder": "john.doe@mail.com",
                 "passwordPlaceholder": "********"
               },
-            "loginPasswordPopup": {
+            loginPasswordPopup: {
                 "popupTitle": "Write your e-mail here and we will send you a form to reset your password:",
                 "emailPlaceholder": "john.doe@mail.com",
                 "submitButton": "Submit",
                 "success": "Success!",
                 "resetLink": "The link to reset your password will arrive to the supplied e-mail shortly.",
                 "close": "Close"
+              },
+            noMatchRoute: {
+                "error": "Error 404",
+                "notFound": "Page not found.",
+                "goBack": "Back",
+                "toLogin": "Take me to login"
+              },
+            patientDash: {
+                "mySchedule": "My schedule:",
+                "noSessionsThisWeek": "No sessions this week.",
+                "nextSession": "Next session:",
+                "selectedSession": "Selected session:",
+                "noUpcomingSessions": "No upcoming sessions.",
+                "noSessions": "No sessions.",
+                "viewMore": "View more",
+                "therapist": "Therapist:",
+                "therapy": "Therapy:",
+                "time": "Time:",
+                "location": "Location:",
+                "sessionNumber": "Session number:",
+                "viewLocationOnMap": "View location on map",
+                "closeMap": "Close map",
+                "viewNotes": "View notes",
+                "noNotesSoFar": "No notes so far.",
+                "reschedule": "Reschedule",
+                "cannotReschedule": "Cannot reschedule.",
+                "appointmentInLess48Hours": "Appointment is in less than 48 hours.",
+                "appointmentPassed": "Appointment has passed.",
+                "sessionNotesTitle": "SESSION NOTES:",
+                "session": "Session"
+              },
+            patientHeader: {
+                "brandName": "MedBay",
+                "logOut": "LOG OUT",
+                "logOutConfirmation": "LOG OUT?",
+                "yes": "YES",
+                "no": "NO",
+                "theme": "THEME",
+                "language": "LANGUAGE",
+                "myProfile": "MY PROFILE",
+                "newTherapy": "NEW THERAPY",
+                "dashboard": "DASHBOARD"
+              },
+            patientNewTherapy: {
+                "title": "REQUEST A NEW THERAPY",
+                "step1Title": "STEP 1: PICK A THERAPY",
+                "step1Subtitle": "or enter therapy code provided by your doctor:",
+                "invalidCode": "Invalid code.",
+                "codePlaceholder": "#4JGSE",
+                "filterBy": "FILTER BY:",
+                "searchPlaceholder": "Search",
+                "searchText": "Select a body part to filter or use the search bar below to find your therapy.",
+                "step2Title": "STEP 2: PICK SESSIONS",
+                "pickedSessions": "PICKED:",
+                "duration": "duration:",
+                "oneDay": "day",
+                "moreDays": "days",
+                "restrictions": "Restrictions:",
+                "sessionRestrictions": {
+                  "firstRestriction1": "Selected sessions must be at least ", 
+                  "firstRestriction2": "24h apart.",
+                  "secondRestriction1": "The total duration of the therapy must not exceed ",
+                  "secondRestriction2": " days.",
+                  "thirdRestriction1": "Sessions cannot be scheduled more than ",
+                  "thirdRestriction2": "3 months ",
+                  "thirdRestriction3": "in advance."
+                },
+                "scheduleLegend1": "Grayed out dates/times are inelligible or full. ",
+                "scheduleLegend2": "Picked dates/times are highlighted in ",
+                "scheduleLegend3": "purple and bolded.",
+                "step3Title": "STEP 3: FINAL STEP",
+                "reviewSectionTitle": "review:",
+                "durationDays1": "duration: ",
+                "durationDays2": " days",
+                "noOfSessions": "number of session: ",
+                "mySessions": "MY SESSIONS",
+                "collapse": "Collapse",
+                "expand": "Expand",
+                "verificationSectionTitle": "verification:",
+                "referralNumber": "Referral number:",
+                "referralPlaceholder": "123456789",
+                "referralDescription1": "A unique sequence of letters and numbers found on the",
+                "referralDescription2": "referral note provided by your doctor.",
+                "referralDescription3": "If you're unsure where to find it, ask your doctor for help.",
+                "doctorId": "Doctor id (hlkid):",
+                "doctorIdDescription1": "A unique sequence of numbers that represents your doctor",
+                "doctorIdDescription2": "in the national health system.",
+                "doctorIdDescription3": "If you're unsure where to find it, ask your doctor for help.",
+                "verificationFailed": "Incorrect referral number or hlkid.",
+                "finishNote": "Once your therapy is approved by admin, we will notify you by email.",
+                "iUnderstand": "I understand",
+                "cancelButton": "Cancel",
+                "backButton": "Back",
+                "nextButton": "Next",
+                "finishButton": "Finish",
+                "tagline": "RECOVERY BEGINS HERE.",
+                "successPopup": {
+                  "text1": "You have filled in all the information and your therapy request is now being processed by our administrator.",
+                  "text2": "Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard.",
+                  "buttonText": "Go to dash"
+                }
+              },
+            patientProfile: {
+                "userID": "(#User",
+                "editAccountData": "Edit account data",
+                "deactivateAccount": "Deactivate account",
+                "myTherapiesTitle": "My therapies:",
+                "noTherapiesMessage1": "You have no therapies yet. ",
+                "noTherapiesMessage2": "Sign up through the ",
+                "noTherapiesMessage3": "NEW THERAPY",
+                "noTherapiesMessage4": "tab!",
+                "emailLabel": "E-mail:",
+                "addressLabel": "Address:",
+                "dateOfBirthLabel": "Date of Birth:",
+                "phoneNumberLabel": "Phone Number:",
+                "mboLabel": "MBO:",
+                "therapyCard": {
+                  "therapyCode": "THERAPY CODE",
+                  "dateStarted": "DATE STARTED:",
+                  "dateFinished": "DATE FINISHED:",
+                  "totalSessions": "TOTAL SESSIONS:",
+                  "viewMore": "View more"
+                },
+                "thankYouMessage": {
+                  "title": "THANK YOU",
+                  "subtitle": "FOR BEING WITH US FOR",
+                  "oneDay": "DAY",
+                  "moreDays": "DAYS",
+                  "oneMonth": "MONTH",
+                  "moreMonths": "MONTHS",
+                  "oneYear": "YEAR",
+                  "moreYears": "YEARS",
+                  "alotOfTime": "OVER"
+                },
+                "uploadImageTooltip": {
+                  "add": "Add a profile image",
+                  "change": "Change profile image"
+                }
               }
             
         }
@@ -306,7 +444,7 @@ i18n
                 buttonYes: "DA, ",
                 buttonNo: "NE, NEMOJ "
               },
-            "login": {
+            login: {
                 "formTitle": "Dobrodošli natrag!",
                 "invalidCredentials": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
                 "notAuthorized": "Vaš račun još nije odobren. Molimo pokušajte ponovno kasnije.",
@@ -321,14 +459,153 @@ i18n
                 "emailPlaceholder": "ivan.horvat@mail.com",
                 "passwordPlaceholder": "********"
               },
-            "loginPasswordPopup": {
+            loginPasswordPopup: {
                 "popupTitle": "Napišite svoju e-mail adresu kako bismo Vam poslali obrazac za promjenu lozinke:",
                 "emailPlaceholder": "ivan.horvat@mail.com",
                 "submitButton": "Podnesi",
                 "success": "Uspješno!",
                 "resetLink": "Na vašu e-mail adresu uskoro će dospjeti obrazac za promjenu lozinke.",
                 "close": "Zatvori"
-              }
+              },
+            noMatchRoute: {
+                "error": "Error 404",
+                "notFound": "Stranica nije pronađena.",
+                "goBack": "Natrag",
+                "toLogin": "Vrati me na prijavu"
+              },
+            patientDash: {
+                "mySchedule": "Moji termini:",
+                "noSessionsThisWeek": "Nema termina ovaj tjedan.",
+                "nextSession": "Sljedeći termin:",
+                "selectedSession": "Odabrani termin:",
+                "noUpcomingSessions": "Nema nadolazećih termina.",
+                "noSessions": "Nema termina.",
+                "viewMore": "Prikaži više",
+                "therapist": "Terapeut:",
+                "therapy": "Terapija:",
+                "time": "Vrijeme:",
+                "location": "Lokacija:",
+                "sessionNumber": "Broj termina:",
+                "viewLocationOnMap": "Prikaži lokaciju na karti",
+                "closeMap": "Zatvori kartu",
+                "viewNotes": "Pogledaj bilješke",
+                "noNotesSoFar": "Zasad nema bilješki.",
+                "reschedule": "Odgodi termin",
+                "cannotReschedule": "Nemoguće odgoditi termin.",
+                "appointmentInLess48Hours": "Termin je u sljedećih 48 sati.",
+                "appointmentPassed": "Termin je prošao.",
+                "sessionNotesTitle": "BILJEŠKE O TERMINU:",
+                "session": "Termin"
+              },
+            patientHeader: {
+                "brandName": "MedBay",
+                "logOut": "ODJAVA",
+                "logOutConfirmation": "ODJAVA?",
+                "yes": "DA",
+                "no": "NE",
+                "theme": "TEMA",
+                "language": "JEZIK",
+                "myProfile": "MOJ PROFIL",
+                "newTherapy": "NOVA TERAPIJA",
+                "dashboard": "POČETNA"
+              },
+            patientNewTherapy: {
+                "title": "ZAHTJEV ZA NOVU TERAPIJU",
+                "step1Title": "KORAK 1: IZABERITE TERAPIJU",
+                "step1Subtitle": "ili unesite kod terapije koji vam je dao Vaš liječnik:",
+                "invalidCode": "Nevažeći kod.",
+                "codePlaceholder": "#4JGSE",
+                "filterBy": "FILTRIRAJ PO:",
+                "searchPlaceholder": "Pretraži",
+                "searchText": "Filtrirajte po dijelu tijela ili upotrijebite tražilicu kako biste pronašli terapiju.",
+                "step2Title": "KORAK 2: IZBOR TERMINA",
+                "pickedSessions": "ODABRANO:",
+                "duration": "trajanje:",
+                "oneDay": "dan",
+                "moreDays": "dana",
+                "restrictions": "Ograničenja:",
+                "sessionRestrictions": {
+                  "firstRestriction1": "Odabrani termini moraju biti udaljeni barem ",
+                  "firstRestriction2": "24 sata.",
+                  "secondRestriction1": "Ukupno trajanje terapije ne smije prelaziti ",
+                  "secondRestriction2": " dana.", 
+                  "thirdRestriction1": "Termini se ne mogu zakazati više od ",
+                  "thirdRestriction2": "3 mjeseca ",
+                  "thirdRestriction3": "unaprijed."
+                },
+                "scheduleLegend1": "Sivo obojani datumi/vremena su nedostupni.",
+                "scheduleLegend2": "Odabrani datumi/vremena označeni su ",
+                "scheduleLegend3": "ljubičastom bojom i podebljani.",
+                "step3Title": "KORAK 3: ZAVRŠNI KORAK",
+                "reviewSectionTitle": "pregled:",
+                "durationDays1": "trajanje: ",
+                "durationDays2": " dana",
+                "noOfSessions": "broj termina: ",
+                "mySessions": "MOJI TERMINI",
+                "collapse": "Sažmi",
+                "expand": "Proširi",
+                "verificationSectionTitle": "verifikacija:",
+                "referralNumber": "Broj uputnice:",
+                "referralPlaceholder": "123456789",
+                "referralDescription1": "Jedinstveni slijed slova i znamenaka koji se nalaze na",
+                "referralDescription2": "uputnici koju Vam je izdao liječnik.",
+                "referralDescription3": "Ako ga ne možete naći, kontaktirajte svog liječnika.",    
+                "doctorId": "ID liječnika (hlkid):",
+                "doctorIdDescription1": "Jedinstveni slijed znamenaka koji identificira Vašeg liječnika ",
+                "doctorIdDescription2": "u bazi zavoda za zdravstveno osiguranje.",
+                "doctorIdDescription3": "Ako ga ne možete naći, kontaktirajte svog liječnika.",
+                "verificationFailed": "Nevažeći broj uputnice ili hlkid.",
+                "finishNote": "Kada vašu terapiju odobri admin, obavijestit ćemo Vas putem e-pošte.",
+                "iUnderstand": "Razumijem",
+                "cancelButton": "Odustani",
+                "backButton": "Natrag",
+                "nextButton": "Dalje",
+                "finishButton": "Završi",
+                "tagline": "RECOVERY BEGINS HERE.",
+                "successPopup": {
+                  "text1": "Unijeli ste sve podatke i vaš zahtjev za terapijom sada obrađuje naš administrator.",
+                  "text2": "Kada vaš zahtjev bude odobren, obavijestit ćemo vas putem e-pošte i termini će se pojaviti na vašoj početnoj stranici.",
+                  "buttonText": "Na početnu"
+                }
+              },
+            patientProfile: {
+                "userID": "(#User",
+                "editAccountData": "Uredi podatke o računu",
+                "deactivateAccount": "Deaktiviraj račun",
+                "myTherapiesTitle": "Moje terapije:",
+                "noTherapiesMessage1": "Još nemate terapija. ",
+                "noTherapiesMessage2": "Prijavite se pritiskom na ",
+                "noTherapiesMessage3": "NOVA TERAPIJA!",
+                "noTherapiesMessage4": "",
+                "emailLabel": "E-mail:",
+                "addressLabel": "Adresa:",
+                "dateOfBirthLabel": "Datum rođenja:",
+                "phoneNumberLabel": "Telefonski broj:",
+                "mboLabel": "MBO:",
+                "therapyCard": {
+                  "therapyCode": "KOD TERAPIJE",
+                  "dateStarted": "DATUM POČETKA:",
+                  "dateFinished": "DATUM ZAVRŠETKA:",
+                  "totalSessions": "UKUPNO TERMINA:",
+                  "viewMore": "Prikaži više"
+                },
+                "thankYouMessage": {
+                  "title": "HVALA",
+                  "subtitle": "ŠTO STE S NAMA VEĆ",
+                  "oneDay": "DAN",
+                  "moreDays": "DANA",
+                  "oneMonth": "MJESEC",
+                  "moreMonths": "MJESECA/MJESECI",
+                  "oneYear": "GODINU",
+                  "moreYears": "GODINE/GODINA",
+                  "alotOfTime": "VIŠE OD ",
+                  "_comment_za_Lovru3": "funkcija za rješavanje problema mjeseca/mjeseci i godine/godina"
+                },
+                "uploadImageTooltip": {
+                  "add": "Dodaj sliku profila",
+                  "change": "Promijeni sliku profila"
+                }
+            }
         }
       }
     }

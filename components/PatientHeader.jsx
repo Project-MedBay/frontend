@@ -22,6 +22,8 @@ export default function PatientHeader(props) {
    const [mobileOptions, setMobileOptions] = useState(false)
    const { theme, toggleTheme } = useTheme();
 
+   const { t, i18n } = useTranslation();
+
    function toggleMobileNav() {
       setMobileNav(prevState => !prevState)
       setMobileOptions(false)
@@ -56,14 +58,14 @@ export default function PatientHeader(props) {
          
          <nav className={s.header_nav}>
             <div className={`${s.nav_container} ${mobileNav && s.mobile_visible}`}>
-               <h2 className={s.nav_item} onClick={() => handleNavigate("dash")}>DASHBOARD</h2>
-               <h2 className={s.nav_item} onClick={() => handleNavigate("newTherapy")}>NEW THERAPY</h2>
-               <h2 className={s.nav_item} onClick={() => handleNavigate("profile")}>MY PROFILE</h2>
+               <h2 className={s.nav_item} onClick={() => handleNavigate("dash")}>{t('patientHeader.dashboard')}</h2>
+               <h2 className={s.nav_item} onClick={() => handleNavigate("newTherapy")}>{t('patientHeader.newTherapy')}</h2>
+               <h2 className={s.nav_item} onClick={() => handleNavigate("profile")}>{t('patientHeader.myProfile')}</h2>
             </div>
 
             <div className={`${s.options_container} ${mobileOptions && s.mobile_visible}`}>
                <div className={s.option_row}>
-                  <h2 className={`${s.options_item} ${s.mobile_only}`}>THEME&#160;</h2>
+                  <h2 className={`${s.options_item} ${s.mobile_only}`}>{t('patientHeader.theme')}&#160;</h2>
                   <Toggle
                      defaultChecked={theme === 'dark' ? true : false}
                      icons={{
@@ -76,7 +78,7 @@ export default function PatientHeader(props) {
                </div>
 
                <div className={`${s.option_row} ${s.language}`}>
-                  <h2 className={`${s.options_item} ${s.mobile_only}`}>LANGUAGE&#160;</h2>
+                  <h2 className={`${s.options_item} ${s.mobile_only}`}>{t('patientHeader.language')}&#160;</h2>
                   <CustomSelectInput
                      options={[{value: "en", label: "ENG"}, {value: "hr", label: "HRV"}]}
                      name={"language"}
@@ -88,12 +90,12 @@ export default function PatientHeader(props) {
                </div>
 
                {logOut ? 
-                  <h2 className={s.nav_check_logout}>LOG OUT?&#160;
-                     <span id={s.yes} onClick={() => handleLogout()}>YES</span> /&#160;
-                     <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
+                  <h2 className={s.nav_check_logout}>{t('patientHeader.logOutConfirmation')}&#160;
+                     <span id={s.yes} onClick={() => handleLogout()}>{t('patientHeader.yes')}</span> /&#160;
+                     <span id={s.no} onClick={() => setLogOut(false)}>{t('patientHeader.no')}</span>
                   </h2>
                   :
-                  <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
+                  <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>{t('patientHeader.logOut')}</h2>
                }
             </div>
          </nav>

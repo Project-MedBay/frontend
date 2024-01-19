@@ -332,7 +332,7 @@
     "step1Title": "KORAK 1: IZBOR TERAPIJE",
     "step1Subtitle": "ili unesite kod terapije koji vam je dao Vaš liječnik:",
     "invalidCode": "Nevažeći kod.",
-    "codePlaceholderr": "#4JGSE",
+    "codePlaceholder": "#4JGSE",
     "filterBy": "FILTRIRAJ PO:",
     "searchPlaceholder": "Pretraži",
     "searchText": "Filtrirajte preko dijela tijela ili upotrijebite tražilicu kako biste pronašli svoju terapiju.",

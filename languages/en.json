@@ -302,13 +302,17 @@
     "DONE": "DONE"
   },
   "loginHeader": {
-    "brandName": "MedBay"
+    "brandName": "MedBay",
+
+    "DONE": "DONE"
   },
   "noMatchRoute": {
     "error": "Error 404",
     "notFound": "Page not found.",
     "goBack": "Back",
-    "toLogin": "Take me to login"
+    "toLogin": "Take me to login",
+
+    "DONE": "DONE"
   },
   "patient": {
     "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -336,7 +340,9 @@
     "appointmentInLess48Hours": "Appointment is in less than 48 hours.",
     "appointmentPassed": "Appointment has passed.",
     "sessionNotesTitle": "SESSION NOTES:",
-    "session": "Session"
+    "session": "Session",
+
+    "DONE": "DONE"
   },
   "patientHeader": {
     "brandName": "MedBay",
@@ -348,14 +354,16 @@
     "language": "LANGUAGE",
     "myProfile": "MY PROFILE",
     "newTherapy": "NEW THERAPY",
-    "dashboard": "DASHBOARD"
+    "dashboard": "DASHBOARD",
+
+    "DONE": "DONE"
   },
   "patientNewTherapy": {
     "title": "REQUEST A NEW THERAPY",
     "step1Title": "STEP 1: PICK A THERAPY",
     "step1Subtitle": "or enter therapy code provided by your doctor:",
     "invalidCode": "Invalid code.",
-    "codePlaceholderr": "#4JGSE",
+    "codePlaceholder": "#4JGSE",
     "filterBy": "FILTER BY:",
     "searchPlaceholder": "Search",
     "searchText": "Select a body part to filter or use the search bar below to find your therapy.",
@@ -400,7 +408,9 @@
       "text1": "You have filled in all the information and your therapy request is now being processed by our administrator.",
       "text2": "Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard.",
       "buttonText": "Go to dash"
-    }
+    },
+
+    "DONE": "DONE"
   },
   "patientProfile": {
     "userID": "(#User",
@@ -429,8 +439,10 @@
       "moreMonths": "MONTHS",
       "oneYear": "YEAR",
       "moreYears": "YEARS",
-      "alotOfTime": "OVER"
+      "alotOfTime": "OVER",
+                                                    "funkcija za hrvatske dane mjesece i godine (padezi)": "funkcija"
     },
+                                                    "gdje je upload image??": "Nema ga??",
     "uploadImageTooltip": {
       "add": "Add a profile image",
       "change": "Change profile image"
