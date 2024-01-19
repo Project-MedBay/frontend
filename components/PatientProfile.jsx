@@ -5,10 +5,11 @@ import DeactivatePopup from "./DeactivatePopup"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import profile_image from "../assets/profile_image.png"
 import input_image from "../assets/input_image.png"
+import input_image_hr from "../assets/input_image_hr.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme} = props
+   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme, language} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -170,7 +171,7 @@ export default function PatientProfile(props) {
                   <img className={s.user_image} src={
                      userData.userImage ? `data:image/jpeg;base64,${userData.userImage}` : profile_image
                   }/>
-                  {inputImage && <img className={s.user_image} src={input_image} />}
+                  {inputImage && <img className={s.user_image} src={language == "hr" ? input_image_hr : input_image} />}
                </label>
                <div className={s.user_info}>
                   <div className={s.info_item}>

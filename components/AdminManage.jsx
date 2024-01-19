@@ -427,7 +427,6 @@ export default function AdminManage(props) {
          {currentManage == "facility" && <>
             <div className={s.manage_facility}>
                <div className={s.facility_section}>
-                  <div className={s.scroll_fade} id={s.top}>­</div>
                   <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "resources")}
                         placeholder="Search" name="search" value={searchInput.resources} autoComplete="off" />
                   <h1 className={s.section_title}>RESOURCES</h1>
@@ -435,11 +434,9 @@ export default function AdminManage(props) {
                      {resourceElements}
                      <button className={s.section_button} onClick={() => handleAdd("resource")}>ADD NEW</button>
                   </div>
-                  <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>
 
                <div className={s.facility_section}>
-                  <div className={s.scroll_fade} id={s.top}>­</div>
                   <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "therapies")}
                         placeholder="Search" name="search" value={searchInput.therapies} autoComplete="off" />
                   <h1 className={s.section_title}>THERAPIES</h1>
@@ -447,7 +444,6 @@ export default function AdminManage(props) {
                      {therapyElements}
                      <button className={s.section_button} onClick={() => handleAdd("therapy")}>ADD NEW</button>
                   </div>
-                  <div className={s.scroll_fade} id={s.bottom}>­</div>
                </div>
             </div>
          </>}

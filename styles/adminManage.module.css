@@ -85,25 +85,6 @@
    gap: calc(40 * var(--scale-by-height));
 }
 
-.scroll_fade {
-   position: absolute;
-   height: calc(30 * var(--scale-by-height));
-   width: calc(725 * var(--scale-by-height));
-   background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%,
-             rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.1) 100%);
-   pointer-events: none;
-   /* border: 2px solid red; */
-}
-
-.scroll_fade#bottom {
-   bottom: calc(105 * var(--scale-by-height));
-}
-
-.scroll_fade#top {
-   bottom: calc(830 * var(--scale-by-height));
-   transform: scaleY(-1);
-}
-
 .section_title {
    font-size: calc(42 * var(--scale-by-height));
    font-weight: 700;
