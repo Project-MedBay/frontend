@@ -28,6 +28,36 @@ i18n
                 "language": "en",
                 "languageLabel": "ENG"
             },
+            admin: {
+                "weekdays": {
+                    "Sunday": "Sunday",
+                    "Monday": "Monday",
+                    "Tuesday": "Tuesday",
+                    "Wednesday": "Wednesday",
+                    "Thursday": "Thursday",
+                    "Friday": "Friday",
+                    "Saturday": "Saturday"
+                  },
+                  "months": {
+                      "January": "January", 
+                      "February": "February",
+                      "March": "March", 
+                      "April": "April", 
+                      "May": "May", 
+                      "June": "June", 
+                      "July": "July", 
+                      "August": "August", 
+                      "September": "September", 
+                      "October": "October", 
+                      "November": "November", 
+                      "December": "December"
+                    },
+                  "extension1": "st",
+                  "extension2": "nd",
+                  "extension3": "rd",
+                  "extension4": "th" 
+              
+            },
             adminHeader: {
                 calendar: "CALENDAR",
                 verifications: "VERIFICATIONS",
@@ -35,10 +65,32 @@ i18n
                 statistics: "STATISTICS",
                 logOut: "LOG OUT",
                 logoAltText: "Logo"
-              }, 
-            adminCalendar: {
-                weekdays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
               },
+            adminCalendar: {
+                "appointmentCalendarTitle": "Appointment Calendar",
+                "filtersDescription": "Use the filters to search for appointments by patient, therapist, or therapy name.",
+                "previousWeek": "Previous Week",
+                "nextWeek": "Next Week",
+                "filterAll": "All",
+                "filterPatient": "Patient",
+                "filterTherapist": "Therapist",
+                "filterTherapyName": "Therapy Name",
+                "searchPlaceholder": "Search...",
+                "timeDateHeader": "Time / Date",
+                "weekdays": {
+                    "Monday": "Monday", 
+                    "Tuesday": "Tuesday", 
+                    "Wednesday": "Wednesday", 
+                    "Thursday": "Thursday", 
+                    "Friday": "Friday"
+                },
+                "popupTherapist": "THERAPIST:",
+                "popupPatient": "PATIENT:",
+                "popupCannotReschedule": "Cannot reschedule",
+                "reasonOne": "Appointment has passed.",
+                "reasonTwo": "Appointment is in less than 48 hours.",
+                "rescheduleCalendar": "RESCHEDULE THERAPY"
+              }, 
             adminFacilityCard: {
                 editFacility: "EDIT",
                 deleteFacility: "DELETE",
@@ -155,6 +207,39 @@ i18n
                 buttonYes: "YES, ",
                 buttonNo: "NO, DON'T "
               },
+            adminEditPopup: {
+                "titleAdd": "ADD",
+                "titleEdit": "EDIT",
+                "titleAccountData": "ACCOUNT DATA",
+                "titlePatient": "PATIENT",
+                "titleTherapist": "THERAPIST",
+                "titleResource": "RESOURCE",
+                "titleTherapy": "THERAPY",
+                "buttonCancel": "CANCEL",
+                "buttonSave": "SAVE",
+                "validation": {
+                  "nameRequired": "Name is required.",
+                  "surnameRequired": "Surname is required.",
+                  "emailFormat": "Email must be in format 'something@something.domain'.",
+                  "addressRequired": "Address is required.",
+                  "phoneDigits": "Must be 9+ digits.",
+                  "specializationRequired": "Specialization is required.",
+                  "employedSinceFormat": "Must be YYYY-MM-DD.",
+                  "passwordLength": "Password must be 8+ characters.",
+                  "passwordMatch": "Passwords do not match.",
+                  "locationRequired": "Location is required",
+                  "digitsOnly": "Must be digits only",
+                  "resourceRequired": "Resource is required.",
+                  "descriptionRequired": "Description is required.",
+                  "bodypartRequired": "Relevant body part is required."
+                },
+                "incorrectPassword": "Incorrect password.",
+                "changePassword": "Change password",
+                "cancelEdit": "Cancel edit",
+                "fieldRequired": "Field is required.",
+                "bodyPartList": ["head", "shoulder", "leg", "upper torso", "arm", "foot", "lower torso", "hand", "any"],
+                "changePasswordNote": "Input current password first"
+              },
             formFields: {
                 "register": {
                   "firstName": {
@@ -193,7 +278,67 @@ i18n
                     "label": "Confirm Password",
                     "placeholder": "********"
                   }
-                }
+                },
+                "patient": {
+                    "name": "Name",
+                    "surname": "Surname",
+                    "email": "E-mail",
+                    "address": "Address",
+                    "dateOfBirth": "Date Of Birth",
+                    "phoneNumber": "Phone Number",
+                    "mbo": "MBO",
+                    "password": "Password",
+                    "confirmPassword": "Confirm Password",
+                    "namePlaceholder": "John",
+                    "surnamePlaceholder": "Doe",
+                    "emailPlaceholder": "john.doe@mail.com",
+                    "addressPlaceholder": "Street Name 1",
+                    "dobPlaceholder": "YYYY-MM-DD",
+                    "phonePlaceholder": "0912345678",
+                    "mboPlaceholder": "123456789",
+                    "passwordPlaceholder": "********"
+                  },
+                  "therapist": {
+                    "name": "Name",
+                    "surname": "Surname",
+                    "email": "E-mail",
+                    "specialization": "Specialization",
+                    "employedSince": "Employed since",
+                    "password": "Password",
+                    "confirmPassword": "Confirm Password",
+                    "namePlaceholder": "John",
+                    "surnamePlaceholder": "Doe",
+                    "emailPlaceholder": "john.doe@mail.com",
+                    "specializationPlaceholder": "Somekindof therapist",
+                    "employedSincePlaceholder": "YYYY-MM-DD",
+                    "passwordPlaceholder": "********"
+                  },
+                  "resource": {
+                    "name": "Name",
+                    "location": "Location",
+                    "specialization": "Specialization",
+                    "capacity": "Capacity",
+                    "description": "Description",
+                    "namePlaceholder": "Somekindof resource",
+                    "locationPlaceholder": "Some room or zone",
+                    "specializationPlaceholder": "Somekindof therapist",
+                    "capacityPlaceholder": "#",
+                    "descriptionPlaceholder": "This resource is used for some kind of therapy."
+                  },
+                  "therapy": {
+                    "name": "Name",
+                    "resource": "Resource",
+                    "bodyPart": "Relevant part of the body",
+                    "sessions": "Sessions",
+                    "code": "Code",
+                    "description": "Description",
+                    "namePlaceholder": "Somekindof therapy",
+                    "resourcePlaceholder": "Somekindof resource",
+                    "bodyPartPlaceholder": "",
+                    "sessionsPlaceholder": "#",
+                    "codePlaceholder": "45G7E",
+                    "descriptionPlaceholder": "This therapy uses this resource and is used to treat this kind of injury."
+                  }
             },
             login: {
                 "formTitle": "Welcome back!",
@@ -223,6 +368,35 @@ i18n
                 "notFound": "Page not found.",
                 "goBack": "Back",
                 "toLogin": "Take me to login"
+              },
+            patient: {
+                "weekdays": {
+                    "Sunday": "Sunday",
+                    "Monday": "Monday",
+                    "Tuesday": "Tuesday",
+                    "Wednesday": "Wednesday",
+                    "Thursday": "Thursday",
+                    "Friday": "Friday",
+                    "Saturday": "Saturday"
+                  },
+                  "months": {
+                      "January": "January", 
+                      "February": "February",
+                      "March": "March", 
+                      "April": "April", 
+                      "May": "May", 
+                      "June": "June", 
+                      "July": "July", 
+                      "August": "August", 
+                      "September": "September", 
+                      "October": "October", 
+                      "November": "November", 
+                      "December": "December"
+                    },
+                  "extension1": "st",
+                  "extension2": "nd",
+                  "extension3": "rd",
+                  "extension4": "th" 
               },
             patientDash: {
                 "mySchedule": "My schedule:",
@@ -443,12 +617,194 @@ i18n
                   "no": "No"
                 }
               },
-              "resetPassword": {
+            resetPassword: {
                 "resetTitle": "Reset your password",
                 "newPassword": "New password:",
                 "confirmNew": "Confirm new password:",
                 "resetButton": "Reset password",
-                "failedText": "Invalid email or password. Please try again."
+                "failedText": "Invalid email or password. Please try again.",
+                "success": "Success!",
+                "successMessage": "Your password has been reset and you may now use it to log in.",
+                "takeToLogin": "Take me to login",
+                "eightPlusChar": "Password must be 8+ characters.",
+                "noMatch": "Passwords do not match."
+              },
+            sessionSelection: {
+                "selectDateMessage1": "Select date to ",
+                "selectDateMessage2": "view timeslots"
+              },
+            successPopup: {
+                "success": "Success!"
+              },
+            tableList: {
+                "headers": {
+                    "patients": {
+                        "#": "#",
+                        "NAME": "NAME",
+                        "SURNAME": "SURNAME",
+                        "E-MAIL": "E-MAIL",
+                        "ADDRESS": "ADDRESS",
+                        "DOB": "DOB",
+                        "PHONE": "PHONE",
+                        "MBO": "MBO"
+                    },
+                    "therapists": {
+                        "#": "#",
+                        "NAME": "NAME",
+                        "SURNAME": "SURNAME",
+                        "E-MAIL": "E-MAIL",
+                        "SPECIALIZATION": "SPECIALIZATION",
+                        "EMPLOYED SINCE": "EMPLOYED SINCE",
+                    }
+                },
+                "buttons": {
+                  "edit": "EDIT",
+                  "deactivate": "DEACTIVATE",
+                  "details": "DETAILS",
+                  "addNew": "ADD NEW"
+                },
+                "messages": {
+                  "noResults": "There are no items that match this query."
+                }
+              },
+            therapist: {
+                "weekdays": {
+                  "Sunday": "Sunday",
+                  "Monday": "Monday",
+                  "Tuesday": "Tuesday",
+                  "Wednesday": "Wednesday",
+                  "Thursday": "Thursday",
+                  "Friday": "Friday",
+                  "Saturday": "Saturday"
+                },
+                "months": {
+                    "January": "January", 
+                    "February": "February",
+                    "March": "March", 
+                    "April": "April", 
+                    "May": "May", 
+                    "June": "June", 
+                    "July": "July", 
+                    "August": "August", 
+                    "September": "September", 
+                    "October": "October", 
+                    "November": "November", 
+                    "December": "December"
+                  },
+                "extension1": "st",
+                "extension2": "nd",
+                "extension3": "rd",
+                "extension4": "th" 
+            },
+            therapistDash: {
+                "schedule": {
+                  "title": "My schedule:",
+                  "noUpcomingSessions": "No upcoming sessions.",
+                  "noSessionsThisWeek": "No sessions this week.",
+                  "nextSession": "Next session:",
+                  "selectedSession": "Selected session:"
+                },
+                "sessionCard": {
+                  "viewMore": "View more",
+                  "therapy": "Therapy:",
+                  "time": "Time:",
+                  "location": "Location:",
+                  "sessionNumber": "Session number:",
+                  "patient": "Patient:"
+                },
+                "notes": {
+                  "title": "Your note:",
+                  "cancel": "Cancel",
+                  "edit": "Edit note",
+                  "save": "Save note",
+                  "add": "Add note",
+                  "placeholder": "No notes yet.",
+                  "disabledText": "Cannot add note before session has started."
+                },
+                "popup": {
+                  "close": "Close",
+                  "patientDetails": "Patient Details",
+                  "therapyDetails": "Therapy Details"
+                },
+                "buttons": {
+                  "goBackWeek": "Go Back a Week",
+                  "goForwardWeek": "Go Forward a Week",
+                  "resetWeek": "Reset to Current Week"
+                },
+                "messages": {
+                  "noSessions": "No sessions this week.",
+                  "noNotesYet": "No notes yet."
+                },
+                "collapse": "Collapse",
+                "viewNotes": "View notes",
+                "rows1": {
+                  "dateStarted":"date started",
+                  "rows1Therapist": "therapist",
+                  "rows1DateFinished": "date finished",
+                  "rows1location": "location"
+                },
+                "rows2": {
+                  "rows2Email": "email",
+                  "rows2Address": "address",
+                  "rows2DOB": "date of birth",
+                  "rows2PhoneNumber": "phone number",
+                  "rows2MBO": "mbo"
+                },
+                "atSessionInfo": "at",
+                "noNotes": "No notes"
+              },
+            therapistHeader: {
+                "logoTitle": "MedBay",
+                "navigation": {
+                  "logOutConfirmation": "LOG OUT?",
+                  "logOutYes": "YES",
+                  "logOutNo": "NO",
+                  "logOut": "LOG OUT",
+                  "patients": "PATIENTS",
+                  "dashboard": "DASHBOARD"
+                }
+              },
+            therapistPatients: {
+                "title": {
+                  "showing": "SHOWING:",
+                  "allPatients": "SEARCH RESULT (all patients)",
+                  "yourPatients": "YOUR PATIENTS"
+                },
+                "searchPlaceholder": "Search",
+                "popup": {
+                  "patientType": "patient"
+                }
+              },
+            therapyOrPatientPopup: {
+                "popup": {
+                  "therapy": "therapy",
+                  "patient": "patient",
+                  "sessionCount": " SESSIONS:"
+                },
+                "infoLabels": {
+                  "dateStarted": "Date started",
+                  "therapist": "Therapist",
+                  "dateFinished": "Date finished",
+                  "location": "Location",
+                  "e-mail": "Email",
+                  "address": "Address",
+                  "dob": "DOB",
+                  "phone": "Phone number",
+                  "mbo": "MBO"
+                },
+                "session": {
+                  "noNotes": "No notes",
+                  "viewNotes": "View notes",
+                  "collapse": "Collapse",
+                  "addNote": "Add note",
+                  "editNote": "Edit note",
+                  "saveNote": "Save note",
+                  "cancel": "Cancel",
+                  "placeholder": "No notes yet."
+                },
+                "exitButton": "Exit",
+                "noSessionsYet": "NO SESSIONS YET",
+                "atSessionInfo": "at"
               }
             
         }
@@ -459,6 +815,35 @@ i18n
                 "language": "hr",
                 "languageLabel": "HRV"
             },
+            admin: {
+                "weekdays": {
+                    "Sunday": "Nedjelja",
+                    "Monday": "Ponedjeljak",
+                    "Tuesday": "Utorak",
+                    "Wednesday": "Srijeda",
+                    "Thursday": "Četvrtak",
+                    "Friday": "Petak",
+                    "Saturday": "Subota"
+                  },
+                  "months": {
+                      "January": "siječnja", 
+                      "February": "veljače",
+                      "March": "ožujka", 
+                      "April": "travnja", 
+                      "May": "svibnja", 
+                      "June": "lipnja", 
+                      "July": "srpnja", 
+                      "August": "kolovoza", 
+                      "September": "rujna", 
+                      "October": "listopada", 
+                      "November": "studenog", 
+                      "December": "prosinca"
+                    },
+                  "extension1": ".",
+                  "extension2": ".",
+                  "extension3": ".",
+                  "extension4": "." 
+            },
             adminHeader: {
                 calendar: "KALENDAR",
                 verifications: "VERIFIKACIJE",
@@ -467,8 +852,30 @@ i18n
                 logOut: "ODJAVA",
                 logoAltText: "Logo"
               },
-              adminCalendar: {
-                weekdays: ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"]
+            adminCalendar: {
+                "appointmentCalendarTitle": "Kalendar termina",
+                "filtersDescription": "Koristite filtre za pretragu termina po pacijentu, djelatniku ili nazivu terapije.",
+                "previousWeek": "Prethodni tjedan",
+                "nextWeek": "Sljedeći tjedan",
+                "filterAll": "Sve",
+                "filterPatient": "Pacijent",
+                "filterTherapist": "Djelatnik",
+                "filterTherapyName": "Naziv terapije",
+                "searchPlaceholder": "Pretraži...",
+                "timeDateHeader": "Vrijeme / Datum",
+                "weekdays": {
+                    "Monday": "Ponedjeljak", 
+                    "Tuesday": "Utorak", 
+                    "Wednesday": "Srijeda", 
+                    "Thursday": "Četvrtak", 
+                    "Friday": "Petak"
+                },
+                "popupTherapist": "DJELATNIK:",
+                "popupPatient": "PACIJENT:",
+                "popupCannotReschedule": "Nije moguća odgoda",
+                "reasonOne": "Termin je prošao.",
+                "reasonTwo": "Termin je u sljedećih 48 sati.",
+                "rescheduleCalendar": "ODGODI TERMIN"
               },
               adminFacilityCard: {
                 editFacility: "UREDI",
@@ -479,7 +886,7 @@ i18n
                 description: "OPIS:",
                 resource: "RESURS:",
                 sessions: "TERMINI:",
-                relevantBody: "DIO TIJELA:",
+                relevantBody: "RELEVANTNI DIO TIJELA:",
                 code: "KOD:",
                 description2: "OPIS:"
               },
@@ -586,6 +993,39 @@ i18n
                 buttonYes: "DA, ",
                 buttonNo: "NE, NEMOJ "
               },
+            adminEditPopup: {
+                "titleAdd": "DODAJ",
+                "titleEdit": "UREDI",
+                "titleAccountData": "PODATKE O RAČUNU",
+                "titlePatient": "PACIJENT",
+                "titleTherapist": "DJELATNIK",
+                "titleResource": "RESURS",
+                "titleTherapy": "TERAPIJA",
+                "buttonCancel": "ODUSTANI",
+                "buttonSave": "SPREMI",
+                "validation": {
+                  "nameRequired": "Ime je obavezno.",
+                  "surnameRequired": "Prezime je obavezno.",
+                  "emailFormat": "Email mora biti u formatu 'nesto@nesto.domena'.",
+                  "addressRequired": "Adresa je obavezna.",
+                  "phoneDigits": "Mora sadržavati 9+ znamenki.",
+                  "specializationRequired": "Specijalizacija je obavezna.",
+                  "employedSinceFormat": "Mora biti u formatu YYYY-MM-DD.",
+                  "passwordLength": "Lozinka mora imati 8+ znakova.",
+                  "passwordMatch": "Lozinke se ne podudaraju.",
+                  "locationRequired": "Lokacija je obavezna",
+                  "digitsOnly": "Mora sadržavati samo znamenke",
+                  "resourceRequired": "Resurs je obavezan.",
+                  "descriptionRequired": "Opis je obavezan.",
+                  "bodypartRequired": "Dio tijela je obavezan."
+                },
+                "incorrectPassword": "Netočna lozinka.",
+                "changePassword": "Promijeni lozinku",
+                "cancelEdit": "Odustani od uređivanja",
+                "fieldRequired": "Polje je obavezno.",
+                "bodyPartList": ["glava", "rame", "noga", "gornji dio trupa", "ruka", "noga", "donji dio trupa", "šaka", "bilo što"],
+                "changePasswordNote": "Prvo unijeti trenutnu lozinku"
+              },
               formFields: {
                 "register": {
                   "firstName": {
@@ -624,7 +1064,67 @@ i18n
                     "label": "Potvrdite lozinku",
                     "placeholder": "********"
                   }
-                }
+                },
+                "patient": {
+                    "name": "Ime",
+                    "surname": "Prezime",
+                    "email": "E-mail",
+                    "address": "Adresa",
+                    "dateOfBirth": "Datum rođenja",
+                    "phoneNumber": "Telefonski broj",
+                    "mbo": "MBO",
+                    "password": "Lozinka",
+                    "confirmPassword": "Potvrdi lozinku",
+                    "namePlaceholder": "Ivan",
+                    "surnamePlaceholder": "Horvat",
+                    "emailPlaceholder": "ivan.horvat@mail.com",
+                    "addressPlaceholder": "Ime ulice 1",
+                    "dobPlaceholder": "YYYY-MM-DD",
+                    "phonePlaceholder": "0912345678",
+                    "mboPlaceholder": "123456789",
+                    "passwordPlaceholder": "********"
+                  },
+                  "therapist": {
+                    "name": "Ime",
+                    "surname": "Prezime",
+                    "email": "E-mail",
+                    "specialization": "Specijalizacija",
+                    "employedSince": "Zaposlen od",
+                    "password": "Lozinka",
+                    "confirmPassword": "Potvrdi lozinku",
+                    "namePlaceholder": "Ivan",
+                    "surnamePlaceholder": "Horvat",
+                    "emailPlaceholder": "ivan.horvat@mail.com",
+                    "specializationPlaceholder": "Neki terapeut",
+                    "employedSincePlaceholder": "YYYY-MM-DD",
+                    "passwordPlaceholder": "********"
+                  },
+                  "resource": {
+                    "name": "Ime",
+                    "location": "Lokacija",
+                    "specialization": "Specijalizacija",
+                    "capacity": "Kapacitet",
+                    "description": "Opis",
+                    "namePlaceholder": "Neki resurs",
+                    "locationPlaceholder": "Neka prostorija ili prostor",
+                    "specializationPlaceholder": "Neki terapeut",
+                    "capacityPlaceholder": "#",
+                    "descriptionPlaceholder": "Ovaj resurs se koristi za neku vrstu terapije."
+                  },
+                  "therapy": {
+                    "name": "Ime",
+                    "resource": "Resurs",
+                    "bodyPart": "Dio tijela",
+                    "sessions": "Termini",
+                    "code": "Kod",
+                    "description": "Opis",
+                    "namePlaceholder": "Neka vrsta terapije",
+                    "resourcePlaceholder": "Neki resurs",
+                    "bodyPartPlaceholder": "",
+                    "sessionsPlaceholder": "#",
+                    "codePlaceholder": "45G7E",
+                    "descriptionPlaceholder": "Ova terapija koristi ovaj resurs i koristi se za liječenje ovakvih vrsta ozljeda."
+                  }
             },
             login: {
                 "formTitle": "Dobrodošli natrag!",
@@ -655,6 +1155,35 @@ i18n
                 "goBack": "Natrag",
                 "toLogin": "Vrati me na prijavu"
               },
+            patient: {
+                "weekdays": {
+                    "Sunday": "Nedjelja",
+                    "Monday": "Ponedjeljak",
+                    "Tuesday": "Utorak",
+                    "Wednesday": "Srijeda",
+                    "Thursday": "Četvrtak",
+                    "Friday": "Petak",
+                    "Saturday": "Subota"
+                  },
+                  "months": {
+                      "January": "siječnja", 
+                      "February": "veljače",
+                      "March": "ožujka", 
+                      "April": "travnja", 
+                      "May": "svibnja", 
+                      "June": "lipnja", 
+                      "July": "srpnja", 
+                      "August": "kolovoza", 
+                      "September": "rujna", 
+                      "October": "listopada", 
+                      "November": "studenog", 
+                      "December": "prosinca"
+                    },
+                  "extension1": ".",
+                  "extension2": ".",
+                  "extension3": ".",
+                  "extension4": "." 
+            },
             patientDash: {
                 "mySchedule": "Moji termini:",
                 "noSessionsThisWeek": "Nema termina ovaj tjedan.",
@@ -874,6 +1403,195 @@ i18n
                   "yes": "Da",
                   "no": "Ne"
                 }
+              },
+            resetPassword: {
+                "resetTitle": "Promjena lozinke",
+                "newPassword": "Nova lozinka:",
+                "confirmNew": "Potvrda nove lozinke:",
+                "resetButton": "Promijeni lozinku",
+                "failedText": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
+                "success": "Uspjeh!",
+                "successMessage": "Vaša lozinka je uspješno promijenjena i možete se s njome prijaviti.",
+                "takeToLogin": "Odvedi na prijavu",
+                "eightPlusChar": "Lozinka mora imati barem osam znakova",
+                "noMatch": "Lozinke se ne podudaraju"
+              },
+            sessionSelection: {
+                "selectDateMessage1": "Odaberite datum za ",
+                "selectDateMessage2": "pregled termina"
+              },
+            successPopup: {
+                "success": "Uspjeh!"
+              },
+            tableList: {
+                "headers": {
+                    "patients": {
+                        "#": "#",
+                        "NAME": "IME",
+                        "SURNAME": "PREZIME",
+                        "E-MAIL": "E-MAIL",
+                        "ADDRESS": "ADRESA",
+                        "DOB": "DATUM ROĐ.",
+                        "PHONE": "TELEFON",
+                        "MBO": "MBO"
+                    },
+                    "therapists": {
+                        "#": "#",
+                        "NAME": "IME",
+                        "SURNAME": "PREZIME",
+                        "E-MAIL": "E-MAIL",
+                        "SPECIALIZATION": "SPECIJALIZACIJA",
+                        "EMPLOYED SINCE": "ZAPOSLEN OD",
+                    }
+                },
+                "buttons": {
+                  "edit": "UREDI",
+                  "deactivate": "DEAKTIVIRAJ",
+                  "details": "DETALJI",
+                  "addNew": "DODAJ"
+                },
+                "messages": {
+                  "noResults": "Nema stavki koje odgovaraju upitu."
+                }
+              },
+            therapist: {
+                "weekdays": {
+                  "Sunday": "Nedjelja",
+                  "Monday": "Ponedjeljak",
+                  "Tuesday": "Utorak",
+                  "Wednesday": "Srijeda",
+                  "Thursday": "Četvrtak",
+                  "Friday": "Petak",
+                  "Saturday": "Subota"
+                },
+                "months": {
+                    "January": "siječnja", 
+                    "February": "veljače",
+                    "March": "ožujka", 
+                    "April": "travnja", 
+                    "May": "svibnja", 
+                    "June": "lipnja", 
+                    "July": "srpnja", 
+                    "August": "kolovoza", 
+                    "September": "rujna", 
+                    "October": "listopada", 
+                    "November": "studenog", 
+                    "December": "prosinca"
+                  },
+                "extension1": ".",
+                "extension2": ".",
+                "extension3": ".",
+                "extension4": "." 
+            },
+            therapistDash: {
+                "schedule": {
+                  "title": "Moj raspored:",
+                  "noUpcomingSessions": "Nema nadolazećih termina.",
+                  "noSessionsThisWeek": "Nema termina ovaj tjedan.",
+                  "nextSession": "Sljedeći termin:",
+                  "selectedSession": "Odabrani termin:"
+                },
+                "sessionCard": {
+                  "viewMore": "Prikaži više",
+                  "therapy": "Terapija:",
+                  "time": "Vrijeme:",
+                  "location": "Lokacija:",
+                  "sessionNumber": "Broj termina:",
+                  "patient": "Pacijent:"
+                },
+                "notes": {
+                  "title": "Vaša bilješka:",
+                  "cancel": "Odustani",
+                  "edit": "Uredi zapis",
+                  "save": "Spremi",
+                  "add": "Dodaj zapis",
+                  "placeholder": "Trenutno nema bilješki.",
+                  "disabledText": "Bilješku nije moguće dodati prije početka termina."
+                },
+                "popup": {
+                  "close": "Zatvori",
+                  "patientDetails": "Detalji o pacijentu",
+                  "therapyDetails": "Detalji o terapiji"
+                },
+                "buttons": {
+                  "goBackWeek": "Prošli tjedan",
+                  "goForwardWeek": "Sljedeći tjedan",
+                  "resetWeek": "Postavi na trenutni tjedan"
+                },
+                "messages": {
+                  "noSessions": "Nema termina ovaj tjedan.",
+                  "noNotes": "Trenutno nema bliješki."
+                },
+                "collapse": "Sažmi",
+                "viewNotes": "Pregledaj bilješke",
+                "rows1": {
+                  "dateStarted": "datum početka",
+                  "rows1Therapist": "terapeut",
+                  "rows1DateFinished": "datum završetka",
+                  "rows1location": "lokacija"
+                },
+                "rows2": {
+                  "rows2Email": "email",
+                  "rows2Address": "adresa",
+                  "rows2DOB": "datum rođenja",
+                  "rows2PhoneNumber": "telefonski broj",
+                  "rows2MBO": "mbo"
+                },
+                "atSessionInfo": "u",
+                "noNotes": "Nema bilješki"
+              },
+            therapistHeader: {
+                "logoTitle": "MedBay",
+                "navigation": {
+                  "logOutConfirmation": "ODJAVA?",
+                  "logOutYes": "DA",
+                  "logOutNo": "NE",
+                  "logOut": "ODJAVA",
+                  "patients": "PACIJENTI",
+                  "dashboard": "POČETNA"
+                }
+              },
+            therapistPatients: {
+                "title": {
+                  "showing": "PRIKAZUJE SE:",
+                  "allPatients": "REZULTATI PRETRAGE (svi pacijenti)",
+                  "yourPatients": "VAŠI PACIJENTI"
+                },
+                "searchPlaceholder": "Pretraži",
+                "popup": {
+                  "patientType": "pacijent"
+                }
+              },
+            therapyOrPatientPopup: {
+                "popup": {
+                  "therapy": "terapija",
+                  "patient": "pacijent",
+                  "sessionCount": "TERMINA:"
+                },
+                "infoLabels": {
+                  "date started": "Datum početka",
+                  "therapist": "Terapeut",
+                  "date finished": "Datum završetka",
+                  "location": "Lokacija",
+                  "e-mail": "E-mail",
+                  "address": "Adresa",
+                  "dob": "Datum rođ",
+                  "phone": "Telefon",
+                  "mbo": "MBO"
+                },
+                "session": {
+                  "noNotes": "Nema bilješki",
+                  "viewNotes": "Bilješke",
+                  "collapse": "Sažmi",
+                  "addNote": "Dodaj zapis",
+                  "editNote": "Uredi zapis",
+                  "saveNote": "Spremi bilješku",
+                  "cancel": "Odustani",
+                  "placeholder": "Trenutno nema bilješki."
+                },
+                "exitButton": "Izlaz",
+                "noSessionsYet": "Trenutno nema termina",
+                "atSessionInfo": "u",
               }
         }
       }

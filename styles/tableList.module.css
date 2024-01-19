@@ -20,7 +20,7 @@
    /* grid-template-columns: 80px 180px 200px 320px 350px 130px 150px 150px 240px; */
    grid-template-columns: fit-content(calc(80 * var(--scale-by-height))) fit-content(calc(180 * var(--scale-by-height)))
                           fit-content(calc(200 * var(--scale-by-height))) fit-content(calc(320 * var(--scale-by-height)))
-                          fit-content(calc(350 * var(--scale-by-height))) fit-content(calc(140 * var(--scale-by-height)))
+                          fit-content(calc(350 * var(--scale-by-height))) fit-content(calc(165 * var(--scale-by-height)))
                           fit-content(calc(150 * var(--scale-by-height))) fit-content(calc(150 * var(--scale-by-height)))
                           fit-content(calc(240 * var(--scale-by-height)));
 }
@@ -31,7 +31,7 @@
    grid-template-columns: fit-content(calc(80 * var(--scale-by-height))) fit-content(calc(180 * var(--scale-by-height)))
                           fit-content(calc(200 * var(--scale-by-height))) fit-content(calc(320 * var(--scale-by-height)))
                           fit-content(calc(300 * var(--scale-by-height))) fit-content(calc(220 * var(--scale-by-height)))
-                          fit-content(calc(240 * var(--scale-by-height)));
+                          fit-content(calc(260 * var(--scale-by-height)));
 }
 
 .hidden {

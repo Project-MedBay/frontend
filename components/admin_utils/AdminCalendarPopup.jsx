@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import x_icon from "../../assets/x_icon.svg"
 import s from "../../styles//admin_utils/adminCalendarPopup.module.css"
 
 export default function AdminCalendarPopup(props) {
    const {selectedDate, selectedHour, dateSessions, setRescheduledSession, setCurrentSession, popupExit} = props;
+   const { t, i18n } = useTranslation();
    const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
    const sessionDatetime = new Date(new Date(selectedDate).setHours(extractHours(selectedHour)))
@@ -23,20 +25,20 @@ export default function AdminCalendarPopup(props) {
             <h3 className={s.card_header_therapy}>{session.name.toUpperCase()}</h3>
             <div className={s.inner_wrapper}>
                <div className={s.card_main_row}>
-                  <h4 className={s.main_tag}>THERAPIST:</h4>
+                  <h4 className={s.main_tag}>{t("adminCalendar.popupTherapist")}</h4>
                   <h4 className={s.main_name}>{session.therapist}</h4>
                </div>
                <div className={s.card_main_row}>
-                  <h4 className={s.main_tag}>PATIENT:</h4>
+                  <h4 className={s.main_tag}>{t("adminCalendar.popupPatient")}</h4>
                   <h4 className={s.main_name}>{session.patient}</h4>
                </div>
             </div>
          </div>
          {sessionDatetime.getTime() <= new Date().getTime() + 48*60*60*1000 ?
             <div className={s.reschedule_disabled}>
-               <h3>Cannot reschedule</h3>
+               <h3>{t("adminCalendar.popupCannotReschedule")}</h3>
                <p>{sessionDatetime.getTime() <= new Date().getTime() ?
-                  "Appointment has passed." : "Appointment is in less than 48 hours."}
+                  t("adminCalendar.reasonOne") : t("adminCalendar.reasonTwo")}
                </p>
             </div>
          :
@@ -51,7 +53,7 @@ export default function AdminCalendarPopup(props) {
                }
                setCurrentSession(currentSession)
                setRescheduledSession(currentSession)
-            }}>RESCHEDULE THERAPY</button>
+            }}>{t("adminCalendar.rescheduleCalendar")}</button>
          }
       </div>
    ))

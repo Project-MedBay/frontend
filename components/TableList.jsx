@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/tableList.module.css"
 
 export default function TableList(props) {
    const {userToken, handleLogout, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
+   
+   const { t, i18n } = useTranslation();
+
    if (user == "admin") {
       var {handleAdd, handleEdit, handleDeactivate} = props
    } else {
@@ -60,7 +64,7 @@ export default function TableList(props) {
       tableHeader = ["#", "name", "surname", "e-mail", "specialization", "employed since"]
    }
    const tableHeaderElements = tableHeader.map(item => (
-      <h2 className={s.header_item} key={item}>{item.toUpperCase()}</h2>
+      <h2 className={s.header_item} key={item}>{t("tableList.headers." + tableOf + "." + item.toUpperCase())}</h2>
    ))
 
    var tableList
@@ -100,14 +104,14 @@ export default function TableList(props) {
       if (user == "admin") {
          rowElements.push(<div className={`${divClass} ${s.button_wrapper}`} key={"admin" + index}>
             {tableOf == "therapists" &&
-               <button className={`${s.table_button} ${s.button_green}`} onClick={() => handleEdit(item)}>EDIT</button>
+               <button className={`${s.table_button} ${s.button_green}`} onClick={() => handleEdit(item)}>{t('tableList.buttons.edit')}</button>
             }
-            <button className={s.table_button} onClick={() => handleDeactivate(item)}>DEACTIVATE</button>
+            <button className={s.table_button} onClick={() => handleDeactivate(item)}>{t('tableList.buttons.deactivate')}</button>
          </div>)
       }
       else {
          rowElements.push(<div className={`${divClass} ${s.button_wrapper}`} key={"therapist" + index}>
-            <button className={s.table_button} onClick={() => handleDetails(item)}>DETAILS</button>
+            <button className={s.table_button} onClick={() => handleDetails(item)}>{t('tableList.buttons.details')}</button>
          </div>)
       }
 
@@ -115,7 +119,7 @@ export default function TableList(props) {
    })
    if (tableListElements.length == 0) {tableListElements.push(
       <h3 className={s.no_results}>
-         There are no items that match this query.
+         {t('tableList.messages.noResults')}
       </h3>
    )}
 
@@ -125,7 +129,7 @@ export default function TableList(props) {
             {tableHeaderElements}
             <div className={`${s.header_buttons} ${(tableOf == "patients" && tableList.length == 0) && s.reduced_header}`}>
                <button className={`${s.header_add} ${tableOf == "patients" && s.hidden}`}
-                   onClick={() => handleAdd("therapist")}>ADD NEW
+                   onClick={() => handleAdd("therapist")}>{t('tableList.buttons.addNew')}
                </button>
             </div>
             {tableListElements}

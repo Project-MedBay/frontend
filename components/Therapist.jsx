@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Routes, Route } from "react-router-dom"
 import axios from 'axios'
+import { useTranslation, Trans } from 'react-i18next';
 import TherapistHeader from './TherapistHeader'
 import TherapistDash from './TherapistDash'
 import TherapistPatients from './TherapistPatients'
@@ -10,6 +11,8 @@ import NoMatchRoute from './NoMatchRoute'
 export default function Therapist(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
    const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
    const [mySchedule, setMySchedule] = useState("")
+
+   const { t, i18n } = useTranslation();
 
    useEffect(() => {
       if (userToken != "") {
@@ -47,11 +50,11 @@ export default function Therapist(props) {           // glavna komponenta uloge,
       let tempDate = new Date(getWeekFirst(datetime))
       let date = tempDate.getDate()
       let formattedWeek = date.toString() + addExtension(date) + " " + 
-                        month[tempDate.getMonth()] + " - "
+                        t("therapist.months." + month[tempDate.getMonth()]) + " - "
       tempDate.setDate(date + 6)
       date = tempDate.getDate()
       formattedWeek += date.toString() + addExtension(date) + " " +
-                        month[tempDate.getMonth()]
+                        t("therapist.months." + month[tempDate.getMonth()])
       return formattedWeek
    }
 
@@ -66,10 +69,10 @@ export default function Therapist(props) {           // glavna komponenta uloge,
 
    function formatDate(datetime) {
       let formattedDate = ""
-      formattedDate += weekday[datetime.getDay()] + ", "
+      formattedDate += t("therapist.weekdays." + weekday[datetime.getDay()]) + ", "
       formattedDate += (datetime.getDate()).toString()
       formattedDate += addExtension(datetime.getDate()) + " "
-      formattedDate += month[datetime.getMonth()]
+      formattedDate += t("therapist.months." + month[datetime.getMonth()])
       return formattedDate
    }
 
@@ -78,15 +81,15 @@ export default function Therapist(props) {           // glavna komponenta uloge,
          case 1:
          case 21:
          case 31:
-            return "st"
+            return t("therapist.extension1")
          case 2:
          case 22:
-            return "nd"
+            return t("therapist.extension2")
          case 3:
          case 23:
-            return "rd"
+            return t("therapist.extension3")
          default:
-            return "th"
+            return t("therapist.extension4")
       }
    }
 

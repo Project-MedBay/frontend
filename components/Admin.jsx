@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Routes, Route } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 import AdminHeader from './AdminHeader'
 import AdminWelcome from './AdminWelcome'
 import AdminCalendar from './AdminCalendar.jsx'
@@ -13,7 +14,8 @@ import NoMatchRoute from './NoMatchRoute'
 
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
     const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
-    // const { t, i18n } = useTranslation();
+
+    const { t, i18n } = useTranslation();
     
     useEffect(() => {
         if (userToken != "") {
@@ -36,10 +38,10 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
     
     function formatDate(datetime) {
         let formattedDate = ""
-        formattedDate += weekday[datetime.getDay()] + ", "
+        formattedDate += t("admin.weekdays." + weekday[datetime.getDay()]) + ", "
         formattedDate += (datetime.getDate()).toString()
         formattedDate += addExtension(datetime.getDate()) + " "
-        formattedDate += month[datetime.getMonth()]
+        formattedDate += t("admin.months." + month[datetime.getMonth()])
         return formattedDate
     }
 
@@ -48,15 +50,15 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
         case 1:
         case 21:
         case 31:
-            return "st"
+            return t("admin.extension1")
         case 2:
         case 22:
-            return "nd"
+            return t("admin.extension2")
         case 3:
         case 23:
-            return "rd"
+            return t("admin.extension3")
         default:
-            return "th"
+            return t("admin.extension4")
         }
     }
 

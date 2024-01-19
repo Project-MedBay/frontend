@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Routes, Route } from "react-router-dom"
 import axios from 'axios'
+import { useTranslation, Trans } from 'react-i18next';
 import PatientHeader from './PatientHeader'
 import PatientDash from './PatientDash'
 import PatientNewTherapy from './PatientNewTherapy'
@@ -16,6 +17,8 @@ export default function Patient(props) {           // glavna komponenta uloge, u
    const [mySchedule, setMySchedule] = useState({})
    const [userTherapies, setUserTherapies] = useState([])
    const { theme } = useTheme();
+
+   const { t, i18n } = useTranslation();
 
    useEffect(() => {
       if (userToken != "") {
@@ -112,11 +115,11 @@ export default function Patient(props) {           // glavna komponenta uloge, u
       let tempDate = getWeekFirst(new Date(datetime))
       let date = tempDate.getDate()
       let formattedWeek = date.toString() + addExtension(date) + " " + 
-                        month[tempDate.getMonth()] + " - "
+                        t("patient.months." + month[tempDate.getMonth()]) + " - "
       tempDate.setDate(date + 6)
       date = tempDate.getDate()
       formattedWeek += date.toString() + addExtension(date) + " " +
-                        month[tempDate.getMonth()]
+                        t("patient.months." + month[tempDate.getMonth()])
       return formattedWeek
    }
 
@@ -130,10 +133,10 @@ export default function Patient(props) {           // glavna komponenta uloge, u
 
    function formatDate(datetime) {
       let formattedDate = ""
-      formattedDate += weekday[datetime.getDay()] + ", "
+      formattedDate += t("patient.weekdays." + weekday[datetime.getDay()]) + ", "
       formattedDate += (datetime.getDate()).toString()
       formattedDate += addExtension(datetime.getDate()) + " "
-      formattedDate += month[datetime.getMonth()]
+      formattedDate += t("patient.months." + month[datetime.getMonth()])
       return formattedDate
    }
 
@@ -142,15 +145,15 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          case 1:
          case 21:
          case 31:
-            return "st"
+            return t("patient.extension1")
          case 2:
          case 22:
-            return "nd"
+            return t("patient.extension2")
          case 3:
          case 23:
-            return "rd"
+            return t("patient.extension3")
          default:
-            return "th"
+            return t("patient.extension4")
       }
    }
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import x_icon from "../assets/x_icon.svg"
 import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
    const {userToken, handleLogout, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
+
+   const { t, i18n } = useTranslation();
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
@@ -32,12 +35,13 @@ export default function TherapyOrPatientPopup(props) {
       let rowClass = s.popup_row
       if (popupType == "patient") rowClass += ` ${s.row_patients}`
       let rowElements = row.map(item => {
-         let label = item.charAt(0).toUpperCase() + item.slice(1)
-         if (item == "dob" || item == "mbo") label = label.toUpperCase()
+         // let label 
+         // = item.charAt(0).toUpperCase() + item.slice(1)
+         // if (item == "dob" || item == "mbo") item = item.toUpperCase()
          let value = popupData[item]
          if (value instanceof Date) value = formatFullDate(value)
 
-         return <p className={s.popup_info} key={label}>{label}: <span>{value}</span></p>
+         return <p className={s.popup_info} key={item}>{t("therapyOrPatientPopup.infoLabels." + item)}: <span>{value}</span></p>
       })
       infoElements.push(<div className={rowClass} key={infoElements.length}>{rowElements}</div>)
    }
@@ -46,14 +50,16 @@ export default function TherapyOrPatientPopup(props) {
       .map(session => {
       let sessionPassed = new Date(session.appointmentDate) < new Date()
       let sessionInfo = <> 
-         <p className={s.session_datetime}>{formatDate(new Date(session.appointmentDate))} at {new Date(session.appointmentDate).getHours()}:00</p>
+         <p className={s.session_datetime}>
+            {formatDate(new Date(session.appointmentDate))} {t("therapyOrPatientPopup.atSessionInfo")} {new Date(session.appointmentDate).getHours()}:00
+         </p>
          {session.sessionNotes != "" ?
             <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session)}>
-               {viewingNotesOf.appointmentId === session.appointmentId ? "Collapse" : "View notes"}
+               {viewingNotesOf.appointmentId === session.appointmentId ? t('therapyOrPatientPopup.session.collapse') : t('therapyOrPatientPopup.session.viewNotes')}
             </p> :
             (popupType == "therapy" || !session.show || !sessionPassed) ?
-            <p className={s.session_notes}>No notes</p> :
-            <button className={s.note_edit} onClick={() => handleNotesEdit("add", session)}>Add note</button>
+            <p className={s.session_notes}>{t('therapyOrPatientPopup.session.noNotes')}</p> :
+            <button className={s.note_edit} onClick={() => handleNotesEdit("add", session)}>{t('therapyOrPatientPopup.session.addNote')}</button>
          }
       </>
       return (
@@ -72,7 +78,7 @@ export default function TherapyOrPatientPopup(props) {
                   {editingNotes ?
                   <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                      className={s.note_box} type="text" onChange={event => setNotesInput(event.target.value)}
-                     placeholder="No notes yet." name="note" value={notesInput}
+                     placeholder={t('therapyOrPatientPopup.session.placeholder')} name="note" value={notesInput}
                   /> :
                   <div className={s.note_box}>
                      <p className={s.note_contents}>{viewingNotesOf.sessionNotes}</p>
@@ -83,11 +89,11 @@ export default function TherapyOrPatientPopup(props) {
 
                {popupType == "patient" && session.show && sessionPassed && <div className={s.buttons_container}>
                   {editingNotes &&
-                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button>
+                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>{t('therapyOrPatientPopup.session.cancel')}</button>
                   }  
 
                   <button className={s.note_edit} onClick={() => handleNotesEdit("save")}>
-                     {editingNotes ? "Save note" : "Edit note"}
+                     {editingNotes ? t('therapyOrPatientPopup.session.saveNote') : t('therapyOrPatientPopup.session.editNote')}
                   </button>
                </div>}
             </>}
@@ -171,7 +177,7 @@ export default function TherapyOrPatientPopup(props) {
          }
 
          <h2 className={s.popup_sessions}>
-            {popupSessions.length ? `${popupSessions.length} SESSIONS:` : "NO SESSIONS YET"}
+            {popupSessions.length ? `${popupSessions.length} ` + t('therapyOrPatientPopup.popup.sessionCount') : t('therapyOrPatientPopup.noSessionsYet')}
          </h2>
          <div className={`${s.sessions_container} ${popupType == "patient" && s.popup_tall}`}>
             {sessionElements}

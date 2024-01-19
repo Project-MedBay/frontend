@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useTranslation, Trans } from 'react-i18next';
 import AdminCalendarPopup from "./admin_utils/AdminCalendarPopup.jsx";
 import ReschedulePopup from "./ReschedulePopup.jsx";
 import s from "../styles/adminCalendar.module.css";
@@ -8,6 +9,8 @@ import s from "../styles/adminCalendar.module.css";
 
 export default function AdminCalendar(props) {
     const {userToken, handleLogout, formatDate, formatFullDate} = props
+
+    const { t, i18n } = useTranslation();
 
     // const { t, i18n } = useTranslation();
 
@@ -126,34 +129,34 @@ export default function AdminCalendar(props) {
         <div className={`${s.calendarContainer} ${calendarPopup && s.covered_by_popup}`}>
             <div className={s.topBar}>
                 <div className={s.title}>
-                    <h2>Appointment Calendar</h2>
-                    <p>Use the filters to search for appointments by patient, therapist, or therapy name.</p>
+                    <h2>{t("adminCalendar.appointmentCalendarTitle")}</h2>
+                    <p>{t("adminCalendar.filtersDescription")}</p>
                 </div>
                 <div className={s.bottomTopBar}>
                     <div className={s.arrows}>
                         <div className={`${s.tooltip}`}>
                             <button onClick={handlePrevWeek} className={s.calendarButton}>←</button>
-                            <span className={s.tooltiptext}>Previous Week</span>
+                            <span className={s.tooltiptext}>{t("adminCalendar.previousWeek")}</span>
                         </div>
                         <div className={`${s.tooltip}`}>
                             <button onClick={handleNextWeek} className={s.calendarButton}>→</button>
-                            <span className={s.tooltiptext}>Next Week</span>
+                            <span className={s.tooltiptext}>{t("adminCalendar.nextWeek")}</span>
                         </div>
                     </div>
                     <div className={s.filter}>
                         <select className={s.selectInput} value={filterOption} onChange={e => setFilterOption(e.target.value)}>
-                            <option value="All">All</option>
-                            <option value="Patient">Patient</option>
-                            <option value="Therapist">Therapist</option>
-                            <option value="Therapy name">Therapy Name</option>
+                            <option value="All">{t("adminCalendar.filterAll")}</option>
+                            <option value="Patient">{t("adminCalendar.filterPatient")}</option>
+                            <option value="Therapist">{t("adminCalendar.filterTherapist")}</option>
+                            <option value="Therapy name">{t("adminCalendar.filterTherapyName")}</option>
                         </select>
-                        <input className={s.textInput} type="text" placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
+                        <input className={s.textInput} type="text" placeholder={t("adminCalendar.searchPlaceholder")} value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
                     </div>
                 </div>
             </div>
             <table className={s.calendarTable}>
                 <thead className={s.tableHeader}>
-                        <th className={s.dateTime}>Time / Date</th>
+                        <th className={s.dateTime}>{t("adminCalendar.timeDateHeader")}</th>
                         {weekDates.map(date => <th className={s.tableDoW} key={date}>{formatDateAdmin(date)}</th>)}
                 </thead>
                 <tbody className={s.tableBody}>

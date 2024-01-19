@@ -128,7 +128,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     max-height: 80vh; /* maximum height of the popup */
     overflow-y: auto; /* enables vertical scrolling if content overflows */
-    width: 25vw; /* or any width you prefer */
+    width: max-content; /* or any width you prefer */
     pointer-events: all;
 }
 

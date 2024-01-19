@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
@@ -7,6 +8,8 @@ export default function SessionSelection(props) {
    const {userToken, handleLogout, formatDate, formatFullDate, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
    const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
+
+   const { t, i18n } = useTranslation();
 
    const [availableSessions, setAvailableSessions] = useState("")
    const [viewingSession, setViewingSession] = useState(reschedule ? selectedSessions[0] : null)
@@ -101,7 +104,7 @@ export default function SessionSelection(props) {
       if (viewingSession == null) {
          h3Class += ` ${s.vertical_center}`
          timeElements.push(
-            <h3 className={h3Class} key={25}>Select date to<br />view timeslots</h3>
+            <h3 className={h3Class} key={25}>{t('sessionSelection.selectDateMessage1')}<br />{t('sessionSelection.selectDateMessage2')}</h3>
          )
          break
       } else if (Object.keys(formattedSessions).includes(formatDate(viewingSession)) &&
