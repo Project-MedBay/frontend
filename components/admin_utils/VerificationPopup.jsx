@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios'
 import { useTranslation, Trans } from 'react-i18next';
 import s from '../../styles/adminVerifications.module.css';
@@ -10,6 +10,7 @@ export default function VerificationCard(props){
 
     const [action, setAction] = React.useState(null); // 'reject', 'approve', or null
     const [rejectionReason, setRejectionReason] = React.useState("");
+    const [rejectDisabled, setRejectDisabled] = React.useState(false)
     const [isExpanded, setIsExpanded] = React.useState(false);
 
     if (type == "therapy") {
@@ -26,12 +27,19 @@ export default function VerificationCard(props){
         })
     }
 
+    useEffect(() => {
+        if (rejectionReason == "") setRejectDisabled(true)
+        else setRejectDisabled(false)
+    }, [rejectionReason])
+
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
     };
 
     const handleActionClick = (newAction) => {
         setAction(newAction);
+        if (newAction == "reject") setRejectDisabled(true)
+        else setRejectDisabled(false)
     };
 
     const confirmAction = () => {
@@ -69,6 +77,7 @@ export default function VerificationCard(props){
 
     const cancelAction = () => {
         setAction(null);
+        setRejectDisabled(false)
     };
 
     return(
@@ -157,7 +166,8 @@ export default function VerificationCard(props){
                             <div className={s.requestInfo}> {t('adminVerificationPopup.requestAccept')} </div>
                         )}
                         <div className={s.confirmationButtons}>
-                            <button className={s.confirmBtn} onClick={confirmAction}>✔</button>
+                            <button className={`${s.confirmBtn} ${rejectDisabled ? s.disabled : ""}`}
+                                    onClick={rejectDisabled ? () => {return} : confirmAction}>✔</button>
                             <button className={s.cancelBtn} onClick={cancelAction}>✖</button>
                         </div>
                     </div>

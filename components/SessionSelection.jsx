@@ -55,7 +55,7 @@ export default function SessionSelection(props) {
       if (date.getTime() > new Date().getTime() + 29 * 60 * 60 * 1000) weekDates.push(date)
    }
 
-   var weekElements = weekDates.map(weekDate => {               // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+   var weekElements = weekDates.map(weekDate => {               // mapiranje podataka iz baze na jsx (html) elemente za ispis
       let h3Class = s.weekdate
       let h3OnClick = () => {}
       if (Object.keys(formattedSessions).includes(formatDate(weekDate))) {

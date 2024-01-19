@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { useTranslation, Trans } from 'react-i18next';
-import { mySchedule } from "./TestingData"
 import ReschedulePopup from "./ReschedulePopup"
 import map from "../assets/hospital_map1.png"
 import refresh from "../assets/refresh.png"
@@ -64,7 +63,7 @@ export default function PatientDash(props) {
    }, [selectedSession])
 
    var scheduleElements
-   if (mySchedule[selectedWeek] != null) {                                       // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+   if (mySchedule[selectedWeek] != null) {                                       // mapiranje podataka iz baze na jsx (html) elemente za ispis
       scheduleElements = mySchedule[selectedWeek].map(session => {               // kartice sesija u rasporedu
          const { id, datetime, location } = session
          let cardClass = s.session_card

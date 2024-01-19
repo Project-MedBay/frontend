@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { adminSessions, adminStatsPatients, adminStatsResources } from "./TestingData"
 import AdminStatisticsCircle from "./admin_utils/AdminStatisticsCircle"
 import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/adminStatistics.module.css"

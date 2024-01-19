@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useTranslation, Trans } from 'react-i18next';
-import { mySchedule } from "./TestingData" // NOTE temp
 import SessionSelection from "./SessionSelection"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/reschedulePopup.module.css"
