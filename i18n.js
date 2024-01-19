@@ -443,12 +443,54 @@ i18n
                   "no": "No"
                 }
               },
-              "resetPassword": {
+            resetPassword: {
                 "resetTitle": "Reset your password",
                 "newPassword": "New password:",
                 "confirmNew": "Confirm new password:",
                 "resetButton": "Reset password",
-                "failedText": "Invalid email or password. Please try again."
+                "failedText": "Invalid email or password. Please try again.",
+                "success": "Success!",
+                "successMessage": "Your password has been reset and you may now use it to log in.",
+                "takeToLogin": "Take me to login",
+                "eightPlusChar": "Password must be 8+ characters.",
+                "noMatch": "Passwords do not match."
+              },
+            sessionSelection: {
+                "selectDateMessage1": "Select date to ",
+                "selectDateMessage2": "view timeslots"
+              },
+            successPopup: {
+                "success": "Success!"
+              },
+            therapyOrPatientPopup: {
+                "popup": {
+                  "therapy": "therapy",
+                  "patient": "patient",
+                  "sessionCount": " SESSIONS:"
+                },
+                "infoLabels": {
+                  "dateStarted": "Date started",
+                  "therapist": "Therapist",
+                  "dateFinished": "Date finished",
+                  "location": "Location",
+                  "e-mail": "Email",
+                  "address": "Address",
+                  "dob": "DOB",
+                  "phone": "Phone number",
+                  "mbo": "MBO"
+                },
+                "session": {
+                  "noNotes": "No notes",
+                  "viewNotes": "View notes",
+                  "collapse": "Collapse",
+                  "addNote": "Add note",
+                  "editNote": "Edit note",
+                  "saveNote": "Save note",
+                  "cancel": "Cancel",
+                  "placeholder": "No notes yet."
+                },
+                "exitButton": "Exit",
+                "noSessionsYet": "NO SESSIONS YET"
               }
             
         }
@@ -874,6 +916,55 @@ i18n
                   "yes": "Da",
                   "no": "Ne"
                 }
+              },
+            resetPassword: {
+                "resetTitle": "Promjena lozinke",
+                "newPassword": "Nova lozinka:",
+                "confirmNew": "Potvrda nove lozinke:",
+                "resetButton": "Promijeni lozinku",
+                "failedText": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
+                "success": "Uspjeh!",
+                "successMessage": "Vaša lozinka je uspješno promijenjena i možete se s njome prijaviti.",
+                "takeToLogin": "Odvedi na prijavu",
+                "eightPlusChar": "Lozinka mora imati barem osam znakova",
+                "noMatch": "Lozinke se ne podudaraju"
+              },
+            sessionSelection: {
+                "selectDateMessage1": "Odaberite datum za ",
+                "selectDateMessage2": "pregled termina"
+              },
+            successPopup: {
+                "success": "Uspjeh!"
+              },
+            therapyOrPatientPopup: {
+                "popup": {
+                  "therapy": "terapija",
+                  "patient": "pacijent",
+                  "sessionCount": "TERMINA:"
+                },
+                "infoLabels": {
+                  "date started": "Datum početka",
+                  "therapist": "Terapeut",
+                  "date finished": "Datum završetka",
+                  "location": "Lokacija",
+                  "e-mail": "E-mail",
+                  "address": "Adresa",
+                  "dob": "Datum rođ",
+                  "phone": "Telefon",
+                  "mbo": "MBO"
+                },
+                "session": {
+                  "noNotes": "Nema bilješki",
+                  "viewNotes": "Bilješke",
+                  "collapse": "Sažmi",
+                  "addNote": "Nova bilješka",
+                  "editNote": "Uredi bilješku",
+                  "saveNote": "Spremi bilješku",
+                  "cancel": "Odustani",
+                  "placeholder": "Trenutno nema bilješki."
+                },
+                "exitButton": "Izlaz",
+                "noSessionsYet": "Trenutno nema termina"
               }
         }
       }

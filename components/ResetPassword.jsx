@@ -1,6 +1,7 @@
 import { React, useState} from "react"
 import axios from "axios"
 import { useLocation } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 import eyeHidden from "../assets/eye_hidden.png"
 import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/resetPassword.module.css"
@@ -8,9 +9,11 @@ import s from "../styles/resetPassword.module.css"
 export default function ResetPassword(props) {
    const {globalNavigate} = props
 
+   const { t, i18n } = useTranslation();
+
    const [inputFailed, setInputFailed] = useState({         
       value: false,
-      text: "Passwords do not match."
+      text: t('resetPassword.noMatch')
    })
    const [passwordShown, setPasswordShown] = useState(false)
    const [success, setSuccess] = useState(false)
@@ -34,12 +37,12 @@ export default function ResetPassword(props) {
       }))
       if (name == "password" && value.length < 8) setInputFailed({
          value: true,
-         text: "Password must be 8+ characters."
+         text: t('resetPassword.eightPlusChar')
       })
       else if ((name == "password" && value != formData.confirmPassword) ||
          (name == "confirmPassword" && value != formData.password)) setInputFailed({
          value: true,
-         text: "Passwords do not match."
+         text: t('resetPassword.noMatch')
       })
       else setInputFailed(prevState => ({...prevState, value: false}))
    }
@@ -52,7 +55,7 @@ export default function ResetPassword(props) {
       event.preventDefault()
       if (formData.password.length < 8) setInputFailed({
          value: true,
-         text: "Password must be 8+ characters."
+         text: t('resetPassword.eightPlusChar')
       })
       else {
          axios({
@@ -68,13 +71,13 @@ export default function ResetPassword(props) {
     return (
         <>
             <form className={s.reset_password_form} onSubmit={handleSubmit} autoComplete="off">
-                <h1 className={s.form_title}>Reset your password</h1>
+                <h1 className={s.form_title}>{t('resetPassword.resetTitle')}</h1>
                 <p className={`${s.reset_failed} ${inputFailed.value && s.failed_text}`}>
                     {inputFailed.text}
                 </p>
 
                 <div className={s.form_input}>
-                  <p className={s.input_text}>New password:</p>
+                  <p className={s.input_text}>{t('resetPassword.newPassword')}</p>
                   <div className={s.password_container}>
                      <input
                         className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
@@ -89,7 +92,7 @@ export default function ResetPassword(props) {
                </div>
 
                <div className={s.form_input}>
-                  <p className={s.input_text}>Confirm new password:</p>
+                  <p className={s.input_text}>{t('resetPassword.confirmNew')}</p>
                   <div className={s.password_container}>
                      <input
                         className={`${s.input_box} ${inputFailed.value && s.failed_input}`}
@@ -104,12 +107,12 @@ export default function ResetPassword(props) {
                </div>
 
                {!success ?
-                  <button className={s.form_button}>Reset password</button>
+                  <button className={s.form_button}>{t('resetPassword.resetButton')}</button>
                : <>
                   <h3 className={s.success_text}>
-                     <span>Success!</span><br />Your password has been reset and you may now use it to log in.
+                     <span>{t('resetPassword.success')}</span><br />{t('resetPassword.successMessage')}
                   </h3>
-                  <h3 className={s.login} onClick={() => globalNavigate("/login")}>Take me to login</h3>
+                  <h3 className={s.login} onClick={() => globalNavigate("/login")}>{t('resetPassword.takeToLogin')}</h3>
                </>}
 
             </form>

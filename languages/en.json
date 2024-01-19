@@ -560,13 +560,19 @@
     "newPassword": "New password:",
     "confirmNew": "Confirm new password:",
     "resetButton": "Reset password",
-    "failedText": "Invalid email or password. Please try again."
+    "failedText": "Invalid email or password. Please try again.",
+
+    "DONE": "DONE"
   },
   "sessionSelection": {
-    "selectDateMessage": "Select date to view timeslots"
+    "selectDateMessage": "Select date to view timeslots",
+
+    "DONE": "DONE"
   },
   "successPopup": {
-    "success": "Success!"
+    "success": "Success!",
+
+    "DONE": "DONE"
   },
   "tableList": {
     "headers": {

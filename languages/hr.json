@@ -510,7 +510,7 @@
     "selectDateMessage": "Odaberite datum za pregled termina"
   },
   "successPopup": {
-    "success": "Uspješno!"
+    "success": "Uspjeh!"
   },
   "tableList": {
     "headers": {
@@ -629,7 +629,7 @@
     },
     "session": {
       "noNotes": "Nema bilješki",
-      "viewNotes": "Pregledaj bilješke",
+      "viewNotes": "Bilješke",
       "collapse": "Sažmi",
       "addNote": "Dodaj bilješku",
       "editNote": "Uredi bilješku",
