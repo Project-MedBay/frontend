@@ -11,7 +11,7 @@
    align-items: center;
    gap: 8.5vw;
    height: calc(100vh - max(calc(85px * 0.6), calc(85vh * 59 / 725)));
-   min-height: 700px;
+   min-height: 725px;
 }
 
 .covered_by_popup {
@@ -29,7 +29,7 @@
    align-items: center;
    justify-content: center;
    box-shadow: 0px 4px 50px 20px #00000033;
-   border-radius: 14px;
+   border-radius: calc(14 * var(--scale-by-height));
    font-family: "Barlow", sans-serif;
    gap: max(calc(50px * 0.6), calc(50vh * 59 / 725));
 }
@@ -131,7 +131,7 @@
    padding-left: max(calc(14px * 0.6), calc(14vh * 59 / 725));
    background: #F4F3F3;
    border: 1px solid #F4F3F3;
-   border-radius: 10px;
+   border-radius: calc(10 * var(--scale-by-height));
 }
 
 .input_box:focus {
@@ -164,7 +164,8 @@ input[type=password]::placeholder, input[type=text]::placeholder {
 }
 
 .recaptcha {
-   margin: -25px 0;
+   margin: calc(-25 * var(--scale-by-height)) 0;
+   margin-top: calc(-15 * var(--scale-by-height));
 }
 
 .form_button {
@@ -177,7 +178,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    font-size: max(calc(40px * 0.6), calc(40vh * 59 / 725));
    color: white;
    border: 1px solid #70D8AC;
-   border-radius: 14px;
+   border-radius: calc(14 * var(--scale-by-height));
    cursor: pointer;
 }
 
@@ -218,7 +219,7 @@ input[type=password]::placeholder, input[type=text]::placeholder {
    font-weight: 500;
    padding: max(calc(10px * 0.6), calc(10vh * 59 / 725)) max(calc(30px * 0.6), calc(30vh * 59 / 725));
    width: fit-content;
-   border-radius: 12px;
+   border-radius: calc(12 * var(--scale-by-height));
    background: rgb(34, 0, 106);
    box-shadow: 0px 4px 50px 8px #00000026;
    color: white;

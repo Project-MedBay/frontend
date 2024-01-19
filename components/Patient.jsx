@@ -214,6 +214,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
                formatFullDate={formatFullDate}
                navigate={navigate}
                theme={theme}
+               language={language.id}
             />} />
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
