@@ -21,7 +21,7 @@ export default function PatientDash(props) {
       datetime: "--"
    })
    useEffect(() => {
-      let tempSession = {datetime: "--"}
+      let tempSession = {text: t('patientDash.noUpcomingSessions'), datetime: "--"}
       for (let week in mySchedule) {
          for (let session of mySchedule[week]) {
             if (session.datetime > new Date()) {

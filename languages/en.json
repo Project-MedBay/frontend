@@ -200,23 +200,42 @@
   },
   "formFields": {
     "register": {
-      "name": "Name",
-      "surname": "Surname",
-      "email": "E-mail",
-      "address": "Address",
-      "dateOfBirth": "Date Of Birth",
-      "phoneNumber": "Phone Number",
-      "mbo": "MBO",
-      "password": "Password",
-      "confirmPassword": "Confirm Password",
-      "namePlaceholder": "John",
-      "surnamePlaceholder": "Doe",
-      "emailPlaceholder": "john.doe@mail.com",
-      "addressPlaceholder": "Street Name 1",
-      "dobPlaceholder": "YYYY-MM-DD",
-      "phonePlaceholder": "0912345678",
-      "mboPlaceholder": "123456789",
-      "passwordPlaceholder": "********"
+      "firstName": {
+        "label": "Name",
+        "placeholder": "John"
+      },
+      "lastName": {
+        "label": "Surname",
+        "placeholder": "Doe"
+      }, 
+      "email": {
+        "label": "E-mail",
+        "placeholder": "john.doe@mail.com"
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Street Name 1"
+      },
+      "dateOfBirth": {
+        "label": "Date Of Birth",
+        "placeholder": "YYYY-MM-DD"
+      },
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "0912345678"
+      },
+      "MBO": {
+        "label": "MBO",
+        "placeholder": "123456789"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "********"
+      },
+      "passwordConfirm": {
+        "label": "Confirm Password",
+        "placeholder": "********"
+      }
     },
     "patient": {
       "name": "Name",
@@ -440,13 +459,15 @@
       "oneYear": "YEAR",
       "moreYears": "YEARS",
       "alotOfTime": "OVER",
-                                                    "funkcija za hrvatske dane mjesece i godine (padezi)": "funkcija"
+                                                    "funkcija za hrvatske dane mjesece i godine (padezi)": "bit cemo lijeni"
     },
-                                                    "gdje je upload image??": "Nema ga??",
+                                                    "gdje je upload image??": "Nista",
     "uploadImageTooltip": {
       "add": "Add a profile image",
       "change": "Change profile image"
-    }
+    },
+
+    "DONE": "DONE? - DODATI JOŠ HRVATSKU SLIKU"
   },
   "registerMain": {
     "alreadyHaveAccount": "Already have an account?",
@@ -511,7 +532,9 @@
       "text2": "Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made.",
       "buttonText": "OK"
     },
-    "greeting": "Where Healing Begins With Care."
+    "greeting": "Where Healing Begins With Care.",
+
+    "DONE": "DONE - VALJDA"
   },
   "reschedulePopup": {
     "popupTitle": "RESCHEDULE SESSION:",
@@ -528,7 +551,9 @@
       "text": "Are you sure?",
       "yes": "Yes",
       "no": "No"
-    }
+    },
+
+    "DONE": "DONE"
   },
   "resetPassword": {
     "resetTitle": "Reset your password",

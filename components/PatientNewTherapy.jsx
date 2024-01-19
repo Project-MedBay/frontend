@@ -192,8 +192,11 @@ export default function PatientNewTherapy(props) {
                      <h2 className={s.counter_text}>{t('patientNewTherapy.pickedSessions')} {selectedSessions.length}/{numOfSessions}</h2>
                   </div>
                   <div className={s.info_duration}>
-                     <h2 className={s.duration_text}>{t('patientNewTherapy.duration')} {duration} {duration == 1 
-                                                   ? t('patientNewTherapy.oneDay') : t('patientNewTherapy.moreDays')}</h2>
+                     <h2 className={s.duration_text}>
+                        {t("patientNewTherapy.duration")} {duration} {duration == 1 ? t("patientNewTherapy.oneDay")
+                        : (duration > 20 && duration % 10 == 1) ? t("patientNewTherapy.croDay")
+                        : t("patientNewTherapy.moreDays")}
+                     </h2>
                   </div>
                </div>
             </div>

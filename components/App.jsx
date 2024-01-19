@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 import LogRegHeader  from './LogRegHeader'
 import LoginMain  from './LoginMain'
 import RegisterMain from './RegisterMain'
@@ -13,9 +14,11 @@ import { ThemeProvider } from './ThemeContext';
 import '../styles/App.css'
 
 export default function App() {           // glavna komponenta, u njoj se renderaju sve ostale
+   const { t, i18n } = useTranslation();
+
    const [language, setLanguage] = useState(() => {
       if (sessionStorage.getItem("medbay-lang") !== null) return JSON.parse(sessionStorage.getItem("medbay-lang"))
-      else return {id: "hr", name: "HRV"}
+      else return {id: t("app.language"), name: t("app.languageLabel")}
    })
    const [userToken, setUserToken] = useState(() => {
       if (sessionStorage.getItem("medbay-token") !== null) {
@@ -76,7 +79,7 @@ export default function App() {           // glavna komponenta, u njoj se render
 
             <Route path="/register" element={<>
                <LogRegHeader globalNavigate={globalNavigate} language={language} setLanguage={setLanguage} />
-               <RegisterMain globalNavigate={globalNavigate} />
+               <RegisterMain globalNavigate={globalNavigate} language={language.id} />
             </>} />
 
             <Route path="/patient/*" element={<Patient

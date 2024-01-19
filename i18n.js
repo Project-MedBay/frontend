@@ -24,6 +24,10 @@ i18n
     resources: {
       en: {
         translation: {
+            app: {
+                "language": "en",
+                "languageLabel": "ENG"
+            },
             adminHeader: {
                 calendar: "CALENDAR",
                 verifications: "VERIFICATIONS",
@@ -151,6 +155,46 @@ i18n
                 buttonYes: "YES, ",
                 buttonNo: "NO, DON'T "
               },
+            formFields: {
+                "register": {
+                  "firstName": {
+                    "label": "Name",
+                    "placeholder": "John"
+                  },
+                  "lastName": {
+                    "label": "Surname",
+                    "placeholder": "Doe"
+                  }, 
+                  "email": {
+                    "label": "E-mail",
+                    "placeholder": "john.doe@mail.com"
+                  },
+                  "address": {
+                    "label": "Address",
+                    "placeholder": "Street Name 1"
+                  },
+                  "dateOfBirth": {
+                    "label": "Date Of Birth",
+                    "placeholder": "YYYY-MM-DD"
+                  },
+                  "phoneNumber": {
+                    "label": "Phone Number",
+                    "placeholder": "0912345678"
+                  },
+                  "MBO": {
+                    "label": "MBO",
+                    "placeholder": "123456789"
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "********"
+                  },
+                  "passwordConfirm": {
+                    "label": "Confirm Password",
+                    "placeholder": "********"
+                  }
+                }
+            },
             login: {
                 "formTitle": "Welcome back!",
                 "invalidCredentials": "Invalid email or password. Please try again.",
@@ -230,6 +274,7 @@ i18n
                 "duration": "duration:",
                 "oneDay": "day",
                 "moreDays": "days",
+                "croDay": "days",
                 "restrictions": "Restrictions:",
                 "sessionRestrictions": {
                   "firstRestriction1": "Selected sessions must be at least ", 
@@ -311,12 +356,109 @@ i18n
                   "add": "Add a profile image",
                   "change": "Change profile image"
                 }
+              },
+            registerMain: {
+                "alreadyHaveAccount": "Already have an account?",
+                "loginHere": "Login here",
+                "formTitle": "Register",
+                "unexpectedError": "Error",
+                "emptyField": "Field is required.",
+                "digitsChecker": "Must be digits only.",
+                "recaptchaChecker": "Please verify that you are not a robot.",
+                "tryAgain": "Please try again.",
+                "fields": {
+                  "firstName": {
+                    "label": "Name",
+                    "placeholder": "John",
+                    "errorMessage": "Name is required."
+                  },
+                  "lastName": {
+                    "label": "Surname",
+                    "placeholder": "Doe",
+                    "errorMessage": "Surname is required."
+                  },
+                  "email": {
+                    "label": "E-mail",
+                    "placeholder": "john.doe@mail.com",
+                    "errorMessage": "Email must be in format 'something@something.domain'."
+                  },
+                  "address": {
+                    "label": "Address",
+                    "placeholder": "Street Name 1",
+                    "errorMessage": "Address is required."
+                  },
+                  "dateOfBirth": {
+                    "label": "Date Of Birth",
+                    "placeholder": "YYYY-MM-DD",
+                    "errorMessage1": "Must be YYYY-MM-DD.",
+                    "errorMessage2": "Date is in the future.",
+                    "errorMessage3": "Age is over 150."
+                  },
+                  "phoneNumber": {
+                    "label": "Phone Number",
+                    "placeholder": "0912345678",
+                    "errorMessage": "Must be 9+ digits."
+                  },
+                  "MBO": {
+                    "label": "MBO",
+                    "placeholder": "123456789",
+                    "errorMessage": "Must be 9 digits."
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "********",
+                    "errorMessage": "Password must be 8+ characters."
+                  },
+                  "passwordConfirm": {
+                    "label": "Confirm Password",
+                    "placeholder": "********",
+                    "errorMessage": "Passwords do not match."
+                  }
+                },
+                "togglePasswordText": "Show/Hide Password",
+                "registerButtonText": "Register",
+                "successPopup": {
+                  "text1": "You have filled in all the information and your account is now being processed by our administrator.",
+                  "text2": "Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made.",
+                  "buttonText": "OK"
+                },
+                "greeting": "Where Healing Begins With Care."
+              },
+            reschedulePopup: {
+                "popupTitle": "RESCHEDULE SESSION:",
+                "currentSession": "SESSION:",
+                "newSession": "NEW SESSION:",
+                "rescheduleButton": "Reschedule",
+                "rescheduleLegend1": "Grayed out dates/times are inelligible or full.",
+                "rescheduleLegend2": "The selected date/time is highlighted in ",
+                "rescheduleLegend3": "purple and bolded.",
+                "rescheduleLegend4": "Dates when ",
+                "rescheduleLegendTernary1": "you ",
+                "rescheduleLegendTernary2": "they ",
+                "rescheduleLegend5": " have other sessions scheduled are emphasized with a ",
+                "rescheduleLegend6": "green box",
+                "confirmation": {
+                  "text": "Are you sure?",
+                  "yes": "Yes",
+                  "no": "No"
+                }
+              },
+              "resetPassword": {
+                "resetTitle": "Reset your password",
+                "newPassword": "New password:",
+                "confirmNew": "Confirm new password:",
+                "resetButton": "Reset password",
+                "failedText": "Invalid email or password. Please try again."
               }
             
         }
       },
       hr: {
         translation: {
+            app: {
+                "language": "hr",
+                "languageLabel": "HRV"
+            },
             adminHeader: {
                 calendar: "KALENDAR",
                 verifications: "VERIFIKACIJE",
@@ -406,7 +548,7 @@ i18n
                 firstTextBayBot: "Pozdrav! Ja sam BayBot i ovdje sam da Vam pomognem odgovoriti na bilo koje pitanje o korištenju naše stranice!",
                 processing: "Obrađujem...",
                 errorMessage: "Naišao sam na pogrešku pri spajanju na poslužitelj. Molim Vas da pokušate ponovno za par trenutaka!",
-                assistant: "AI Asistent",
+                assistant: "AI Pomoćnik",
                 open: "Otvori ",
                 question: "Postavite pitanje...",
                 send: "Pošalji"
@@ -444,6 +586,46 @@ i18n
                 buttonYes: "DA, ",
                 buttonNo: "NE, NEMOJ "
               },
+              formFields: {
+                "register": {
+                  "firstName": {
+                    "label": "Ime",
+                    "placeholder": "Ivan"
+                  },
+                  "lastName": {
+                    "label": "Prezime",
+                    "placeholder": "Horvat"
+                  }, 
+                  "email": {
+                    "label": "E-mail",
+                    "placeholder": "ivan.horvat@mail.com"
+                  },
+                  "address": {
+                    "label": "Adresa",
+                    "placeholder": "Ime ulice 1"
+                  },
+                  "dateOfBirth": {
+                    "label": "Datum rođenja",
+                    "placeholder": "YYYY-MM-DD"
+                  },
+                  "phoneNumber": {
+                    "label": "Telefonski broj",
+                    "placeholder": "0912345678"
+                  },
+                  "MBO": {
+                    "label": "MBO",
+                    "placeholder": "123456789"
+                  },
+                  "password": {
+                    "label": "Lozinka",
+                    "placeholder": "********"
+                  },
+                  "passwordConfirm": {
+                    "label": "Potvrdite lozinku",
+                    "placeholder": "********"
+                  }
+                }
+            },
             login: {
                 "formTitle": "Dobrodošli natrag!",
                 "invalidCredentials": "Neispravna e-mail adresa ili lozinka. Pokušajte ponovno.",
@@ -463,7 +645,7 @@ i18n
                 "popupTitle": "Napišite svoju e-mail adresu kako bismo Vam poslali obrazac za promjenu lozinke:",
                 "emailPlaceholder": "ivan.horvat@mail.com",
                 "submitButton": "Podnesi",
-                "success": "Uspješno!",
+                "success": "Uspjeh!",
                 "resetLink": "Na vašu e-mail adresu uskoro će dospjeti obrazac za promjenu lozinke.",
                 "close": "Zatvori"
               },
@@ -515,7 +697,7 @@ i18n
                 "step1Subtitle": "ili unesite kod terapije koji vam je dao Vaš liječnik:",
                 "invalidCode": "Nevažeći kod.",
                 "codePlaceholder": "#4JGSE",
-                "filterBy": "FILTRIRAJ PO:",
+                "filterBy": "FILTRIRAJ:",
                 "searchPlaceholder": "Pretraži",
                 "searchText": "Filtrirajte po dijelu tijela ili upotrijebite tražilicu kako biste pronašli terapiju.",
                 "step2Title": "KORAK 2: IZBOR TERMINA",
@@ -523,6 +705,7 @@ i18n
                 "duration": "trajanje:",
                 "oneDay": "dan",
                 "moreDays": "dana",
+                "croDay": "dan",
                 "restrictions": "Ograničenja:",
                 "sessionRestrictions": {
                   "firstRestriction1": "Odabrani termini moraju biti udaljeni barem ",
@@ -595,9 +778,9 @@ i18n
                   "oneDay": "DAN",
                   "moreDays": "DANA",
                   "oneMonth": "MJESEC",
-                  "moreMonths": "MJESECA/MJESECI",
+                  "moreMonths": "MJESECA/I",
                   "oneYear": "GODINU",
-                  "moreYears": "GODINE/GODINA",
+                  "moreYears": "GODINE/A",
                   "alotOfTime": "VIŠE OD ",
                   "_comment_za_Lovru3": "funkcija za rješavanje problema mjeseca/mjeseci i godine/godina"
                 },
@@ -605,7 +788,93 @@ i18n
                   "add": "Dodaj sliku profila",
                   "change": "Promijeni sliku profila"
                 }
-            }
+            },
+            registerMain: {
+                "alreadyHaveAccount": "Već imate korisnički račun?",
+                "loginHere": "Prijavite se",
+                "formTitle": "Registracija",
+                "unexpectedError": "Greška",
+                "emptyField": "Polje je obavezno.",
+                "digitsChecker": "Samo znamenke.",
+                "recaptchaChecker": "Potvrdite da niste robot.",
+                "tryAgain": "Pokušajte ponovno.",
+                "fields": {
+                  "firstName": {
+                    "label": "Ime",
+                    "placeholder": "Ivan",
+                    "errorMessage": "Ime je obavezno."
+                  },
+                  "lastName": {
+                    "label": "Prezime",
+                    "placeholder": "Horvat",
+                    "errorMessage": "Prezime je obavezno."
+                  },
+                  "email": {
+                    "label": "E-mail",
+                    "placeholder": "ivan.horvat@mail.com",
+                    "errorMessage": "E-mail mora biti u formatu 'ime@domena.com'."
+                  },
+                  "address": {
+                    "label": "Adresa",
+                    "placeholder": "Ulica 1",
+                    "errorMessage": "Adresa je obavezna."
+                  },
+                  "dateOfBirth": {
+                    "label": "Datum rođenja",
+                    "placeholder": "YYYY-MM-DD",
+                    "errorMessage1": "YYYY-MM-DD format.",
+                    "errorMessage2": "Datum još nije prošao.",
+                    "errorMessage3": "Starost je preko 150."
+                  },
+                  "phoneNumber": {
+                    "label": "Telefonski broj",
+                    "placeholder": "0912345678",
+                    "errorMessage": "Najmanje 9 znamenki."
+                  },
+                  "MBO": {
+                    "label": "MBO",
+                    "placeholder": "123456789",
+                    "errorMessage": "Točno 9 znamenki."
+                  },
+                  "password": {
+                    "label": "Lozinka",
+                    "placeholder": "********",
+                    "errorMessage": "Najmanje 8 znakova."
+                  },
+                  "passwordConfirm": {
+                    "label": "Potvrda lozinke",
+                    "placeholder": "********",
+                    "errorMessage": "Lozinke se ne podudaraju."
+                  }
+                },
+                "togglePasswordText": "Prikaži/Sakrij lozinku",
+                "registerButtonText": "Registracija",
+                "successPopup": {
+                  "text1": "Unijeli ste sve podatke i vaš račun sada obrađuje naš administrator.",
+                  "text2": "Molimo provjeravajte svoj e-mail kako biste vidjeli je li vaš račun potvrđen ili postoje promjene koje trebate napraviti.",
+                  "buttonText": "OK"
+                },
+                "greeting": "Where Healing Begins With Care."
+              },
+            reschedulePopup: {
+                "popupTitle": "ODGODI TERMIN:",
+                "currentSession": "TERMIN:",
+                "newSession": "NOVI TERMIN:",
+                "rescheduleButton": "Odgodi termin",
+                "rescheduleLegend1": "Sivo obojani datumi/vremena su nedostupni ili popunjeni.",
+                "rescheduleLegend2": "Odabrani datum i vrijeme su podebljani i ",
+                "rescheduleLegend3": "naglašeni ljubičastom bojom.",
+                "rescheduleLegend4": "Datumi u kojima ",
+                "rescheduleLegendTernary1": "već imate ",
+                "rescheduleLegendTernary2": "pacijent već ima ",
+                "rescheduleLegend5": " zakazani drugi termin naglašeni su ",
+                "rescheduleLegend6": "zelenim okvirom",
+                "confirmation": {
+                  "text": "Jeste li sigurni?",
+                  "yes": "Da",
+                  "no": "Ne"
+                }
+              }
         }
       }
     }

@@ -32,7 +32,7 @@
    color: #fff;
    font-size: calc(16 * var(--scale-by-height-reduced));
    font-weight: 600;
-   width: calc(110 * var(--scale-by-height-reduced));
+   width: calc(115 * var(--scale-by-height-reduced));
    padding: calc(6 * var(--scale-by-height-reduced));
    background-color: #22006a;
    border: none;

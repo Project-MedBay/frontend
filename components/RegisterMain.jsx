@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import { registerFields } from "./FormsData"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import ReCAPTCHA from "react-google-recaptcha";
@@ -8,7 +9,9 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/register.module.css"
 
 export default function RegisterMain(props) {
-   const {globalNavigate} = props
+   const {globalNavigate, language} = props
+
+   const { t, i18n } = useTranslation();
 
    const [formData, setFormData] = useState({         // state za sadrzaj formi, ne koristimo default formdata
       firstName: "",
@@ -22,16 +25,16 @@ export default function RegisterMain(props) {
       passwordConfirm: ""
    })
    const [inputFailed, setInputFailed] = useState({         // state za pracenje pogreski, izvora pogreske i vrste pogreske s odgovarajucom porukom
-      unexpectedError: {failed: false, text: "Error"},
-      firstName: {failed: false, text: "Name is required."},
-      lastName: {failed: false, text: "Surname is required."},
-      email: {failed: false, text: "Email must be in format 'something@something.domain'."},
-      address: {failed: false, text: "Address is required."},
-      dateOfBirth: {failed: false, text: "Must be YYYY-MM-DD."},
-      phoneNumber: {failed: false, text: "Must be 9+ digits."},
-      MBO: {failed: false, text: "Must be 9 digits."},
-      password: {failed: false, text: "Password must be 8+ characters."},
-      passwordConfirm: {failed: false, text: "Passwords do not match."}
+      unexpectedError: {failed: false, text: 'registerMain.unexpectedError'},
+      firstName: {failed: false, text: 'registerMain.fields.firstName.errorMessage'},
+      lastName: {failed: false, text: 'registerMain.fields.lastName.errorMessage'},
+      email: {failed: false, text: 'registerMain.fields.email.errorMessage'},
+      address: {failed: false, text: 'registerMain.fields.address.errorMessage'},
+      dateOfBirth: {failed: false, text: 'registerMain.fields.dateOfBirth.errorMessage1'},
+      phoneNumber: {failed: false, text: 'registerMain.fields.phoneNumber.errorMessage'},
+      MBO: {failed: false, text: 'registerMain.fields.MBO.errorMessage'},
+      password: {failed: false, text: 'registerMain.fields.password.errorMessage'},
+      passwordConfirm: {failed: false, text: 'registerMain.fields.passwordConfirm.errorMessage'}
    })
    const [successPopup, setSuccessPopup] = useState(false)        // state za uvjetni render popupa o uspjesnoj registraciji
    const [passwordShown, setPasswordShown] = useState(false)      // state za pokazat/skrit lozinku
@@ -50,14 +53,14 @@ export default function RegisterMain(props) {
       }
       return (
          <div className={s.form_input} id={s[id]} key={id}>       {/* osim klase, id sluzi za namjestanje grida, jedinstven key je potreban pri mapiranju */}
-            <p className={s.input_text}>{label}</p>
+            <p className={s.input_text}>{t("formFields.register." + name + ".label")}</p>
             <input
                className={`${s.input_box} ${inputFailed[name].failed && s.failed_input}`}       /* uvjetni render klase za gresku (zacrveni input box) */
-               type={type} onChange={handleChange} placeholder={placeholder}
+               type={type} onChange={handleChange} placeholder={t("formFields.register." + name + ".placeholder")}
                name={name} value={formData[name]} id={s[id]}                  /* tekst polja odgovara sadrzaju statea formData */
             />
             <p className={`${s.register_failed} ${inputFailed[name].failed && s.failed_text}`}>    {/* uvjetni render teksta za gresku ispod pojedinog inputa */}
-               {inputFailed[name].text}
+               {t(inputFailed[name].text)}
             </p>
          </div>
       )
@@ -80,14 +83,14 @@ export default function RegisterMain(props) {
          // ako je prazno automatski ne valja
          setInputFailed(prevState => ({
             ...prevState,
-            [name]: {failed: true, text: "Field is required."}
+            [name]: {failed: true, text: 'registerMain.emptyField'}
          }))
       }
       else if (name == "firstName" || name == "lastName" || name == "address") {
          // ovi samo ne smiju bit prazni, nemaju pravila za provjeru formata
          setInputFailed(prevState => ({
             ...prevState,
-            [name]: {failed: false, text: "Field is required."}      /* tekst mora neki biti da se odrzi poravnanje, bitno je da je false */
+            [name]: {failed: false, text: 'registerMain.emptyField'}      /* tekst mora neki biti da se odrzi poravnanje, bitno je da je false */
          }))
       }
       else if (name != "passwordConfirm") {
@@ -119,47 +122,47 @@ export default function RegisterMain(props) {
 
    function checkEmailRules(value) {               // provjera za email (trenutno: format x@y.z)
       let failed = !/.+@.+[/.].+/.test(value)
-      let text = "Email must be in format 'something@something.domain'."
+      let text = 'registerMain.fields.email.errorMessage'
       return {failed: failed, text: text}
    }
    
    function checkPhoneNumberRules(value) {         // provjera za broj mobitela (trenutno: samo brojke, barem 9)
       let failed = !/^\d+$/.test(value)
-      let text = "Must be digits only."
+      let text = 'registerMain.digitsChecker'
       if (!failed && value.length < 9) {
          failed = true
-         text = "Must be 9+ digits."
+         text = 'registerMain.fields.phoneNumber.errorMessage'
       }
       return {failed: failed, text: text}
    }
    
    function checkMBORules(value) {                 // provjera za MBO (trenutno: samo brojke, tocno 9)
       let failed = !/^\d+$/.test(value)
-      let text = "Must be digits only."
+      let text = 'registerMain.digitsChecker'
       if (!failed && value.length != 9) {
          failed = true
-         text = "Must be 9 digits."
+         text = 'registerMain.fields.MBO.errorMessage'
       }
       return {failed: failed, text: text}
    }
    
    function checkDoBRules(value) {                 // provjera za datum rodenja (trenutno format YYYY-MM-DD:, mora biti moguc datum)
       let failed = !/^\d{4}-\d{2}-\d{2}$/.test(value)
-      let text = "Must be YYYY-MM-DD."
+      let text = 'registerMain.fields.dateOfBirth.errorMessage1'
       if (!failed && isNaN(new Date(value))) failed = true
       else if (!failed && new Date(value) > new Date()) {
          failed = true
-         text = "Date is in future."
+         text = "registerMain.fields.dateOfBirth.errorMessage2"
       } else if (!failed && new Date(value) < new Date().setFullYear(new Date().getFullYear() - 150)) {
          failed = true
-         text = "Age is over 150."
+         text = "registerMain.fields.dateOfBirth.errorMessage3"
       }
       return {failed: failed, text: text}
    }
    
    function checkPasswordRules(value) {            // provjera za lozinku (trenutno: barem 8 znakova)
       let failed = false
-      let text = "Password must be 8+ characters."
+      let text = 'registerMain.fields.password.errorMessage'
       if (value.length < 8) failed = true
       return {failed: failed, text: text}
    }
@@ -170,19 +173,19 @@ export default function RegisterMain(props) {
       value != formData[checkAgainst] ? failed = true : failed = false
       setInputFailed(prevState => ({
          ...prevState,
-         passwordConfirm: {failed: failed, text: "Passwords do not match."}
+         passwordConfirm: {failed: failed, text: "registerMain.fields.passwordConfirm.errorMessage"}
       }))
    }
       
    function handleSubmit(event) {               // submit - axios poziv na odgovarajuci url za obradu na backendu
       event.preventDefault()
       if (!recaptchaValue) {
-         alert('Please verify that you are not a robot.');
+         alert(t('registerMain.recaptchaChecker'));
          return;
      }
       setInputFailed(prevState => ({
          ...prevState,
-         unexpectedError: {failed: false, text: "Error"}
+         unexpectedError: {failed: false, text: 'registerMain.unexpectedError'}
       }))
       if (checkInputFailedAny()) return;        // blokiraj slanje ako postoji greska
       axios({
@@ -201,7 +204,7 @@ export default function RegisterMain(props) {
          else if (formData[name] == "") {                      // ako je polje ostalo prazno, a netaknuto (dakle nije provjereno u handleChange)
             setInputFailed(prevState => ({
                ...prevState,
-               [name]: {failed: true, text: "Field is required."}
+               [name]: {failed: true, text: 'registerMain.emptyField'}
             }))
             failedAny = true
          }
@@ -213,7 +216,7 @@ export default function RegisterMain(props) {
       console.log(error)
       setInputFailed(prevState => ({
          ...prevState,
-         unexpectedError: {failed: true, text: `${error.message}. Please try again.`}
+         unexpectedError: {failed: true, text: `${error.message}. ` + t('registerMain.tryAgain')}
       }))
    }
 
@@ -228,18 +231,18 @@ export default function RegisterMain(props) {
             <div className={s.greeting_container}>
                <h1 className={s.greeting}>Where Healing<br />Begins With Care.</h1>
                <div className={s.login_container}>
-                  <p className={s.login_q}>Already have an account?</p>
+                  <p className={s.login_q}>{t('registerMain.alreadyHaveAccount')}</p>
                   <button className={s.login_button}
-                     onClick={() => globalNavigate("login")}>Login here
+                     onClick={() => globalNavigate("login")}>{t('registerMain.loginHere')}
                   </button>
                </div>
 
             </div>
 
             <form className={s.register_form} onSubmit={handleSubmit} autoComplete="off">
-               <h1 className={s.form_title}>Register</h1>
+               <h1 className={s.form_title}>{t('registerMain.formTitle')}</h1>
                <p className={`${s.register_error} ${inputFailed["unexpectedError"].failed && s.failed_text}`}>
-                  {inputFailed["unexpectedError"].text}
+                  {t(inputFailed["unexpectedError"].text)}
                </p>
 
                <div className={s.grid_container}>              {/* input polja koja su gore mapirana u html elemente */}
@@ -254,16 +257,17 @@ export default function RegisterMain(props) {
                   className={s.recaptcha}
                   sitekey="6LehQE8pAAAAACkeL6kBATsk3sgGJ7h4NYxqZmnv"
                   onChange={onRecaptchaChange}
+                  hl={language}
                />
 
-               <button className={s.form_button}>Register</button>
+               <button className={s.form_button}>{t('registerMain.registerButtonText')}</button>
             </form>
          </div>
 
          {successPopup && <SuccessPopup              // uvjetni render popupa za uspjesnu registraciju
-            text1="You have filled in all the information and your account is now being processed by our administrator."
-            text2="Please check your e-mail frequently in order to see if your account is confirmed or if there are changes to be made."
-            buttonText="OK"
+            text1={t('registerMain.successPopup.text1')}
+            text2={t('registerMain.successPopup.text2')}
+            buttonText={t('registerMain.successPopup.buttonText')}
             clickFunction={() => globalNavigate("login")}
          />}
 
