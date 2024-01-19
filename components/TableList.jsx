@@ -3,7 +3,7 @@ import axios, { formToJSON } from "axios"
 import s from "../styles/tableList.module.css"
 
 export default function TableList(props) {
-   const {userToken, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
+   const {userToken, handleLogout, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
    if (user == "admin") {
       var {handleAdd, handleEdit, handleDeactivate} = props
    } else {
@@ -45,8 +45,13 @@ export default function TableList(props) {
          }))
          setTableItems(itemList)
       })
-      .catch(error => console.log(error));
+      .catch(error => handleError(error));
    }, [])
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
+   }
    
    var tableHeader
    if (tableOf == "patients") {

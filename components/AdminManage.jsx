@@ -8,7 +8,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/adminManage.module.css"
 
 export default function AdminManage(props) {
-   const {userToken, formatFullDate} = props;
+   const {userToken, handleLogout, formatFullDate} = props;
 
    const { t, i18n } = useTranslation();
 
@@ -82,7 +82,7 @@ export default function AdminManage(props) {
          setTherapyList(therapyTypeList)
          setSpecializationList(res.data.specializations)
       })
-      .catch(error => console.log(error));
+      .catch(error => handleError(error));
    }, [])
 
    const resourceElements = resourceList
@@ -230,7 +230,7 @@ export default function AdminManage(props) {
             data: data
          })
          .then(res => handleSuccess(res))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
       setAddPopup(prevState => !prevState)
    }
@@ -308,7 +308,7 @@ export default function AdminManage(props) {
             data: data
          })
          .then(res => handleSuccess(res))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
       setEditPopup(prevState => !prevState)
    }
@@ -352,9 +352,14 @@ export default function AdminManage(props) {
             },
          })
          .then(res => handleSuccess(res))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
       setDeactivatePopup(prevState => !prevState)
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    function popupExit() {
@@ -398,6 +403,7 @@ export default function AdminManage(props) {
             
             <TableList
                userToken={userToken}
+               handleLogout={handleLogout}
                tableOf="therapists"
                user={"admin"}
                tableItems={therapistList}
@@ -416,6 +422,7 @@ export default function AdminManage(props) {
             
             <TableList
                userToken={userToken}
+               handleLogout={handleLogout}
                tableOf="patients"
                user={"admin"}
                tableItems={patientList}
@@ -458,6 +465,7 @@ export default function AdminManage(props) {
       {(addPopup || editPopup) &&
          <AccountEditPopup
             userToken={userToken}
+            handleLogout={handleLogout}
             popupType={addPopup ? "add" : "edit"}
             popupFor={popupFor()}
             popupData={popupData}

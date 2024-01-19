@@ -6,7 +6,7 @@ import x_icon from "../assets/x_icon.svg"
 import s from "../styles/reschedulePopup.module.css"
 
 export default function ReschedulePopup(props) {
-   const {userToken, renewSchedule, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, patientSchedule, selectedWeek, popupExit, theme} = props
+   const {userToken, handleLogout, renewSchedule, user, formatDate, formatFullDate, formatWeek, currentSession, rescheduledSession, setRescheduledSession, patientSchedule, selectedWeek, popupExit, theme} = props
 
    const { t, i18n } = useTranslation();
 
@@ -28,9 +28,14 @@ export default function ReschedulePopup(props) {
          }
       })
       .then(res => res.status == 200 && renewSchedule())
-      .catch(error => console.log(error));
+      .catch(error => handleError(error));
       setRescheduleConfirmBox(false)
       popupExit()       // NOTE vidicemo jel pozivanje popupexita on success sjebe stvar
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    return (
@@ -57,6 +62,7 @@ export default function ReschedulePopup(props) {
 
          <SessionSelection
             userToken = {userToken}
+            handleLogout={handleLogout}
             formatDate = {formatDate}
             formatFullDate = {formatFullDate}
             formatWeek = {formatWeek}

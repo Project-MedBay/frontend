@@ -7,7 +7,7 @@ import eyeShown from "../assets/eye_shown.png"
 import s from "../styles/editPopup.module.css"
 
 export default function AccountEditPopup(props) {
-   const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
+   const {userToken, handleLogout, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -309,12 +309,17 @@ export default function AccountEditPopup(props) {
          }
       })
       .then(res => res.data)
-      .catch(error => console.log(error))
+      .catch(error => handleError(error))
       if (correct().then(res => console.log(res))) setInputFailed(prevInputFailed => ({
          ...prevInputFailed,
          password: {failed: true, text: "Incorrect password."}
       }))
       return correct().then(res => res)
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    return (

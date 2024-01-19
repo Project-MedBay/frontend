@@ -6,7 +6,7 @@ import VerificationCard from "./admin_utils/VerificationCard.jsx"
 import VerificationPopup from "./admin_utils/VerificationPopup.jsx"
 
 export default function AdminVerifications(props) {
-    const {userToken, formatFullDateAndTime, formatFullTime} = props
+    const {userToken, handleLogout, formatFullDateAndTime, formatFullTime} = props
 
     const { t, i18n } = useTranslation();
 
@@ -28,8 +28,13 @@ export default function AdminVerifications(props) {
             setTherapiesData(res.data.therapies)
             console.log(res.status)
         })
-        .catch(error => console.log(error));
+        .catch(error => handleError(error));
      }, [])
+
+    function handleError(error) {
+        console.log(error)
+        if (error.response.status == 403) handleLogout()
+    }
 
     const [registrationsData, setRegistrationsData] = useState([])
     const [registrationPopupData, setRegistrationPopupData] = useState({
@@ -132,6 +137,7 @@ export default function AdminVerifications(props) {
                 popup.set && (popup.type === "registration" ? 
                     <VerificationPopup 
                         userToken={userToken}
+                        handleLogout={handleLogout}
                         popupData={registrationPopupData} 
                         setPopup={setPopup} 
                         type="registration"
@@ -140,6 +146,7 @@ export default function AdminVerifications(props) {
                 :
                     <VerificationPopup
                         userToken={userToken}
+                        handleLogout={handleLogout}
                         popupData={therapyPopupData} 
                         setPopup={setPopup} 
                         type="therapy"

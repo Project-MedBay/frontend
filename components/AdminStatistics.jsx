@@ -7,7 +7,7 @@ import s from "../styles/adminStatistics.module.css"
 // NOTE: Posloziti postotke ili abecedno ili silazno
 
 export default function AdminStatistics(props) {
-    const {userToken} = props
+    const {userToken, handleLogout} = props
 
     const { t, i18n } = useTranslation();
 
@@ -60,7 +60,7 @@ export default function AdminStatistics(props) {
                 patients: patientsList
             }))
         })
-        .catch(error => console.log(error));
+        .catch(error => handleError(error));
 
         axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/equipment/statistics",
@@ -96,8 +96,13 @@ export default function AdminStatistics(props) {
                 patients: patientsList
             }))
         })
-        .catch(error => console.log(error));
+        .catch(error => handleError(error));
     }, [])
+
+    function handleError(error) {
+       console.log(error)
+       if (error.response.status == 403) handleLogout()
+    }
 
     var bestItem = pageInfo.patients[0]?.noOfPatients
 

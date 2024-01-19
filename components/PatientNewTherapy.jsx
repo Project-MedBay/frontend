@@ -7,7 +7,7 @@ import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme} = props    
+   const {userToken, handleLogout, formatWeek, formatDate, formatFullDate, navigate, theme} = props    
    const { t, i18n } = useTranslation();     
    // global const
    const [progress, setProgress] = useState(1)
@@ -18,8 +18,8 @@ export default function PatientNewTherapy(props) {
    }
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
-   const [therapies, setTherapies] = useState([])
-   const [codeInput, setCodeInput] = useState("")                       // page 1 const
+   const [therapies, setTherapies] = useState([])                       // page 1 const
+   const [codeInput, setCodeInput] = useState("")
    const [searchInput, setSearchInput] = useState("")
    const [selectedBodypart, setSelectedBodypart] = useState("any")
    const [selectedTherapy, setSelectedTherapy] = useState("")
@@ -33,7 +33,7 @@ export default function PatientNewTherapy(props) {
          }
       })
       .then(res => setTherapies(res.data))
-      .catch(error => console.log(error));
+      .catch(error => handleTherapiesError(error));
    }, [])
 
    const [selectedSessions, setSelectedSessions] = useState([])         // page 2 const (and var)
@@ -133,19 +133,24 @@ export default function PatientNewTherapy(props) {
             appointmentDates: selectedSessions
          }
       })
-      .then(res => handleSuccess())
-      .catch(error => handleError(error));
+      .then(res => handleFinishSuccess())
+      .catch(error => handleFinishError(error));
    }
 
-   function handleSuccess() {
+   function handleFinishSuccess() {
       setVerificationFailed(false)
       setSuccessPopup(true)
    }
    
-   function handleError(error) {
+   function handleFinishError(error) {
       console.log(error)
-      // NOTE tu neka provjera je li zbog hlkid i to
+      if (error.response.status == 403) handleLogout()
       setVerificationFailed(true)
+   }
+
+   function handleTherapiesError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    return (<>

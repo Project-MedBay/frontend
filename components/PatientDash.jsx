@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { useTranslation, Trans } from 'react-i18next';
 import ReschedulePopup from "./ReschedulePopup"
-import map from "../assets/hospital_map1.png"
+import map1 from "../assets/map1.png"
+import map2 from "../assets/map2.png"
+import map3 from "../assets/map3.png"
+import map4 from "../assets/map4.png"
+import map5 from "../assets/map5.png"
 import refresh from "../assets/refresh.png"
 import x_icon from "../assets/x_icon.svg"
 import s from "../styles/patientDash.module.css"
 
 export default function PatientDash(props) {
-   const {userToken, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
+   const {userToken, handleLogout, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
 
    const { t, i18n } = useTranslation();
 
@@ -37,6 +41,7 @@ export default function PatientDash(props) {
    }, [mySchedule])
    const [selectedSession, setSelectedSession] = useState(nextSession)
    const [showMapMobile, setshowMapMobile] = useState(false)
+   const [mapImage, setMapImage] = useState(map1)
    
    const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
    const [notesPopup, setNotesPopup] = useState(false)
@@ -59,6 +64,24 @@ export default function PatientDash(props) {
          if (!selectedSession.notes) {
             setNotesDisabled(true)
          } else {setNotesDisabled(false)}
+
+         switch (selectedSession.location) {
+            case "Electrotherapy Zone":
+               setMapImage(map1)
+               break
+            case "CryoRecovery Room":
+               setMapImage(map2)
+               break
+            case "Hydro Rehab Pool":
+               setMapImage(map3)
+               break
+            case "Thermal Wellness Space":
+               setMapImage(map4)
+               break
+            case "Physiotherapy Suite":
+               setMapImage(map5)
+               break
+         }
       }
    }, [selectedSession])
 
@@ -190,7 +213,7 @@ export default function PatientDash(props) {
                      </div>
                   </div>
 
-                  <img src={map} className={`${s.session_image} ${showMapMobile ? "" : s.tablet_hidden}`} />
+                  <img src={mapImage} className={`${s.session_image} ${showMapMobile ? "" : s.tablet_hidden}`} />
                   <button className={s.view_map} onClick={() => setshowMapMobile(prevState => !prevState)}>
                      {showMapMobile ? t('patientDash.closeMap') : t('patientDash.viewLocationOnMap')}
                   </button>
@@ -243,6 +266,7 @@ export default function PatientDash(props) {
       {reschedulePopup &&                                /* uvjetni render popupa za reschedule */
          <ReschedulePopup
             userToken = {userToken}
+            handleLogout={handleLogout}
             renewSchedule={renewSchedule}
             user = "patient"
             formatDate = {formatDate}

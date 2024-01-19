@@ -5,7 +5,7 @@ import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import s from "../styles/therapistPatients.module.css"
 
 export default function TherapistPatients(props) {
-   const {userToken, formatDate, formatFullDate} = props
+   const {userToken, handleLogout, formatDate, formatFullDate} = props
 
    const [searchInput, setSearchInput] = useState("")
    const [patientList, setPatientList] = useState([])
@@ -44,6 +44,7 @@ export default function TherapistPatients(props) {
 
          <TableList
             userToken={userToken}
+            handleLogout={handleLogout}
             tableOf="patients"
             user="therapist"
             tableItems={patientList}

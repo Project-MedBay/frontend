@@ -5,14 +5,14 @@ import profile_image from "../assets/profile_image.png"
 import s from "../styles/therapyOrPatientPopup.module.css"
 
 export default function TherapyOrPatientPopup(props) {
-   const {userToken, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
+   const {userToken, handleLogout, popupType, popupData, popupSessions, setPopupSessions, formatDate, formatFullDate, popupExit, theme} = props
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
    const [viewingNotesOf, setViewingNotesOf] = useState("")
    const [editingNotes, setEditingNotes] = useState(false)
    const [notesInput, setNotesInput] = useState("")
-console.log(popupSessions)
+
    useEffect(() => {                                                                         // sinkroniziranje svega za reschedule ovisno o odabranom sessionu
       if (viewingNotesOf != "") {
          setNotesInput(viewingNotesOf.sessionNotes)
@@ -136,9 +136,14 @@ console.log(popupSessions)
             }
             else return {...session}
          })))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
       setEditingNotes(prevState => !prevState)
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    function handleExit() {

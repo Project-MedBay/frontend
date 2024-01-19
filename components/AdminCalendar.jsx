@@ -7,7 +7,7 @@ import s from "../styles/adminCalendar.module.css";
 // import { useTranslation, Trans } from 'react-i18next';
 
 export default function AdminCalendar(props) {
-    const {userToken, formatDate, formatFullDate} = props
+    const {userToken, handleLogout, formatDate, formatFullDate} = props
 
     // const { t, i18n } = useTranslation();
 
@@ -35,7 +35,12 @@ export default function AdminCalendar(props) {
             }
          })
          .then(res => setCalendarData(res.data))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
+    }
+
+    function handleError(error) {
+       console.log(error)
+       if (error.response.status == 403) handleLogout()
     }
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -205,6 +210,7 @@ export default function AdminCalendar(props) {
         {rescheduledSession != "" &&
             <ReschedulePopup
                 userToken = {userToken}
+                handleLogout={handleLogout}
                 renewSchedule={getAndSetCalendarData}
                 user = "admin"
                 formatDate = {formatDate}

@@ -4,7 +4,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/aiChat.module.css"
 
 export default function AIChat(props) {
-   const {userToken, theme, language} = props
+   const {userToken, handleLogout, theme, language} = props
 
    const { t, i18n } = useTranslation();
 
@@ -96,7 +96,7 @@ export default function AIChat(props) {
          setInputDisabled(false)
       })
       .catch(error => {
-         console.log(error)
+         handleError(error)
          setMessages(prevState => ({
             ...prevState,
             [currentBot]: [
@@ -107,6 +107,11 @@ export default function AIChat(props) {
          setInputDisabled(false)
       });
       setChatInput("")
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    useEffect(() => {

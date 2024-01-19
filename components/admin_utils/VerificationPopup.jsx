@@ -4,7 +4,7 @@ import { useTranslation, Trans } from 'react-i18next';
 import s from '../../styles/adminVerifications.module.css';
 
 export default function VerificationCard(props){
-    const {userToken, popupData, setPopup, type, handleProcess, formatFullDateAndTime, formatFullTime} = props;
+    const {userToken, handleLogout, popupData, setPopup, type, handleProcess, formatFullDateAndTime, formatFullTime} = props;
 
     const { t, i18n } = useTranslation();
 
@@ -53,8 +53,8 @@ export default function VerificationCard(props){
                     Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
                 }
             })
-            .then(res => console.log(res.status))
-            .catch(error => console.log(error));
+            .then(res => res.status == 200 && handleSuccess())
+            .catch(error => handleError(error));
         } else if (type === 'therapy') {
             axios({
                 url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/change-status/"
@@ -65,15 +65,23 @@ export default function VerificationCard(props){
                     Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
                 }
             })
-            .then(res => console.log(res.status))
-            .catch(error => console.log(error));
+            .then(res => res.status == 200 && handleSuccess())
+            .catch(error => handleError(error));
         }
+    };
+    
+    function handleSuccess() {
         handleProcess(type, popupData.request_id)
         setPopup({
             set: false,
             type: null
         });
-    };
+    }
+
+    function handleError(error) {
+       console.log(error)
+       if (error.response.status == 403) handleLogout()
+    }
 
     const cancelAction = () => {
         setAction(null);

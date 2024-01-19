@@ -71,7 +71,10 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             }))
          })))
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+         console.log(error)
+         if (error.response.status == 403) handleLogout()
+      });
    }, [])
 
    function getAndSetSchedule() {
@@ -99,7 +102,10 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          }
          setMySchedule(scheduleList)
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+         console.log(error)
+         if (error.response.status == 403) handleLogout()
+      });
    }
 
    function formatWeek(datetime) {
@@ -174,6 +180,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
          <Routes>
             <Route index element={<PatientDash
                userToken={userToken}
+               handleLogout={handleLogout}
                renewSchedule={getAndSetSchedule}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
@@ -185,6 +192,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             />} />
             <Route path="dash" element={<PatientDash
                userToken={userToken}
+               handleLogout={handleLogout}
                renewSchedule={getAndSetSchedule}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
@@ -197,6 +205,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
 
             <Route path="newTherapy" element={<PatientNewTherapy
                userToken={userToken}
+               handleLogout={handleLogout}
                formatWeek={formatWeek}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
@@ -206,6 +215,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
 
             <Route path="profile" element={<PatientProfile
                userToken={userToken}
+               handleLogout={handleLogout}
                userData={userData}
                setUserData={setUserData}
                userTherapies={userTherapies}
@@ -219,7 +229,7 @@ export default function Patient(props) {           // glavna komponenta uloge, u
             
             <Route path="*" element={<NoMatchRoute back={-1} handleLogout={handleLogout} />} />
          </Routes>
-         <AIChat userToken={userToken} theme={theme} language={language.id} />
+         <AIChat userToken={userToken} handleLogout={handleLogout} theme={theme} language={language.id} />
       </>
   )
 }

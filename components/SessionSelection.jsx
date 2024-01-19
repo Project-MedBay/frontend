@@ -4,7 +4,7 @@ import x_icon from "../assets/x_icon2.png"
 import s from "../styles/sessionSelection.module.css"
 
 export default function SessionSelection(props) {
-   const {userToken, formatDate, formatFullDate, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
+   const {userToken, handleLogout, formatDate, formatFullDate, selectedSessions, setSelectedSessions, currentSession, patientSchedule, numOfSessions, numberOfDays, therapyCode, theme} = props  
    const darkModeClass = theme === 'dark' ? s.dark : '';   // i think ill need current for axios, will see
    var reschedule = numOfSessions == 1
 
@@ -31,7 +31,7 @@ export default function SessionSelection(props) {
             }
          })
          .then(res => setAvailableSessions(res.data))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       } else {
          axios({
             url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/appointment/availability?days=" + numberOfDays +
@@ -42,9 +42,14 @@ export default function SessionSelection(props) {
             }
          })
          .then(res => setAvailableSessions(res.data))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
    }, [])
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
+   }
 
    var weekDates = []
    for (let dateKey in availableSessions) {
@@ -60,7 +65,7 @@ export default function SessionSelection(props) {
          h3OnClick = () => {setViewingSession(weekDate)}
       } else if (availableSessions == "" || availableSessions[formatFullDate(weekDate)]?.length == 0 ||
                (!reschedule && (weekDate >= therapyMaxDates.latest || weekDate <= therapyMaxDates.earliest)) ||
-                blockedSessions[formatDate(weekDate)]?.length == 12) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
+                blockedSessions[formatDate(weekDate)]?.length == availableSessions[formatFullDate(weekDate)]?.length) {           // ako je u blocked sessions i tamo su svih 12h radnog vrimena
          h3Class += ` ${s.weekdate_disabled}`
          if (reschedule) {
             for (let week in patientSchedule) {

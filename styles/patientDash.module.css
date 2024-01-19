@@ -383,6 +383,7 @@
 
 
 .dark .session_card,
+.dark .notes_text,
 .dark .reschedule_text{
    color: #c9c9c9; /* Darker background for these elements */
    /* Other styles... */

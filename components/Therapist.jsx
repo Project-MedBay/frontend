@@ -37,7 +37,10 @@ export default function Therapist(props) {           // glavna komponenta uloge,
          }
       })
       .then(res => {console.log(res.data); setMySchedule(res.data)})
-      .catch(error => console.log(error));
+      .catch(error => {
+         console.log(error)
+         if (error.response.status == 403) handleLogout()
+      });
    }, [])
 
    function formatWeek(datetime) {
@@ -117,6 +120,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
          <Routes>
             <Route index element={<TherapistDash
                userToken={userToken}
+               handleLogout={handleLogout}
                formatWeek={formatWeek}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
@@ -127,6 +131,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
             />} />
             <Route path="dash" element={<TherapistDash
                userToken={userToken}
+               handleLogout={handleLogout}
                formatWeek={formatWeek}
                getWeekFirst={getWeekFirst}
                formatDate={formatDate}
@@ -138,6 +143,7 @@ export default function Therapist(props) {           // glavna komponenta uloge,
 
             <Route path="patients" element={<TherapistPatients
                userToken={userToken}
+               handleLogout={handleLogout}
                formatDate={formatDate}
                formatFullDate={formatFullDate}
             />} />

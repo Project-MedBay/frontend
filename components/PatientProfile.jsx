@@ -10,7 +10,7 @@ import input_image_hr from "../assets/input_image_hr.png"
 import s from "../styles/patientProfile.module.css"
 
 export default function PatientProfile(props) {
-   const {userToken, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme, language} = props
+   const {userToken, handleLogout, userData, setUserData, userTherapies, formatWeek, formatDate, formatFullDate, mySchedule, navigate, theme, language} = props
 
    const { t, i18n } = useTranslation();
 
@@ -89,7 +89,7 @@ export default function PatientProfile(props) {
          data: imageData
       })
       .then(res => console.log(res.status))
-      .catch(error => console.log(error));
+      .catch(error => handleError(error));
    }
 
    const toBase64 = file => new Promise((resolve, reject) => {
@@ -128,7 +128,7 @@ export default function PatientProfile(props) {
             phone: data.phone,
             mbo: data.mbo
          })))
-         .catch(error => console.log(error));
+         .catch(error => handleError(error));
       }
       setEditPopup(prevState => !prevState)
    }
@@ -142,7 +142,12 @@ export default function PatientProfile(props) {
          },
       })
       .then(res => res.status == 200 && navigate("login"))
-      .catch(error => console.log(error))
+      .catch(error => handleError(error));
+   }
+
+   function handleError(error) {
+      console.log(error)
+      if (error.response.status == 403) handleLogout()
    }
 
    function popupExit() {
@@ -236,6 +241,7 @@ export default function PatientProfile(props) {
       {editPopup &&
          <AccountEditPopup
             userToken={userToken}
+            handleLogout={handleLogout}
             popupType={"edit"}
             popupFor={"patient"}
             popupData={{
