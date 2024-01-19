@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
-import { testSessions } from "./TestingData"
 import TableList from "./TableList"
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import s from "../styles/therapistPatients.module.css"

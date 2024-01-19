@@ -47,7 +47,7 @@ export default function TherapistDash(props) {
    }, [selectedSession])
       
    var scheduleElements
-   if (mySchedule[selectedWeek] != null) {                                 // mapiranje podataka iz testingdata na jsx (html) elemente za ispis
+   if (mySchedule[selectedWeek] != null) {                                 // mapiranje podataka iz baze na jsx (html) elemente za ispis
       scheduleElements = mySchedule[selectedWeek]
       .sort((s1, s2) => new Date(s1.dateTime).getTime() - new Date(s2.dateTime).getTime())
       .map(session => {               // kartice sesija u rasporedu

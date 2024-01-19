@@ -17,8 +17,8 @@
 }
 
 .popup_wide {
-   width: max-content;
-   max-width: calc(1000 * var(--scale-by-height));
+   max-width: none;
+   width: calc(930 * var(--scale-by-height));
 }
 
 .popup_header {
@@ -135,12 +135,12 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   gap: calc(60 * var(--scale-by-height));
+   gap: 5%;
    width: 100%;
 }
 
 .info_section {
-   width: 70%;
+   width: 72%;
 }
 
 .session_therapy, .session_datetime, .session_notes {
@@ -151,7 +151,7 @@
 
 .session_therapy {
    font-weight: 700;
-   width: 30%;
+   width: 28%;
 }
 
 .session_notes {
