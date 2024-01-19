@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import { patientFields, therapistFields, resourceFields, therapyFields } from "./FormsData"
 import CustomSelectInput from "./CustomSelectInput"
 import eyeHidden from "../assets/eye_hidden.png"
@@ -8,6 +9,8 @@ import s from "../styles/editPopup.module.css"
 
 export default function AccountEditPopup(props) {
    const {userToken, popupType, popupFor, popupData, selectData, handleAdd, handleEdit, popupExit, formatFullDate, theme} = props
+
+   const { t, i18n } = useTranslation();
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -76,15 +79,15 @@ export default function AccountEditPopup(props) {
          <div className={s.form_input} id={s[id]} key={name}>
             {(name == "passwordConfirm" && !editingPassword) ?
                <>
-                  <p className={s.change_password_note}>&#40;Input current password first&#41;</p>
+                  <p className={s.change_password_note}>&#40;{t("adminEditPopup.changePasswordNote")}&#41;</p>
                   <button className={s.change_password} onClick={event => handlePassEdit(event)}>
-                     Change password
+                     {t("adminEditPopup.changePassword")}
                   </button>
                </> : <>
 
                <p className={s.input_label}>
                   {label} {(popupType == "edit" && name == "passwordConfirm" && editingPassword) &&
-                     <span onClick={cancelPassEdit}>Cancel edit</span>
+                     <span onClick={cancelPassEdit}>{t("adminEditPopup.cancelEdit")}</span>
                   }
                </p>
                {nonEditableFields.includes(name) ?
@@ -320,8 +323,8 @@ export default function AccountEditPopup(props) {
    return (
       <div className={`${s.edit_popup} ${darkModeClass}`}>
          <h1 className={s.popup_title}>
-            {popupType == "add" ? "ADD" : "EDIT"}&#160;
-            {popupFor == "patient" ? "ACCOUNT DATA" : popupFor.toUpperCase()}
+            {popupType == "add" ? t("adminEditPopup.titleAdd") : t("adminEditPopup.titleEdit")}&#160;
+            {popupFor == "patient" ? t("adminEditPopup.titleAccountData") : popupFor.toUpperCase()}
          </h1>
          <form className={s.grid_container} autoComplete="off">
             {formElements}
@@ -333,8 +336,8 @@ export default function AccountEditPopup(props) {
             }
          </form>
          <div className={s.popup_buttons}>
-            <button className={s.button_cancel} onClick={popupExit}>CANCEL</button>
-            <button className={s.button_save} onClick={handleSave}>SAVE</button>
+            <button className={s.button_cancel} onClick={popupExit}>{t("adminEditPopup.buttonCancel")}</button>
+            <button className={s.button_save} onClick={handleSave}>{t("adminEditPopup.buttonSave")}</button>    
          </div>
       </div>
    )

@@ -24,8 +24,8 @@ export default function TherapistHeader(props) {
             </div>
             <nav className={s.header_nav}>
                 <div className={s.nav_container}>
-                    <h2 className={s.nav_item} onClick={() => navigate("dash")}>DASHBOARD</h2>
-                    <h2 className={s.nav_item} onClick={() => navigate("patients")}>PATIENTS</h2>
+                    <h2 className={s.nav_item} onClick={() => navigate("dash")}>{t("therapistHeader.navigation.dashboard")}</h2>
+                    <h2 className={s.nav_item} onClick={() => navigate("patients")}>{t("therapistHeader.navigation.patients")}</h2>
                 </div>
                 
                 <div className={`${s.options_container} ${s.therapist_options}`}>
@@ -41,12 +41,12 @@ export default function TherapistHeader(props) {
                     </div>
 
                     {logOut ? 
-                        <h2 className={s.nav_check_logout}>LOG OUT?&#160;
-                            <span id={s.yes} onClick={() => handleLogout()}>YES</span> /&#160;
-                            <span id={s.no} onClick={() => setLogOut(false)}>NO</span>
+                        <h2 className={s.nav_check_logout}>{t("therapistHeader.navigation.logOutConfirmation")}&#160;
+                            <span id={s.yes} onClick={() => handleLogout()}>{t("therapistHeader.navigation.logOutYes")}</span> /&#160;
+                            <span id={s.no} onClick={() => setLogOut(false)}>{t("therapistHeader.navigation.logOutNo")}</span>
                         </h2>
                         :
-                        <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>LOG OUT</h2>
+                        <h2 className={s.nav_logout} onClick={() => setLogOut(true)}>{t("therapistHeader.navigation.logOut")}</h2>
                     }
                 </div>
             </nav>

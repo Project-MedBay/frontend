@@ -217,7 +217,7 @@ textarea.note_box {
    color: #FFF;
    font-size: calc(22 * var(--scale-by-height));
    font-weight: 600;
-   width: calc(120 * var(--scale-by-height));
+   width: calc(130 * var(--scale-by-height));
    padding: calc(5 * var(--scale-by-height));
    border: 0;
    border-radius: calc(10 * var(--scale-by-height));

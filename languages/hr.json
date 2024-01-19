@@ -528,7 +528,15 @@
     }
   },
   "therapist": {
-    "weekdays": ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+    "weekdays": {
+      "Sunday": "Nedjelja",
+      "Monday": "Ponedjeljak",
+      "Tuesday": "Utorak",
+      "Wednesday": "Srijeda",
+      "Thursday": "Četvrtak",
+      "Friday": "Petak",
+      "Saturday": "Subota"
+    },
     "months": ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"]
   },
   "therapistDash": {

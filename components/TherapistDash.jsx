@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import TherapyOrPatientPopup from "./TherapyOrPatientPopup"
 import refresh from "../assets/refresh.png"
 import s from "../styles/therapistDash.module.css"
 
 export default function TherapistDash(props) {
    const {userToken, formatWeek, getWeekFirst, formatDate, formatFullDate, formatFullDateISO, mySchedule, setMySchedule} = props
+
+   const { t, i18n } = useTranslation();
    
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
    const [nextSession, setNextSession] = useState({
-      text: "No upcoming sessions.",
+      text: t('therapistDash.schedule.noUpcomingSessions'),
       dateTime: "--"
    })
    useEffect(() => {
-      let tempSession = {text: "No upcoming sessions.", dateTime: "--"}
+      let tempSession = {text: t('therapistDash.schedule.noUpcomingSessions'), dateTime: "--"}
       for (let week in mySchedule) {
          for (let session of mySchedule[week]) {
             if (new Date(session.dateTime) > new Date()) {
@@ -69,7 +72,7 @@ export default function TherapistDash(props) {
          }
       )
    } else {
-      scheduleElements = <p className={s.no_sessions}>No sessions this week.</p>
+      scheduleElements = <p className={s.no_sessions}>{t('therapistDash.schedule.noSessionsThisWeek')}</p>
    }
 
    function goBackWeek() {
@@ -142,7 +145,7 @@ export default function TherapistDash(props) {
    return (<>
       <div className={`${s.therapist_dash_main} ${patientPopup && s.covered_by_popup}`}>
          <div className={s.container_left}>
-            <h2 className={s.container_title}>My schedule:</h2>
+            <h2 className={s.container_title}>{t('therapistDash.schedule.title')}</h2>
 
             <div className={s.date_wrapper}>
                <span className={s.date_arrow} onClick={goBackWeek}>&#60;</span>
@@ -160,7 +163,7 @@ export default function TherapistDash(props) {
 
          <div className={s.container_right}>
             <h2 className={s.container_title}>
-               {selectedSession.dateTime == nextSession.dateTime ? "Next session:" : "Selected session:"}
+               {selectedSession.dateTime == nextSession.dateTime ? t('therapistDash.schedule.nextSession') : t('therapistDash.schedule.selectedSession')}
             </h2>
             
             {selectedSession.dateTime == "--" ? <>
@@ -176,27 +179,27 @@ export default function TherapistDash(props) {
             <div className={s.right_cards}>
                <div className={s.selected_session}>
                   <div className={s.session_info}>
-                  <p>Therapy:</p>
+                  <p>{t('therapistDash.sessionCard.therapy')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.therapyTypeName}</p>
                      </div>
 
-                     <p>Time:</p>
+                     <p>{t('therapistDash.sessionCard.time')}</p>
                      <div className={s.info_values}>
                         <p>{new Date(selectedSession.dateTime).getHours()}:00 - {new Date(selectedSession.dateTime).getHours()+1}:00</p>
                      </div>
                      
-                     <p>Location:</p>
+                     <p>{t('therapistDash.sessionCard.location')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.equipmentRoomName}</p>
                      </div>
                      
-                     <p>Session number:</p>
+                     <p>{t('therapistDash.sessionCard.sessionNumber')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.numberOfSessionsCompleted}/{selectedSession.numberOfSessions}</p>
                      </div>
                      
-                     <p>Patient:</p>
+                     <p>{t('therapistDash.sessionCard.patient')}</p>
                      <div className={s.info_values}>
                         <p className={s.patient_link} onClick={() => setPatientPopup(true)}>
                            {selectedSession.patient.firstName + " " + selectedSession.patient.lastName}
@@ -207,25 +210,25 @@ export default function TherapistDash(props) {
 
                <div className={s.session_notes}>
                   <div className={s.notes_header}>
-                     <p className={s.note_title}>Your note:</p>
+                     <p className={s.note_title}>{t('therapistDash.notes.title')}</p>
                      
                      {editingNotes ?
-                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>Cancel</button> :
+                     <button className={s.note_cancel} onClick={() => handleNotesEdit("cancel")}>{t('therapistDash.notes.cancel')}</button> :
                      <p className={`${s.add_note_text} ${notesDisabled && s.disabled_text}`}>
-                        Cannot add note before session has started.
+                           {t('therapistDash.notes.disabledText')}
                      </p>}
                      
                      <button className={`${s.note_edit} ${notesDisabled && s.button_disabled}`}
                         onClick={() => notesDisabled ? {} : handleNotesEdit("edit")}>
-                        {editingNotes ? "Save note" :
-                        selectedSession.sessionNotes == "" ? "Add note" : "Edit note"}
+                        {editingNotes ? t('therapistDash.notes.save') :
+                        selectedSession.sessionNotes == "" ? t('therapistDash.notes.add') : t('therapistDash.notes.edit')}
                      </button>
                   
                   </div>
                   {editingNotes ?
                   <textarea autoFocus onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                      className={s.note_box} type="text" onChange={event => setNotesInput(event.target.value)}
-                     placeholder="No notes yet." name="note" value={notesInput}
+                     placeholder={t('therapistDash.notes.placeholder')} name="note" value={notesInput}
                   /> :
                   <div className={s.note_box}>
                      <p className={s.note_contents}>{selectedSession.sessionNotes}</p>

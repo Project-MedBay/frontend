@@ -50,7 +50,9 @@ console.log(popupSessions)
       .map(session => {
       let sessionPassed = new Date(session.appointmentDate) < new Date()
       let sessionInfo = <> 
-         <p className={s.session_datetime}>{formatDate(new Date(session.appointmentDate))} at {new Date(session.appointmentDate).getHours()}:00</p>
+         <p className={s.session_datetime}>
+            {formatDate(new Date(session.appointmentDate))} {t("therapyOrPatientPopup.atSessionInfo")} {new Date(session.appointmentDate).getHours()}:00
+         </p>
          {session.sessionNotes != "" ?
             <p className={`${s.session_notes} ${s.notes_link}`} onClick={() => viewNote(session)}>
                {viewingNotesOf.appointmentId === session.appointmentId ? t('therapyOrPatientPopup.session.collapse') : t('therapyOrPatientPopup.session.viewNotes')}
