@@ -9,8 +9,11 @@ import AdminManage from './AdminManage'
 import AdminStatistics from './AdminStatistics'
 import NoMatchRoute from './NoMatchRoute'
 
+// import { useTranslation, Trans } from 'react-i18next';
+
 export default function Admin(props) {           // glavna komponenta uloge, u njoj se renderaju sve ostale
     const {globalNavigate, userToken, handleLogout, language, setLanguage} = props
+    // const { t, i18n } = useTranslation();
     
     useEffect(() => {
         if (userToken != "") {
@@ -28,6 +31,7 @@ export default function Admin(props) {           // glavna komponenta uloge, u n
     }
 
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    // const weekday = t("admin.weekdays")
     const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     
     function formatDate(datetime) {

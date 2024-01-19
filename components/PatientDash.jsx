@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import { mySchedule } from "./TestingData"
 import ReschedulePopup from "./ReschedulePopup"
 import map from "../assets/hospital_map1.png"
@@ -10,11 +11,13 @@ import s from "../styles/patientDash.module.css"
 export default function PatientDash(props) {
    const {userToken, renewSchedule, formatDate, formatFullDate, formatWeek, getWeekFirst, formatFullDatetime, mySchedule, theme} = props
 
+   const { t, i18n } = useTranslation();
+
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
    const [nextSession, setNextSession] = useState({
-      text: "No upcoming sessions.",
+      text: t('patientDash.noUpcomingSessions'),
       datetime: "--"
    })
    useEffect(() => {
@@ -39,7 +42,7 @@ export default function PatientDash(props) {
    const [notesDisabled, setNotesDisabled] = useState(false)                                          // const za notes
    const [notesPopup, setNotesPopup] = useState(false)
 
-   const [rescheduleText, setRescheduleText] = useState("Appointment is in less than 48 hours.")      // const za reschedule
+   const [rescheduleText, setRescheduleText] = useState(t('patientDash.appointmentInLess48Hours'))      // const za reschedule
    const [rescheduleDisabled, setRescheduleDisabled] = useState(false)
    const [reschedulePopup, setReschedulePopup] = useState(false)
    const [rescheduledSession, setRescheduledSession] = useState()
@@ -50,8 +53,8 @@ export default function PatientDash(props) {
             setRescheduleDisabled(true)
          } else {setRescheduleDisabled(false)}
          if (selectedSession.datetime.getTime() <= new Date().getTime()) {
-            setRescheduleText("Appointment has passed.")
-         } else {setRescheduleText("Appointment is in less than 48 hours.")}
+            setRescheduleText(t('patientDash.appointmentPassed'))
+         } else {setRescheduleText(t('patientDash.appointmentInLess48Hours'))}
          setRescheduledSession(selectedSession)
 
          if (!selectedSession.notes) {
@@ -75,13 +78,13 @@ export default function PatientDash(props) {
                <h3 className={s.session_time}>{datetime.getHours()}:00 - {datetime.getHours()+1}:00</h3>
                <div className={s.session_footer}>
                   <p className={s.session_location}>{location}</p>
-                  <p className={s.session_more}>View more</p>
+                  <p className={s.session_more}>{t('patientDash.viewMore')}</p>
                </div>
             </div>
          )
       })
    } else {
-      scheduleElements = <p className={s.no_sessions}>No sessions this week.</p>
+      scheduleElements = <p className={s.no_sessions}>{t('patientDash.noSessionsThisWeek')}</p>
    }
 
    function goBackWeek() {
@@ -128,7 +131,7 @@ export default function PatientDash(props) {
       <div className={`${s.patient_dash_main} ${darkModeClass} ${((reschedulePopup || notesPopup) ? s.covered_by_popup : '')}`}>
 
          <div className={s.container_left}>
-            <h2 className={s.container_title}>My schedule:</h2>
+            <h2 className={s.container_title}>{t('patientDash.mySchedule')}</h2>
 
             <div className={s.date_wrapper}>
                <span className={s.date_arrow} onClick={goBackWeek}>&#60;</span>
@@ -147,7 +150,7 @@ export default function PatientDash(props) {
          <div className={s.container_right}>
             <h2 className={s.container_title}>
                {formatDate(new Date(selectedSession.datetime)) == formatDate(new Date(nextSession.datetime)) ?
-               "Next session:" : "Selected session:"}
+               t('patientDash.nextSession') : t('patientDash.selectedSession')}
             </h2>
 
             {selectedSession.datetime == "--" ? <>
@@ -162,27 +165,27 @@ export default function PatientDash(props) {
                
                <div className={s.selected_session}>
                   <div className={s.session_info}>
-                     <p>Therapy:</p>
+                     <p>{t('patientDash.therapy')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.therapy}</p>
                      </div>
 
-                     <p>Time:</p>
+                     <p>{t('patientDash.time')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.datetime.getHours()}:00 - {selectedSession.datetime.getHours()+1}:00</p>
                      </div>
                      
-                     <p>Location:</p>
+                     <p>{t('patientDash.location')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.location}</p>
                      </div>
                      
-                     <p>Session number:</p>
+                     <p>{t('patientDash.sessionNumber')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.completedSessions}/{selectedSession.totalSessions}</p>
                      </div>
                      
-                     <p>Therapist:</p>
+                     <p>{t('patientDash.therapist')}</p>
                      <div className={s.info_values}>
                         <p>{selectedSession.therapist}</p>
                      </div>
@@ -190,24 +193,24 @@ export default function PatientDash(props) {
 
                   <img src={map} className={`${s.session_image} ${showMapMobile ? "" : s.tablet_hidden}`} />
                   <button className={s.view_map} onClick={() => setshowMapMobile(prevState => !prevState)}>
-                     {showMapMobile ? "Close map" : "View location on map"}
+                     {showMapMobile ? t('patientDash.closeMap') : t('patientDash.viewLocationOnMap')}
                   </button>
 
                   <div className={s.session_buttons}>
                      <div className={s.button_wrapper}>
                         <button className={`${s.session_button} ${notesDisabled && s.button_disabled}`}
-                           onClick={() => notesDisabled ? "" : setNotesPopup(true)}>View notes
+                           onClick={() => notesDisabled ? "" : setNotesPopup(true)}>{t('patientDash.viewNotes')}
                         </button>
                         <p className={`${s.notes_text} ${notesDisabled && s.disabled_text}`}>
-                           No notes so far.<br />
+                           {t('patientDash.noNotesSoFar')}<br />
                         </p>
                      </div>
                      <div className={s.button_wrapper}>
                         <button className={`${s.session_button} ${rescheduleDisabled && s.button_disabled}`}
-                           onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>Reschedule
+                           onClick={() => rescheduleDisabled ? "" : setReschedulePopup(true)}>{t('patientDash.reschedule')}
                         </button>
                         <p className={`${s.reschedule_text} ${rescheduleDisabled && s.disabled_text}`}>
-                           Cannot reschedule.<br />{rescheduleText}
+                           {t('patientDash.cannotReschedule')}<br />{rescheduleText}
                         </p>
                      </div>
                   </div>
@@ -221,12 +224,12 @@ export default function PatientDash(props) {
 
       {notesPopup && <div className={s.session_popup}>                   {/* uvjetni render popupa za notes */}
          <div className={s.popup_header}>
-            <h3 className={s.popup_title}>SESSION NOTES:</h3>
+            <h3 className={s.popup_title}>{t('patientDash.sessionNotesTitle')}</h3>
             <img src={x_icon} className={s.popup_exit} onClick={popupExit} />
          </div>
 
          <div className={s.notes_info}>
-            <p><span>Session {selectedSession.completedSessions}/{selectedSession.totalSessions}</span></p>
+            <p><span>{t('patientDash.session')} {selectedSession.completedSessions}/{selectedSession.totalSessions}</span></p>
             <p>{formatDate(selectedSession.datetime)}</p>
          </div>
 

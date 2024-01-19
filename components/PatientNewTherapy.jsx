@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useRef } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import BodypartSelection from "./BodypartSelection"
 import SessionSelection from "./SessionSelection"
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup"
 import s from "../styles/patientNewTherapy.module.css"
 
 export default function PatientNewTherapy(props) {
-   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme} = props         // global const
+   const {userToken, formatWeek, formatDate, formatFullDate, navigate, theme} = props    
+   const { t, i18n } = useTranslation();     
+   // global const
    const [progress, setProgress] = useState(1)
    const [successPopup, setSuccessPopup] = useState(false)
    const tooltips = {
-      referral: "A unique sequence of letters and numbers found on the\nreferral note provided by your doctor.\nIf you're unsure where to find it, ask your doctor for help.",
-      doctor: "A unique sequence of numbers that represents your doctor\nin the national health system.\nIf you're unsure where to find it, ask your doctor for help."
+      referral: t("patientNewTherapy.referralDescription1") + "\n" + t("patientNewTherapy.referralDescription2") + "\n" + t("patientNewTherapy.referralDescription3"),
+      doctor: t("patientNewTherapy.doctorIdDescription1") + "\n" + t("patientNewTherapy.doctorIdDescription2") + "\n" + t("patientNewTherapy.doctorIdDescription3")
    }
    const darkModeClass = theme === 'dark' ? s.dark : '';
    
@@ -59,9 +62,12 @@ export default function PatientNewTherapy(props) {
       case 3:
          return (!finishAgreement || verificationData.referral == "" || verificationData.hlkid == "")
    }}
+
+   console.log(selectedBodypart);
    
    const therapyElements = therapies
-      .filter(therapy => (selectedBodypart == "any" ? true : therapy.bodyPart == selectedBodypart))
+      .filter(therapy => (t("bodyPartSelection." + selectedBodypart) == t("bodyPartSelection.any") ?
+         true : t("bodyPartSelection." + therapy.bodyPart) == t("bodyPartSelection." + selectedBodypart))) 
       .filter(therapy => { for (let term of searchInput.trim().split(" ")) {
          if (therapy.name.toLowerCase().includes(term.toLowerCase())) return true}
       }).map(therapy => (
@@ -144,7 +150,7 @@ export default function PatientNewTherapy(props) {
 
    return (<>
       <div className={`${s.patient_therapy_main} ${darkModeClass} ${successPopup && s.covered_by_popup}`}>
-         <h1 className={s.create_title}>REQUEST A NEW THERAPY</h1>
+         <h1 className={s.create_title}>{t('patientNewTherapy.title')}</h1>
          <div className={s.green_shape}></div>
          
          <div className={s.create_container}>
@@ -152,13 +158,13 @@ export default function PatientNewTherapy(props) {
             
             {progress == 1 && <>
             <div className={s.therapy_header}>
-               <h2 className={s.header_step}>STEP 1: PICK A THERAPY</h2>
+               <h2 className={s.header_step}>{t('patientNewTherapy.step1Title')}</h2>
                <div className={s.header_input}>
-                  <p className={s.header_prompt}>or enter therapy code provided by your doctor:</p>
+                  <p className={s.header_prompt}>{t('patientNewTherapy.step1Subtitle')}</p>
                   <input className={`${s.code_input} ${(nextDisabled() && codeInput != "") && s.invalid_input}`} type="text"
-                        onChange={handleCodeInput} placeholder="#4JG5E" name="therapyCode" value={codeInput} autoComplete="off"
+                        onChange={handleCodeInput} placeholder={t('patientNewTherapy.codePlaceholder')} name="therapyCode" value={codeInput} autoComplete="off"
                   />
-                  <p className={`${s.invalid_text} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}>Invalid code.</p>
+                  <p className={`${s.invalid_text} ${(nextDisabled() && codeInput != "") && s.invalid_input}`}>{t('patientNewTherapy.invalidCode')}</p>
                </div>
             </div>
 
@@ -166,10 +172,10 @@ export default function PatientNewTherapy(props) {
                <BodypartSelection selectedBodypart={selectedBodypart} setSelectedBodypart={setSelectedBodypart} theme={theme}/>
 
                <form className={s.therapy_form} autoComplete="off" onSubmit={event => event.preventDefault()}>
-                  <h2 className={s.form_title}>FILTER BY: <span>{selectedBodypart.toUpperCase()}</span></h2>
-                  <p className={s.form_tip}>Select a body part to filter or use the search bar below to find your therapy</p>
+                  <h2 className={s.form_title}>{t('patientNewTherapy.filterBy')} <span>{t("bodyPartSelection." + selectedBodypart).toUpperCase()}</span></h2>
+                  <p className={s.form_tip}>{t('patientNewTherapy.searchText')}</p>
                   <input className={s.form_search} type="text" onChange={event => setSearchInput(event.target.value)}
-                     placeholder="Search" name="search" value={searchInput} />
+                     placeholder={t('patientNewTherapy.searchPlaceholder')} name="search" value={searchInput} />
                   <div className={s.therapies_container}>
                      {therapyElements}
                   </div>
@@ -180,27 +186,32 @@ export default function PatientNewTherapy(props) {
 
             {progress == 2 && <>
             <div className={s.sessions_header}>
-               <h2 className={s.header_step}>STEP 2: PICK SESSIONS</h2>
+               <h2 className={s.header_step}>{t('patientNewTherapy.step2Title')}</h2>
                <div className={s.header_shapes}>
                   <div className={s.header_counter}>
-                     <h2 className={s.counter_text}>PICKED: {selectedSessions.length}/{numOfSessions}</h2>
+                     <h2 className={s.counter_text}>{t('patientNewTherapy.pickedSessions')} {selectedSessions.length}/{numOfSessions}</h2>
                   </div>
                   <div className={s.info_duration}>
-                     <h2 className={s.duration_text}>duration: {duration} {duration == 1 ? "day" : "days"}</h2>
+                     <h2 className={s.duration_text}>{t('patientNewTherapy.duration')} {duration} {duration == 1 
+                                                   ? t('patientNewTherapy.oneDay') : t('patientNewTherapy.moreDays')}</h2>
                   </div>
                </div>
             </div>
             
-            <p className={s.sessions_subtitle}>Restrictions:</p>
+            <p className={s.sessions_subtitle}>{t('patientNewTherapy.restrictions')}</p>
             <div className={s.sessions_info}>
                <p className={s.sessions_restrictions}>
-                  1.&#160; Selected sessions must be at least <span>24h apart.</span><br />      {/* extra space za poravnanje */}
-                  2. The total duration of the therapy must not exceed <span>{numOfSessions*5} days.</span><br />
-                  3. Sessions cannot be scheduled more than <span>3 months</span> in advance.
+                  1.&#160; {t('patientNewTherapy.sessionRestrictions.firstRestriction1')}
+                           <span>{t('patientNewTherapy.sessionRestrictions.firstRestriction2')}</span><br />      {/* extra space za poravnanje */}
+                  2. {t('patientNewTherapy.sessionRestrictions.secondRestriction1')} 
+                           <span>{numOfSessions*5} {t('patientNewTherapy.sessionRestrictions.secondRestriction2')}</span><br />
+                  3. {t('patientNewTherapy.sessionRestrictions.thirdRestriction1')} 
+                           <span>{t('patientNewTherapy.sessionRestrictions.thirdRestriction2')}
+                           </span> {t('patientNewTherapy.sessionRestrictions.thirdRestriction3')}
                </p>
             </div>
-            <p className={s.schedule_legend}>Grayed out dates/times are inelligible or full.&#160;<br className={s.mobile_only} />
-               Picked dates/times are highlighted in <span className={s.legend_purple}>purple and bolded.</span><br />
+            <p className={s.schedule_legend}>{t('patientNewTherapy.scheduleLegend1')}&#160;<br className={s.mobile_only} />
+               {t('patientNewTherapy.scheduleLegend2')} <span className={s.legend_purple}>{t('patientNewTherapy.scheduleLegend3')}</span><br />
             </p>
             <div className={s.selection_wrapper}>
                <SessionSelection
@@ -221,10 +232,10 @@ export default function PatientNewTherapy(props) {
 
 
             {progress == 3 && <>
-               <h2 className={s.header_step}>STEP 3: FINAL STEP</h2>
+               <h2 className={s.header_step}>{t('patientNewTherapy.step3Title')}</h2>
                <div className={s.final_main}>
                   <div className={s.final_review}>
-                     <h3 className={s.section_title}>review:</h3>
+                     <h3 className={s.section_title}>{t('patientNewTherapy.reviewSectionTitle')}</h3>
                      <div className={s.review_card}>
                         <h3 className={s.card_title}>
                            {formatString(selectedTherapy.name).first.toUpperCase()}<br />
@@ -232,30 +243,30 @@ export default function PatientNewTherapy(props) {
                         </h3>
                         <div className={s.review_details}>
                            <p>{selectedTherapy.therapyCode}</p>
-                           <p>duration: {duration} days</p>
-                           <p>number of sessions: {selectedTherapy.numOfSessions}</p>
+                           <p>{t('patientNewTherapy.durationDays1')} {duration} {t('patientNewTherapy.durationDays2')}</p>
+                           <p>{t('patientNewTherapy.noOfSessions')} {selectedTherapy.numOfSessions}</p>
                         </div>
                      </div>
                   </div>
 
                   <div className={`${s.final_sessions} ${expandSessions && s.sessions_expanded}`}>
                      <div className={s.sessions_card}>
-                        <h3 className={s.card_title}>MY SESSIONS</h3>
+                        <h3 className={s.card_title}>{t('patientNewTherapy.mySessions')}</h3>
                            <div className={s.sessions_container}>
                               {sessionElements}
                            </div>
                         <p className={s.sessions_expand} onClick={() => setExpandSessions(prevState => !prevState)}>
-                           {expandSessions ? "Collapse" : "Expand"}
+                           {expandSessions ? t('patientNewTherapy.collapse') : t('patientNewTherapy.expand')}
                         </p>
                      </div>
                   </div>
 
                   <div className={s.final_verification}>
-                     <h3 className={s.section_title}>verification:</h3>
+                     <h3 className={s.section_title}>{t('patientNewTherapy.verificationSectionTitle')}</h3>
 
                      <form className={s.verification_form} autoComplete="off">
                         <div className={s.verification_input}>
-                           <p className={s.input_label}>Referral number:</p>
+                           <p className={s.input_label}>{t('patientNewTherapy.referralNumber')}</p>
                            <div className={s.input_wrapper}>
                               <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
                                  onChange={event => setVerificationData(prevData => ({
@@ -268,7 +279,7 @@ export default function PatientNewTherapy(props) {
                         </div>
                         
                         <div className={s.verification_input}>
-                           <p className={s.input_label}>Doctor id (hlkid):</p>
+                           <p className={s.input_label}>{t('patientNewTherapy.doctorId')}</p>
                            <div className={s.input_wrapper}>
                               <input className={`${s.input_field} ${verificationFailed && s.input_failed}`}
                                  onChange={event => setVerificationData(prevData => ({
@@ -281,18 +292,18 @@ export default function PatientNewTherapy(props) {
                         </div>
 
                         <p className={`${s.verification_failed} ${verificationFailed && s.visible}`}>
-                           Incorrect referral number or hlkid.
+                           {t('patientNewTherapy.verificationFailed')}
                         </p>
                      </form>
                   </div>
                </div>
                <div className={s.final_finish}>
-                  <p className={s.finish_note}>Once your therapy is approved by admin, we will notify you by email.</p>
+                  <p className={s.finish_note}>{t('patientNewTherapy.finishNote')}</p>
                   <div className={s.checkbox_container} onClick={() => setFinishAgreement(prevState => !prevState)}>
                      <div className={s.custom_checkbox}>
                         <div className={`${s.checkbox_fill} ${finishAgreement && s.checkbox_selected}`}></div>
                      </div>
-                     <p className={s.finish_label}>I understand</p>
+                     <p className={s.finish_label}>{t('patientNewTherapy.iUnderstand')}</p>
                   </div>
                </div>
             </>}
@@ -301,11 +312,11 @@ export default function PatientNewTherapy(props) {
             <div className={s.create_buttons}>
                <button className={s.button_back} onClick={() => {
                   progress == 1 ? navigate("dash") : setProgress(prevProgress => prevProgress - 1)}
-                  }>{progress == 1 ? "Cancel" : "Back"}
+                  }>{progress == 1 ? t('patientNewTherapy.cancelButton') : t('patientNewTherapy.backButton')}
                </button>
                <button className={`${s.button_next} ${nextDisabled() ? s.button_disabled : ""}`} onClick={() => {
                   nextDisabled() ? "" : (progress == 3 ? handleFinish() : setProgress(prevProgress => prevProgress + 1))}
-                  }>{progress == 3 ? "Finish" : "Next"}
+                  }>{progress == 3 ? t('patientNewTherapy.finishButton') : t('patientNewTherapy.nextButton')}
                </button>
             </div>
 
@@ -327,9 +338,9 @@ export default function PatientNewTherapy(props) {
       </div>
 
       {successPopup && <SuccessPopup 
-         text1="You have filled in all the information and your therapy request is now being processed by our administrator."
-         text2="Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard."
-         buttonText="Go to dash"
+         text1={t('patientNewTherapy.successPopup.text1')}
+         text2={t('patientNewTherapy.successPopup.text2')}
+         buttonText={t('patientNewTherapy.successPopup.buttonText')}
          clickFunction={() => navigate("dash")}
       />}
    </>)

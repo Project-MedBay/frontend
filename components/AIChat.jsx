@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react"
 import axios from "axios"
+import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/aiChat.module.css"
 
 export default function AIChat(props) {
    const {userToken, theme, language} = props
+
+   const { t, i18n } = useTranslation();
 
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
@@ -18,11 +21,11 @@ export default function AIChat(props) {
       return sessionStorage.getItem("medbay-ai-chat") != null ? JSON.parse(sessionStorage.getItem("medbay-ai-chat")) : {
          medbot: [{
             sender: "bot",
-            text: "Hello! I am MedBot and I am here to help answer any of your questions regarding the therapies we offer!"
+            text: t('AIChat.firstTextMedBot')
          }],
          baybot: [{
             sender: "bot",
-            text: "Hello! I am BayBot and I am here to help answer any of your questions regarding the use of this site!"
+            text: t('AIChat.firstTextBayBot')
          }]
       }
    })
@@ -65,7 +68,7 @@ export default function AIChat(props) {
          [currentBot]: [
             ...prevState[currentBot],
             {sender: "user", text: chatInput.trim()},
-            {sender: "bot", text: "Processing..."}
+            {sender: "bot", text: t('AIChat.processing')}
          ]
       }))
       setInputDisabled(true)
@@ -98,7 +101,7 @@ export default function AIChat(props) {
             ...prevState,
             [currentBot]: [
                ...prevState[currentBot].filter(msg => (msg.sender != "bot" || msg.text != "Processing...")),
-               {sender: "bot", text: `I encountered an error while trying to reach the server. I am very sorry for the inconvenience, please try again in a few moments!`}
+               {sender: "bot", text: t('AIChat.errorMessage')}
             ]
          }))
          setInputDisabled(false)
@@ -139,11 +142,11 @@ export default function AIChat(props) {
       <div className={`${s.chat_main} ${darkModeClass}`}>
          <div className={`${s.chat_header} ${chatOpen ? s.expanded : ""}`} onClick={() => setChatOpen(prevState => !prevState)}>
             <h3 className={s.header_title}>
-               {!chatOpen ? "AI Assistant" : currentBot == "medbot" ? "MedBot" : "BayBot"}
+               {!chatOpen ? t('AIChat.assistant') : currentBot == "medbot" ? "MedBot" : "BayBot"}
             </h3>
             {chatOpen &&
                <button className={s["header_" + currentBot]} onClick={event => switchBot(event)}>
-                  Open {currentBot == "medbot" ? "BayBot" : "MedBot"}
+                  {t('AIChat.open')} {currentBot == "medbot" ? "BayBot" : "MedBot"}
                </button>
             }
          </div>
@@ -155,10 +158,10 @@ export default function AIChat(props) {
             </div>
             <form className={s.chat_footer} onSubmit={handleSend}>
                <textarea className={`${s.chat_input} ${inputDisabled ? s.input_disabled : ""}`} type="text"
-                        onChange={event => setChatInput(event.target.value)} placeholder="Ask a question..." name="chat" value={chatInput}
+                        onChange={event => setChatInput(event.target.value)} placeholder={t('AIChat.question')} name="chat" value={chatInput}
                         autoComplete="off" rows={1} ref={textAreaRef} onKeyDown={event => handleKeyDown(event)}
                />
-               <button className={`${s.chat_send} ${currentBot == "baybot" ? s.send_baybot : ""}`}>Send</button>
+               <button className={`${s.chat_send} ${currentBot == "baybot" ? s.send_baybot : ""}`}>{t('AIChat.send')}</button>
             </form>
          </div>}
       </div>

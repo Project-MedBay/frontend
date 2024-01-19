@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react"
+import { useTranslation, Trans } from 'react-i18next';
 import Select from 'react-select'
 import s from "../styles/editPopup.module.css"
 
 export default function CustomSelectInput(props) {
    const {options, name, defaultValue, handleChange, failed, theme} = props
+
+   const { t, i18n } = useTranslation();
 
    const fontDefault = theme == "light" ? "#000" : "#fff"
    const fontFocus = theme == "light" ? "#fff" : "#000"
@@ -20,7 +23,7 @@ export default function CustomSelectInput(props) {
       options={options}
       className={`${s.input_box} ${failed && s.failed_input}`}
       maxMenuHeight="max(calc(180px * 0.6), calc(180vh * 59 / 725))"
-      placeholder={"Select " + name + "..."}
+      placeholder={t("CustomSelectInput.select") + name + "..."}
       styles={{
          container: baseStyles => ({
             ...baseStyles,

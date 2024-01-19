@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react"
 import axios, { formToJSON } from "axios"
 import { adminSessions, adminStatsPatients, adminStatsResources } from "./TestingData"
 import AdminStatisticsCircle from "./admin_utils/AdminStatisticsCircle"
+import { useTranslation, Trans } from 'react-i18next';
 import s from "../styles/adminStatistics.module.css"
 
 // NOTE: Posloziti postotke ili abecedno ili silazno
 
 export default function AdminStatistics(props) {
     const {userToken} = props
+
+    const { t, i18n } = useTranslation();
 
     const [currentStatistic, setCurrentStatistic] = useState("therapists")
     const [therapistStats, setTherapistStats] = useState({hours: [], patients: []})
@@ -143,23 +146,23 @@ export default function AdminStatistics(props) {
                     onClick={() => {
                         setCurrentStatistic("therapists")
                         setPageInfo(therapistStats)}
-                    }>Therapists
+                    }>{t('adminStatistics.therapists')}
                 </h2>
                 <h2 className={`${s.options_item} ${currentStatistic == "resources" ? s.current_option : ''}`}
                     onClick={() => {
                         setCurrentStatistic("resources")
                         setPageInfo(resourceStats)}
-                    }>Resources
+                    }>{t('adminStatistics.resources')}
                 </h2>
             </div>
 
             
                 <input className={s.form_search} type="text" onChange={event => handleSearch(event.target.value, "therapists")}
-                    placeholder="Search" name="search" value={searchInput[currentStatistic]} autoComplete="off" />
+                    placeholder={t('adminStatistics.placeholder')} name="search" value={searchInput[currentStatistic]} autoComplete="off" />
                 <div className={s.stats_container}>
                     <div className={s.container_left}>
-                        <h2 className={s.container_main_text}>WORK HOURS AT APPOINTMENTS</h2>
-                        <h4 className={s.container_secondary_text}>(PAST 30 DAYS)</h4>
+                        <h2 className={s.container_main_text}>{t('adminStatistics.workHours')}</h2>
+                        <h4 className={s.container_secondary_text}>{t('adminStatistics.pastMonth')}</h4>
                         <div className={s.left_big_circle}>
                             <AdminStatisticsCircle 
                                 percentage={pageInfo.hours[0]?.average}
@@ -171,9 +174,10 @@ export default function AdminStatistics(props) {
                     </div>
                     <div className={s.container_right}>
                         <h2 className={s.container_main_text}>
-                            PATIENTS TREATED {currentStatistic == "therapists" ? "BY" : "WITH"}
+                            {t('adminStatistics.patientsTreated')} {currentStatistic == "therapists" ? t('adminStatistics.by') 
+                                                                                               : t('adminStatistics.with')}
                         </h2>
-                        <h4 className={s.container_secondary_text}>(LIFETIME)</h4>
+                        <h4 className={s.container_secondary_text}>{t('adminStatistics.lifetime')}</h4>
                         <div className={s.right_bar_container}>
                             {noOfPatients}
                         </div>

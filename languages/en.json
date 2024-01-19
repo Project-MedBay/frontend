@@ -9,7 +9,9 @@
     "manage": "MANAGE",
     "statistics": "STATISTICS",
     "logOut": "LOG OUT",
-    "logoAltText": "Logo"
+    "logoAltText": "Logo",
+
+    "DONE": "DONE"
   },
   "adminCalendar": {
     "appointmentCalendarTitle": "Appointment Calendar",
@@ -41,7 +43,9 @@
     "sessions": "SESSIONS:",
     "relevantBody": "RELEVANT PART OF THE BODY:",
     "code": "CODE:",
-    "description2": "DESCRIPTION:"
+    "description2": "DESCRIPTION:",
+
+    "DONE": "DONE"
   },
   "adminManage": {
     "therapistsTab": "Therapists",
@@ -51,30 +55,40 @@
     "resourcesSectionTitle": "RESOURCES",
     "therapiesSectionTitle": "THERAPIES",
     "addNewButton": "ADD NEW",
-    "noItemsMatchQuery": "There are no items that match this query."
+    "noItemsMatchQuery": "There are no items that match this query.",
+
+    "DONE": "DONE"
   },
   "adminStatistics": {
     "therapists": "Therapists",
     "resources": "Resources",
     "placeholder": "Search",
     "workHours": "WORK HOURS AT APPOINTMENTS",
-    "pastMonth": "(PAST MONTH)",
+    "pastMonth": "(PAST 30 DAYS)",
     "patientsTreated": "PATIENTS TREATED",
-    "lifetime": "(LIFETIME)"
+    "by": "BY",
+    "with": "WITH",
+    "lifetime": "(LIFETIME)",
+
+    "DODATI_TEKST": "DODATI_TEKST"
   },
   "adminVerifications": {
     "verificationsTitle": "Verifications",
     "therapiesSectionTitle": "THERAPIES",
-    "registrationsSectionTitle": "REGISTRATIONS"
+    "registrationsSectionTitle": "REGISTRATIONS",
+
+    "DONE": "DONE"
   },
   "adminVerificationCard": {
     "request": "Request #",
-    "review": "Review"
+    "review": "Review",
+
+    "DONE": "DONE"
   },
   "adminVerificationPopup": {
     "registration": "Registration",
     "therapy": "Therapy",
-    "requestNo": "Request #",
+    "requestNo": "Request #", "PITATI_LOVRU":  "PITATI_LOVRU", "IDEJA": "crtica ili mijenjati kod",
     "userData": "USER DATA:",
     "name": "Full name:",
     "email": "Email:",
@@ -89,8 +103,8 @@
     "collapse": "Collapse",
     "expand": "Expand",
     "requestWasMade": "Request was made on ",
-    "requestWillBe": "Request will be assigned identifier User#",
-    "reasonRejection": "Reason for ejection",
+    "requestWillBe": "Request will be assigned identifier User#", "PITATI_LOVRU2": "PITATI_LOVRU", "IDEJA2": "promijeniti ovaj dio",
+    "reasonRejection": "Reason for rejection",
     "requestAccept": "Are you sure that you want to approve this request?",
     "buttonApprove": "Approve",
     "buttonReject": "Reject"
@@ -99,7 +113,9 @@
     "welcomeMessage": "Welcome, Admin!",
     "calendarButton": "Calendar",
     "verificationsButton": "Verifications",
-    "manageButton": "Manage"
+    "manageButton": "Manage",
+
+    "DONE": "DONE"
   },
   "AIChat": {
     "firstTextMedBot": "Hello! I am MedBot and I am here to help answer any of your questions regarding the therapies we offer!",
@@ -109,9 +125,11 @@
     "assistant": "AI Assistant",
     "open": "Open ",
     "question": "Ask a question...",
-    "send": "Send"
+    "send": "Send",
+
+    "DONE": "DONE"
   },
-  "bodypartSelection": {
+  "bodyPartSelection": {
     "head": "Head",
     "shoulder": "Shoulder",
     "arm": "Arm",
@@ -119,23 +137,33 @@
     "lowerTorso": "Lower Torso",
     "leg": "Leg",
     "hand": "Hand",
-    "foot": "Foot"
+    "foot": "Foot",
+
+    "DONE": "DONE"
   },
   "customSelectInput": {
-    "select": "Select..."
+    "select": "Select ",        "PITATI_LOVRU": "PITATI_LOVRU"
   },
   "deactivatePopup": {
     "title": "Are you sure?",
     "subtitle": "This action is irreversible.",
     "deactivateTextSelf": "If you deactivate your account, you will lose access to your account and all your data permanently, and will need to register again to request new therapies in the future.",
-    "deactivateTextPatient": "If you deactivate this account ({{name}} {{surname}} User#{{id}}), the user will lose access to their account and data, and will be removed from the list.",
-    "deactivateTextTherapist": "If you deactivate this account ({{specialization}} {{name}} {{surname}}), the user will lose access to their account and data, and will be removed from the list.",
-    "deactivateTextResource": "Only delete this resource ({{name}}) if there are no scheduled sessions with this resource and you are sure you want to remove it permanently.",
-    "deactivateTextTherapy": "Only delete this therapy ({{name}} {{code}}) if there are no scheduled sessions for this therapy and you are sure you want to remove it permanently.",
+    "deactivateTextPatient1": "If you deactivate this account ",
+    "deactivateTextPatient2": ", the user will lose access to their account and data, and will be removed from the list.",
+    "deactivateTextTherapist1": "If you deactivate this account ",
+    "deactivateTextTherapist2": ", the user will lose access to their account and data, and will be removed from the list.",
+    "deactivateTextResource1": "Only delete this resource ",
+    "deactivateTextResource2": "if there are no scheduled sessions with this resource and you are sure you want to remove it permanently.",
+    "deactivateTextTherapy1": "Only delete this therapy ",
+    "deactivateTextTherapy2": "if there are no scheduled sessions for this therapy and you are sure you want to remove it permanently.",
     "actionDelete": "DELETE",
     "actionDeactivate": "DEACTIVATE",
+    "actionDeleteCroatian": "DELETE",
+    "actionDeactivateCroatian": "DEACTIVATE",
     "buttonYes": "YES, ",
-    "buttonNo": "NO, DON'T "
+    "buttonNo": "NO, DON'T ",
+
+    "DONE": "DONE"
   },
   "adminEditPopup": {
     "titleAdd": "ADD",
@@ -262,21 +290,29 @@
     "newHere": "You're new here?",
     "registerButton": "Register now",
     "emailPlaceholder": "john.doe@mail.com",
-    "passwordPlaceholder": "********"
+    "passwordPlaceholder": "********",
+
+    "DONE": "DONE"
   },
   "loginPasswordPopup": {
     "popupTitle": "Write your e-mail here and we will send you a form to reset your password:",
     "emailPlaceholder": "john.doe@mail.com",
-    "submitButton": "Submit"
+    "submitButton": "Submit",
+
+    "DONE": "DONE"
   },
   "loginHeader": {
-    "brandName": "MedBay"
+    "brandName": "MedBay",
+
+    "DONE": "DONE"
   },
   "noMatchRoute": {
     "error": "Error 404",
     "notFound": "Page not found.",
     "goBack": "Back",
-    "toLogin": "Take me to login"
+    "toLogin": "Take me to login",
+
+    "DONE": "DONE"
   },
   "patient": {
     "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -304,7 +340,9 @@
     "appointmentInLess48Hours": "Appointment is in less than 48 hours.",
     "appointmentPassed": "Appointment has passed.",
     "sessionNotesTitle": "SESSION NOTES:",
-    "session": "Session"
+    "session": "Session",
+
+    "DONE": "DONE"
   },
   "patientHeader": {
     "brandName": "MedBay",
@@ -312,16 +350,20 @@
     "logOutConfirmation": "LOG OUT?",
     "yes": "YES",
     "no": "NO",
+    "theme": "THEME",
+    "language": "LANGUAGE",
     "myProfile": "MY PROFILE",
     "newTherapy": "NEW THERAPY",
-    "dashboard": "DASHBOARD"
+    "dashboard": "DASHBOARD",
+
+    "DONE": "DONE"
   },
   "patientNewTherapy": {
     "title": "REQUEST A NEW THERAPY",
     "step1Title": "STEP 1: PICK A THERAPY",
     "step1Subtitle": "or enter therapy code provided by your doctor:",
     "invalidCode": "Invalid code.",
-    "codePlaceholderr": "#4JGSE",
+    "codePlaceholder": "#4JGSE",
     "filterBy": "FILTER BY:",
     "searchPlaceholder": "Search",
     "searchText": "Select a body part to filter or use the search bar below to find your therapy.",
@@ -366,7 +408,9 @@
       "text1": "You have filled in all the information and your therapy request is now being processed by our administrator.",
       "text2": "Once your request is approved, you will be notified by e-mail and the therapy will appear on your dashboard.",
       "buttonText": "Go to dash"
-    }
+    },
+
+    "DONE": "DONE"
   },
   "patientProfile": {
     "userID": "(#User",
@@ -395,8 +439,10 @@
       "moreMonths": "MONTHS",
       "oneYear": "YEAR",
       "moreYears": "YEARS",
-      "alotOfTime": "OVER"
+      "alotOfTime": "OVER",
+                                                    "funkcija za hrvatske dane mjesece i godine (padezi)": "funkcija"
     },
+                                                    "gdje je upload image??": "Nema ga??",
     "uploadImageTooltip": {
       "add": "Add a profile image",
       "change": "Change profile image"
