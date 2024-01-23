@@ -280,7 +280,7 @@ export default function PatientNewTherapy(props) {
                                  onChange={event => setVerificationData(prevData => ({
                                     ...prevData,
                                     referral: event.target.value
-                                 }))} type="text" placeholder="123456789" name="referral" value={verificationData.referral}
+                                 }))} type="text" placeholder="DGC_123456" name="referral" value={verificationData.referral}
                               />
                               <p className={s.verification_tip} title={tooltips.referral}>?</p>
                            </div>
