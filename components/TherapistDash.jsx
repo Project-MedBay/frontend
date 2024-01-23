@@ -11,12 +11,9 @@ export default function TherapistDash(props) {
    const { t, i18n } = useTranslation();
    
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                         // const za dash
-   const [nextSession, setNextSession] = useState({
-      text: t('therapistDash.schedule.noUpcomingSessions'),
-      dateTime: "--"
-   })
+   const [nextSession, setNextSession] = useState({dateTime: "--"})
    useEffect(() => {
-      let tempSession = {text: t('therapistDash.schedule.noUpcomingSessions'), dateTime: "--"}
+      let tempSession = {dateTime: "--"}
       for (let week in mySchedule) {
          for (let session of mySchedule[week]) {
             if (new Date(session.dateTime) > new Date()) {
@@ -170,7 +167,7 @@ export default function TherapistDash(props) {
             <p className={s.container_date}>{selectedSession.dateTime}</p>
          
             <div className={`${s.selected_session} ${s.no_sessions_container}`}>
-               <p className={s.no_sessions}>{selectedSession.text}</p>
+               <p className={s.no_sessions}>{t('therapistDash.schedule.noUpcomingSessions')}</p>
             </div>
             
             </> : <>

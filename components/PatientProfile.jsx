@@ -76,20 +76,20 @@ export default function PatientProfile(props) {
             ...prevState,
             userImage: base64img.slice(startIndex)
          }))
+         const imageData = new FormData()
+         imageData.append("file", event.target.files[0])
+         axios({
+            url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/profile-picture",
+            method: "PUT",
+            headers: {
+               Authorization: `Bearer ${userToken}`,
+               "Content-Type": 'multipart/form-data'
+            },
+            data: imageData
+         })
+         .then(res => console.log(res.status))
+         .catch(error => handleError(error));
       }
-      const imageData = new FormData()
-      imageData.append("file", event.target.files[0])
-      axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/profile-picture",
-         method: "PUT",
-         headers: {
-            Authorization: `Bearer ${userToken}`,
-            "Content-Type": 'multipart/form-data'
-         },
-         data: imageData
-      })
-      .then(res => console.log(res.status))
-      .catch(error => handleError(error));
    }
 
    const toBase64 = file => new Promise((resolve, reject) => {

@@ -854,9 +854,9 @@ i18n
                   "sessionCount": " SESSIONS:"
                 },
                 "infoLabels": {
-                  "dateStarted": "Date started",
+                  "date started": "Date started",
                   "therapist": "Therapist",
-                  "dateFinished": "Date finished",
+                  "date finished": "Date finished",
                   "location": "Location",
                   "e-mail": "Email",
                   "address": "Address",
@@ -1730,7 +1730,7 @@ i18n
                   "collapse": "Sažmi",
                   "addNote": "Dodaj zapis",
                   "editNote": "Uredi zapis",
-                  "saveNote": "Spremi bilješku",
+                  "saveNote": "Spremi",
                   "cancel": "Odustani",
                   "placeholder": "Trenutno nema bilješki."
                 },

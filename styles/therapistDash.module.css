@@ -227,6 +227,7 @@ p.patient_link {
 .note_title {
    font-size: calc(24 * var(--scale-by-height));
    font-weight: 600;
+   width: calc(150 * var(--scale-by-height));
    margin: calc(5 * var(--scale-by-height));
    color: #22006a;
 }
@@ -252,9 +253,8 @@ p.patient_link {
 }
 
 .note_cancel {
-   width: calc(130 * var(--scale-by-height));
    background: #22006a;
-   margin-right: calc(-250 * var(--scale-by-height));
+   margin-right: calc(-220 * var(--scale-by-height));
 }
 
 .note_box {

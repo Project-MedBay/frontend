@@ -691,53 +691,53 @@
       margin: 0 calc(15 * var(--scale-by-width) * (8/5));
       font-size: calc(12 * var(--scale-by-width) * (8/5));
    }
-                                                               /* TU SMO STALI */
+   
    .session_popup {
-      gap: calc(15 * var(--scale-by-height));
-      box-shadow: calc(5 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(8 * var(--scale-by-height)) calc(6 * var(--scale-by-height)) rgba(0, 0, 0, 0.15);
-      border-radius: calc(12 * var(--scale-by-height));
+      gap: calc(15 * var(--scale-by-width) * (8/5));
+      box-shadow: calc(5 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(8 * var(--scale-by-width) * (8/5)) calc(6 * var(--scale-by-width) * (8/5)) rgba(0, 0, 0, 0.15);
+      border-radius: calc(12 * var(--scale-by-width) * (8/5));
    }
    
    .popup_header {
-      padding: calc(20 * var(--scale-by-height)) calc(30 * var(--scale-by-height));
-      border-bottom: #656565 solid calc(1 * var(--scale-by-height));
-      margin-bottom: calc(10 * var(--scale-by-height));
+      padding: calc(20 * var(--scale-by-width) * (8/5)) calc(30 * var(--scale-by-width) * (8/5));
+      border-bottom: #656565 solid calc(1 * var(--scale-by-width) * (8/5));
+      margin-bottom: calc(10 * var(--scale-by-width) * (8/5));
    }
    
    .popup_title {
-      font-size:  calc(32 * var(--scale-by-height));
+      font-size:  calc(32 * var(--scale-by-width) * (8/5));
    }
    
    .popup_exit {
-      margin-top: calc(3 * var(--scale-by-height));
+      margin-top: calc(3 * var(--scale-by-width) * (8/5));
    }
    
    .notes_info {
-      padding: 0 calc(30 * var(--scale-by-height));
+      padding: 0 calc(30 * var(--scale-by-width) * (8/5));
    }
    
    .notes_info > p {
-      font-size: calc(28 * var(--scale-by-height));
+      font-size: calc(28 * var(--scale-by-width) * (8/5));
    }
    
    .notes_note {
-      margin: calc(30 * var(--scale-by-height));
-      margin-top: calc(15 * var(--scale-by-height));
+      margin: calc(30 * var(--scale-by-width) * (8/5));
+      margin-top: calc(15 * var(--scale-by-width) * (8/5));
    }
    
    .note_details {
-      font-size: calc(20 * var(--scale-by-height));
-      margin: calc(5 * var(--scale-by-height));
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
+      margin: calc(5 * var(--scale-by-width) * (8/5));
    }
    
    .note_box {
-      border-radius: calc(5 * var(--scale-by-height));
-      width: calc(700 * var(--scale-by-height));
-      min-height: calc(250 * var(--scale-by-height));
-      padding: calc(15 * var(--scale-by-height));
+      border-radius: calc(5 * var(--scale-by-width) * (8/5));
+      width: calc(700 * var(--scale-by-width) * (8/5));
+      min-height: calc(250 * var(--scale-by-width) * (8/5));
+      padding: calc(15 * var(--scale-by-width) * (8/5));
    }
    
    .note_contents {
-      font-size: calc(20 * var(--scale-by-height));
+      font-size: calc(20 * var(--scale-by-width) * (8/5));
    }
 }

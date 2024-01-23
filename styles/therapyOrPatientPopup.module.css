@@ -227,7 +227,7 @@ textarea.note_box {
 
 .note_cancel {
    background: #22006a;
-   margin-right: calc(-250 * var(--scale-by-height));
+   margin-right: calc(-280 * var(--scale-by-height));
 }
 
 .dark {
@@ -380,6 +380,6 @@ textarea.note_box {
    }
    
    .note_cancel {
-      margin-right: calc(-250 * var(--scale-by-width) * (8/5));
+      margin-right: calc(-280 * var(--scale-by-width) * (8/5));
    }
 }

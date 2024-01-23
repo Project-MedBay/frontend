@@ -19,12 +19,9 @@ export default function PatientDash(props) {
    const darkModeClass = theme === 'dark' ? s.dark : '';
 
    const [selectedWeek, setSelectedWeek] = useState(getWeekFirst(new Date()))                                       // const za dash
-   const [nextSession, setNextSession] = useState({
-      text: t('patientDash.noUpcomingSessions'),
-      datetime: "--"
-   })
+   const [nextSession, setNextSession] = useState({datetime: "--"})
    useEffect(() => {
-      let tempSession = {text: t('patientDash.noUpcomingSessions'), datetime: "--"}
+      let tempSession = {datetime: "--"}
       for (let week in mySchedule) {
          for (let session of mySchedule[week]) {
             if (session.datetime > new Date()) {
@@ -110,7 +107,6 @@ export default function PatientDash(props) {
    }
 
    function goBackWeek() {
-      // ako je selected week (format week) == week earliest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(prevDate.getDate() - 7)
@@ -119,7 +115,6 @@ export default function PatientDash(props) {
    }
 
    function goForwardWeek() {
-      // ako je selected week (format week) == week latest iz myschedule (dodati) -> poziv za novih 20 tjedana ili sto vec
       setSelectedWeek(prevDate => {
          let newDate = new Date(prevDate)
          newDate.setDate(prevDate.getDate() + 7)
@@ -179,7 +174,7 @@ export default function PatientDash(props) {
                <p className={s.container_date}>{selectedSession.datetime}</p>
             
                <div className={`${s.selected_session} ${s.no_sessions_container}`}>
-                  <p className={s.no_sessions}>{selectedSession.text}</p>
+                  <p className={s.no_sessions}>{t('patientDash.noUpcomingSessions')}</p>
                </div>
             
             </> : <>
