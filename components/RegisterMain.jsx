@@ -3,7 +3,6 @@ import axios from "axios";
 import { useTranslation, Trans } from "react-i18next";
 import { registerFields } from "./FormsData";
 import SuccessPopup from "./patient_therapist_utils/SuccessPopup";
-import ReCAPTCHA from "react-google-recaptcha";
 import eyeHidden from "../assets/eye_hidden.png";
 import eyeShown from "../assets/eye_shown.png";
 import s from "../styles/register.module.css";
@@ -61,12 +60,6 @@ export default function RegisterMain(props) {
   });
   const [successPopup, setSuccessPopup] = useState(false); // state za uvjetni render popupa o uspjesnoj registraciji
   const [passwordShown, setPasswordShown] = useState(false); // state za pokazat/skrit lozinku
-
-  const [recaptchaValue, setRecaptchaValue] = useState(null);
-
-  const onRecaptchaChange = (value) => {
-    setRecaptchaValue(value);
-  };
 
   const formFields = registerFields.map((field) => {
     // mapiranje podataka iz formsdata na jsx (html) elemente za ispis
@@ -235,10 +228,6 @@ export default function RegisterMain(props) {
   function handleSubmit(event) {
     // submit - axios poziv na odgovarajuci url za obradu na backendu
     event.preventDefault();
-    if (!recaptchaValue) {
-      alert(t("registerMain.recaptchaChecker"));
-      return;
-    }
     setInputFailed((prevState) => ({
       ...prevState,
       unexpectedError: { failed: false, text: "registerMain.unexpectedError" },
