@@ -102,7 +102,7 @@ export default function PatientProfile(props) {
       age = (
         <>
           <span>{Math.floor(days / 30.4167)}</span>{" "}
-          {t("patihttps://medbay-backend-4957d331fef0.herokuapp.com
+          {t("patientProfile.thankYouMessage.moreMonths")}
         </>
       );
     else if (days < 396)
@@ -135,7 +135,7 @@ export default function PatientProfile(props) {
       );
     else if (days % 365.25 < 61)
       age = (
-        <>https://medbay-backend-4957d331fef0.herokuapp.com
+        <>
           <span>{Math.floor(days / 365.25)}</span>{" "}
           {t("patientProfile.thankYouMessage.moreYears")} <span>1</span>{" "}
           {t("patientProfile.thankYouMessage.oneMonth")}

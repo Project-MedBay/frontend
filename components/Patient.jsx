@@ -82,7 +82,7 @@ export default function Patient(props) {
           email: res.data.patient.email,
           address: res.data.patient.address,
           dob: new Date(res.data.patient.dateOfBirth),
-          phonehttps://medbay-backend-4957d331fef0.herokuapp.com
+          phone: res.data.patient.phoneNumber,
           mbo: res.data.patient.mbo,
           registeredSince: new Date(res.data.patient.createdAt),
           userImage: res.data.patient.photo,
@@ -112,7 +112,7 @@ export default function Patient(props) {
 
   function getAndSetSchedule() {
     axios({
-      url: "https://medbay-backend-4957d331fef0.herokuapp.com/api/patient/dashboard",
+      url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/patient/dashboard",
       method: "GET",
       headers: {
         Authorization: `Bearer ${userToken}`, // korisnikov access token potreban za dohvacanje podataka iz baze
