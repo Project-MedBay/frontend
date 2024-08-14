@@ -337,7 +337,7 @@ export default function RegisterMain(props) {
 
           <ReCAPTCHA
             className={s.recaptcha}
-            sitekey="6LdclyYqAAAAALS_QBMqv2zoIEh1kiZioSeKGJG0"
+            sitekey="6Ld1xyYqAAAAAHlgw-gCqG1k90jbex0eU1vt6E16"
             onChange={onRecaptchaChange}
             hl={language}
           />
