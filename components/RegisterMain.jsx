@@ -335,13 +335,6 @@ export default function RegisterMain(props) {
             />
           </div>
 
-          <ReCAPTCHA
-            className={s.recaptcha}
-            sitekey="6Ld1xyYqAAAAAHlgw-gCqG1k90jbex0eU1vt6E16"
-            onChange={onRecaptchaChange}
-            hl={language}
-          />
-
           <button className={s.form_button}>
             {t("registerMain.registerButtonText")}
           </button>
