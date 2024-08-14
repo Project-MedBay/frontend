@@ -1,31 +1,42 @@
-import React, { useState, useEffect } from "react"
-import axios, { formToJSON } from "axios"
-import { useTranslation, Trans } from 'react-i18next';
-import s from "../styles/tableList.module.css"
+import React, { useState, useEffect } from "react";
+import axios, { formToJSON } from "axios";
+import { useTranslation, Trans } from "react-i18next";
+import s from "../styles/tableList.module.css";
 
 export default function TableList(props) {
-   const {userToken, handleLogout, tableOf, user, tableItems, setTableItems, searchInput, formatFullDate} = props
-   
-   const { t, i18n } = useTranslation();
+  const {
+    userToken,
+    handleLogout,
+    tableOf,
+    user,
+    tableItems,
+    setTableItems,
+    searchInput,
+    formatFullDate,
+  } = props;
 
-   if (user == "admin") {
-      var {handleAdd, handleEdit, handleDeactivate} = props
-   } else {
-      var {handleDetails} = props
-   }
-   useEffect(() => {
-      axios({
-         url: "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/" +
-               (tableOf == "patients" ? "patient/all" : "employee"),
-         method: "GET",
-         headers: {
-            Authorization: `Bearer ${userToken}`         // korisnikov access token potreban za dohvacanje podataka iz baze
-         }
-      })
-      .then(res => {
-         let itemList
-         console.log(res.data)
-         if (tableOf == "patients") itemList = res.data.map((item, index) => ({
+  const { t, i18n } = useTranslation();
+
+  if (user == "admin") {
+    var { handleAdd, handleEdit, handleDeactivate } = props;
+  } else {
+    var { handleDetails } = props;
+  }
+  useEffect(() => {
+    axios({
+      url:
+        "https://medbay-backend-4957d331fef0.herokuapp.com/api/" +
+        (tableOf == "patients" ? "patient/all" : "employee"),
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${userToken}`, // korisnikov access token potreban za dohvacanje podataka iz baze
+      },
+    })
+      .then((res) => {
+        let itemList;
+        console.log(res.data);
+        if (tableOf == "patients")
+          itemList = res.data.map((item, index) => ({
             id: item.id,
             name: item.firstName,
             surname: item.lastName,
@@ -35,105 +46,168 @@ export default function TableList(props) {
             phone: item.phoneNumber,
             mbo: item.mbo,
             show: item.show,
-            code: "#User" + item.id,             // NOTE vidit za ovo
-            sessions: item.appointments
-         }))
-         else itemList = res.data.map((item, index) => ({
+            code: "#User" + item.id, // NOTE vidit za ovo
+            sessions: item.appointments,
+          }));
+        else
+          itemList = res.data.map((item, index) => ({
             id: item.id,
             name: item.firstName,
             surname: item.lastName,
             "e-mail": item.email,
-            specialization: item.specialization[0] + item.specialization.toLowerCase().split("_").join(" ").slice(1),
+            specialization:
+              item.specialization[0] +
+              item.specialization.toLowerCase().split("_").join(" ").slice(1),
             "employed since": new Date(item.createdAt),
             show: true,
-         }))
-         setTableItems(itemList)
+          }));
+        setTableItems(itemList);
       })
-      .catch(error => handleError(error));
-   }, [])
+      .catch((error) => handleError(error));
+  }, []);
 
-   function handleError(error) {
-      console.log(error)
-      if (error.response.status == 403) handleLogout()
-   }
-   
-   var tableHeader
-   if (tableOf == "patients") {
-      tableHeader = ["#", "name", "surname", "e-mail", "address", "dob", "phone", "mbo"]
-   } else {
-      tableHeader = ["#", "name", "surname", "e-mail", "specialization", "employed since"]
-   }
-   const tableHeaderElements = tableHeader.map(item => (
-      <h2 className={s.header_item} key={item}>{t("tableList.headers." + tableOf + "." + item.toUpperCase())}</h2>
-   ))
+  function handleError(error) {
+    console.log(error);
+    if (error.response.status == 403) handleLogout();
+  }
 
-   var tableList
-   if (searchInput == "") {
-      tableList = tableItems.filter(tableItem => tableItem.show)
-   } else {
-      tableList = tableItems.filter(tableItem => {
-         for (let term of searchInput.trim().split(" ")) {
-            for (let attr of tableHeader.slice(1)) {
-               if (typeof tableItem[attr] === 'string' || tableItem[attr] instanceof String) {
-                  if (tableItem[attr].toLowerCase().includes(term.toLowerCase())) return true
-               } else {
-                  if (formatFullDate(tableItem[attr]).includes(term)) return true
-               }
-            }
-         }
-      })
-   }
-   const tableListElements = tableList.map((item, index) => {
-      var rowElements = []
-      let itemKey
-      let divClass = s.table_item_wrapper
-      if (index == 0) divClass += ` ${s.table_first}`
+  var tableHeader;
+  if (tableOf == "patients") {
+    tableHeader = [
+      "#",
+      "name",
+      "surname",
+      "e-mail",
+      "address",
+      "dob",
+      "phone",
+      "mbo",
+    ];
+  } else {
+    tableHeader = [
+      "#",
+      "name",
+      "surname",
+      "e-mail",
+      "specialization",
+      "employed since",
+    ];
+  }
+  const tableHeaderElements = tableHeader.map((item) => (
+    <h2 className={s.header_item} key={item}>
+      {t("tableList.headers." + tableOf + "." + item.toUpperCase())}
+    </h2>
+  ));
 
-      for (let attr in item) {
-         itemKey = index*10 + rowElements.length
-         let content
-         if (attr == "id") content = (index+1).toString()
-         else if (attr == "dob" || attr == "employed since") content = formatFullDate(item[attr])
-         else if (attr != "show") content = item[attr]
-         else break
-         rowElements.push(<div className={divClass} key={itemKey}>
-            <p className={s.table_item}>{content}</p>
-         </div>)
+  var tableList;
+  if (searchInput == "") {
+    tableList = tableItems.filter((tableItem) => tableItem.show);
+  } else {
+    tableList = tableItems.filter((tableItem) => {
+      for (let term of searchInput.trim().split(" ")) {
+        for (let attr of tableHeader.slice(1)) {
+          if (
+            typeof tableItem[attr] === "string" ||
+            tableItem[attr] instanceof String
+          ) {
+            if (tableItem[attr].toLowerCase().includes(term.toLowerCase()))
+              return true;
+          } else {
+            if (formatFullDate(tableItem[attr]).includes(term)) return true;
+          }
+        }
       }
+    });
+  }
+  const tableListElements = tableList.map((item, index) => {
+    var rowElements = [];
+    let itemKey;
+    let divClass = s.table_item_wrapper;
+    if (index == 0) divClass += ` ${s.table_first}`;
 
-      if (user == "admin") {
-         rowElements.push(<div className={`${divClass} ${s.button_wrapper}`} key={"admin" + index}>
-            {tableOf == "therapists" &&
-               <button className={`${s.table_button} ${s.button_green}`} onClick={() => handleEdit(item)}>{t('tableList.buttons.edit')}</button>
-            }
-            <button className={s.table_button} onClick={() => handleDeactivate(item)}>{t('tableList.buttons.deactivate')}</button>
-         </div>)
-      }
-      else {
-         rowElements.push(<div className={`${divClass} ${s.button_wrapper}`} key={"therapist" + index}>
-            <button className={s.table_button} onClick={() => handleDetails(item)}>{t('tableList.buttons.details')}</button>
-         </div>)
-      }
+    for (let attr in item) {
+      itemKey = index * 10 + rowElements.length;
+      let content;
+      if (attr == "id") content = (index + 1).toString();
+      else if (attr == "dob" || attr == "employed since")
+        content = formatFullDate(item[attr]);
+      else if (attr != "show") content = item[attr];
+      else break;
+      rowElements.push(
+        <div className={divClass} key={itemKey}>
+          <p className={s.table_item}>{content}</p>
+        </div>
+      );
+    }
 
-      return rowElements
-   })
-   if (tableListElements.length == 0) {tableListElements.push(
-      <h3 className={s.no_results}>
-         {t('tableList.messages.noResults')}
-      </h3>
-   )}
+    if (user == "admin") {
+      rowElements.push(
+        <div
+          className={`${divClass} ${s.button_wrapper}`}
+          key={"admin" + index}
+        >
+          {tableOf == "therapists" && (
+            <button
+              className={`${s.table_button} ${s.button_green}`}
+              onClick={() => handleEdit(item)}
+            >
+              {t("tableList.buttons.edit")}
+            </button>
+          )}
+          <button
+            className={s.table_button}
+            onClick={() => handleDeactivate(item)}
+          >
+            {t("tableList.buttons.deactivate")}
+          </button>
+        </div>
+      );
+    } else {
+      rowElements.push(
+        <div
+          className={`${divClass} ${s.button_wrapper}`}
+          key={"therapist" + index}
+        >
+          <button
+            className={s.table_button}
+            onClick={() => handleDetails(item)}
+          >
+            {t("tableList.buttons.details")}
+          </button>
+        </div>
+      );
+    }
 
-   return (
-      <div className={s.table_wrapper}>
-         <div className={`${s.main_table} ${tableOf == "patients" ? s.patients : s.therapists}`}>
-            {tableHeaderElements}
-            <div className={`${s.header_buttons} ${(tableOf == "patients" && tableList.length == 0) && s.reduced_header}`}>
-               <button className={`${s.header_add} ${tableOf == "patients" && s.hidden}`}
-                   onClick={() => handleAdd("therapist")}>{t('tableList.buttons.addNew')}
-               </button>
-            </div>
-            {tableListElements}
-         </div>
+    return rowElements;
+  });
+  if (tableListElements.length == 0) {
+    tableListElements.push(
+      <h3 className={s.no_results}>{t("tableList.messages.noResults")}</h3>
+    );
+  }
+
+  return (
+    <div className={s.table_wrapper}>
+      <div
+        className={`${s.main_table} ${
+          tableOf == "patients" ? s.patients : s.therapists
+        }`}
+      >
+        {tableHeaderElements}
+        <div
+          className={`${s.header_buttons} ${
+            tableOf == "patients" && tableList.length == 0 && s.reduced_header
+          }`}
+        >
+          <button
+            className={`${s.header_add} ${tableOf == "patients" && s.hidden}`}
+            onClick={() => handleAdd("therapist")}
+          >
+            {t("tableList.buttons.addNew")}
+          </button>
+        </div>
+        {tableListElements}
       </div>
-   )
+    </div>
+  );
 }
