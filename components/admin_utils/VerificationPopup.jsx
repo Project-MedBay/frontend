@@ -57,7 +57,7 @@ export default function VerificationCard(props) {
     if (type === "registration") {
       axios({
         url:
-          "https://medhttps://medbay-backend-4957d331fef0.herokuapp.comctivity/" +
+          "https://medbay-backend-4957d331fef0.herokuapp.com/user/activity/" +
           popupData.user_id +
           "?status=" +
           (action == "approve"
@@ -73,7 +73,7 @@ export default function VerificationCard(props) {
     } else if (type === "therapy") {
       axios({
         url:
-          "https://medbay-backend-0a5b8fe22926.herokuapp.com/api/therapy/change-status/" +
+          "https://medbay-backend-4957d331fef0.herokuapp.com/api/therapy/change-status/" +
           popupData.therapy_id +
           "?status=" +
           (action == "approve"
