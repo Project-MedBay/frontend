@@ -57,7 +57,7 @@ export default function VerificationCard(props) {
     if (type === "registration") {
       axios({
         url:
-          "https://medbay-backend-4957d331fef0.herokuapp.com/api/user/activity/" +
+          "https://medbay-backend-4957d331fef0.herokuapp.com/user/activity/" +
           popupData.user_id +
           "?status=" +
           (action == "approve"
